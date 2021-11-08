@@ -6,11 +6,20 @@
 //
 
 import UIKit
+import AsyncDisplayKit
 
-class ViewController: UIViewController {
-
+class ViewController: ASDKViewController<ASDisplayNode> {
+	
+	override init() {
+		let mainNode = landingNode()
+		super.init(node: mainNode)
+	}
+	
+	required init?(coder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
+	
 	override func viewDidLoad() {
-		view.backgroundColor = .blue
 		super.viewDidLoad()
 		// Do any additional setup after loading the view.
 	}

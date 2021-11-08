@@ -15,6 +15,9 @@
 		0ABC6328273929880041087F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ABC6326273929880041087F /* LaunchScreen.storyboard */; };
 		0ABC6333273929880041087F /* kayayuAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC6332273929880041087F /* kayayuAppTests.swift */; };
 		0ABC633E273929880041087F /* kayayuAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC633D273929880041087F /* kayayuAppUITests.swift */; };
+		0ABC636F273933800041087F /* landingNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC636E273933800041087F /* landingNode.swift */; };
+		0ABC637A273933E00041087F /* NSAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC6379273933E00041087F /* NSAttributedString+Extension.swift */; };
+		0ABC637F273934020041087F /* colorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC637E273934020041087F /* colorHelper.swift */; };
 		465797E2FE63F6017A3D46DA /* Pods_kayayuApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B24C4321B5D25F3735CC2CE2 /* Pods_kayayuApp.framework */; };
 		C85222BDFC0C4353EF0EF0BD /* Pods_kayayuApp_kayayuAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA298E0F630B182870A43DB /* Pods_kayayuApp_kayayuAppUITests.framework */; };
 		CF5F6A57A2C96269113C4B45 /* Pods_kayayuAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 822540B0945D1E91F4C2F699 /* Pods_kayayuAppTests.framework */; };
@@ -52,6 +55,9 @@
 		0ABC6339273929880041087F /* kayayuAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = kayayuAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0ABC633D273929880041087F /* kayayuAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kayayuAppUITests.swift; sourceTree = "<group>"; };
 		0ABC633F273929880041087F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0ABC636E273933800041087F /* landingNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = landingNode.swift; sourceTree = "<group>"; };
+		0ABC6379273933E00041087F /* NSAttributedString+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extension.swift"; sourceTree = "<group>"; };
+		0ABC637E273934020041087F /* colorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = colorHelper.swift; sourceTree = "<group>"; };
 		14A3DB5E594A6ECC0BFCB654 /* Pods-kayayuAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuAppTests.debug.xcconfig"; path = "Target Support Files/Pods-kayayuAppTests/Pods-kayayuAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2127C8BED94B463E5147CB30 /* Pods-kayayuApp-kayayuAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuApp-kayayuAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-kayayuApp-kayayuAppUITests/Pods-kayayuApp-kayayuAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		3A3169E080FFED822273F72A /* Pods-kayayuApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuApp.debug.xcconfig"; path = "Target Support Files/Pods-kayayuApp/Pods-kayayuApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -116,6 +122,10 @@
 		0ABC6317273929860041087F /* kayayuApp */ = {
 			isa = PBXGroup;
 			children = (
+				0ABC636D2739335C0041087F /* ViewController */,
+				0ABC636C273933560041087F /* ViewModel */,
+				0ABC636B273933510041087F /* Helper */,
+				0ABC636A2739334B0041087F /* Views */,
 				0ABC6318273929860041087F /* AppDelegate.swift */,
 				0ABC631A273929860041087F /* SceneDelegate.swift */,
 				0ABC631C273929860041087F /* ViewController.swift */,
@@ -143,6 +153,37 @@
 				0ABC633F273929880041087F /* Info.plist */,
 			);
 			path = kayayuAppUITests;
+			sourceTree = "<group>";
+		};
+		0ABC636A2739334B0041087F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0ABC636E273933800041087F /* landingNode.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0ABC636B273933510041087F /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				0ABC6379273933E00041087F /* NSAttributedString+Extension.swift */,
+				0ABC637E273934020041087F /* colorHelper.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		0ABC636C273933560041087F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0ABC636D2739335C0041087F /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		7F7DCAB52298946E2AF28AC9 /* Frameworks */ = {
@@ -423,8 +464,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0ABC637F273934020041087F /* colorHelper.swift in Sources */,
+				0ABC636F273933800041087F /* landingNode.swift in Sources */,
 				0ABC631D273929860041087F /* ViewController.swift in Sources */,
 				0ABC6319273929860041087F /* AppDelegate.swift in Sources */,
+				0ABC637A273933E00041087F /* NSAttributedString+Extension.swift in Sources */,
 				0ABC631B273929860041087F /* SceneDelegate.swift in Sources */,
 				0ABC6323273929860041087F /* kayayuApp.xcdatamodeld in Sources */,
 			);
