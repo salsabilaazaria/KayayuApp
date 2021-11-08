@@ -1,0 +1,755 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0B14F058B3AAD14111E34EBB3887964E /* Pods-kayayuAppTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 14E04C3DCD905E1EBD326F41F9933A1C /* Pods-kayayuAppTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		33FD993157753C1F4FA733FFB39C2546 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		6905AD48432C7D92392D917788EBBAF0 /* Pods-kayayuApp-kayayuAppUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EEF4F23433014EFB9B71D6CACEEC0D26 /* Pods-kayayuApp-kayayuAppUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8186545042D8482CA3313FBCE02D2620 /* Pods-kayayuApp-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FF0BD715B512826BAC80E06F3D6AC54 /* Pods-kayayuApp-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		883E3EA82450602C9583506F35CC6284 /* Pods-kayayuApp-kayayuAppUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A85A664FA025E833946A172D4D3EE2B /* Pods-kayayuApp-kayayuAppUITests-dummy.m */; };
+		B8A4FA406D25D3589617BE525D5CCC39 /* Pods-kayayuApp-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F2BF4D41E1094FD030DBFBCA368CDD /* Pods-kayayuApp-dummy.m */; };
+		CD20D859D38A53735FD3AE486BF957B9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		D3BA0B2CB9641948CA36908FE996212D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		E48C5DA978922B207D6358DFCB348FE7 /* Pods-kayayuAppTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F532B06B4DB8C3EB74A05C4F6AAE944 /* Pods-kayayuAppTests-dummy.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E3B9C0387B365DEEA12ED3B190273BFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 30B8AC1842D56EF4E0262F502A025352;
+			remoteInfo = "Pods-kayayuApp";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		073B7582FCE641FA493DDBA204876995 /* Pods-kayayuApp-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-kayayuApp-acknowledgements.markdown"; sourceTree = "<group>"; };
+		0D6B9C8305A414EE513C994D571632B8 /* Pods-kayayuApp-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-kayayuApp-Info.plist"; sourceTree = "<group>"; };
+		12F2BF4D41E1094FD030DBFBCA368CDD /* Pods-kayayuApp-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-kayayuApp-dummy.m"; sourceTree = "<group>"; };
+		14E04C3DCD905E1EBD326F41F9933A1C /* Pods-kayayuAppTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-kayayuAppTests-umbrella.h"; sourceTree = "<group>"; };
+		27B75DEE6105EBFE732BEC348174AA23 /* Pods-kayayuApp-kayayuAppUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-kayayuApp-kayayuAppUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		2836DFDFC92DC2EEC5A3F41ADD97EA0F /* Pods-kayayuAppTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-kayayuAppTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		29E9CAEA57F2E5EDDD8B493833ABD745 /* Pods-kayayuApp-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-kayayuApp-acknowledgements.plist"; sourceTree = "<group>"; };
+		3E77F39377C2FE6CD84387B70751A8EE /* Pods-kayayuAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-kayayuAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		3F532B06B4DB8C3EB74A05C4F6AAE944 /* Pods-kayayuAppTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-kayayuAppTests-dummy.m"; sourceTree = "<group>"; };
+		43D57465D3C1EA6DA30E7CC037E7C514 /* Pods_kayayuAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_kayayuAppTests.framework; path = "Pods-kayayuAppTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A85A664FA025E833946A172D4D3EE2B /* Pods-kayayuApp-kayayuAppUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-kayayuApp-kayayuAppUITests-dummy.m"; sourceTree = "<group>"; };
+		64CA7431B480AD7E713369DB3CFD12E2 /* Pods-kayayuApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-kayayuApp.release.xcconfig"; sourceTree = "<group>"; };
+		6FF0BD715B512826BAC80E06F3D6AC54 /* Pods-kayayuApp-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-kayayuApp-umbrella.h"; sourceTree = "<group>"; };
+		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		7BAFE00F028A464452131513F1BA610C /* Pods-kayayuAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-kayayuAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7F73EC51D9B886F5F4F500393E736A6B /* Pods-kayayuApp-kayayuAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-kayayuApp-kayayuAppUITests.release.xcconfig"; sourceTree = "<group>"; };
+		82858F85C1478B4AEEA6F5A54315CC40 /* Pods_kayayuApp_kayayuAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_kayayuApp_kayayuAppUITests.framework; path = "Pods-kayayuApp-kayayuAppUITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		82F12442D06885FA0A1C67279ECC02E1 /* Pods_kayayuApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_kayayuApp.framework; path = "Pods-kayayuApp.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D5CDF155322DF09B78DA3F2FBDA35D3 /* Pods-kayayuApp-kayayuAppUITests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-kayayuApp-kayayuAppUITests-Info.plist"; sourceTree = "<group>"; };
+		8FE7F394CD11197B2790EBF4F75FE2CE /* Pods-kayayuAppTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-kayayuAppTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		972D2E1963D5372D92CAA144C465781C /* Pods-kayayuApp.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-kayayuApp.modulemap"; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9DCE2612E2ED175E72DAB45F6622AC20 /* Pods-kayayuApp-kayayuAppUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-kayayuApp-kayayuAppUITests.modulemap"; sourceTree = "<group>"; };
+		AE168B6C8F7FF701ADD6BB5B92EC492A /* Pods-kayayuApp-kayayuAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-kayayuApp-kayayuAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		BE23986295F3912625A1F8F0143F6322 /* Pods-kayayuAppTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-kayayuAppTests-Info.plist"; sourceTree = "<group>"; };
+		C044529C2F53560820CEE3D7728B299E /* Pods-kayayuApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-kayayuApp.debug.xcconfig"; sourceTree = "<group>"; };
+		D5491444AC92E382E6BC4F68559B7469 /* Pods-kayayuApp-kayayuAppUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-kayayuApp-kayayuAppUITests-acknowledgements.plist"; sourceTree = "<group>"; };
+		DDFE4770BD83E2D624DC6595A690E460 /* Pods-kayayuAppTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-kayayuAppTests.modulemap"; sourceTree = "<group>"; };
+		EEF4F23433014EFB9B71D6CACEEC0D26 /* Pods-kayayuApp-kayayuAppUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-kayayuApp-kayayuAppUITests-umbrella.h"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		67B222C4DBCCC6B86C8B2E176CF56D55 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD20D859D38A53735FD3AE486BF957B9 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		705F593A3365105469FDB943787747D6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				33FD993157753C1F4FA733FFB39C2546 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7CFDEDE5AFF5E64143AFA396A65F70DF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D3BA0B2CB9641948CA36908FE996212D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1E6007E23E7518AD0A39736BD6376A8B /* Pods-kayayuAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				DDFE4770BD83E2D624DC6595A690E460 /* Pods-kayayuAppTests.modulemap */,
+				2836DFDFC92DC2EEC5A3F41ADD97EA0F /* Pods-kayayuAppTests-acknowledgements.markdown */,
+				8FE7F394CD11197B2790EBF4F75FE2CE /* Pods-kayayuAppTests-acknowledgements.plist */,
+				3F532B06B4DB8C3EB74A05C4F6AAE944 /* Pods-kayayuAppTests-dummy.m */,
+				BE23986295F3912625A1F8F0143F6322 /* Pods-kayayuAppTests-Info.plist */,
+				14E04C3DCD905E1EBD326F41F9933A1C /* Pods-kayayuAppTests-umbrella.h */,
+				7BAFE00F028A464452131513F1BA610C /* Pods-kayayuAppTests.debug.xcconfig */,
+				3E77F39377C2FE6CD84387B70751A8EE /* Pods-kayayuAppTests.release.xcconfig */,
+			);
+			name = "Pods-kayayuAppTests";
+			path = "Target Support Files/Pods-kayayuAppTests";
+			sourceTree = "<group>";
+		};
+		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		66CBA03DB68990F46DC55BE867A513F9 /* Pods-kayayuApp-kayayuAppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				9DCE2612E2ED175E72DAB45F6622AC20 /* Pods-kayayuApp-kayayuAppUITests.modulemap */,
+				27B75DEE6105EBFE732BEC348174AA23 /* Pods-kayayuApp-kayayuAppUITests-acknowledgements.markdown */,
+				D5491444AC92E382E6BC4F68559B7469 /* Pods-kayayuApp-kayayuAppUITests-acknowledgements.plist */,
+				5A85A664FA025E833946A172D4D3EE2B /* Pods-kayayuApp-kayayuAppUITests-dummy.m */,
+				8D5CDF155322DF09B78DA3F2FBDA35D3 /* Pods-kayayuApp-kayayuAppUITests-Info.plist */,
+				EEF4F23433014EFB9B71D6CACEEC0D26 /* Pods-kayayuApp-kayayuAppUITests-umbrella.h */,
+				AE168B6C8F7FF701ADD6BB5B92EC492A /* Pods-kayayuApp-kayayuAppUITests.debug.xcconfig */,
+				7F73EC51D9B886F5F4F500393E736A6B /* Pods-kayayuApp-kayayuAppUITests.release.xcconfig */,
+			);
+			name = "Pods-kayayuApp-kayayuAppUITests";
+			path = "Target Support Files/Pods-kayayuApp-kayayuAppUITests";
+			sourceTree = "<group>";
+		};
+		956480092415F114B844F5B643C230A9 /* Pods-kayayuApp */ = {
+			isa = PBXGroup;
+			children = (
+				972D2E1963D5372D92CAA144C465781C /* Pods-kayayuApp.modulemap */,
+				073B7582FCE641FA493DDBA204876995 /* Pods-kayayuApp-acknowledgements.markdown */,
+				29E9CAEA57F2E5EDDD8B493833ABD745 /* Pods-kayayuApp-acknowledgements.plist */,
+				12F2BF4D41E1094FD030DBFBCA368CDD /* Pods-kayayuApp-dummy.m */,
+				0D6B9C8305A414EE513C994D571632B8 /* Pods-kayayuApp-Info.plist */,
+				6FF0BD715B512826BAC80E06F3D6AC54 /* Pods-kayayuApp-umbrella.h */,
+				C044529C2F53560820CEE3D7728B299E /* Pods-kayayuApp.debug.xcconfig */,
+				64CA7431B480AD7E713369DB3CFD12E2 /* Pods-kayayuApp.release.xcconfig */,
+			);
+			name = "Pods-kayayuApp";
+			path = "Target Support Files/Pods-kayayuApp";
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
+				D2B831F6ACEB9C4BC1A84F8BDC152B99 /* Products */,
+				D370E6E578C413460F5EABF89B7F474D /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				578452D2E740E91742655AC8F1636D1F /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D2B831F6ACEB9C4BC1A84F8BDC152B99 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				82F12442D06885FA0A1C67279ECC02E1 /* Pods_kayayuApp.framework */,
+				82858F85C1478B4AEEA6F5A54315CC40 /* Pods_kayayuApp_kayayuAppUITests.framework */,
+				43D57465D3C1EA6DA30E7CC037E7C514 /* Pods_kayayuAppTests.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D370E6E578C413460F5EABF89B7F474D /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				956480092415F114B844F5B643C230A9 /* Pods-kayayuApp */,
+				66CBA03DB68990F46DC55BE867A513F9 /* Pods-kayayuApp-kayayuAppUITests */,
+				1E6007E23E7518AD0A39736BD6376A8B /* Pods-kayayuAppTests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		384DD90E25089C5C1785402AB072D6C8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6905AD48432C7D92392D917788EBBAF0 /* Pods-kayayuApp-kayayuAppUITests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		558452BF236234657E3CCB8B60E771C4 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8186545042D8482CA3313FBCE02D2620 /* Pods-kayayuApp-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		88B20621AE6E030D017F51B6DF867E62 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B14F058B3AAD14111E34EBB3887964E /* Pods-kayayuAppTests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		0131B2DCC7B41BCA897309D4B5B2D2F8 /* Pods-kayayuAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 80F82132228B6586B6A6C3C3679F5B4C /* Build configuration list for PBXNativeTarget "Pods-kayayuAppTests" */;
+			buildPhases = (
+				88B20621AE6E030D017F51B6DF867E62 /* Headers */,
+				B8518295B0B8A7E1833ED436741DEE99 /* Sources */,
+				67B222C4DBCCC6B86C8B2E176CF56D55 /* Frameworks */,
+				15C3E493B41EA338D786A86AF45DF9F9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4DE027E4449FD1C1B59821A78D4F26F2 /* PBXTargetDependency */,
+			);
+			name = "Pods-kayayuAppTests";
+			productName = "Pods-kayayuAppTests";
+			productReference = 43D57465D3C1EA6DA30E7CC037E7C514 /* Pods_kayayuAppTests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		30B8AC1842D56EF4E0262F502A025352 /* Pods-kayayuApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6A21B9FE4C5C6FB5681B5931AF961978 /* Build configuration list for PBXNativeTarget "Pods-kayayuApp" */;
+			buildPhases = (
+				558452BF236234657E3CCB8B60E771C4 /* Headers */,
+				BAAE58DAD47DE0293F53C41CED799AC3 /* Sources */,
+				705F593A3365105469FDB943787747D6 /* Frameworks */,
+				2BC691348E760657F1C1BB1800D855C9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-kayayuApp";
+			productName = "Pods-kayayuApp";
+			productReference = 82F12442D06885FA0A1C67279ECC02E1 /* Pods_kayayuApp.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		9CD894AF44AFC36E44DB86068317A537 /* Pods-kayayuApp-kayayuAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BDD28D0DB3DE96DE82E1CE68D16F0619 /* Build configuration list for PBXNativeTarget "Pods-kayayuApp-kayayuAppUITests" */;
+			buildPhases = (
+				384DD90E25089C5C1785402AB072D6C8 /* Headers */,
+				BB431E47ABFAA8072D8B6C59017E1FF9 /* Sources */,
+				7CFDEDE5AFF5E64143AFA396A65F70DF /* Frameworks */,
+				1B41AAFB8A3355223AED5626239C59BB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-kayayuApp-kayayuAppUITests";
+			productName = "Pods-kayayuApp-kayayuAppUITests";
+			productReference = 82858F85C1478B4AEEA6F5A54315CC40 /* Pods_kayayuApp_kayayuAppUITests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
+			};
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = D2B831F6ACEB9C4BC1A84F8BDC152B99 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				30B8AC1842D56EF4E0262F502A025352 /* Pods-kayayuApp */,
+				9CD894AF44AFC36E44DB86068317A537 /* Pods-kayayuApp-kayayuAppUITests */,
+				0131B2DCC7B41BCA897309D4B5B2D2F8 /* Pods-kayayuAppTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		15C3E493B41EA338D786A86AF45DF9F9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1B41AAFB8A3355223AED5626239C59BB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2BC691348E760657F1C1BB1800D855C9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B8518295B0B8A7E1833ED436741DEE99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E48C5DA978922B207D6358DFCB348FE7 /* Pods-kayayuAppTests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BAAE58DAD47DE0293F53C41CED799AC3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B8A4FA406D25D3589617BE525D5CCC39 /* Pods-kayayuApp-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB431E47ABFAA8072D8B6C59017E1FF9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				883E3EA82450602C9583506F35CC6284 /* Pods-kayayuApp-kayayuAppUITests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4DE027E4449FD1C1B59821A78D4F26F2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-kayayuApp";
+			target = 30B8AC1842D56EF4E0262F502A025352 /* Pods-kayayuApp */;
+			targetProxy = E3B9C0387B365DEEA12ED3B190273BFE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		2AD998EBF6052D1DBAA96AC6DDAE1CB4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7F73EC51D9B886F5F4F500393E736A6B /* Pods-kayayuApp-kayayuAppUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-kayayuApp-kayayuAppUITests/Pods-kayayuApp-kayayuAppUITests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-kayayuApp-kayayuAppUITests/Pods-kayayuApp-kayayuAppUITests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		2B070852C792AD188FA4B40983BE7E93 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE168B6C8F7FF701ADD6BB5B92EC492A /* Pods-kayayuApp-kayayuAppUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-kayayuApp-kayayuAppUITests/Pods-kayayuApp-kayayuAppUITests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-kayayuApp-kayayuAppUITests/Pods-kayayuApp-kayayuAppUITests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		5FBE81A330E9087627FCA133A9E95CD9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 64CA7431B480AD7E713369DB3CFD12E2 /* Pods-kayayuApp.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-kayayuApp/Pods-kayayuApp-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-kayayuApp/Pods-kayayuApp.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		71243899B61152433AAE34EE86456EE7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		75D70EEEA0A456E14F7338A7F342964E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		AC02C1333810C6ED9CA7CF51E22E59EE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E77F39377C2FE6CD84387B70751A8EE /* Pods-kayayuAppTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-kayayuAppTests/Pods-kayayuAppTests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-kayayuAppTests/Pods-kayayuAppTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		C774E12F6DD1764790A612BE936E6A15 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C044529C2F53560820CEE3D7728B299E /* Pods-kayayuApp.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-kayayuApp/Pods-kayayuApp-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-kayayuApp/Pods-kayayuApp.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		E345C37126AA27C1F250476389560FDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7BAFE00F028A464452131513F1BA610C /* Pods-kayayuAppTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-kayayuAppTests/Pods-kayayuAppTests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-kayayuAppTests/Pods-kayayuAppTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				75D70EEEA0A456E14F7338A7F342964E /* Debug */,
+				71243899B61152433AAE34EE86456EE7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6A21B9FE4C5C6FB5681B5931AF961978 /* Build configuration list for PBXNativeTarget "Pods-kayayuApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C774E12F6DD1764790A612BE936E6A15 /* Debug */,
+				5FBE81A330E9087627FCA133A9E95CD9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		80F82132228B6586B6A6C3C3679F5B4C /* Build configuration list for PBXNativeTarget "Pods-kayayuAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E345C37126AA27C1F250476389560FDC /* Debug */,
+				AC02C1333810C6ED9CA7CF51E22E59EE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BDD28D0DB3DE96DE82E1CE68D16F0619 /* Build configuration list for PBXNativeTarget "Pods-kayayuApp-kayayuAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2B070852C792AD188FA4B40983BE7E93 /* Debug */,
+				2AD998EBF6052D1DBAA96AC6DDAE1CB4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+}

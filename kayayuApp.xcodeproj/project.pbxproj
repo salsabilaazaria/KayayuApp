@@ -1,0 +1,734 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0ABC6319273929860041087F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC6318273929860041087F /* AppDelegate.swift */; };
+		0ABC631B273929860041087F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC631A273929860041087F /* SceneDelegate.swift */; };
+		0ABC631D273929860041087F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC631C273929860041087F /* ViewController.swift */; };
+		0ABC6320273929860041087F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ABC631E273929860041087F /* Main.storyboard */; };
+		0ABC6323273929860041087F /* kayayuApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC6321273929860041087F /* kayayuApp.xcdatamodeld */; };
+		0ABC6325273929880041087F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0ABC6324273929880041087F /* Assets.xcassets */; };
+		0ABC6328273929880041087F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ABC6326273929880041087F /* LaunchScreen.storyboard */; };
+		0ABC6333273929880041087F /* kayayuAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC6332273929880041087F /* kayayuAppTests.swift */; };
+		0ABC633E273929880041087F /* kayayuAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC633D273929880041087F /* kayayuAppUITests.swift */; };
+		465797E2FE63F6017A3D46DA /* Pods_kayayuApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B24C4321B5D25F3735CC2CE2 /* Pods_kayayuApp.framework */; };
+		C85222BDFC0C4353EF0EF0BD /* Pods_kayayuApp_kayayuAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA298E0F630B182870A43DB /* Pods_kayayuApp_kayayuAppUITests.framework */; };
+		CF5F6A57A2C96269113C4B45 /* Pods_kayayuAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 822540B0945D1E91F4C2F699 /* Pods_kayayuAppTests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0ABC632F273929880041087F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0ABC630D273929860041087F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0ABC6314273929860041087F;
+			remoteInfo = kayayuApp;
+		};
+		0ABC633A273929880041087F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0ABC630D273929860041087F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0ABC6314273929860041087F;
+			remoteInfo = kayayuApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0ABC6315273929860041087F /* kayayuApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kayayuApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0ABC6318273929860041087F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0ABC631A273929860041087F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		0ABC631C273929860041087F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0ABC631F273929860041087F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0ABC6322273929860041087F /* kayayuApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = kayayuApp.xcdatamodel; sourceTree = "<group>"; };
+		0ABC6324273929880041087F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0ABC6327273929880041087F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0ABC6329273929880041087F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0ABC632E273929880041087F /* kayayuAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = kayayuAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0ABC6332273929880041087F /* kayayuAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kayayuAppTests.swift; sourceTree = "<group>"; };
+		0ABC6334273929880041087F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0ABC6339273929880041087F /* kayayuAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = kayayuAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0ABC633D273929880041087F /* kayayuAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kayayuAppUITests.swift; sourceTree = "<group>"; };
+		0ABC633F273929880041087F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		14A3DB5E594A6ECC0BFCB654 /* Pods-kayayuAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuAppTests.debug.xcconfig"; path = "Target Support Files/Pods-kayayuAppTests/Pods-kayayuAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2127C8BED94B463E5147CB30 /* Pods-kayayuApp-kayayuAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuApp-kayayuAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-kayayuApp-kayayuAppUITests/Pods-kayayuApp-kayayuAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		3A3169E080FFED822273F72A /* Pods-kayayuApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuApp.debug.xcconfig"; path = "Target Support Files/Pods-kayayuApp/Pods-kayayuApp.debug.xcconfig"; sourceTree = "<group>"; };
+		57BE6B92567BB1BD82ACD311 /* Pods-kayayuAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuAppTests.release.xcconfig"; path = "Target Support Files/Pods-kayayuAppTests/Pods-kayayuAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		822540B0945D1E91F4C2F699 /* Pods_kayayuAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kayayuAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B24C4321B5D25F3735CC2CE2 /* Pods_kayayuApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kayayuApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B887FE174A81196E743E9593 /* Pods-kayayuApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuApp.release.xcconfig"; path = "Target Support Files/Pods-kayayuApp/Pods-kayayuApp.release.xcconfig"; sourceTree = "<group>"; };
+		DCA298E0F630B182870A43DB /* Pods_kayayuApp_kayayuAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kayayuApp_kayayuAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4903A224266B6B0E1497275 /* Pods-kayayuApp-kayayuAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuApp-kayayuAppUITests.release.xcconfig"; path = "Target Support Files/Pods-kayayuApp-kayayuAppUITests/Pods-kayayuApp-kayayuAppUITests.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0ABC6312273929860041087F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				465797E2FE63F6017A3D46DA /* Pods_kayayuApp.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0ABC632B273929880041087F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF5F6A57A2C96269113C4B45 /* Pods_kayayuAppTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0ABC6336273929880041087F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C85222BDFC0C4353EF0EF0BD /* Pods_kayayuApp_kayayuAppUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0ABC630C273929860041087F = {
+			isa = PBXGroup;
+			children = (
+				0ABC6317273929860041087F /* kayayuApp */,
+				0ABC6331273929880041087F /* kayayuAppTests */,
+				0ABC633C273929880041087F /* kayayuAppUITests */,
+				0ABC6316273929860041087F /* Products */,
+				E949D484373EE7F83AF88521 /* Pods */,
+				7F7DCAB52298946E2AF28AC9 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		0ABC6316273929860041087F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0ABC6315273929860041087F /* kayayuApp.app */,
+				0ABC632E273929880041087F /* kayayuAppTests.xctest */,
+				0ABC6339273929880041087F /* kayayuAppUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0ABC6317273929860041087F /* kayayuApp */ = {
+			isa = PBXGroup;
+			children = (
+				0ABC6318273929860041087F /* AppDelegate.swift */,
+				0ABC631A273929860041087F /* SceneDelegate.swift */,
+				0ABC631C273929860041087F /* ViewController.swift */,
+				0ABC631E273929860041087F /* Main.storyboard */,
+				0ABC6324273929880041087F /* Assets.xcassets */,
+				0ABC6326273929880041087F /* LaunchScreen.storyboard */,
+				0ABC6329273929880041087F /* Info.plist */,
+				0ABC6321273929860041087F /* kayayuApp.xcdatamodeld */,
+			);
+			path = kayayuApp;
+			sourceTree = "<group>";
+		};
+		0ABC6331273929880041087F /* kayayuAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				0ABC6332273929880041087F /* kayayuAppTests.swift */,
+				0ABC6334273929880041087F /* Info.plist */,
+			);
+			path = kayayuAppTests;
+			sourceTree = "<group>";
+		};
+		0ABC633C273929880041087F /* kayayuAppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				0ABC633D273929880041087F /* kayayuAppUITests.swift */,
+				0ABC633F273929880041087F /* Info.plist */,
+			);
+			path = kayayuAppUITests;
+			sourceTree = "<group>";
+		};
+		7F7DCAB52298946E2AF28AC9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B24C4321B5D25F3735CC2CE2 /* Pods_kayayuApp.framework */,
+				DCA298E0F630B182870A43DB /* Pods_kayayuApp_kayayuAppUITests.framework */,
+				822540B0945D1E91F4C2F699 /* Pods_kayayuAppTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E949D484373EE7F83AF88521 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3A3169E080FFED822273F72A /* Pods-kayayuApp.debug.xcconfig */,
+				B887FE174A81196E743E9593 /* Pods-kayayuApp.release.xcconfig */,
+				2127C8BED94B463E5147CB30 /* Pods-kayayuApp-kayayuAppUITests.debug.xcconfig */,
+				F4903A224266B6B0E1497275 /* Pods-kayayuApp-kayayuAppUITests.release.xcconfig */,
+				14A3DB5E594A6ECC0BFCB654 /* Pods-kayayuAppTests.debug.xcconfig */,
+				57BE6B92567BB1BD82ACD311 /* Pods-kayayuAppTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0ABC6314273929860041087F /* kayayuApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0ABC6342273929880041087F /* Build configuration list for PBXNativeTarget "kayayuApp" */;
+			buildPhases = (
+				D44A8F23A22F084655FD64BF /* [CP] Check Pods Manifest.lock */,
+				0ABC6311273929860041087F /* Sources */,
+				0ABC6312273929860041087F /* Frameworks */,
+				0ABC6313273929860041087F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = kayayuApp;
+			productName = kayayuApp;
+			productReference = 0ABC6315273929860041087F /* kayayuApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		0ABC632D273929880041087F /* kayayuAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0ABC6345273929880041087F /* Build configuration list for PBXNativeTarget "kayayuAppTests" */;
+			buildPhases = (
+				5CADA0A0D12C2114F5CE5E1A /* [CP] Check Pods Manifest.lock */,
+				0ABC632A273929880041087F /* Sources */,
+				0ABC632B273929880041087F /* Frameworks */,
+				0ABC632C273929880041087F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0ABC6330273929880041087F /* PBXTargetDependency */,
+			);
+			name = kayayuAppTests;
+			productName = kayayuAppTests;
+			productReference = 0ABC632E273929880041087F /* kayayuAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		0ABC6338273929880041087F /* kayayuAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0ABC6348273929880041087F /* Build configuration list for PBXNativeTarget "kayayuAppUITests" */;
+			buildPhases = (
+				C07D930ADBA4306273A56924 /* [CP] Check Pods Manifest.lock */,
+				0ABC6335273929880041087F /* Sources */,
+				0ABC6336273929880041087F /* Frameworks */,
+				0ABC6337273929880041087F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0ABC633B273929880041087F /* PBXTargetDependency */,
+			);
+			name = kayayuAppUITests;
+			productName = kayayuAppUITests;
+			productReference = 0ABC6339273929880041087F /* kayayuAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0ABC630D273929860041087F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1240;
+				TargetAttributes = {
+					0ABC6314273929860041087F = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					0ABC632D273929880041087F = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = 0ABC6314273929860041087F;
+					};
+					0ABC6338273929880041087F = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = 0ABC6314273929860041087F;
+					};
+				};
+			};
+			buildConfigurationList = 0ABC6310273929860041087F /* Build configuration list for PBXProject "kayayuApp" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0ABC630C273929860041087F;
+			productRefGroup = 0ABC6316273929860041087F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0ABC6314273929860041087F /* kayayuApp */,
+				0ABC632D273929880041087F /* kayayuAppTests */,
+				0ABC6338273929880041087F /* kayayuAppUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0ABC6313273929860041087F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0ABC6328273929880041087F /* LaunchScreen.storyboard in Resources */,
+				0ABC6325273929880041087F /* Assets.xcassets in Resources */,
+				0ABC6320273929860041087F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0ABC632C273929880041087F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0ABC6337273929880041087F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5CADA0A0D12C2114F5CE5E1A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-kayayuAppTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C07D930ADBA4306273A56924 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-kayayuApp-kayayuAppUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D44A8F23A22F084655FD64BF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-kayayuApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0ABC6311273929860041087F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0ABC631D273929860041087F /* ViewController.swift in Sources */,
+				0ABC6319273929860041087F /* AppDelegate.swift in Sources */,
+				0ABC631B273929860041087F /* SceneDelegate.swift in Sources */,
+				0ABC6323273929860041087F /* kayayuApp.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0ABC632A273929880041087F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0ABC6333273929880041087F /* kayayuAppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0ABC6335273929880041087F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0ABC633E273929880041087F /* kayayuAppUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0ABC6330273929880041087F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0ABC6314273929860041087F /* kayayuApp */;
+			targetProxy = 0ABC632F273929880041087F /* PBXContainerItemProxy */;
+		};
+		0ABC633B273929880041087F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0ABC6314273929860041087F /* kayayuApp */;
+			targetProxy = 0ABC633A273929880041087F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0ABC631E273929860041087F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0ABC631F273929860041087F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		0ABC6326273929880041087F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0ABC6327273929880041087F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0ABC6340273929880041087F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		0ABC6341273929880041087F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0ABC6343273929880041087F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A3169E080FFED822273F72A /* Pods-kayayuApp.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8H99W6AJAP;
+				INFOPLIST_FILE = kayayuApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Kayayu.kayayuApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0ABC6344273929880041087F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B887FE174A81196E743E9593 /* Pods-kayayuApp.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8H99W6AJAP;
+				INFOPLIST_FILE = kayayuApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Kayayu.kayayuApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		0ABC6346273929880041087F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 14A3DB5E594A6ECC0BFCB654 /* Pods-kayayuAppTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8H99W6AJAP;
+				INFOPLIST_FILE = kayayuAppTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Kayayu.kayayuAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/kayayuApp.app/kayayuApp";
+			};
+			name = Debug;
+		};
+		0ABC6347273929880041087F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 57BE6B92567BB1BD82ACD311 /* Pods-kayayuAppTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8H99W6AJAP;
+				INFOPLIST_FILE = kayayuAppTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Kayayu.kayayuAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/kayayuApp.app/kayayuApp";
+			};
+			name = Release;
+		};
+		0ABC6349273929880041087F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2127C8BED94B463E5147CB30 /* Pods-kayayuApp-kayayuAppUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8H99W6AJAP;
+				INFOPLIST_FILE = kayayuAppUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Kayayu.kayayuAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = kayayuApp;
+			};
+			name = Debug;
+		};
+		0ABC634A273929880041087F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4903A224266B6B0E1497275 /* Pods-kayayuApp-kayayuAppUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8H99W6AJAP;
+				INFOPLIST_FILE = kayayuAppUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Kayayu.kayayuAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = kayayuApp;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0ABC6310273929860041087F /* Build configuration list for PBXProject "kayayuApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0ABC6340273929880041087F /* Debug */,
+				0ABC6341273929880041087F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0ABC6342273929880041087F /* Build configuration list for PBXNativeTarget "kayayuApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0ABC6343273929880041087F /* Debug */,
+				0ABC6344273929880041087F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0ABC6345273929880041087F /* Build configuration list for PBXNativeTarget "kayayuAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0ABC6346273929880041087F /* Debug */,
+				0ABC6347273929880041087F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0ABC6348273929880041087F /* Build configuration list for PBXNativeTarget "kayayuAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0ABC6349273929880041087F /* Debug */,
+				0ABC634A273929880041087F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		0ABC6321273929860041087F /* kayayuApp.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				0ABC6322273929860041087F /* kayayuApp.xcdatamodel */,
+			);
+			currentVersion = 0ABC6322273929860041087F /* kayayuApp.xcdatamodel */;
+			path = kayayuApp.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 0ABC630D273929860041087F /* Project object */;
+}

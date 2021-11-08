@@ -1,0 +1,6 @@
+framework module Pods_kayayuAppTests {
+  umbrella header "Pods-kayayuAppTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
