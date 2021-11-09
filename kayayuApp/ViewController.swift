@@ -11,7 +11,8 @@ import AsyncDisplayKit
 class ViewController: ASDKViewController<ASDisplayNode> {
 	
 	override init() {
-		let mainNode = LoginNode()
+		let mainNode = LandingNode()
+//		let mainNode = LoginNode()
 		super.init(node: mainNode)
 	}
 	
