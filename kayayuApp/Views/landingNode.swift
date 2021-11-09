@@ -28,9 +28,6 @@ class landingNode: ASDisplayNode {
 	}
 	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-//		let loginSpec = configureLoginButton()
-		
-//		let registerSpec = configureRegisterButton()
 		
 		let appInfo = ASStackLayoutSpec(direction: .vertical,
 											spacing: 10,

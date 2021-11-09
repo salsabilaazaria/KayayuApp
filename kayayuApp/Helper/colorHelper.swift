@@ -10,6 +10,7 @@ import UIKit
 
 struct kayayuColor {
 	static let yellow = colorHelper.hexToColor(hex: "#FFCC00")
+	static let softGrey = colorHelper.hexToColor(hex: "#F2F2F2")
 }
 
 class colorHelper {
