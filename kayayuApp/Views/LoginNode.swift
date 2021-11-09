@@ -12,7 +12,7 @@ class LoginNode: ASDisplayNode, ASEditableTextNodeDelegate {
 	private let greetingText: ASTextNode = ASTextNode()
 	private let usernameTextfield : ASEditableTextNode = ASEditableTextNode()
 	private let passwordTextfield : ASEditableTextNode = ASEditableTextNode()
-	private var loginButton: bigButton = bigButton()
+	private var loginButton: BigButton = BigButton()
 	private let singUpText: ASTextNode = ASTextNode()
 	private let signUpButton: ASButtonNode = ASButtonNode()
 	
@@ -93,7 +93,7 @@ class LoginNode: ASDisplayNode, ASEditableTextNodeDelegate {
 	}
 	
 	private func configureLoginButton() {
-		loginButton = bigButton(buttonText: "LOGIN", buttonColor: kayayuColor.yellow, borderColor: kayayuColor.yellow)
+		loginButton = BigButton(buttonText: "LOGIN", buttonColor: kayayuColor.yellow, borderColor: kayayuColor.yellow)
 		loginButton.addTarget(self, action: #selector(loginButtonTapped), forControlEvents: .touchUpInside)
 	}
 	

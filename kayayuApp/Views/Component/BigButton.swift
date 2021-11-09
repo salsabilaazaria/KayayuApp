@@ -8,7 +8,7 @@
 import Foundation
 import AsyncDisplayKit
 
-class bigButton: ASButtonNode {
+class BigButton: ASButtonNode {
 	var buttonText: String = ""
 	var background: UIColor = UIColor()
 	var border: UIColor = UIColor()

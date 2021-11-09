@@ -8,7 +8,7 @@
 import Foundation
 import AsyncDisplayKit
 
-class landingNode: ASDisplayNode {
+class LandingNode: ASDisplayNode {
 	
 	private let logo: ASImageNode = ASImageNode()
 	private let name: ASTextNode = ASTextNode()
