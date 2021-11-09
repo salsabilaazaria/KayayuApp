@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0AAA2674273A65900063D876 /* BigButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAA2673273A65900063D876 /* BigButton.swift */; };
+		0AAA2685273AAA230063D876 /* SignUpNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAA2684273AAA230063D876 /* SignUpNode.swift */; };
 		0ABC6319273929860041087F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC6318273929860041087F /* AppDelegate.swift */; };
 		0ABC631B273929860041087F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC631A273929860041087F /* SceneDelegate.swift */; };
 		0ABC631D273929860041087F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC631C273929860041087F /* ViewController.swift */; };
@@ -44,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		0AAA2673273A65900063D876 /* BigButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigButton.swift; sourceTree = "<group>"; };
+		0AAA2684273AAA230063D876 /* SignUpNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNode.swift; sourceTree = "<group>"; };
 		0ABC6315273929860041087F /* kayayuApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kayayuApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0ABC6318273929860041087F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0ABC631A273929860041087F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				0AAA2672273A65750063D876 /* Component */,
 				0ABC636E273933800041087F /* LandingNode.swift */,
 				0ABC639527393B710041087F /* LoginNode.swift */,
+				0AAA2684273AAA230063D876 /* SignUpNode.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -481,6 +484,7 @@
 				0ABC637F273934020041087F /* ColorHelper.swift in Sources */,
 				0ABC639627393B710041087F /* LoginNode.swift in Sources */,
 				0AAA2674273A65900063D876 /* BigButton.swift in Sources */,
+				0AAA2685273AAA230063D876 /* SignUpNode.swift in Sources */,
 				0ABC636F273933800041087F /* LandingNode.swift in Sources */,
 				0ABC631D273929860041087F /* ViewController.swift in Sources */,
 				0ABC6319273929860041087F /* AppDelegate.swift in Sources */,

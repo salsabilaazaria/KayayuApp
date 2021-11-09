@@ -1,30 +1,34 @@
 //
-//  loginNode.swift
+//  SignUpNode.swift
 //  kayayuApp
 //
-//  Created by Salsabila Azaria on 11/8/21.
+//  Created by Salsabila Azaria on 11/9/21.
 //
 
 import Foundation
 import AsyncDisplayKit
 
-class LoginNode: ASDisplayNode {
+class SignUpNode: ASDisplayNode {
 	private let greetingText: ASTextNode = ASTextNode()
 	private let usernameTextfield : ASEditableTextNode = ASEditableTextNode()
+	private let emailTextfield : ASEditableTextNode = ASEditableTextNode()
 	private let passwordTextfield : ASEditableTextNode = ASEditableTextNode()
-	private var loginButton: BigButton = BigButton()
-	private let singUpText: ASTextNode = ASTextNode()
-	private let signUpButton: ASButtonNode = ASButtonNode()
+	private let confirmPassTextfield : ASEditableTextNode = ASEditableTextNode()
+	private var signUpButton: BigButton = BigButton()
+	private let loginText: ASTextNode = ASTextNode()
+	private let loginButton: ASButtonNode = ASButtonNode()
 	
 	override init() {
 		super.init()
 		
 		configureGreetingText()
 		configureUsernameTextfield()
+		configureEmailTextfield()
 		configurePasswordTextfield()
+		configureConfirmPassTextfield()
+		configureSignUpButton()
+		configureLoginText()
 		configureLoginButton()
-		configureSignUpText()
-		configueSignUpButton()
 		
 		backgroundColor = .white
 		automaticallyManagesSubnodes = true
@@ -35,19 +39,19 @@ class LoginNode: ASDisplayNode {
 											   spacing: 10,
 											   justifyContent: .center,
 											   alignItems: .center,
-											   children: [usernameTextfield, passwordTextfield])
+											   children: [usernameTextfield, emailTextfield, passwordTextfield, confirmPassTextfield])
 		
-		let signUpTextSpec = ASStackLayoutSpec(direction: .horizontal,
+		let loginTextSpec = ASStackLayoutSpec(direction: .horizontal,
 											   spacing: 0,
 											   justifyContent: .center,
 											   alignItems: .center,
-											   children: [singUpText,signUpButton])
+											   children: [loginText,loginButton])
 		
 		let buttonSpec = ASStackLayoutSpec(direction: .vertical,
 										   spacing: 10,
 										   justifyContent: .center,
 										   alignItems: .center,
-										   children: [loginButton, signUpTextSpec])
+										   children: [signUpButton, loginTextSpec])
 		
 		let mainSpec = ASStackLayoutSpec(direction: .vertical,
 										 spacing: 40,
@@ -65,7 +69,7 @@ class LoginNode: ASDisplayNode {
 	}
 	
 	private func configureGreetingText() {
-		greetingText.attributedText = NSAttributedString.bold("Welcome back!\nWe miss you.", 30, kayayuColor.yellow)
+		greetingText.attributedText = NSAttributedString.bold("Hello!\nGlad you're joining us!", 30, kayayuColor.yellow)
 	}
 	
 	private func configureUsernameTextfield() {
@@ -79,6 +83,19 @@ class LoginNode: ASDisplayNode {
 		usernameTextfield.textView.textContainer.maximumNumberOfLines = 1
 	}
 	
+	private func configureEmailTextfield() {
+		emailTextfield.backgroundColor = kayayuColor.softGrey
+		emailTextfield.style.preferredSize = CGSize(width: UIScreen.main.bounds.width - 32, height: 40)
+		emailTextfield.cornerRadius = 8.0
+		emailTextfield.textContainerInset = UIEdgeInsets(top: 10, left: 8, bottom: 10, right: 8)
+		
+		emailTextfield.textView.delegate = self
+		emailTextfield.textView.text = "Email"
+		emailTextfield.textView.textColor = .gray
+		emailTextfield.maximumLinesToDisplay = 1
+		
+	}
+	
 	private func configurePasswordTextfield() {
 		passwordTextfield.backgroundColor = kayayuColor.softGrey
 		passwordTextfield.style.preferredSize = CGSize(width: UIScreen.main.bounds.width - 32, height: 40)
@@ -89,40 +106,53 @@ class LoginNode: ASDisplayNode {
 		passwordTextfield.textView.text = "Password"
 		passwordTextfield.textView.textColor = .gray
 		passwordTextfield.maximumLinesToDisplay = 1
+	}
+	
+	private func configureConfirmPassTextfield() {
+		confirmPassTextfield.backgroundColor = kayayuColor.softGrey
+		confirmPassTextfield.style.preferredSize = CGSize(width: UIScreen.main.bounds.width - 32, height: 40)
+		confirmPassTextfield.cornerRadius = 8.0
+		confirmPassTextfield.textContainerInset = UIEdgeInsets(top: 10, left: 8, bottom: 10, right: 8)
+		
+		confirmPassTextfield.textView.delegate = self
+		confirmPassTextfield.textView.text = "Confirm Password"
+		confirmPassTextfield.textView.textColor = .gray
+		confirmPassTextfield.maximumLinesToDisplay = 1
 		
 	}
 	
-	private func configureLoginButton() {
-		loginButton = BigButton(buttonText: "LOGIN", buttonColor: kayayuColor.yellow, borderColor: kayayuColor.yellow)
-		loginButton.addTarget(self, action: #selector(loginButtonTapped), forControlEvents: .touchUpInside)
-	}
-	
-	private func configureSignUpText() {
-		singUpText.attributedText = NSAttributedString.normal("Didn't Have Any Account?", 12, .gray)
-	}
-	
-	private func configueSignUpButton() {
-		signUpButton.setAttributedTitle(NSAttributedString.normal("Sign Up", 12, .black), for: .normal)
+	private func configureSignUpButton() {
+		signUpButton = BigButton(buttonText: "SIGN UP", buttonColor: kayayuColor.yellow, borderColor: kayayuColor.yellow)
+		//NEED TO CONFIRM: setelah sign up mau ke home apa ke login?
 		signUpButton.addTarget(self, action: #selector(signUpButtonTapped), forControlEvents: .touchUpInside)
 	}
 	
+	private func configureLoginText() {
+		loginText.attributedText = NSAttributedString.normal("Already Have an Account? ", 12, .gray)
+	}
+	
+	private func configureLoginButton() {
+		loginButton.setAttributedTitle(NSAttributedString.normal("Login", 12, .black), for: .normal)
+		loginButton.addTarget(self, action: #selector(loginButtonTapped), forControlEvents: .touchUpInside)
+	}
+	
 	@objc func loginButtonTapped(sender: ASButtonNode) {
-		print("GO TO HOMEPAGE")
+		print("GO TO LOGIN")
 	}
 	
 	@objc func signUpButtonTapped(sender: ASButtonNode) {
-		print("GO TO SIGN UP")
+		print("GO TO HOMEPAGE")
 	}
 
 	
 }
 
-extension LoginNode: UITextViewDelegate {
+extension SignUpNode: UITextViewDelegate {
 	
 	func textViewDidBeginEditing(_ textView: UITextView) {
 		textView.textContainerInset =  UIEdgeInsets(top: 10, left: 8, bottom: 10, right: 8)
 		
-		if textView.text == "Username" || textView.text == "Password" {
+		if textView.text == "Username" || textView.text == "Password" || textView.text == "Email" || textView.text == "Confirm Password" {
 			textView.textColor = .black
 			textView.text = nil
 		}
@@ -136,8 +166,14 @@ extension LoginNode: UITextViewDelegate {
 				if textView == self.usernameTextfield {
 					textView.text = "Username"
 				}
-				if textView == self.passwordTextfield {
+				else if textView == self.passwordTextfield {
 					textView.text = "Password"
+				}
+				else if textView == self.emailTextfield {
+					textView.text = "Email"
+				}
+				else if textView == self.confirmPassTextfield {
+					textView.text = "Confirm Password"
 				}
 			}
 		} else {
