@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0AAA2674273A65900063D876 /* BigButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAA2673273A65900063D876 /* BigButton.swift */; };
 		0AAA2685273AAA230063D876 /* SignUpNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAA2684273AAA230063D876 /* SignUpNode.swift */; };
+		0AAA268A273AB0700063D876 /* SummaryHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAA2689273AB0700063D876 /* SummaryHeader.swift */; };
 		0ABC6319273929860041087F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC6318273929860041087F /* AppDelegate.swift */; };
 		0ABC631B273929860041087F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC631A273929860041087F /* SceneDelegate.swift */; };
 		0ABC631D273929860041087F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC631C273929860041087F /* ViewController.swift */; };
@@ -46,6 +47,7 @@
 /* Begin PBXFileReference section */
 		0AAA2673273A65900063D876 /* BigButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigButton.swift; sourceTree = "<group>"; };
 		0AAA2684273AAA230063D876 /* SignUpNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNode.swift; sourceTree = "<group>"; };
+		0AAA2689273AB0700063D876 /* SummaryHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryHeader.swift; sourceTree = "<group>"; };
 		0ABC6315273929860041087F /* kayayuApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kayayuApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0ABC6318273929860041087F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0ABC631A273929860041087F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				0AAA2673273A65900063D876 /* BigButton.swift */,
+				0AAA2689273AB0700063D876 /* SummaryHeader.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -491,6 +494,7 @@
 				0ABC637A273933E00041087F /* NSAttributedString+Extension.swift in Sources */,
 				0ABC631B273929860041087F /* SceneDelegate.swift in Sources */,
 				0ABC6323273929860041087F /* kayayuApp.xcdatamodeld in Sources */,
+				0AAA268A273AB0700063D876 /* SummaryHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
