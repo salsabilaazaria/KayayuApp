@@ -1,5 +1,5 @@
 //
-//  SignUpNode.swift
+//  RegisterNode.swift
 //  kayayuApp
 //
 //  Created by Salsabila Azaria on 11/9/21.
@@ -8,7 +8,7 @@
 import Foundation
 import AsyncDisplayKit
 
-class SignUpNode: ASDisplayNode {
+class RegisterNode: ASDisplayNode {
 	private let greetingText: ASTextNode = ASTextNode()
 	private let usernameTextfield : ASEditableTextNode = ASEditableTextNode()
 	private let emailTextfield : ASEditableTextNode = ASEditableTextNode()
@@ -147,7 +147,7 @@ class SignUpNode: ASDisplayNode {
 	
 }
 
-extension SignUpNode: UITextViewDelegate {
+extension RegisterNode: UITextViewDelegate {
 	
 	func textViewDidBeginEditing(_ textView: UITextView) {
 		textView.textContainerInset =  UIEdgeInsets(top: 10, left: 8, bottom: 10, right: 8)

@@ -12,8 +12,8 @@ class ViewController: ASDKViewController<ASDisplayNode> {
 	
 	override init() {
 //		let mainNode = LandingNode()
-		let mainNode = SignUpNode()
-//		let mainNode = LoginNode()
+//		let mainNode = SummaryHeader()
+		let mainNode = HomeNode()
 		super.init(node: mainNode)
 	}
 	

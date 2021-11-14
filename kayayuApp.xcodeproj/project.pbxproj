@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A20A9C427411024005E8BB6 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A20A9C327411024005E8BB6 /* NavigationBar.swift */; };
+		0A2A6894273D5FFF0062501C /* HomeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2A6893273D5FFF0062501C /* HomeNode.swift */; };
+		0A2A6899273D64560062501C /* HomeSummaryCollectionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2A6898273D64560062501C /* HomeSummaryCollectionNode.swift */; };
 		0AAA2674273A65900063D876 /* BigButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAA2673273A65900063D876 /* BigButton.swift */; };
-		0AAA2685273AAA230063D876 /* SignUpNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAA2684273AAA230063D876 /* SignUpNode.swift */; };
+		0AAA2685273AAA230063D876 /* RegisterNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAA2684273AAA230063D876 /* RegisterNode.swift */; };
 		0AAA268A273AB0700063D876 /* SummaryHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAA2689273AB0700063D876 /* SummaryHeader.swift */; };
 		0ABC6319273929860041087F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC6318273929860041087F /* AppDelegate.swift */; };
 		0ABC631B273929860041087F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC631A273929860041087F /* SceneDelegate.swift */; };
@@ -45,8 +48,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A20A9C327411024005E8BB6 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
+		0A2A6893273D5FFF0062501C /* HomeNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNode.swift; sourceTree = "<group>"; };
+		0A2A6898273D64560062501C /* HomeSummaryCollectionNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSummaryCollectionNode.swift; sourceTree = "<group>"; };
 		0AAA2673273A65900063D876 /* BigButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigButton.swift; sourceTree = "<group>"; };
-		0AAA2684273AAA230063D876 /* SignUpNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNode.swift; sourceTree = "<group>"; };
+		0AAA2684273AAA230063D876 /* RegisterNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterNode.swift; sourceTree = "<group>"; };
 		0AAA2689273AB0700063D876 /* SummaryHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryHeader.swift; sourceTree = "<group>"; };
 		0ABC6315273929860041087F /* kayayuApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kayayuApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0ABC6318273929860041087F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +116,7 @@
 			children = (
 				0AAA2673273A65900063D876 /* BigButton.swift */,
 				0AAA2689273AB0700063D876 /* SummaryHeader.swift */,
+				0A20A9C327411024005E8BB6 /* NavigationBar.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -178,7 +185,9 @@
 				0AAA2672273A65750063D876 /* Component */,
 				0ABC636E273933800041087F /* LandingNode.swift */,
 				0ABC639527393B710041087F /* LoginNode.swift */,
-				0AAA2684273AAA230063D876 /* SignUpNode.swift */,
+				0AAA2684273AAA230063D876 /* RegisterNode.swift */,
+				0A2A6893273D5FFF0062501C /* HomeNode.swift */,
+				0A2A6898273D64560062501C /* HomeSummaryCollectionNode.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -487,12 +496,15 @@
 				0ABC637F273934020041087F /* ColorHelper.swift in Sources */,
 				0ABC639627393B710041087F /* LoginNode.swift in Sources */,
 				0AAA2674273A65900063D876 /* BigButton.swift in Sources */,
-				0AAA2685273AAA230063D876 /* SignUpNode.swift in Sources */,
+				0AAA2685273AAA230063D876 /* RegisterNode.swift in Sources */,
 				0ABC636F273933800041087F /* LandingNode.swift in Sources */,
+				0A2A6899273D64560062501C /* HomeSummaryCollectionNode.swift in Sources */,
 				0ABC631D273929860041087F /* ViewController.swift in Sources */,
 				0ABC6319273929860041087F /* AppDelegate.swift in Sources */,
 				0ABC637A273933E00041087F /* NSAttributedString+Extension.swift in Sources */,
+				0A2A6894273D5FFF0062501C /* HomeNode.swift in Sources */,
 				0ABC631B273929860041087F /* SceneDelegate.swift in Sources */,
+				0A20A9C427411024005E8BB6 /* NavigationBar.swift in Sources */,
 				0ABC6323273929860041087F /* kayayuApp.xcdatamodeld in Sources */,
 				0AAA268A273AB0700063D876 /* SummaryHeader.swift in Sources */,
 			);

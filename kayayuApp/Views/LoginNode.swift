@@ -102,7 +102,7 @@ class LoginNode: ASDisplayNode {
 	}
 	
 	private func configueSignUpButton() {
-		signUpButton.setAttributedTitle(NSAttributedString.normal("Sign Up", 12, .black), for: .normal)
+		signUpButton.setAttributedTitle(NSAttributedString.normal("Register", 12, .black), for: .normal)
 		signUpButton.addTarget(self, action: #selector(signUpButtonTapped), forControlEvents: .touchUpInside)
 	}
 	

@@ -18,7 +18,7 @@ enum summary: String {
 	case savings = "savings"
 }
 
-class SummaryHeader: ASDisplayNode {
+class SummaryHeader: ASCellNode {
 	private let icon: ASImageNode = ASImageNode()
 	private let title: ASTextNode = ASTextNode()
 	private let subtitle: ASTextNode = ASTextNode()
@@ -36,7 +36,7 @@ class SummaryHeader: ASDisplayNode {
 		self.subtitleText = subtitleText
 		
 		super.init()
-		
+		configureNodeBorder()
 		configureTitle()
 		configureSubtitle()
 		configureIcon()
