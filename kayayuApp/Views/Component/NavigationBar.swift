@@ -39,7 +39,7 @@ class NavigationBar: ASDisplayNode {
 		let profile = configureProfileNavbar()
 		
 		let mainSpec = ASStackLayoutSpec(direction: .horizontal,
-										  spacing: <#T##CGFloat#>,
+										  spacing: 0,
 										  justifyContent: .center,
 										  alignItems: .center,
 										  children: [home,stats,profile])

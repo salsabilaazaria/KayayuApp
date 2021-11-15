@@ -29,7 +29,7 @@ class SummaryHeader: ASCellNode {
 	
 	private let progressBarHeight: CGFloat = 40
 	private let progressBarWidth: CGFloat = UIScreen.main.bounds.width - 110
-	private let nodeSize = CGSize(width: UIScreen.main.bounds.width-32, height: 80)
+	private let nodeSize = CGSize(width: UIScreen.main.bounds.width - 40, height: 80)
 	
 	init(summary: summary = .balance, subtitleText: String = "") {
 		self.summary = summary
@@ -84,11 +84,11 @@ class SummaryHeader: ASCellNode {
 										 children: elementArray)
 		
 
-		let elementSpecInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 25, left: 0, bottom: 0, right: 0), child: elementSpec)
+		let elementSpecInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), child: elementSpec)
 		
 		let horizontalSpec = ASStackLayoutSpec(direction: .horizontal,
 											   spacing: 8,
-											   justifyContent: .center,
+											   justifyContent: .start,
 											   alignItems: .center,
 											   children: [icon, elementSpecInset])
 		
