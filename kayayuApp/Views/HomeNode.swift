@@ -11,6 +11,7 @@ import AsyncDisplayKit
 class HomeNode: ASDisplayNode {
 	
 	private let summaryCollectionNode: ASCollectionNode
+	private let transactionTableNode: TransactionTableNode = TransactionTableNode()
 	
 	private let lineSpacing: CGFloat = 8
 	private let sidePadding: CGFloat = 28
@@ -20,9 +21,10 @@ class HomeNode: ASDisplayNode {
 		
 		let flowLayout = UICollectionViewFlowLayout()
 		flowLayout.scrollDirection = .horizontal
-		flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 10)
+		flowLayout.sectionInset = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 10)
 		
 		self.summaryCollectionNode = ASCollectionNode(collectionViewLayout: flowLayout)
+		self.transactionTableNode.style.preferredSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 7/10)
 		
 		super.init()
 		
@@ -37,6 +39,7 @@ class HomeNode: ASDisplayNode {
 		summaryCollectionNode.dataSource = self
 		summaryCollectionNode.backgroundColor = .clear
 		summaryCollectionNode.showsHorizontalScrollIndicator = false
+		summaryCollectionNode.showsVerticalScrollIndicator = false
 
 	}
 	
@@ -55,9 +58,15 @@ class HomeNode: ASDisplayNode {
 													   alignItems: .center,
 													   children: [summaryCollectionNode]
 		)
+		
+		let mainSpec = ASStackLayoutSpec(direction: .vertical,
+										 spacing: 10,
+												  justifyContent: .center,
+												  alignItems: .center,
+												  children: [summaryCollectionSpec, transactionTableNode])
 
 		
-		return summaryCollectionSpec
+		return mainSpec
 	}
 }
 
