@@ -70,10 +70,10 @@ class TransactionDateCellNode: ASCellNode {
 	}
 	
 	private func configureIncomeAmount() {
-		totalIncomeAmount.attributedText = NSAttributedString.bold("Rp1.000.000.000", 14, .systemGreen)
+		totalIncomeAmount.attributedText = NSAttributedString.semibold("Rp1.000.000.000", 14, .systemGreen)
 	}
 	
 	private func configureExpenseAmount() {
-		totalExpenseAmount.attributedText = NSAttributedString.bold("Rp1.000.000.000", 14, .systemRed)
+		totalExpenseAmount.attributedText = NSAttributedString.semibold("Rp1.000.000.000", 14, .systemRed)
 	}
 }

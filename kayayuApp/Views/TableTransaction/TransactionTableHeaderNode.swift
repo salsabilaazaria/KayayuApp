@@ -116,8 +116,8 @@ class TransactionTableHeaderNode: ASCellNode {
 	}
 	
 	private func configureIncomeText() -> ASLayoutSpec {
-		incomeTitle.attributedText = NSAttributedString.normal("Income", 14, .systemGreen)
-		incomeAmount.attributedText = NSAttributedString.normal("Rp1.000.000", 14, .systemGreen)
+		incomeTitle.attributedText = NSAttributedString.bold("Income", 14, .systemGreen)
+		incomeAmount.attributedText = NSAttributedString.semibold("Rp1.000.000", 14, .systemGreen)
 		
 		let incomeSpec = ASStackLayoutSpec(direction: .vertical,
 										   spacing: 5,
@@ -129,8 +129,8 @@ class TransactionTableHeaderNode: ASCellNode {
 	}
 	
 	private func configureExpenseText() -> ASLayoutSpec {
-		expenseTitle.attributedText = NSAttributedString.normal("Expense", 14, .systemRed)
-		expenseAmount.attributedText = NSAttributedString.normal("Rp600.000", 14, .systemRed)
+		expenseTitle.attributedText = NSAttributedString.bold("Expense", 14, .systemRed)
+		expenseAmount.attributedText = NSAttributedString.semibold("Rp600.000", 14, .systemRed)
 		
 		let expenseSpec = ASStackLayoutSpec(direction: .vertical,
 										   spacing: 5,
@@ -143,8 +143,8 @@ class TransactionTableHeaderNode: ASCellNode {
 	}
 	
 	private func configureTotalText() -> ASLayoutSpec {
-		totalTitle.attributedText = NSAttributedString.normal("Total", 14, .black)
-		totalAmount.attributedText = NSAttributedString.normal("Rp400.000", 14, .black)
+		totalTitle.attributedText = NSAttributedString.bold("Total", 14, .black)
+		totalAmount.attributedText = NSAttributedString.semibold("Rp400.000", 14, .black)
 		
 		let totalSpec = ASStackLayoutSpec(direction: .vertical,
 										   spacing: 5,
