@@ -17,21 +17,23 @@ class TransactionTableNode: ASTableNode {
 
 		backgroundColor = .white
 	}
-	
 }
 
 extension TransactionTableNode: ASTableDataSource, ASTableDelegate {
 
 	func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
-		print("tableNode")
-		return 10
+		return 30
 	}
 	
 	func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
-		
-		let cellNode = TransactionDetailCellNode()
-		
-		return cellNode
+	 if indexPath.row % 2 == 0 {
+			let cellNode = TransactionDateCellNode()
+			return cellNode
+		} else {
+			let cellNode = TransactionCellNode(isIncomeTransaction: false)
+			return cellNode
+		}
+
 	}
 	
 }

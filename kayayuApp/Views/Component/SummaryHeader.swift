@@ -112,7 +112,7 @@ class SummaryHeader: ASCellNode {
 	}
 	
 	private func configureTitle() {
-		title.attributedText = NSAttributedString.bold(summary.rawValue.uppercased(), 12, .black)
+		title.attributedText = NSAttributedString.bold(summary.rawValue.uppercased(), 16, .black)
 	}
 	
 	private func configureSubtitle() {
