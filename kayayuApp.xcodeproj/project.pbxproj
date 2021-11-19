@@ -170,6 +170,7 @@
 		0ABC6317273929860041087F /* kayayuApp */ = {
 			isa = PBXGroup;
 			children = (
+				AFC65DBE2747B2F70050769D /* Coordinator */,
 				0ABC636D2739335C0041087F /* ViewController */,
 				0ABC636C273933560041087F /* ViewModel */,
 				0ABC636B273933510041087F /* Helper */,
@@ -181,8 +182,6 @@
 				0ABC6326273929880041087F /* LaunchScreen.storyboard */,
 				0ABC6329273929880041087F /* Info.plist */,
 				0ABC6321273929860041087F /* kayayuApp.xcdatamodeld */,
-				AFC65D9F27476F000050769D /* KayayuCoordinator.swift */,
-				AFC65DA4274771650050769D /* KayayuScreen.swift */,
 			);
 			path = kayayuApp;
 			sourceTree = "<group>";
@@ -275,6 +274,15 @@
 				AF2C188A27464E6A00482D6E /* HomeTableTransaction.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		AFC65DBE2747B2F70050769D /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				AFC65D9F27476F000050769D /* KayayuCoordinator.swift */,
+				AFC65DA4274771650050769D /* KayayuScreen.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		E949D484373EE7F83AF88521 /* Pods */ = {
