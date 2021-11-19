@@ -8,7 +8,7 @@
 import Foundation
 import AsyncDisplayKit
 
-class NavigationBar: ASDisplayNode {
+class TabBar: ASDisplayNode {
 	
 	private let homeButton: ASButtonNode = ASButtonNode()
 	private let homeIcon: ASImageNode = ASImageNode()

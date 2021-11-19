@@ -13,13 +13,12 @@ class HomeNode: ASDisplayNode {
 	private let tableTransaction: HomeTableTransaction = HomeTableTransaction()
 	private var summaryBalanceNode: SummaryHeader = SummaryHeader()
 
-	
 	private let lineSpacing: CGFloat = 8
 	private let sidePadding: CGFloat = 28
 	private let cellAspectRatio: CGFloat = 128/375
 	
 	override init() {
-		
+		print("home node")
 		super.init()
 		configureTableTransaction()
 		configureSummaryBalance()
