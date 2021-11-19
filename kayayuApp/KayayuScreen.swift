@@ -15,6 +15,8 @@ final class KayayuScreen {
 	enum NavigationEvent {
 		case onOpenHomePage
 		case onOpenLandingPage
+		case onOpenLoginPage
+		case onOpenRegisterPage
 //		case onOpenStatsPage
 //		case onOpenProfilePage
 //		case onOpenRecordIncomePage
@@ -27,18 +29,55 @@ final class KayayuScreen {
 	}
 	
 	func make() -> UIViewController {
-		var viewController: UIViewController
-		viewController = makeLandingPageViewController()
-		return viewController
+		let controller = makeLandingPageViewController()
+		return controller
 	}
 	
 	func makeLandingPageViewController() -> UIViewController {
 		let controller = LandingViewController()
+		controller.onOpenLoginPage = { [weak self] in
+			guard let self = self else {
+				return
+			}
+			print("screen on open login")
+			self.onNavigationEvent?(.onOpenLoginPage)
+		}
+		controller.onOpenRegisterPage = { [weak self] in
+			guard let self = self else {
+				return
+			}
+			
+			self.onNavigationEvent?(.onOpenRegisterPage)
+		}
 		return controller
 	}
 	
 	func makeHomePageViewController() -> UIViewController {
 		let controller = HomeViewController()
+		return controller
+	}
+	
+	func makeLoginPageViewController() -> UIViewController {
+		let controller = LoginViewController()
+		controller.onOpenHomePage = { [weak self] in
+			guard let self = self else {
+				return
+			}
+			
+			self.onNavigationEvent?(.onOpenHomePage)
+		}
+		return controller
+	}
+	
+	func makeRegisterPageViewController() -> UIViewController {
+		let controller = RegisterViewController()
+		controller.onOpenHomePage = { [weak self] in
+			guard let self = self else {
+				return
+			}
+			
+			self.onNavigationEvent?(.onOpenHomePage)
+		}
 		return controller
 	}
 	

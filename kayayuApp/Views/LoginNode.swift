@@ -9,6 +9,10 @@ import Foundation
 import AsyncDisplayKit
 
 class LoginNode: ASDisplayNode {
+	
+	var onOpenHomePage: (() -> Void)?
+	var onOpenRegisterPage: (() -> Void)?
+	
 	private let greetingText: ASTextNode = ASTextNode()
 	private let usernameTextfield : ASEditableTextNode = ASEditableTextNode()
 	private let passwordTextfield : ASEditableTextNode = ASEditableTextNode()
@@ -107,11 +111,11 @@ class LoginNode: ASDisplayNode {
 	}
 	
 	@objc func loginButtonTapped(sender: ASButtonNode) {
-		print("GO TO HOMEPAGE")
+		self.onOpenHomePage?()
 	}
 	
 	@objc func signUpButtonTapped(sender: ASButtonNode) {
-		print("GO TO SIGN UP")
+		self.onOpenRegisterPage?()
 	}
 
 	

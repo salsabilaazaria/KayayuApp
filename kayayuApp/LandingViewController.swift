@@ -9,6 +9,10 @@ import Foundation
 import AsyncDisplayKit
 
 class LandingViewController:ASDKViewController<ASDisplayNode> {
+	
+	var onOpenLoginPage: (() -> Void)?
+	var onOpenRegisterPage: (() -> Void)?
+	
 	private let landingPage: LandingNode?
 	private let navBar: TabBar?
 	
@@ -20,7 +24,18 @@ class LandingViewController:ASDKViewController<ASDisplayNode> {
 		self.navBar = navBar
 		self.landingPage = landingPage
 		super.init(node: landingPage)
+		configureNode()
 		
+	}
+	
+	private func configureNode() {
+		landingPage?.onOpenLoginPage = { [weak self] in
+			self?.onOpenLoginPage?()
+		}
+		
+		landingPage?.onOpenRegisterPage = { [weak self] in
+			self?.onOpenRegisterPage?()
+		}
 	}
 	
 	required init?(coder aDecoder: NSCoder) {

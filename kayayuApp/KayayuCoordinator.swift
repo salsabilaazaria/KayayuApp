@@ -49,7 +49,6 @@ public final class KayayuCoordinator {
 			case .onOpenHomePage:
 				DispatchQueue.main.async {
 					let controller = screen.makeHomePageViewController()
-		
 					self.navigationController.pushViewController(controller, animated: true)
 					
 				}
@@ -59,6 +58,21 @@ public final class KayayuCoordinator {
 					self.navigationController.pushViewController(controller, animated: true)
 					
 				}
+			case .onOpenLoginPage:
+				DispatchQueue.main.async {
+					print("go to login")
+					let controller = screen.makeLoginPageViewController()
+					self.navigationController.pushViewController(controller, animated: true)
+					
+				}
+			case .onOpenRegisterPage:
+				DispatchQueue.main.async {
+					print("go to register")
+					let controller = screen.makeRegisterPageViewController()
+					self.navigationController.pushViewController(controller, animated: true)
+					
+				}
+				
 			}
 		}
 	}

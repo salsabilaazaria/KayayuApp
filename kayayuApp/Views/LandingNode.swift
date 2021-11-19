@@ -10,6 +10,9 @@ import AsyncDisplayKit
 
 class LandingNode: ASDisplayNode {
 	
+	var onOpenLoginPage: (() -> Void)?
+	var onOpenRegisterPage: (() -> Void)?
+	
 	private let logo: ASImageNode = ASImageNode()
 	private let name: ASTextNode = ASTextNode()
 	
@@ -75,11 +78,13 @@ class LandingNode: ASDisplayNode {
 	
 	@objc func loginClicked(sender:UIButton)
 	{
+		self.onOpenLoginPage?()
 		print("LOGIN CLICKED")
 	}
 	
 	@objc func registerClicked(sender:UIButton)
 	{
+		self.onOpenRegisterPage?()
 		print("SIGN UP CLICKED")
 	}
 	
