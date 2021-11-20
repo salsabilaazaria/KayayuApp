@@ -38,6 +38,7 @@
 		AFC65DAA274792AD0050769D /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC65DA9274792AD0050769D /* LandingViewController.swift */; };
 		AFC65DB52747ABBA0050769D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC65DB42747ABBA0050769D /* LoginViewController.swift */; };
 		AFC65DBA2747ABCA0050769D /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC65DB92747ABCA0050769D /* RegisterViewController.swift */; };
+		AFC65DC02747B35F0050769D /* HomeComponentNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC65DBF2747B35F0050769D /* HomeComponentNode.swift */; };
 		C85222BDFC0C4353EF0EF0BD /* Pods_kayayuApp_kayayuAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA298E0F630B182870A43DB /* Pods_kayayuApp_kayayuAppUITests.framework */; };
 		CF5F6A57A2C96269113C4B45 /* Pods_kayayuAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 822540B0945D1E91F4C2F699 /* Pods_kayayuAppTests.framework */; };
 /* End PBXBuildFile section */
@@ -101,6 +102,7 @@
 		AFC65DA9274792AD0050769D /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LandingViewController.swift; path = kayayuApp/LandingViewController.swift; sourceTree = SOURCE_ROOT; };
 		AFC65DB42747ABBA0050769D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = kayayuApp/LoginViewController.swift; sourceTree = SOURCE_ROOT; };
 		AFC65DB92747ABCA0050769D /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RegisterViewController.swift; path = kayayuApp/RegisterViewController.swift; sourceTree = SOURCE_ROOT; };
+		AFC65DBF2747B35F0050769D /* HomeComponentNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeComponentNode.swift; sourceTree = "<group>"; };
 		B24C4321B5D25F3735CC2CE2 /* Pods_kayayuApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kayayuApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B887FE174A81196E743E9593 /* Pods-kayayuApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuApp.release.xcconfig"; path = "Target Support Files/Pods-kayayuApp/Pods-kayayuApp.release.xcconfig"; sourceTree = "<group>"; };
 		DCA298E0F630B182870A43DB /* Pods_kayayuApp_kayayuAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kayayuApp_kayayuAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -272,6 +274,7 @@
 			children = (
 				0A2A6893273D5FFF0062501C /* HomeNode.swift */,
 				AF2C188A27464E6A00482D6E /* HomeTableTransaction.swift */,
+				AFC65DBF2747B35F0050769D /* HomeComponentNode.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -573,6 +576,7 @@
 				AF0201982742545C0033D067 /* TransactionCellNode.swift in Sources */,
 				AF020193274252C60033D067 /* TransactionTableNode.swift in Sources */,
 				0ABC631B273929860041087F /* SceneDelegate.swift in Sources */,
+				AFC65DC02747B35F0050769D /* HomeComponentNode.swift in Sources */,
 				0A20A9C427411024005E8BB6 /* TabBar.swift in Sources */,
 				AF2C18702746097300482D6E /* DateFormatter+Extension.swift in Sources */,
 				0ABC6323273929860041087F /* kayayuApp.xcdatamodeld in Sources */,

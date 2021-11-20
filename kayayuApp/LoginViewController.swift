@@ -41,6 +41,7 @@ class LoginViewController: ASDKViewController<ASDisplayNode> {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		edgesForExtendedLayout = []
+		self.navigationController?.navigationBar.isHidden = true
 	}
 
 }
