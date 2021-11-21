@@ -7,13 +7,10 @@ target 'kayayuApp' do
 
   # Pods for kayayuApp
 	pod 'Texture'
-	pod 'FSCalendar'
   target 'kayayuAppTests' do
     inherit! :search_paths
     # Pods for testing
 	pod 'Texture'
-	pod 'FSCalendar'
-
   end
 
   target 'kayayuAppUITests' do
