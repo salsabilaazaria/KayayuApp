@@ -10,6 +10,9 @@
 		0A20A9C427411024005E8BB6 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A20A9C327411024005E8BB6 /* TabBar.swift */; };
 		0A2A6894273D5FFF0062501C /* HomeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2A6893273D5FFF0062501C /* HomeNode.swift */; };
 		0A8D94E7274D26F300BB55FC /* StatsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8D94E6274D26F300BB55FC /* StatsNode.swift */; };
+		0A8D950D274D2B2400BB55FC /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8D950C274D2B2400BB55FC /* StatsViewController.swift */; };
+		0A8D9512274D320700BB55FC /* RealisationStatsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8D9511274D320600BB55FC /* RealisationStatsNode.swift */; };
+		0A8D9517274D333500BB55FC /* PlanStatsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8D9516274D333500BB55FC /* PlanStatsNode.swift */; };
 		0AAA2674273A65900063D876 /* BigButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAA2673273A65900063D876 /* BigButton.swift */; };
 		0AAA2685273AAA230063D876 /* RegisterNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAA2684273AAA230063D876 /* RegisterNode.swift */; };
 		0AAA268A273AB0700063D876 /* SummaryHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAA2689273AB0700063D876 /* SummaryHeader.swift */; };
@@ -65,6 +68,9 @@
 		0A20A9C327411024005E8BB6 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		0A2A6893273D5FFF0062501C /* HomeNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNode.swift; sourceTree = "<group>"; };
 		0A8D94E6274D26F300BB55FC /* StatsNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsNode.swift; sourceTree = "<group>"; };
+		0A8D950C274D2B2400BB55FC /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
+		0A8D9511274D320600BB55FC /* RealisationStatsNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealisationStatsNode.swift; sourceTree = "<group>"; };
+		0A8D9516274D333500BB55FC /* PlanStatsNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanStatsNode.swift; sourceTree = "<group>"; };
 		0AAA2673273A65900063D876 /* BigButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigButton.swift; sourceTree = "<group>"; };
 		0AAA2684273AAA230063D876 /* RegisterNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterNode.swift; sourceTree = "<group>"; };
 		0AAA2689273AB0700063D876 /* SummaryHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryHeader.swift; sourceTree = "<group>"; };
@@ -139,6 +145,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A8D951B274D333B00BB55FC /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				0A8D94E6274D26F300BB55FC /* StatsNode.swift */,
+				0A8D9511274D320600BB55FC /* RealisationStatsNode.swift */,
+				0A8D9516274D333500BB55FC /* PlanStatsNode.swift */,
+			);
+			path = Stats;
+			sourceTree = "<group>";
+		};
 		0AAA2672273A65750063D876 /* Component */ = {
 			isa = PBXGroup;
 			children = (
@@ -211,13 +227,13 @@
 		0ABC636A2739334B0041087F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0A8D951B274D333B00BB55FC /* Stats */,
 				AF2C188F27464FF400482D6E /* Home */,
 				AF2C188927464E2700482D6E /* TableTransaction */,
 				0AAA2672273A65750063D876 /* Component */,
 				0ABC636E273933800041087F /* LandingNode.swift */,
 				0ABC639527393B710041087F /* LoginNode.swift */,
 				0AAA2684273AAA230063D876 /* RegisterNode.swift */,
-				0A8D94E6274D26F300BB55FC /* StatsNode.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -247,6 +263,7 @@
 				AFC65DA9274792AD0050769D /* LandingViewController.swift */,
 				AFC65DB42747ABBA0050769D /* LoginViewController.swift */,
 				AFC65DB92747ABCA0050769D /* RegisterViewController.swift */,
+				0A8D950C274D2B2400BB55FC /* StatsViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -560,6 +577,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFC65DA027476F000050769D /* KayayuCoordinator.swift in Sources */,
+				0A8D9512274D320700BB55FC /* RealisationStatsNode.swift in Sources */,
 				AF2C1894274656CE00482D6E /* HomeViewController.swift in Sources */,
 				AF2C18852746477E00482D6E /* TransactionDateCellNode.swift in Sources */,
 				0ABC637F273934020041087F /* ColorHelper.swift in Sources */,
@@ -568,6 +586,8 @@
 				AFC65DA5274771650050769D /* KayayuScreen.swift in Sources */,
 				0AAA2685273AAA230063D876 /* RegisterNode.swift in Sources */,
 				0ABC636F273933800041087F /* LandingNode.swift in Sources */,
+				0A8D9517274D333500BB55FC /* PlanStatsNode.swift in Sources */,
+				0A8D950D274D2B2400BB55FC /* StatsViewController.swift in Sources */,
 				AF2C1867274607AC00482D6E /* Date+Extension.swift in Sources */,
 				AF2C18752746165600482D6E /* TransactionTableHeaderNode.swift in Sources */,
 				AF2C188B27464E6A00482D6E /* HomeTableTransaction.swift in Sources */,

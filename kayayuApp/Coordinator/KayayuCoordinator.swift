@@ -20,12 +20,9 @@ public final class KayayuCoordinator {
 		self.navigationController = UINavigationController()
 		self.window = window
 		self.window.backgroundColor = .white
-		
-		print("window \(window)\n navigationcontroller \(navigationController)")
 	}
 	
 	func makeKayayuScreen() {
-		print("make kayayu screen")
 		window.rootViewController = navigationController
 		window.makeKeyAndVisible()
 		let screen = KayayuScreen(navigationController: self.navigationController)
@@ -33,7 +30,6 @@ public final class KayayuCoordinator {
 		self.configureScreen()
 		
 		DispatchQueue.main.async { [weak self] in
-			print("push view controller")
 			self?.navigationController.pushViewController(screen.make(), animated: true)
 		}
 	}
@@ -60,18 +56,22 @@ public final class KayayuCoordinator {
 				}
 			case .onOpenLoginPage:
 				DispatchQueue.main.async {
-					print("go to login")
 					let controller = screen.makeLoginPageViewController()
 					self.navigationController.pushViewController(controller, animated: true)
 					
 				}
 			case .onOpenRegisterPage:
 				DispatchQueue.main.async {
-					print("go to register")
 					let controller = screen.makeRegisterPageViewController()
 					self.navigationController.pushViewController(controller, animated: true)
 					
 				}
+				case .onOpenStatsPage:
+					DispatchQueue.main.async {
+						let controller = screen.makeStatsPageViewController()
+						self.navigationController.pushViewController(controller, animated: true)
+						
+					}
 				
 			}
 		}

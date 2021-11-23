@@ -49,7 +49,8 @@ class TabBar: ASDisplayNode {
 
 	private func configureHomeNavbar() -> ASLayoutSpec {
 		homeIcon.style.preferredSize = CGSize(width: 40, height: 40)
-		homeIcon.image = UIImage(named: "")
+		homeIcon.backgroundColor = .red
+//		homeIcon.image = UIImage(named: "")
 		
 		homeText.attributedText = NSAttributedString.normal("", 10, .darkGray)
 		
@@ -66,7 +67,8 @@ class TabBar: ASDisplayNode {
 	
 	private func configureStatsNavbar() -> ASLayoutSpec {
 		statsIcon.style.preferredSize = CGSize(width: 40, height: 40)
-		statsIcon.image = UIImage(named: "")
+		statsIcon.backgroundColor = .red
+//		statsIcon.image = UIImage(named: "")
 		
 		statsText.attributedText = NSAttributedString.normal("", 10, .darkGray)
 		
@@ -83,7 +85,8 @@ class TabBar: ASDisplayNode {
 	
 	private func configureProfileNavbar() -> ASLayoutSpec {
 		profileIcon.style.preferredSize = CGSize(width: 40, height: 40)
-		profileIcon.image = UIImage(named: "")
+		profileIcon.backgroundColor = .red
+//		profileIcon.image = UIImage(named: "")
 		
 		profileText.attributedText = NSAttributedString.normal("", 10, .darkGray)
 		

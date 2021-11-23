@@ -17,7 +17,7 @@ final class KayayuScreen {
 		case onOpenLandingPage
 		case onOpenLoginPage
 		case onOpenRegisterPage
-//		case onOpenStatsPage
+		case onOpenStatsPage
 //		case onOpenProfilePage
 //		case onOpenRecordIncomePage
 //		case onOpenRecordExpensePage
@@ -52,11 +52,6 @@ final class KayayuScreen {
 		return controller
 	}
 	
-	func makeHomePageViewController() -> UIViewController {
-		let controller = HomeViewController()
-		return controller
-	}
-	
 	func makeLoginPageViewController() -> UIViewController {
 		let controller = LoginViewController()
 		controller.onOpenHomePage = { [weak self] in
@@ -81,6 +76,15 @@ final class KayayuScreen {
 		return controller
 	}
 	
+	func makeHomePageViewController() -> UIViewController {
+		let controller = HomeViewController()
+		return controller
+	}
+	
+	func makeStatsPageViewController() -> UIViewController {
+		let controller = StatsViewController()
+		return controller
+	}
 
 
 }
