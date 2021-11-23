@@ -108,11 +108,11 @@ class PlanStatsNode: ASDisplayNode {
 	}
 	
 	private func configureWantsSummary() {
-		wantsSummary = SummaryHeader(summary: .wants, subtitleText: "RpNEEDS")
+		wantsSummary = SummaryHeader(summary: .wants, subtitleText: "RpWANTS")
 	}
 	
 	private func configureSavingsSummary() {
-		savingsSummary = SummaryHeader(summary: .savings, subtitleText: "RpNEEDS")
+		savingsSummary = SummaryHeader(summary: .savings, subtitleText: "RpSAVINGS")
 	}
 	
 	
