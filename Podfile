@@ -7,6 +7,7 @@ target 'kayayuApp' do
 
   # Pods for kayayuApp
 	pod 'Texture'
+	pod 'Charts'
   target 'kayayuAppTests' do
     inherit! :search_paths
     # Pods for testing

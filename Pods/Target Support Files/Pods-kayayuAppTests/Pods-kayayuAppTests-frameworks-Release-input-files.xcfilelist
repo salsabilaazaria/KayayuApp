@@ -1,5 +1,4 @@
 ${PODS_ROOT}/Target Support Files/Pods-kayayuAppTests/Pods-kayayuAppTests-frameworks.sh
-${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework
 ${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework
 ${BUILT_PRODUCTS_DIR}/PINOperation/PINOperation.framework
 ${BUILT_PRODUCTS_DIR}/PINRemoteImage/PINRemoteImage.framework

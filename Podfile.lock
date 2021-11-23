@@ -1,5 +1,7 @@
 PODS:
-  - FSCalendar (2.8.2)
+  - Charts (3.6.0):
+    - Charts/Core (= 3.6.0)
+  - Charts/Core (3.6.0)
   - PINCache (3.0.3):
     - PINCache/Arc-exception-safe (= 3.0.3)
     - PINCache/Core (= 3.0.3)
@@ -37,24 +39,24 @@ PODS:
     - Texture/Core
 
 DEPENDENCIES:
-  - FSCalendar
+  - Charts
   - Texture
 
 SPEC REPOS:
   trunk:
-    - FSCalendar
+    - Charts
     - PINCache
     - PINOperation
     - PINRemoteImage
     - Texture
 
 SPEC CHECKSUMS:
-  FSCalendar: e6a2eb9c571bf0719ed797ef807e08426753c241
+  Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
   PINCache: 7a8fc1a691173d21dbddbf86cd515de6efa55086
   PINOperation: 00c935935f1e8cf0d1e2d6b542e75b88fc3e5e20
   PINRemoteImage: f1295b29f8c5e640e25335a1b2bd9d805171bd01
   Texture: 2e8ab2519452515f7f5a520f5a8f7e0a413abfa3
 
-PODFILE CHECKSUM: 6d5df2b9ac9aa892dfc22e731f882252e03244ac
+PODFILE CHECKSUM: 8b52b4a006729d5fb795909fbfb67eba399ea521
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.10.2
