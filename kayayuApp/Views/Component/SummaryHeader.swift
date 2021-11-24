@@ -28,7 +28,7 @@ class SummaryHeader: ASCellNode {
 	private var summary: summary
 	
 	private let createProgressBar: Bool
-	private let progressBarHeight: CGFloat = 40
+	private let progressBarHeight: CGFloat = 20
 	private let progressBarWidth: CGFloat = UIScreen.main.bounds.width - 110
 	private let nodeSize = CGSize(width: UIScreen.main.bounds.width - 40, height: 80)
 	
@@ -70,32 +70,29 @@ class SummaryHeader: ASCellNode {
 			elementArray.append(subtitle)
 			
 		} else {
-			let text = ASStackLayoutSpec(direction: .vertical,
-										 spacing: 0,
-										 justifyContent: .start,
-										 alignItems: .center,
-										 children: [progressBarText])
+			let text = ASCenterLayoutSpec(centeringOptions: .X, sizingOptions: .minimumXY, child: progressBarText)
 			let progressBarOverlayText = ASOverlayLayoutSpec(child: progressBarNode, overlay: text)
-			progressBarOverlayText.style.preferredSize = CGSize(width: progressBarWidth, height: kayayuSize.kayayuBarHeight)
 			elementArray.append(progressBarOverlayText)
 			
 		}
 		
 		
 		let elementSpec = ASStackLayoutSpec(direction: .vertical,
-											spacing: 10,
+											spacing: 6,
 											justifyContent: .center,
 											alignItems: .start,
 											children: elementArray)
 		
 		
-		let elementSpecInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), child: elementSpec)
+		let elementSpecCenter = ASCenterLayoutSpec(centeringOptions: .Y,
+												  sizingOptions: .minimumXY,
+												  child: elementSpec)
 		
 		let horizontalSpec = ASStackLayoutSpec(direction: .horizontal,
 											   spacing: 8,
 											   justifyContent: .start,
 											   alignItems: .center,
-											   children: [icon, elementSpecInset])
+											   children: [icon, elementSpecCenter])
 		
 		let horizontalSpecInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10), child: horizontalSpec)
 		

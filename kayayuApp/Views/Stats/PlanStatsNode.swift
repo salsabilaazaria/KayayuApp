@@ -90,7 +90,7 @@ class PlanStatsNode: ASDisplayNode {
 		centerText.style.flexGrow = 1
 		monthHeader.style.preferredSize = monthYearHeaderSize
 		
-		let monthHeaderSpec = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8), child: monthHeader)
+		let monthHeaderSpec = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16), child: monthHeader)
 		
 		let monthHeaderWithBackground = ASOverlayLayoutSpec(child: backgroundHeader, overlay: monthHeaderSpec)
 		
