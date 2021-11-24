@@ -22,6 +22,8 @@ class RegisterNode: ASDisplayNode {
 	private let loginText: ASTextNode = ASTextNode()
 	private let loginButton: ASButtonNode = ASButtonNode()
 	
+	private let inputTextFieldSize = CGSize(width:  UIScreen.main.bounds.width - 32, height: kayayuSize.kayayuBarHeight)
+	
 	override init() {
 		super.init()
 		
@@ -78,7 +80,7 @@ class RegisterNode: ASDisplayNode {
 	
 	private func configureUsernameTextfield() {
 		usernameTextfield.backgroundColor = kayayuColor.softGrey
-		usernameTextfield.style.preferredSize = CGSize(width: UIScreen.main.bounds.width - 32, height: 40)
+		usernameTextfield.style.preferredSize = inputTextFieldSize
 		usernameTextfield.textContainerInset = UIEdgeInsets(top: 10, left: 8, bottom: 10, right: 8)
 		
 		usernameTextfield.textView.delegate = self
@@ -89,7 +91,7 @@ class RegisterNode: ASDisplayNode {
 	
 	private func configureEmailTextfield() {
 		emailTextfield.backgroundColor = kayayuColor.softGrey
-		emailTextfield.style.preferredSize = CGSize(width: UIScreen.main.bounds.width - 32, height: 40)
+		emailTextfield.style.preferredSize = inputTextFieldSize
 		emailTextfield.cornerRadius = 8.0
 		emailTextfield.textContainerInset = UIEdgeInsets(top: 10, left: 8, bottom: 10, right: 8)
 		
@@ -102,7 +104,7 @@ class RegisterNode: ASDisplayNode {
 	
 	private func configurePasswordTextfield() {
 		passwordTextfield.backgroundColor = kayayuColor.softGrey
-		passwordTextfield.style.preferredSize = CGSize(width: UIScreen.main.bounds.width - 32, height: 40)
+		passwordTextfield.style.preferredSize = inputTextFieldSize
 		passwordTextfield.cornerRadius = 8.0
 		passwordTextfield.textContainerInset = UIEdgeInsets(top: 10, left: 8, bottom: 10, right: 8)
 		
@@ -114,7 +116,7 @@ class RegisterNode: ASDisplayNode {
 	
 	private func configureConfirmPassTextfield() {
 		confirmPassTextfield.backgroundColor = kayayuColor.softGrey
-		confirmPassTextfield.style.preferredSize = CGSize(width: UIScreen.main.bounds.width - 32, height: 40)
+		confirmPassTextfield.style.preferredSize = inputTextFieldSize
 		confirmPassTextfield.cornerRadius = 8.0
 		confirmPassTextfield.textContainerInset = UIEdgeInsets(top: 10, left: 8, bottom: 10, right: 8)
 		

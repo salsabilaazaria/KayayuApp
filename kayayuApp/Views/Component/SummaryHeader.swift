@@ -76,7 +76,7 @@ class SummaryHeader: ASCellNode {
 										 alignItems: .center,
 										 children: [progressBarText])
 			let progressBarOverlayText = ASOverlayLayoutSpec(child: progressBarNode, overlay: text)
-			progressBarOverlayText.style.preferredSize = CGSize(width: progressBarWidth, height: progressBarHeight)
+			progressBarOverlayText.style.preferredSize = CGSize(width: progressBarWidth, height: kayayuSize.kayayuBarHeight)
 			elementArray.append(progressBarOverlayText)
 			
 		}

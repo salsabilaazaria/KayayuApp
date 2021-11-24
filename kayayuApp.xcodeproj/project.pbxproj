@@ -31,12 +31,12 @@
 		465797E2FE63F6017A3D46DA /* Pods_kayayuApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B24C4321B5D25F3735CC2CE2 /* Pods_kayayuApp.framework */; };
 		AF020193274252C60033D067 /* TransactionTableNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF020192274252C60033D067 /* TransactionTableNode.swift */; };
 		AF0201982742545C0033D067 /* TransactionCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0201972742545C0033D067 /* TransactionCellNode.swift */; };
-		AF2C1867274607AC00482D6E /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2C1866274607AB00482D6E /* Date+Extension.swift */; };
-		AF2C18702746097300482D6E /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2C186F2746097300482D6E /* DateFormatter+Extension.swift */; };
+		AF2C1867274607AC00482D6E /* CalendarHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2C1866274607AB00482D6E /* CalendarHelper.swift */; };
 		AF2C18752746165600482D6E /* TransactionTableHeaderNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2C18742746165600482D6E /* TransactionTableHeaderNode.swift */; };
 		AF2C18852746477E00482D6E /* TransactionDateCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2C18842746477E00482D6E /* TransactionDateCellNode.swift */; };
 		AF2C188B27464E6A00482D6E /* HomeTableTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2C188A27464E6A00482D6E /* HomeTableTransaction.swift */; };
 		AF2C1894274656CE00482D6E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2C1893274656CE00482D6E /* HomeViewController.swift */; };
+		AFBA5F59274DF8F6002455A7 /* KayayuHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBA5F58274DF8F6002455A7 /* KayayuHelper.swift */; };
 		AFC65DA027476F000050769D /* KayayuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC65D9F27476F000050769D /* KayayuCoordinator.swift */; };
 		AFC65DA5274771650050769D /* KayayuScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC65DA4274771650050769D /* KayayuScreen.swift */; };
 		AFC65DAA274792AD0050769D /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC65DA9274792AD0050769D /* LandingViewController.swift */; };
@@ -99,12 +99,12 @@
 		822540B0945D1E91F4C2F699 /* Pods_kayayuAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kayayuAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF020192274252C60033D067 /* TransactionTableNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableNode.swift; sourceTree = "<group>"; };
 		AF0201972742545C0033D067 /* TransactionCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCellNode.swift; sourceTree = "<group>"; };
-		AF2C1866274607AB00482D6E /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
-		AF2C186F2746097300482D6E /* DateFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extension.swift"; sourceTree = "<group>"; };
+		AF2C1866274607AB00482D6E /* CalendarHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHelper.swift; sourceTree = "<group>"; };
 		AF2C18742746165600482D6E /* TransactionTableHeaderNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableHeaderNode.swift; sourceTree = "<group>"; };
 		AF2C18842746477E00482D6E /* TransactionDateCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDateCellNode.swift; sourceTree = "<group>"; };
 		AF2C188A27464E6A00482D6E /* HomeTableTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableTransaction.swift; sourceTree = "<group>"; };
 		AF2C1893274656CE00482D6E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = kayayuApp/Views/HomeViewController.swift; sourceTree = SOURCE_ROOT; };
+		AFBA5F58274DF8F6002455A7 /* KayayuHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KayayuHelper.swift; sourceTree = "<group>"; };
 		AFC65D9F27476F000050769D /* KayayuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KayayuCoordinator.swift; sourceTree = "<group>"; };
 		AFC65DA4274771650050769D /* KayayuScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KayayuScreen.swift; sourceTree = "<group>"; };
 		AFC65DA9274792AD0050769D /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LandingViewController.swift; path = kayayuApp/LandingViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -243,8 +243,8 @@
 			children = (
 				0ABC6379273933E00041087F /* NSAttributedString+Extension.swift */,
 				0ABC637E273934020041087F /* ColorHelper.swift */,
-				AF2C1866274607AB00482D6E /* Date+Extension.swift */,
-				AF2C186F2746097300482D6E /* DateFormatter+Extension.swift */,
+				AF2C1866274607AB00482D6E /* CalendarHelper.swift */,
+				AFBA5F58274DF8F6002455A7 /* KayayuHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -583,12 +583,13 @@
 				0ABC637F273934020041087F /* ColorHelper.swift in Sources */,
 				0ABC639627393B710041087F /* LoginNode.swift in Sources */,
 				0AAA2674273A65900063D876 /* BigButton.swift in Sources */,
+				AFBA5F59274DF8F6002455A7 /* KayayuHelper.swift in Sources */,
 				AFC65DA5274771650050769D /* KayayuScreen.swift in Sources */,
 				0AAA2685273AAA230063D876 /* RegisterNode.swift in Sources */,
 				0ABC636F273933800041087F /* LandingNode.swift in Sources */,
 				0A8D9517274D333500BB55FC /* PlanStatsNode.swift in Sources */,
 				0A8D950D274D2B2400BB55FC /* StatsViewController.swift in Sources */,
-				AF2C1867274607AC00482D6E /* Date+Extension.swift in Sources */,
+				AF2C1867274607AC00482D6E /* CalendarHelper.swift in Sources */,
 				AF2C18752746165600482D6E /* TransactionTableHeaderNode.swift in Sources */,
 				AF2C188B27464E6A00482D6E /* HomeTableTransaction.swift in Sources */,
 				0ABC631D273929860041087F /* ViewController.swift in Sources */,
@@ -602,7 +603,6 @@
 				0ABC631B273929860041087F /* SceneDelegate.swift in Sources */,
 				AFC65DC02747B35F0050769D /* HomeComponentNode.swift in Sources */,
 				0A20A9C427411024005E8BB6 /* TabBar.swift in Sources */,
-				AF2C18702746097300482D6E /* DateFormatter+Extension.swift in Sources */,
 				0ABC6323273929860041087F /* kayayuApp.xcdatamodeld in Sources */,
 				AFC65DBA2747ABCA0050769D /* RegisterViewController.swift in Sources */,
 				0AAA268A273AB0700063D876 /* SummaryHeader.swift in Sources */,

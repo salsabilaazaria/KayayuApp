@@ -15,7 +15,7 @@ class StatsNode: ASDisplayNode {
 	private let realisationNode: ASDisplayNode = ASDisplayNode()
 	private let tabBar: TabBar = TabBar()
 	
-	private let buttonSize = CGSize(width: UIScreen.main.bounds.width/2, height: 20)
+	private let buttonSize = CGSize(width: UIScreen.main.bounds.width/2, height: kayayuSize.kayayuBarHeight)
 	private let nodeSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
 	private var goToPlanNode: Bool = false
 
@@ -76,7 +76,7 @@ class StatsNode: ASDisplayNode {
 		planButton.style.preferredSize = buttonSize
 		planButton.backgroundColor = .white
 		planButton.cornerRadius = 5
-		planButton.borderWidth = 0.2
+		planButton.borderWidth = kayayuSize.kayayuBorderWidth
 		planButton.borderColor = UIColor.black.cgColor
 		planButton.setAttributedTitle(NSAttributedString.semibold("PLAN", 12, .black), for: .normal)
 		planButton.addTarget(self, action: #selector(planButtonTapped), forControlEvents: .touchUpInside)
@@ -92,7 +92,7 @@ class StatsNode: ASDisplayNode {
 		realisationButton.style.preferredSize = buttonSize
 		realisationButton.backgroundColor = .white
 		realisationButton.cornerRadius = 5
-		realisationButton.borderWidth = 0.2
+		realisationButton.borderWidth = kayayuSize.kayayuBorderWidth
 		realisationButton.borderColor = UIColor.black.cgColor
 		realisationButton.setAttributedTitle(NSAttributedString.semibold("REALISATION", 12, .black), for: .normal)
 		realisationButton.addTarget(self, action: #selector(realisationButtonTapped), forControlEvents: .touchUpInside)

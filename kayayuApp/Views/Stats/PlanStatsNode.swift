@@ -9,12 +9,14 @@ import Foundation
 import AsyncDisplayKit
 import Charts
 
-struct dataDummyPieChart {
-	var amount: Int
-	var name: String
-}
-
 class PlanStatsNode: ASDisplayNode {
+	private let calendarHelper: CalendarHelper = CalendarHelper()
+	
+	private let nextMonthButton: ASButtonNode = ASButtonNode()
+	private let prevMonthButton: ASButtonNode = ASButtonNode()
+	private let monthYearText: ASTextNode = ASTextNode()
+	private var selectedDate: Date = Date()
+	
 	private let planPieChart: PieChartView = PieChartView()
 	private let planPieChartNode: ASDisplayNode = ASDisplayNode()
 	private let planTitle: ASTextNode = ASTextNode()
@@ -29,6 +31,10 @@ class PlanStatsNode: ASDisplayNode {
 		super.init()
 		automaticallyManagesSubnodes = true
 		backgroundColor = .white
+		
+		configureMonthYearString()
+		configureNextMonthButton()
+		configurePrevMonthButton()
 		configurePlanPieChartNode()
 		configurePlanPieChart()
 		configurePlanTitle()
@@ -39,29 +45,21 @@ class PlanStatsNode: ASDisplayNode {
 	}
 	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
+		let monthHeader = createMonthYearHeaderSpec()
+		let summaryStack = createRatioSummarySpec()
+
 		let pieChartStack = ASStackLayoutSpec(direction: .vertical,
 											  spacing: 10,
 												 justifyContent: .center,
 												 alignItems: .center,
 												 children: [planTitle, planPieChartNode])
 		
-		let summaryStack = ASStackLayoutSpec(direction: .vertical,
-											 spacing: 10,
-											 justifyContent: .center,
-											 alignItems: .center,
-											 children: [needsSummary, wantsSummary, savingsSummary])
-		
-		let summaryTitleStack = ASStackLayoutSpec(direction: .vertical,
-												  spacing: 10,
-												  justifyContent: .start,
-												  alignItems: .start,
-												  children: [ratioTitle, summaryStack])
 		
 		let mainStack = ASStackLayoutSpec(direction: .vertical,
 										  spacing: 10,
 												justifyContent: .start,
 												alignItems: .center,
-												children: [pieChartStack, summaryTitleStack])
+												children: [monthHeader, pieChartStack, summaryStack])
 	  
 		
 		
@@ -69,8 +67,64 @@ class PlanStatsNode: ASDisplayNode {
 		
 	}
 	
+	private func createMonthYearHeaderSpec() -> ASLayoutSpec {
+		
+		let monthYearHeaderSize = CGSize(width: UIScreen.main.bounds.width, height: kayayuSize.kayayuBarHeight)
+		let backgroundHeader = ASDisplayNode()
+		backgroundHeader.backgroundColor = .white
+		backgroundHeader.cornerRadius = 5
+		backgroundHeader.borderWidth = kayayuSize.kayayuBorderWidth
+		backgroundHeader.borderColor = UIColor.black.cgColor
+		backgroundHeader.style.preferredSize = monthYearHeaderSize
+		let centerText = ASStackLayoutSpec(direction: .horizontal,
+											spacing: 8,
+											justifyContent: .center,
+											alignItems: .center,
+											children: [monthYearText])
+		
+		let monthHeader = ASStackLayoutSpec(direction: .horizontal,
+											spacing: 8,
+											justifyContent: .center,
+											alignItems: .center,
+											children: [prevMonthButton, centerText, nextMonthButton])
+		centerText.style.flexGrow = 1
+		monthHeader.style.preferredSize = monthYearHeaderSize
+		
+		let monthHeaderSpec = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8), child: monthHeader)
+		
+		let monthHeaderWithBackground = ASOverlayLayoutSpec(child: backgroundHeader, overlay: monthHeaderSpec)
+		
+		return monthHeaderWithBackground
+	}
+	
+	private func configureMonthYearString() {
+		let monthYear = "\(calendarHelper.monthString(date: selectedDate)) \(calendarHelper.yearString(date: selectedDate))"
+		monthYearText.attributedText = NSAttributedString.bold(monthYear, 14, .black)
+
+	}
+	
+	private func configureNextMonthButton() {
+		nextMonthButton.setAttributedTitle(NSAttributedString.bold(">", 14, .black), for: .normal)
+		nextMonthButton.addTarget(self, action: #selector(nextMonthTapped), forControlEvents: .touchUpInside)
+	}
+	
+	@objc func nextMonthTapped(sender: ASButtonNode) {
+		selectedDate = CalendarHelper().plusMonth(date: selectedDate)
+		configureMonthYearString()
+	}
+	
+	private func configurePrevMonthButton() {
+		prevMonthButton.setAttributedTitle(NSAttributedString.bold("<", 14, .black), for: .normal)
+		prevMonthButton.addTarget(self, action: #selector(prevMonthTapped), forControlEvents: .touchUpInside)
+	}
+	
+	@objc func prevMonthTapped(sender: ASButtonNode) {
+		selectedDate = CalendarHelper().minusMonth(date: selectedDate)
+		configureMonthYearString()
+	}
+	
 	private func configurePlanTitle() {
-		planTitle.attributedText = NSAttributedString.bold("PLAN", 12, .black)
+		planTitle.attributedText = NSAttributedString.bold("PLAN", 16, .black)
 	}
 	
 	private func configurePlanPieChartNode() {
@@ -99,8 +153,24 @@ class PlanStatsNode: ASDisplayNode {
 		
 	}
 	
+	
+	private func createRatioSummarySpec() -> ASLayoutSpec {
+		let summaryStack = ASStackLayoutSpec(direction: .vertical,
+											 spacing: 10,
+											 justifyContent: .center,
+											 alignItems: .center,
+											 children: [needsSummary, wantsSummary, savingsSummary])
+		
+		let summaryTitleStack = ASStackLayoutSpec(direction: .vertical,
+												  spacing: 10,
+												  justifyContent: .start,
+												  alignItems: .start,
+												  children: [ratioTitle, summaryStack])
+		return summaryTitleStack
+	}
+	
 	private func configureRatioTitle() {
-		ratioTitle.attributedText = NSAttributedString.bold("This Month Goal", 12, kayayuColor.yellow)
+		ratioTitle.attributedText = NSAttributedString.bold("This Month Goal", 14, kayayuColor.yellow)
 	}
 	
 	private func configureNeedsSummary() {
