@@ -99,7 +99,6 @@ class StatsNode: ASDisplayNode {
 	@objc func realisationButtonTapped(sender: ASButtonNode) {
 		goToPlanNode = false
 		self.reloadUI()
-		print("Realisation")
 	}
 	
 

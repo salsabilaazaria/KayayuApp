@@ -36,6 +36,8 @@
 		AF2C18852746477E00482D6E /* TransactionDateCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2C18842746477E00482D6E /* TransactionDateCellNode.swift */; };
 		AF2C188B27464E6A00482D6E /* HomeTableTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2C188A27464E6A00482D6E /* HomeTableTransaction.swift */; };
 		AF2C1894274656CE00482D6E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2C1893274656CE00482D6E /* HomeViewController.swift */; };
+		AF7591D5274E4381003B8708 /* RatioRealisationDetailNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7591D4274E4381003B8708 /* RatioRealisationDetailNode.swift */; };
+		AF7591DA274E43DE003B8708 /* StatsDateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7591D9274E43DE003B8708 /* StatsDateHeader.swift */; };
 		AFBA5F59274DF8F6002455A7 /* KayayuHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBA5F58274DF8F6002455A7 /* KayayuHelper.swift */; };
 		AFC65DA027476F000050769D /* KayayuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC65D9F27476F000050769D /* KayayuCoordinator.swift */; };
 		AFC65DA5274771650050769D /* KayayuScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC65DA4274771650050769D /* KayayuScreen.swift */; };
@@ -104,6 +106,8 @@
 		AF2C18842746477E00482D6E /* TransactionDateCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDateCellNode.swift; sourceTree = "<group>"; };
 		AF2C188A27464E6A00482D6E /* HomeTableTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableTransaction.swift; sourceTree = "<group>"; };
 		AF2C1893274656CE00482D6E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = kayayuApp/Views/HomeViewController.swift; sourceTree = SOURCE_ROOT; };
+		AF7591D4274E4381003B8708 /* RatioRealisationDetailNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioRealisationDetailNode.swift; sourceTree = "<group>"; };
+		AF7591D9274E43DE003B8708 /* StatsDateHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsDateHeader.swift; sourceTree = "<group>"; };
 		AFBA5F58274DF8F6002455A7 /* KayayuHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KayayuHelper.swift; sourceTree = "<group>"; };
 		AFC65D9F27476F000050769D /* KayayuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KayayuCoordinator.swift; sourceTree = "<group>"; };
 		AFC65DA4274771650050769D /* KayayuScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KayayuScreen.swift; sourceTree = "<group>"; };
@@ -151,6 +155,8 @@
 				0A8D94E6274D26F300BB55FC /* StatsNode.swift */,
 				0A8D9511274D320600BB55FC /* RealisationStatsNode.swift */,
 				0A8D9516274D333500BB55FC /* PlanStatsNode.swift */,
+				AF7591D4274E4381003B8708 /* RatioRealisationDetailNode.swift */,
+				AF7591D9274E43DE003B8708 /* StatsDateHeader.swift */,
 			);
 			path = Stats;
 			sourceTree = "<group>";
@@ -590,6 +596,7 @@
 				0A8D9517274D333500BB55FC /* PlanStatsNode.swift in Sources */,
 				0A8D950D274D2B2400BB55FC /* StatsViewController.swift in Sources */,
 				AF2C1867274607AC00482D6E /* CalendarHelper.swift in Sources */,
+				AF7591DA274E43DE003B8708 /* StatsDateHeader.swift in Sources */,
 				AF2C18752746165600482D6E /* TransactionTableHeaderNode.swift in Sources */,
 				AF2C188B27464E6A00482D6E /* HomeTableTransaction.swift in Sources */,
 				0ABC631D273929860041087F /* ViewController.swift in Sources */,
@@ -604,6 +611,7 @@
 				AFC65DC02747B35F0050769D /* HomeComponentNode.swift in Sources */,
 				0A20A9C427411024005E8BB6 /* TabBar.swift in Sources */,
 				0ABC6323273929860041087F /* kayayuApp.xcdatamodeld in Sources */,
+				AF7591D5274E4381003B8708 /* RatioRealisationDetailNode.swift in Sources */,
 				AFC65DBA2747ABCA0050769D /* RegisterViewController.swift in Sources */,
 				0AAA268A273AB0700063D876 /* SummaryHeader.swift in Sources */,
 				AFC65DAA274792AD0050769D /* LandingViewController.swift in Sources */,
