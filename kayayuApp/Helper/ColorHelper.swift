@@ -9,10 +9,11 @@ import Foundation
 import UIKit
 
 struct kayayuColor {
-	static let yellow = colorHelper.hexToColor(hex: "#FFCC00")
+	static let yellow = ColorHelper.hexToColor(hex: "#FFCC00")
+	static let softGrey = ColorHelper.hexToColor(hex: "#F2F2F2")
 }
 
-class colorHelper {
+class ColorHelper {
 	
 	static func hexToColor(hex: String) -> UIColor {
 		var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()

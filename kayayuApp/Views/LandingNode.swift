@@ -8,13 +8,16 @@
 import Foundation
 import AsyncDisplayKit
 
-class landingNode: ASDisplayNode {
+class LandingNode: ASDisplayNode {
+	//ngajarin angie
+	var onOpenLoginPage: (() -> Void)?
+	var onOpenRegisterPage: (() -> Void)?
 	
 	private let logo: ASImageNode = ASImageNode()
 	private let name: ASTextNode = ASTextNode()
 	
-	private let loginButton: ASButtonNode = ASButtonNode()
-	private let registerButton: ASButtonNode = ASButtonNode()
+	private var loginButton: BigButton = BigButton()
+	private var registerButton: BigButton = BigButton()
 	
 	
 	override init() {
@@ -28,9 +31,6 @@ class landingNode: ASDisplayNode {
 	}
 	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-//		let loginSpec = configureLoginButton()
-		
-//		let registerSpec = configureRegisterButton()
 		
 		let appInfo = ASStackLayoutSpec(direction: .vertical,
 											spacing: 10,
@@ -64,24 +64,13 @@ class landingNode: ASDisplayNode {
 	}
 	
 	private func configureLoginButton(){
-		loginButton.setAttributedTitle(NSAttributedString.semibold("LOGIN", 16, kayayuColor.yellow), for: .normal)
-
-		loginButton.style.preferredSize = CGSize(width: UIScreen.main.bounds.width - 64, height: 60)
-		loginButton.backgroundColor = .white
-		loginButton.borderColor = kayayuColor.yellow.cgColor
-		loginButton.borderWidth = 1.0
-		loginButton.cornerRadius = 8.0
+		loginButton = BigButton(buttonText: "LOGIN", buttonColor: kayayuColor.yellow, borderColor: kayayuColor.yellow)
 		loginButton.addTarget(self, action: #selector(loginClicked), forControlEvents: .touchUpInside)
 		
 	}
 	
 	private func configureRegisterButton(){
-		registerButton.setAttributedTitle(NSAttributedString.semibold("REGISTER", 16, .white), for: .normal)
-		registerButton.style.preferredSize = CGSize(width: UIScreen.main.bounds.width - 64, height: 60)
-		registerButton.backgroundColor = kayayuColor.yellow
-		registerButton.borderColor = kayayuColor.yellow.cgColor
-		registerButton.borderWidth = 1.0
-		registerButton.cornerRadius = 8.0
+		registerButton = BigButton(buttonText: "SIGN UP", buttonColor: .white, borderColor: kayayuColor.yellow)
 		registerButton.addTarget(self, action: #selector(registerClicked), forControlEvents: .touchUpInside)
 		
 	}
@@ -89,12 +78,14 @@ class landingNode: ASDisplayNode {
 	
 	@objc func loginClicked(sender:UIButton)
 	{
+		self.onOpenLoginPage?()
 		print("LOGIN CLICKED")
 	}
 	
 	@objc func registerClicked(sender:UIButton)
 	{
-		print("REGISTER CLICKED")
+		self.onOpenRegisterPage?()
+		print("SIGN UP CLICKED")
 	}
 	
 	

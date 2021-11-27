@@ -11,15 +11,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 	var window: UIWindow?
 
+	// MARK: - Private properties
+
+	private var coordinator: KayayuCoordinator?
+
+	// MARK: - UIWindowSceneDelegate
 
 	func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 		guard let windowScene = (scene as? UIWindowScene) else { return }
-	  
-		let window = UIWindow(windowScene: windowScene)
-		window.rootViewController = ViewController() // Your initial view controller.
-		window.makeKeyAndVisible()
-		self.window = window
+
+		window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+		window!.windowScene = windowScene
+		coordinator = KayayuCoordinator(window: window!)
+		coordinator?.makeKayayuScreen()
 	}
+
 
 	func sceneDidDisconnect(_ scene: UIScene) {
 		// Called as the scene is being released by the system.

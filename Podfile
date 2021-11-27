@@ -6,16 +6,17 @@ target 'kayayuApp' do
   use_frameworks!
 
   # Pods for kayayuApp
-	pod "Texture"
+	pod 'Texture'
+	pod 'Charts'
   target 'kayayuAppTests' do
     inherit! :search_paths
     # Pods for testing
-	pod "Texture"
+	pod 'Texture'
   end
 
   target 'kayayuAppUITests' do
     # Pods for testing
-	pod "Texture"
+	pod 'Texture'
   end
 
 end
