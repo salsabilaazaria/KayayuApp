@@ -31,6 +31,7 @@
 		465797E2FE63F6017A3D46DA /* Pods_kayayuApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B24C4321B5D25F3735CC2CE2 /* Pods_kayayuApp.framework */; };
 		AF020193274252C60033D067 /* TransactionTableNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF020192274252C60033D067 /* TransactionTableNode.swift */; };
 		AF0201982742545C0033D067 /* TransactionCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0201972742545C0033D067 /* TransactionCellNode.swift */; };
+		AF065E3C2754A27A00433BB1 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF065E3B2754A27A00433BB1 /* AuthenticationViewModel.swift */; };
 		AF2C1867274607AC00482D6E /* CalendarHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2C1866274607AB00482D6E /* CalendarHelper.swift */; };
 		AF2C18752746165600482D6E /* TransactionTableHeaderNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2C18742746165600482D6E /* TransactionTableHeaderNode.swift */; };
 		AF2C18852746477E00482D6E /* TransactionDateCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2C18842746477E00482D6E /* TransactionDateCellNode.swift */; };
@@ -101,6 +102,7 @@
 		822540B0945D1E91F4C2F699 /* Pods_kayayuAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kayayuAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF020192274252C60033D067 /* TransactionTableNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableNode.swift; sourceTree = "<group>"; };
 		AF0201972742545C0033D067 /* TransactionCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCellNode.swift; sourceTree = "<group>"; };
+		AF065E3B2754A27A00433BB1 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthenticationViewModel.swift; path = kayayuApp/Views/AuthenticationViewModel.swift; sourceTree = SOURCE_ROOT; };
 		AF2C1866274607AB00482D6E /* CalendarHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHelper.swift; sourceTree = "<group>"; };
 		AF2C18742746165600482D6E /* TransactionTableHeaderNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableHeaderNode.swift; sourceTree = "<group>"; };
 		AF2C18842746477E00482D6E /* TransactionDateCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDateCellNode.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 		0ABC636C273933560041087F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				AF065E3B2754A27A00433BB1 /* AuthenticationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -584,6 +587,7 @@
 			files = (
 				AFC65DA027476F000050769D /* KayayuCoordinator.swift in Sources */,
 				0A8D9512274D320700BB55FC /* RealisationStatsNode.swift in Sources */,
+				AF065E3C2754A27A00433BB1 /* AuthenticationViewModel.swift in Sources */,
 				AF2C1894274656CE00482D6E /* HomeViewController.swift in Sources */,
 				AF2C18852746477E00482D6E /* TransactionDateCellNode.swift in Sources */,
 				0ABC637F273934020041087F /* ColorHelper.swift in Sources */,

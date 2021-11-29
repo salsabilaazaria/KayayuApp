@@ -13,6 +13,8 @@ class RegisterNode: ASDisplayNode {
 	var onOpenHomePage: (() -> Void)?
 	var onOpenLoginPage: (() -> Void)?
 	
+	private let viewModel: AuthenticationViewModel
+	
 	private let greetingText: ASTextNode = ASTextNode()
 	private let usernameTextfield : ASEditableTextNode = ASEditableTextNode()
 	private let emailTextfield : ASEditableTextNode = ASEditableTextNode()
@@ -24,7 +26,8 @@ class RegisterNode: ASDisplayNode {
 	
 	private let inputTextFieldSize = CGSize(width:  UIScreen.main.bounds.width - 32, height: kayayuSize.kayayuBarHeight)
 	
-	override init() {
+	init(viewModel: AuthenticationViewModel) {
+		self.viewModel = viewModel
 		super.init()
 		
 		configureGreetingText()
@@ -147,7 +150,23 @@ class RegisterNode: ASDisplayNode {
 	}
 	
 	@objc func signUpButtonTapped(sender: ASButtonNode) {
-		self.onOpenHomePage?()
+		guard let username = self.usernameTextfield.textView.text,
+			  let email = self.emailTextfield.textView.text,
+			  let password = self.passwordTextfield.textView.text,
+			  let confirmPassword = self.confirmPassTextfield.textView.text else {
+			return
+		}
+		
+		
+		let dataIsValid = self.viewModel.validateRegisterData(username: username, email: email, password: password, confirmPassword: confirmPassword)
+		
+		if dataIsValid {
+			self.viewModel.addRegisterData(username: username, email: email, password: password, confirmPassword: confirmPassword)
+			self.onOpenHomePage?()
+		} else {
+			print("DATA IS NOT VALID, WRONG INPUT")
+		}
+	
 	}
 
 	

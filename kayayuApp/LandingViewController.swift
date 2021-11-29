@@ -17,7 +17,7 @@ class LandingViewController:ASDKViewController<ASDisplayNode> {
 	private let navBar: TabBar?
 	
 	override init() {
-		print("home view controller")
+		print("landing view controller")
 		let navBar = TabBar()
 		let landingPage = LandingNode()
 		

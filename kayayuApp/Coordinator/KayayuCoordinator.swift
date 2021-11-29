@@ -42,37 +42,36 @@ public final class KayayuCoordinator {
 			}
 			
 			switch navigationEvent {
-			case .onOpenHomePage:
-				DispatchQueue.main.async {
-					let controller = screen.makeHomePageViewController()
-					self.navigationController.pushViewController(controller, animated: true)
-					
-				}
 			case .onOpenLandingPage:
 				DispatchQueue.main.async {
 					let controller = screen.makeLandingPageViewController()
 					self.navigationController.pushViewController(controller, animated: true)
 					
 				}
-			case .onOpenLoginPage:
+			case .onOpenLoginPage(let authenticationViewModel):
 				DispatchQueue.main.async {
-					let controller = screen.makeLoginPageViewController()
+					let controller = screen.makeLoginPageViewController(authenticationViewModel: authenticationViewModel)
 					self.navigationController.pushViewController(controller, animated: true)
 					
 				}
-			case .onOpenRegisterPage:
+			case .onOpenRegisterPage(let authenticationViewModel):
 				DispatchQueue.main.async {
-					let controller = screen.makeRegisterPageViewController()
+					let controller = screen.makeRegisterPageViewController(authenticationViewModel: authenticationViewModel)
 					self.navigationController.pushViewController(controller, animated: true)
 					
 				}
-				case .onOpenStatsPage:
-					DispatchQueue.main.async {
-						let controller = screen.makeStatsPageViewController()
-						self.navigationController.pushViewController(controller, animated: true)
-						
-					}
-				
+			case .onOpenHomePage(let authenticationViewModel):
+				DispatchQueue.main.async {
+					let controller = screen.makeHomePageViewController(authenticationViewModel: authenticationViewModel)
+					self.navigationController.pushViewController(controller, animated: true)
+					
+				}
+			case .onOpenStatsPage:
+				DispatchQueue.main.async {
+					let controller = screen.makeStatsPageViewController()
+					self.navigationController.pushViewController(controller, animated: true)
+					
+				}
 			}
 		}
 	}

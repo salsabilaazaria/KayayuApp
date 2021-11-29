@@ -13,25 +13,28 @@ class RegisterViewController: ASDKViewController<ASDisplayNode> {
 	var onOpenHomePage: (() -> Void)?
 	var onOpenLoginPage: (() -> Void)?
 	
-	let mainNode: RegisterNode = RegisterNode()
+	let mainNode: RegisterNode?
 	
-	override init() {
+	init(authenticationViewModel: AuthenticationViewModel) {
+		let mainNode = RegisterNode(viewModel: authenticationViewModel)
+		self.mainNode = mainNode
 		super.init(node: mainNode)
 		configureNode()
 		
 	}
 	
 	private func configureNode() {
-		mainNode.onOpenHomePage = { [weak self] in
+		mainNode?.onOpenHomePage = { [weak self] in
 			self?.onOpenHomePage?()
 		}
-		mainNode.onOpenLoginPage  = { [weak self] in
+		mainNode?.onOpenLoginPage  = { [weak self] in
 			self?.onOpenLoginPage?()
 		}
 
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
+		self.mainNode = nil
 		super.init(coder: aDecoder)
 	}
 	

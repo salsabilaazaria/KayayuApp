@@ -13,10 +13,10 @@ final class KayayuScreen {
 	var onNavigationEvent: ((NavigationEvent) -> Void)?
 	
 	enum NavigationEvent {
-		case onOpenHomePage
 		case onOpenLandingPage
-		case onOpenLoginPage
-		case onOpenRegisterPage
+		case onOpenHomePage(authenticationViewModel: AuthenticationViewModel)
+		case onOpenLoginPage(authenticationViewModel: AuthenticationViewModel)
+		case onOpenRegisterPage(authenticationViewModel: AuthenticationViewModel)
 		case onOpenStatsPage
 //		case onOpenProfilePage
 //		case onOpenRecordIncomePage
@@ -29,55 +29,56 @@ final class KayayuScreen {
 	}
 	
 	func make() -> UIViewController {
-		let controller = makeStatsPageViewController()
+		let controller = makeLandingPageViewController()
 		return controller
 	}
 	
 	func makeLandingPageViewController() -> UIViewController {
 		let controller = LandingViewController()
+		let viewModel = AuthenticationViewModel()
 		controller.onOpenLoginPage = { [weak self] in
 			guard let self = self else {
 				return
 			}
 			print("screen on open login")
-			self.onNavigationEvent?(.onOpenLoginPage)
+			self.onNavigationEvent?(.onOpenLoginPage(authenticationViewModel: viewModel))
 		}
 		controller.onOpenRegisterPage = { [weak self] in
 			guard let self = self else {
 				return
 			}
 			
-			self.onNavigationEvent?(.onOpenRegisterPage)
+			self.onNavigationEvent?(.onOpenRegisterPage(authenticationViewModel: viewModel))
 		}
 		return controller
 	}
 	
-	func makeLoginPageViewController() -> UIViewController {
-		let controller = LoginViewController()
+	func makeLoginPageViewController(authenticationViewModel: AuthenticationViewModel) -> UIViewController {
+		let controller = LoginViewController(authenticationViewModel: authenticationViewModel)
 		controller.onOpenHomePage = { [weak self] in
 			guard let self = self else {
 				return
 			}
 			
-			self.onNavigationEvent?(.onOpenHomePage)
+			self.onNavigationEvent?(.onOpenHomePage(authenticationViewModel: authenticationViewModel))
 		}
 		return controller
 	}
 	
-	func makeRegisterPageViewController() -> UIViewController {
-		let controller = RegisterViewController()
+	func makeRegisterPageViewController(authenticationViewModel: AuthenticationViewModel) -> UIViewController {
+		let controller = RegisterViewController(authenticationViewModel: authenticationViewModel)
 		controller.onOpenHomePage = { [weak self] in
 			guard let self = self else {
 				return
 			}
 			
-			self.onNavigationEvent?(.onOpenHomePage)
+			self.onNavigationEvent?(.onOpenHomePage(authenticationViewModel: authenticationViewModel))
 		}
 		return controller
 	}
 	
-	func makeHomePageViewController() -> UIViewController {
-		let controller = HomeViewController()
+	func makeHomePageViewController(authenticationViewModel: AuthenticationViewModel) -> UIViewController {
+		let controller = HomeViewController(authenticationViewModel: authenticationViewModel)
 		return controller
 	}
 	
