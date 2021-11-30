@@ -11,6 +11,7 @@ import AsyncDisplayKit
 class HomeViewController:ASDKViewController<ASDisplayNode> {
 	private let homeNode: HomeNode?
     private let viewModel: HomeViewModel?
+	var onOpenAddRecordPage: (() -> Void)?
 	
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
@@ -25,18 +26,28 @@ class HomeViewController:ASDKViewController<ASDisplayNode> {
 		super.init(coder: aDecoder)
 	}
 	
+	private func configureHomeNode() {
+		homeNode.onOpenAddRecordPage = { [weak self] in
+			self?.onOpenAddRecordPage?()
+		}
+	}
+	
 	// MARK: - Private methods -
 	
 
 	override func viewDidLoad() {
+		edgesForExtendedLayout = []
 		super.viewDidLoad()
 		title = "Hello!"
-	
-		edgesForExtendedLayout = []
-		self.navigationController?.navigationBar.isHidden = false
 		self.navigationController?.navigationBar.prefersLargeTitles = true
 		self.navigationController?.navigationBar.backgroundColor = .white
-
+		self.navigationController?.navigationItem.largeTitleDisplayMode = .always
+	
+	
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		navigationItem.backButtonTitle = "Back"
 	}
 
 }

@@ -9,8 +9,10 @@ import Foundation
 import AsyncDisplayKit
 
 class HomeNode: ASDisplayNode {
-	private let homeNode: HomeComponentNode
-    private let navBar: TabBar = TabBar()
+	var onOpenAddRecordPage: (() -> Void)?
+	
+	private let homeNode: HomeComponentNode = HomeComponentNode()
+	private let navBar: TabBar = TabBar()
 	private let addRecordBtn: ASButtonNode = ASButtonNode()
     private let viewModel: HomeViewModel
     
@@ -31,6 +33,12 @@ class HomeNode: ASDisplayNode {
 	private func configureAddRecordBtn() {
 		addRecordBtn.setImage(UIImage(named: "addRecordBtn.png"), for: .normal)
 		addRecordBtn.style.preferredSize = CGSize(width: 80, height: 80)
+		addRecordBtn.addTarget(self, action: #selector(goToAddRecord), forControlEvents: .touchUpInside)
+	}
+	
+	@objc func goToAddRecord() {
+		print("add button tapped")
+		self.onOpenAddRecordPage?()
 	}
 	
 	
