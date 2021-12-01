@@ -18,11 +18,14 @@ class AddIncomeRecordNode: ASDisplayNode {
 	
 	private let spacingTitle: CGFloat = 6
 	private let datePicker = UIDatePicker()
+	private let calendarHelper = CalendarHelper()
+	
 	override init() {
 		super.init()
 		automaticallyManagesSubnodes = true
 		
 	}
+
 	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
 
@@ -34,9 +37,9 @@ class AddIncomeRecordNode: ASDisplayNode {
 										 spacing: 10,
 										 justifyContent: .start,
 										 alignItems: .start,
-										 children: [date])
+										 children: [date, desc, amount])
 		
-		let insetMainSpec = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16), child: mainSpec)
+		let insetMainSpec = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 16, left: 16, bottom: 0, right: 16), child: mainSpec)
 		return insetMainSpec
 	}
 	
@@ -53,7 +56,7 @@ class AddIncomeRecordNode: ASDisplayNode {
 	
 	private func configureDateInputTextField() {
 	
-		dateTitle.attributedText = NSAttributedString.bold("Date", 14, .black)
+		dateTitle.attributedText = NSAttributedString.bold("Date", 16, .black)
 	
 		let toolbar = UIToolbar()
 		toolbar.sizeToFit()
@@ -67,6 +70,8 @@ class AddIncomeRecordNode: ASDisplayNode {
 		}
 		
 		dateInputTextField.style.preferredSize = kayayuSize.inputTextFieldSize
+		dateInputTextField.textView.sizeToFit()
+		dateInputTextField.textView.attributedText = NSAttributedString.normal("", 14, .black)
 		dateInputTextField.textView.text = "DD/MM/YYYY"
 		dateInputTextField.textView.inputView = datePicker
 		dateInputTextField.textView.inputAccessoryView = toolbar
@@ -74,15 +79,18 @@ class AddIncomeRecordNode: ASDisplayNode {
 	}
 	
 	@objc func doneKeyboardTapped() {
-		dateInputTextField.textView.text = "\(datePicker.date)"
+		let formattedDate = calendarHelper.formatFullDate(date: datePicker.date)
+		dateInputTextField.textView.text = formattedDate
 		self.dateInputTextField.view.endEditing(true)
 	}
 	
 	private func configureDescInputTextField() -> ASLayoutSpec {
-		descTitle.attributedText = NSAttributedString.bold("Description", 14, .black)
+		descTitle.attributedText = NSAttributedString.bold("Description", 16, .black)
 		
 		descriptionInputTextField.maximumLinesToDisplay = 3
-		descriptionInputTextField.style.preferredSize = kayayuSize.inputTextFieldSize
+		descriptionInputTextField.style.preferredSize = kayayuSize.bigInputTextField
+		descriptionInputTextField.borderWidth = 1
+		descriptionInputTextField.borderColor = kayayuColor.softGrey.cgColor
 		
 		let descSpec = ASStackLayoutSpec(direction: .vertical,
 										 spacing: spacingTitle,
@@ -94,16 +102,25 @@ class AddIncomeRecordNode: ASDisplayNode {
 	}
 	
 	private func configureAmountInputTextField() -> ASLayoutSpec {
-		amountTitle.attributedText = NSAttributedString.bold("Amount", 14, .black)
+		amountTitle.attributedText = NSAttributedString.bold("Amount", 16, .black)
 		
 		amountInputTextField.maximumLinesToDisplay = 1
 		amountInputTextField.style.preferredSize = kayayuSize.inputTextFieldSize
 		
+		let currceny = ASTextNode()
+		currceny.attributedText = NSAttributedString.semibold("Rp", 12, .black)
+		
+		let amountTextField = ASStackLayoutSpec(direction: .horizontal,
+												spacing: spacingTitle,
+												justifyContent: .start,
+												alignItems: .start,
+												children: [currceny, amountInputTextField])
+		
 		let amountSpec = ASStackLayoutSpec(direction: .vertical,
-										 spacing: spacingTitle,
-										 justifyContent: .start,
-										 alignItems: .start,
-										 children: [amountTitle, amountInputTextField])
+										   spacing: spacingTitle,
+										   justifyContent: .start,
+										   alignItems: .start,
+										   children: [amountTitle, amountTextField])
 		
 		return amountSpec
 		

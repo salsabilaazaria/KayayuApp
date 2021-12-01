@@ -22,7 +22,7 @@ class LoginNode: ASDisplayNode {
 	private let singUpText: ASTextNode = ASTextNode()
 	private let signUpButton: ASButtonNode = ASButtonNode()
 	
-	private let inputTextFieldSize = CGSize(width:  UIScreen.main.bounds.width - 32, height: kayayuSize.kayayuBarHeight)
+	private let inputTextFieldSize = kayayuSize.bigInputTextField
 	
 	init(viewModel: AuthenticationViewModel) {
 		self.viewModel = viewModel

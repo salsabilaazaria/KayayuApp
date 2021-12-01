@@ -119,7 +119,7 @@ class SummaryHeader: ASCellNode {
 	
 	private func configureSubtitle() {
 		print("configure subtitle with \(subtitleText)")
-		subtitle.attributedText = NSAttributedString.normal(subtitleText, 12, .black)
+		subtitle.attributedText = NSAttributedString.normal(subtitleText, 14, .black)
 	}
 	
 	private func configureProgressBarText(text: String) {

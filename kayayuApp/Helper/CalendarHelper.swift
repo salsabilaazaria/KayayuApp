@@ -39,6 +39,15 @@ class CalendarHelper {
 		dateFormatter.dateFormat = "yyyy"
 		return dateFormatter.string(from: date)
 	}
+	
+	func formatFullDate(date: Date) -> String {
+		
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "dd/MM/yyyy"
+		dateFormatter.calendar = Calendar(identifier: .gregorian)
+		
+		return dateFormatter.string(from: date)
+	}
 
 
 }
