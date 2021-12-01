@@ -35,8 +35,8 @@ class AddIncomeRecordNode: ASDisplayNode {
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
 
 		let date = createDateInputSpec()
-		let desc = configureDescInputTextField()
-		let amount = configureAmountInputTextField()
+		let desc = createDescInputSpec()
+		let amount = createAmountInputSpec()
 		
 		let inputSpec = ASStackLayoutSpec(direction: .vertical,
 										 spacing: 10,
@@ -63,16 +63,6 @@ class AddIncomeRecordNode: ASDisplayNode {
 		return insetMainSpec
 	}
 	
-	private func createDateInputSpec() -> ASLayoutSpec {
-		configureDateInputTextField()
-		let dateSpec = ASStackLayoutSpec(direction: .vertical,
-										 spacing: spacingTitle,
-										 justifyContent: .start,
-										 alignItems: .start,
-										 children: [dateTitle, dateInputTextField])
-		return dateSpec
-	}
-	
 	private func configureToolBar() {
 		toolBar.sizeToFit()
 		let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(doneKeyboardTapped))
@@ -93,6 +83,16 @@ class AddIncomeRecordNode: ASDisplayNode {
 	
 	}
 	
+	private func createDateInputSpec() -> ASLayoutSpec {
+		configureDateInputTextField()
+		let dateSpec = ASStackLayoutSpec(direction: .vertical,
+										 spacing: spacingTitle,
+										 justifyContent: .start,
+										 alignItems: .start,
+										 children: [dateTitle, dateInputTextField])
+		return dateSpec
+	}
+	
 	private func configureDateInputTextField() {
 	
 		dateTitle.attributedText = NSAttributedString.bold("Date", 16, .black)
@@ -108,12 +108,22 @@ class AddIncomeRecordNode: ASDisplayNode {
 		dateInputTextField.textView.text = "DD/MM/YYYY"
 		dateInputTextField.textView.inputView = datePicker
 		dateInputTextField.textView.inputAccessoryView = toolBar
+		dateInputTextField.textView.font = kayayuFont.inputTextFieldFont
 
-		
+	}
+	
+	private func createDescInputSpec() -> ASLayoutSpec {
+		configureDescInputTextField()
+		let descSpec = ASStackLayoutSpec(direction: .vertical,
+										 spacing: spacingTitle,
+										 justifyContent: .start,
+										 alignItems: .start,
+										 children: [descTitle, descriptionInputTextField])
+		return descSpec
 	}
 	
 	
-	private func configureDescInputTextField() -> ASLayoutSpec {
+	private func configureDescInputTextField() {
 		descTitle.attributedText = NSAttributedString.bold("Description", 16, .black)
 		
 		descriptionInputTextField.maximumLinesToDisplay = 3
@@ -121,23 +131,12 @@ class AddIncomeRecordNode: ASDisplayNode {
 		descriptionInputTextField.borderWidth = 1
 		descriptionInputTextField.borderColor = kayayuColor.softGrey.cgColor
 		descriptionInputTextField.textView.inputAccessoryView = toolBar
-		
-		let descSpec = ASStackLayoutSpec(direction: .vertical,
-										 spacing: spacingTitle,
-										 justifyContent: .start,
-										 alignItems: .start,
-										 children: [descTitle, descriptionInputTextField])
-		
-		return descSpec
+		descriptionInputTextField.textView.font = kayayuFont.inputTextFieldFont
+	
 	}
 	
-	private func configureAmountInputTextField() -> ASLayoutSpec {
-		amountTitle.attributedText = NSAttributedString.bold("Amount", 16, .black)
-		
-		amountInputTextField.keyboardType = .numberPad
-		amountInputTextField.maximumLinesToDisplay = 1
-		amountInputTextField.style.preferredSize = kayayuSize.inputTextFieldSize
-		amountInputTextField.textView.inputAccessoryView = toolBar
+	private func createAmountInputSpec() -> ASLayoutSpec {
+		configureAmountInputTextField()
 		
 		let currceny = ASTextNode()
 		currceny.attributedText = NSAttributedString.semibold("Rp", 14, .black)
@@ -155,6 +154,16 @@ class AddIncomeRecordNode: ASDisplayNode {
 										   children: [amountTitle, amountTextField])
 		
 		return amountSpec
+	}
+	
+	private func configureAmountInputTextField() {
+		amountTitle.attributedText = NSAttributedString.bold("Amount", 16, .black)
+		
+		amountInputTextField.keyboardType = .numberPad
+		amountInputTextField.maximumLinesToDisplay = 1
+		amountInputTextField.style.preferredSize = kayayuSize.inputTextFieldSize
+		amountInputTextField.textView.inputAccessoryView = toolBar
+		amountInputTextField.textView.font = kayayuFont.inputTextFieldFont
 		
 	}
 	

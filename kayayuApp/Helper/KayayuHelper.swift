@@ -15,3 +15,7 @@ struct kayayuSize {
 	static let bigInputTextField: CGSize = CGSize(width: UIScreen.main.bounds.width - 32, height: 40)
 	static let inputTextFieldSize: CGSize = CGSize(width: UIScreen.main.bounds.width - 32, height: 20)
 }
+
+struct kayayuFont {
+	static let inputTextFieldFont: UIFont = UIFont.systemFont(ofSize: 14)
+}
