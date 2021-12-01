@@ -6,6 +6,7 @@
 //
 import Foundation
 import AsyncDisplayKit
+import iOSDropDown
 
 class AddIncomeRecordNode: ASDisplayNode {
 	private let dateTitle: ASTextNode = ASTextNode()
@@ -15,6 +16,9 @@ class AddIncomeRecordNode: ASDisplayNode {
 	private let dateInputTextField: ASEditableTextNode = ASEditableTextNode()
 	private let descriptionInputTextField: ASEditableTextNode = ASEditableTextNode()
 	private let amountInputTextField: ASEditableTextNode = ASEditableTextNode()
+	
+	private let ratioTitle: ASTextNode = ASTextNode()
+	private var ratioCategory: DropDown = DropDown()
 	
 	private var saveButton: BigButton = BigButton()
 	
@@ -33,16 +37,16 @@ class AddIncomeRecordNode: ASDisplayNode {
 
 	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-
 		let date = createDateInputSpec()
 		let desc = createDescInputSpec()
 		let amount = createAmountInputSpec()
+		let ratio = createRatioCategorySpec()
 		
 		let inputSpec = ASStackLayoutSpec(direction: .vertical,
 										 spacing: 10,
 										 justifyContent: .start,
 										 alignItems: .start,
-										 children: [date, desc, amount])
+										 children: [date, ratio, desc, amount])
 		
 		inputSpec.style.flexGrow = 1
 		
@@ -59,7 +63,7 @@ class AddIncomeRecordNode: ASDisplayNode {
 										 children: [inputSpec, saveButtonSpec])
 		mainSpec.style.preferredSize = CGSize(width: UIScreen.main.bounds.width, height:  UIScreen.main.bounds.height)
 		
-		let insetMainSpec = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 16, left: 16, bottom: 32, right: 16), child: mainSpec)
+		let insetMainSpec = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 16, left: 16, bottom: 48, right: 16), child: mainSpec)
 		return insetMainSpec
 	}
 	
@@ -81,6 +85,38 @@ class AddIncomeRecordNode: ASDisplayNode {
 	
 	@objc func saveButtonTapped() {
 	
+	}
+	
+	private func createRatioCategorySpec() -> ASLayoutSpec{
+		configureRatioCategory()
+		let ratioCategoryNode = ASDisplayNode()
+		ratioCategoryNode.view.addSubview(ratioCategory)
+		ratioCategoryNode.style.preferredSize = CGSize(width: UIScreen.main.bounds.width - 32, height: 30)
+		ratioCategoryNode.borderWidth = 1
+		ratioCategoryNode.borderColor = kayayuColor.softGrey.cgColor
+		
+		let ratioCategoryWrap = ASWrapperLayoutSpec(layoutElements: [ratioCategoryNode])
+		
+		let ratioSpec = ASStackLayoutSpec(direction: .vertical,
+										  spacing: spacingTitle,
+										  justifyContent: .start,
+										  alignItems: .start,
+										  children: [ratioTitle, ratioCategoryWrap])
+		
+		return ratioSpec
+	}
+	
+	private func configureRatioCategory() {
+		ratioTitle.attributedText = NSAttributedString.bold("Ratio", 16, .black)
+		
+		ratioCategory = DropDown(frame: CGRect(x: 3, y: 1, width: UIScreen.main.bounds.width - 32, height: 30))
+		ratioCategory.optionArray = kayayuRatio.incomeValues
+		ratioCategory.selectedRowColor = kayayuColor.softGrey
+		ratioCategory.checkMarkEnabled = false
+		ratioCategory.font = UIFont.systemFont(ofSize: 14)
+		ratioCategory.didSelect{(selectedText, index, id) in
+			//logic if dropdown is selected
+		}
 	}
 	
 	private func createDateInputSpec() -> ASLayoutSpec {

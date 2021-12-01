@@ -8,7 +8,7 @@ target 'kayayuApp' do
   # Pods for kayayuApp
 	pod 'Texture'
 	pod 'Charts'
-	pod 'Dropdowns'
+	pod 'iOSDropDown'
    	pod 'RxSwift', '~> 5'
     	pod 'RxCocoa', '~> 5'
   target 'kayayuAppTests' do
