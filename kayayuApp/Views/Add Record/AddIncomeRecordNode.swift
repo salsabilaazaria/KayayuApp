@@ -16,6 +16,10 @@ class AddIncomeRecordNode: ASDisplayNode {
 	private let descriptionInputTextField: ASEditableTextNode = ASEditableTextNode()
 	private let amountInputTextField: ASEditableTextNode = ASEditableTextNode()
 	
+	private var saveButton: BigButton = BigButton()
+	
+	private let toolBar: UIToolbar = UIToolbar()
+	
 	private let spacingTitle: CGFloat = 6
 	private let datePicker = UIDatePicker()
 	private let calendarHelper = CalendarHelper()
@@ -23,7 +27,8 @@ class AddIncomeRecordNode: ASDisplayNode {
 	override init() {
 		super.init()
 		automaticallyManagesSubnodes = true
-		
+		configureToolBar()
+		configureSaveButton()
 	}
 
 	
@@ -33,13 +38,28 @@ class AddIncomeRecordNode: ASDisplayNode {
 		let desc = configureDescInputTextField()
 		let amount = configureAmountInputTextField()
 		
-		let mainSpec = ASStackLayoutSpec(direction: .vertical,
+		let inputSpec = ASStackLayoutSpec(direction: .vertical,
 										 spacing: 10,
 										 justifyContent: .start,
 										 alignItems: .start,
 										 children: [date, desc, amount])
 		
-		let insetMainSpec = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 16, left: 16, bottom: 0, right: 16), child: mainSpec)
+		inputSpec.style.flexGrow = 1
+		
+		let saveButtonSpec = ASStackLayoutSpec(direction: .vertical,
+											   spacing: spacingTitle,
+											   justifyContent: .end,
+											   alignItems: .end,
+											   children: [saveButton])
+		
+		let mainSpec = ASStackLayoutSpec(direction: .vertical,
+										 spacing: 10,
+										 justifyContent: .start,
+										 alignItems: .start,
+										 children: [inputSpec, saveButtonSpec])
+		mainSpec.style.preferredSize = CGSize(width: UIScreen.main.bounds.width, height:  UIScreen.main.bounds.height)
+		
+		let insetMainSpec = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 16, left: 16, bottom: 32, right: 16), child: mainSpec)
 		return insetMainSpec
 	}
 	
@@ -50,18 +70,32 @@ class AddIncomeRecordNode: ASDisplayNode {
 										 justifyContent: .start,
 										 alignItems: .start,
 										 children: [dateTitle, dateInputTextField])
-		
 		return dateSpec
+	}
+	
+	private func configureToolBar() {
+		toolBar.sizeToFit()
+		let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(doneKeyboardTapped))
+		toolBar.setItems([doneButton], animated: true)
+	}
+	
+	@objc func doneKeyboardTapped() {
+		let formattedDate = calendarHelper.formatFullDate(date: datePicker.date)
+		dateInputTextField.textView.text = formattedDate
+		self.view.endEditing(true)
+	}
+	
+	private func configureSaveButton() {
+		saveButton = BigButton(buttonText: "SAVE", buttonColor: kayayuColor.yellow, borderColor: kayayuColor.yellow)
+	}
+	
+	@objc func saveButtonTapped() {
+	
 	}
 	
 	private func configureDateInputTextField() {
 	
 		dateTitle.attributedText = NSAttributedString.bold("Date", 16, .black)
-	
-		let toolbar = UIToolbar()
-		toolbar.sizeToFit()
-		let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(doneKeyboardTapped))
-		toolbar.setItems([doneButton], animated: true)
 	
 		datePicker.datePickerMode = .date
 		datePicker.sizeToFit()
@@ -71,18 +105,13 @@ class AddIncomeRecordNode: ASDisplayNode {
 		
 		dateInputTextField.style.preferredSize = kayayuSize.inputTextFieldSize
 		dateInputTextField.textView.sizeToFit()
-		dateInputTextField.textView.attributedText = NSAttributedString.normal("", 14, .black)
 		dateInputTextField.textView.text = "DD/MM/YYYY"
 		dateInputTextField.textView.inputView = datePicker
-		dateInputTextField.textView.inputAccessoryView = toolbar
+		dateInputTextField.textView.inputAccessoryView = toolBar
+
 		
 	}
 	
-	@objc func doneKeyboardTapped() {
-		let formattedDate = calendarHelper.formatFullDate(date: datePicker.date)
-		dateInputTextField.textView.text = formattedDate
-		self.dateInputTextField.view.endEditing(true)
-	}
 	
 	private func configureDescInputTextField() -> ASLayoutSpec {
 		descTitle.attributedText = NSAttributedString.bold("Description", 16, .black)
@@ -91,6 +120,7 @@ class AddIncomeRecordNode: ASDisplayNode {
 		descriptionInputTextField.style.preferredSize = kayayuSize.bigInputTextField
 		descriptionInputTextField.borderWidth = 1
 		descriptionInputTextField.borderColor = kayayuColor.softGrey.cgColor
+		descriptionInputTextField.textView.inputAccessoryView = toolBar
 		
 		let descSpec = ASStackLayoutSpec(direction: .vertical,
 										 spacing: spacingTitle,
@@ -104,11 +134,13 @@ class AddIncomeRecordNode: ASDisplayNode {
 	private func configureAmountInputTextField() -> ASLayoutSpec {
 		amountTitle.attributedText = NSAttributedString.bold("Amount", 16, .black)
 		
+		amountInputTextField.keyboardType = .numberPad
 		amountInputTextField.maximumLinesToDisplay = 1
 		amountInputTextField.style.preferredSize = kayayuSize.inputTextFieldSize
+		amountInputTextField.textView.inputAccessoryView = toolBar
 		
 		let currceny = ASTextNode()
-		currceny.attributedText = NSAttributedString.semibold("Rp", 12, .black)
+		currceny.attributedText = NSAttributedString.semibold("Rp", 14, .black)
 		
 		let amountTextField = ASStackLayoutSpec(direction: .horizontal,
 												spacing: spacingTitle,
