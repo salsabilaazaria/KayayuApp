@@ -34,7 +34,7 @@ class HomeViewModel {
         
         database.collection("users").document(getUserId()).addSnapshotListener({ documentSnapshot, error in
             guard let document = documentSnapshot else {
-                print("KAYAYU GET DATA FAILED")
+                print("KAYAYU get data failed")
                 return
             }
             
