@@ -8,6 +8,10 @@ target 'kayayuApp' do
   # Pods for kayayuApp
 	pod 'Texture'
 	pod 'Charts'
+	pod 'Firebase/Analytics'
+	pod 'Firebase/Auth'
+	pod 'Firebase/Core'
+	pod 'Firebase/Firestore'
   target 'kayayuAppTests' do
     inherit! :search_paths
     # Pods for testing
