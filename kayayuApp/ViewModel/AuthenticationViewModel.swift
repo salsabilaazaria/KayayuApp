@@ -20,7 +20,7 @@ class AuthenticationViewModel {
     func validateLoginData(email: String, password: String) {
         //put logic to data validation, if data correct return true
         print("Auth Validate Login Data Username '\(email)' Password '\(password)'")
-        
+        print("ngetest")
         guard !email.isEmpty,
               !password.isEmpty else {
             return
