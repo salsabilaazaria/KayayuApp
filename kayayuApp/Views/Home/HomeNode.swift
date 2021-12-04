@@ -9,13 +9,19 @@ import Foundation
 import AsyncDisplayKit
 
 class HomeNode: ASDisplayNode {
-	private let homeNode: HomeComponentNode = HomeComponentNode()
-	private let navBar: TabBar = TabBar()
+	private let homeNode: HomeComponentNode
+    private let navBar: TabBar = TabBar()
 	private let addRecordBtn: ASButtonNode = ASButtonNode()
-	private let viewModel = HomeViewModel()
-	override init() {
+    private let viewModel: HomeViewModel
+    
+    init(viewModel: HomeViewModel) {
+        self.viewModel = viewModel
+        self.homeNode = HomeComponentNode(viewModel: viewModel)
 		super.init()
-        print("KAYAYU USER BALANCE \(viewModel.getUserBalance())")
+//        print(viewModel.user.value?.balance_total)
+//        viewModel.getUserData()
+        
+     
 		configureAddRecordBtn()
 		backgroundColor = .white
 		automaticallyManagesSubnodes = true

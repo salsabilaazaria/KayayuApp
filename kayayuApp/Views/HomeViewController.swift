@@ -9,15 +9,19 @@ import Foundation
 import AsyncDisplayKit
 
 class HomeViewController:ASDKViewController<ASDisplayNode> {
-	private let homeNode: HomeNode = HomeNode()
+	private let homeNode: HomeNode?
+    private let viewModel: HomeViewModel?
 	
-	override init() {
-		//authenticationViewModel.username -> manggil variable yang ada di AuthenticationViewModel
-//		print("auth home vc \(authenticationViewModel.username)")
-		super.init(node: homeNode)
+    init(viewModel: HomeViewModel) {
+        self.viewModel = viewModel
+        self.homeNode = HomeNode(viewModel: viewModel)
+	
+        super.init(node: homeNode ?? ASDisplayNode())
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
+        self.viewModel = nil
+        self.homeNode = nil
 		super.init(coder: aDecoder)
 	}
 	

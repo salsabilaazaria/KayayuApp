@@ -14,7 +14,7 @@ final class KayayuScreen {
 	
 	enum NavigationEvent {
 		case onOpenLandingPage
-		case onOpenHomePage(authenticationViewModel: AuthenticationViewModel)
+		case onOpenHomePage
 		case onOpenLoginPage(authenticationViewModel: AuthenticationViewModel)
 		case onOpenRegisterPage(authenticationViewModel: AuthenticationViewModel)
 		case onOpenStatsPage
@@ -60,7 +60,7 @@ final class KayayuScreen {
 				return
 			}
 			
-			self.onNavigationEvent?(.onOpenHomePage(authenticationViewModel: authenticationViewModel))
+            self.onNavigationEvent?(.onOpenHomePage)
 		}
 		return controller
 	}
@@ -72,13 +72,13 @@ final class KayayuScreen {
 				return
 			}
 			
-			self.onNavigationEvent?(.onOpenHomePage(authenticationViewModel: authenticationViewModel))
+			self.onNavigationEvent?(.onOpenHomePage)
 		}
 		return controller
 	}
 	
-	func makeHomePageViewController() -> UIViewController {
-		let controller = HomeViewController()
+    func makeHomePageViewController(viewModel: HomeViewModel) -> UIViewController {
+		let controller = HomeViewController(viewModel: viewModel)
 		return controller
 	}
 	

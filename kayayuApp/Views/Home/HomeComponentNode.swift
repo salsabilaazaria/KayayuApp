@@ -10,14 +10,18 @@ import AsyncDisplayKit
 
 class HomeComponentNode: ASDisplayNode {
 	
-	private let tableTransaction: HomeTableTransaction = HomeTableTransaction()
+	private let tableTransaction: HomeTableTransaction
 	private var summaryBalanceNode: SummaryHeader = SummaryHeader()
 
 	private let lineSpacing: CGFloat = 8
 	private let sidePadding: CGFloat = 28
 	private let cellAspectRatio: CGFloat = 128/375
+    
+    private let viewModel: HomeViewModel
 	
-	override init() {
+    init(viewModel: HomeViewModel) {
+        self.viewModel = viewModel
+        self.tableTransaction = HomeTableTransaction(viewModel: viewModel)
 		super.init()
 		configureTableTransaction()
 		configureSummaryBalance()
@@ -53,7 +57,18 @@ class HomeComponentNode: ASDisplayNode {
 	}
 	
 	private func configureSummaryBalance() {
-		summaryBalanceNode = SummaryHeader(summary: .balance, subtitleText: "RpBALANCE")
+        viewModel.user.asObservable().subscribe(onNext: { [weak self] userData in
+            print("KAYAYU USER HOME \(userData)")
+            guard let balance = userData?.balance_total else {
+                return
+            }
+            DispatchQueue.main.async {
+                self?.summaryBalanceNode = SummaryHeader(summary: .balance, subtitleText: "Rp\(balance)")
+                self?.setNeedsLayout()
+            }
+           
+        })
+   
 	}
 	
 }

@@ -10,11 +10,19 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import RxCocoa
+import RxSwift
+
 
 class HomeViewModel {
     let database = Firestore.firestore()
+    var user: BehaviorRelay<Users?> = BehaviorRelay<Users?>(value: nil)
     
-    var userBalanceTotal: String = ""
+    var userBalanceTotal: Float = 0
+    
+    init() {
+        self.getUserData()
+    }
     
     func getUserId() -> String{
         guard let userId = Auth.auth().currentUser?.uid else { return "" }
@@ -22,26 +30,24 @@ class HomeViewModel {
         return userId
     }
     
-    func getUserBalance() -> String {
-//        let docRef = database.collection("users").document(getUserId())
-        
-//        docRef.getDocument(completion: <#T##FIRDocumentSnapshotBlock##FIRDocumentSnapshotBlock##(DocumentSnapshot?, Error?) -> Void#>)
+    func getUserData() {
         
         database.collection("users").document(getUserId()).addSnapshotListener({ documentSnapshot, error in
             guard let document = documentSnapshot else {
                 print("KAYAYU GET DATA FAILED")
                 return
             }
-            guard let data = document.data() else {
-                print("KAYAYU GET DATA NOT FOUND")
-                return
+            
+            do {
+                guard let userData = try document.data(as: Users.self) else {
+                    print("KAYAYU USER DATA IS NIL")
+                    return
+                }
+                self.user.accept(userData)
+                
+            } catch {
+                print(error)
             }
-            
-    
-            print("Current Data: \(data)")
-            
-            
         })
-        return userBalanceTotal
     }
 }

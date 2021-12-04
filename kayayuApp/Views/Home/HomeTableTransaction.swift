@@ -13,7 +13,7 @@ class HomeTableTransaction: ASDisplayNode {
 	private let transactionTableHeader: TransactionTableHeaderNode = TransactionTableHeaderNode()
 	private let transactionTableNode: TransactionTableNode = TransactionTableNode()
 	
-	override init() {
+    init(viewModel: HomeViewModel) {
 		super.init()
 		
 		transactionTableNode.style.preferredSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 7/10)

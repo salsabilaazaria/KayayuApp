@@ -60,9 +60,10 @@ public final class KayayuCoordinator {
 					self.navigationController.pushViewController(controller, animated: true)
 					
 				}
-			case .onOpenHomePage(let authenticationViewModel):
+			case .onOpenHomePage:
 				DispatchQueue.main.async {
-					let controller = screen.makeHomePageViewController()
+                    let viewModel = HomeViewModel()
+					let controller = screen.makeHomePageViewController(viewModel: viewModel)
 					self.navigationController.pushViewController(controller, animated: true)
 					
 				}
