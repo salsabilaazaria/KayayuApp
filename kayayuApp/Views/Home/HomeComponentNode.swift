@@ -58,7 +58,7 @@ class HomeComponentNode: ASDisplayNode {
 	
 	private func configureSummaryBalance() {
         viewModel.user.asObservable().subscribe(onNext: { [weak self] userData in
-            print("KAYAYU USER HOME \(userData)")
+//            print("KAYAYU USER HOME \(userData)")
             guard let balance = userData?.balance_total else {
                 return
             }

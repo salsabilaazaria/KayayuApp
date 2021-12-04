@@ -162,7 +162,7 @@ class RegisterNode: ASDisplayNode {
 		
 		if dataIsValid {
 			self.viewModel.addRegisterData(username: username, email: email, password: password, confirmPassword: confirmPassword)
-			self.onOpenHomePage?()
+			
 		} else {
 			print("DATA IS NOT VALID, WRONG INPUT")
 		}
