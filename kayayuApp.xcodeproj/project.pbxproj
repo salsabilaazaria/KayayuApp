@@ -51,6 +51,9 @@
 		FD2C4D76275B441600A8C50F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FD2C4D75275B441600A8C50F /* GoogleService-Info.plist */; };
 		FD2C4D77275B441600A8C50F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FD2C4D75275B441600A8C50F /* GoogleService-Info.plist */; };
 		FD2C4D78275B441600A8C50F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FD2C4D75275B441600A8C50F /* GoogleService-Info.plist */; };
+		FD2C4D80275B508400A8C50F /* KayayuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2C4D7F275B508400A8C50F /* KayayuModel.swift */; };
+		FD2C4D81275B508400A8C50F /* KayayuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2C4D7F275B508400A8C50F /* KayayuModel.swift */; };
+		FD2C4D82275B508400A8C50F /* KayayuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2C4D7F275B508400A8C50F /* KayayuModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,6 +128,7 @@
 		DCA298E0F630B182870A43DB /* Pods_kayayuApp_kayayuAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kayayuApp_kayayuAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4903A224266B6B0E1497275 /* Pods-kayayuApp-kayayuAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuApp-kayayuAppUITests.release.xcconfig"; path = "Target Support Files/Pods-kayayuApp-kayayuAppUITests/Pods-kayayuApp-kayayuAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		FD2C4D75275B441600A8C50F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FD2C4D7F275B508400A8C50F /* KayayuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KayayuModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +206,7 @@
 		0ABC6317273929860041087F /* kayayuApp */ = {
 			isa = PBXGroup;
 			children = (
+				FD2C4D7E275B505100A8C50F /* Model */,
 				AFC65DBE2747B2F70050769D /* Coordinator */,
 				0ABC636D2739335C0041087F /* ViewController */,
 				0ABC636C273933560041087F /* ViewModel */,
@@ -334,6 +339,15 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		FD2C4D7E275B505100A8C50F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FD2C4D7F275B508400A8C50F /* KayayuModel.swift */,
+			);
+			name = Model;
+			path = kayayuApp/Model;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -607,6 +621,7 @@
 				0ABC636F273933800041087F /* LandingNode.swift in Sources */,
 				0A8D9517274D333500BB55FC /* PlanStatsNode.swift in Sources */,
 				0A8D950D274D2B2400BB55FC /* StatsViewController.swift in Sources */,
+				FD2C4D80275B508400A8C50F /* KayayuModel.swift in Sources */,
 				AF2C1867274607AC00482D6E /* CalendarHelper.swift in Sources */,
 				AF7591DA274E43DE003B8708 /* StatsDateHeader.swift in Sources */,
 				AF2C18752746165600482D6E /* TransactionTableHeaderNode.swift in Sources */,
@@ -635,6 +650,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0ABC6333273929880041087F /* kayayuAppTests.swift in Sources */,
+				FD2C4D81275B508400A8C50F /* KayayuModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -643,6 +659,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0ABC633E273929880041087F /* kayayuAppUITests.swift in Sources */,
+				FD2C4D82275B508400A8C50F /* KayayuModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

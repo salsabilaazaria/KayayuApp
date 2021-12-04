@@ -27,17 +27,14 @@ class LoginNode: ASDisplayNode {
 	init(viewModel: AuthenticationViewModel) {
 		self.viewModel = viewModel
 		super.init()
-		
+        
+        configureViewModel()
 		configureGreetingText()
 		configureEmailTextfield()
 		configurePasswordTextfield()
 		configureLoginButton()
 		configureSignUpText()
 		configueSignUpButton()
-        
-        viewModel.onOpenHomePage = { 
-            self.onOpenHomePage?()
-        }
 		
 		backgroundColor = .white
 		automaticallyManagesSubnodes = true
@@ -76,6 +73,12 @@ class LoginNode: ASDisplayNode {
 		
 		return mainInset
 	}
+    
+    private func configureViewModel() {
+        viewModel.onOpenHomePage = {
+            self.onOpenHomePage?()
+        }
+    }
 	
 	private func configureGreetingText() {
 		greetingText.attributedText = NSAttributedString.bold("Welcome back!\nWe miss you.", 30, kayayuColor.yellow)
