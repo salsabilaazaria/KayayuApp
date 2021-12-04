@@ -11,7 +11,7 @@ import AsyncDisplayKit
 class HomeViewController:ASDKViewController<ASDisplayNode> {
 	private let homeNode: HomeNode = HomeNode()
 	
-	init(authenticationViewModel: AuthenticationViewModel) {
+	override init() {
 		//authenticationViewModel.username -> manggil variable yang ada di AuthenticationViewModel
 //		print("auth home vc \(authenticationViewModel.username)")
 		super.init(node: homeNode)

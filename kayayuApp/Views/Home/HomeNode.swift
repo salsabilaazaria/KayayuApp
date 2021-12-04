@@ -12,9 +12,10 @@ class HomeNode: ASDisplayNode {
 	private let homeNode: HomeComponentNode = HomeComponentNode()
 	private let navBar: TabBar = TabBar()
 	private let addRecordBtn: ASButtonNode = ASButtonNode()
-	
+	private let viewModel = HomeViewModel()
 	override init() {
 		super.init()
+        print("KAYAYU USER BALANCE \(viewModel.getUserBalance())")
 		configureAddRecordBtn()
 		backgroundColor = .white
 		automaticallyManagesSubnodes = true

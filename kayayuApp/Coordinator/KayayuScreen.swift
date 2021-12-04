@@ -77,8 +77,8 @@ final class KayayuScreen {
 		return controller
 	}
 	
-	func makeHomePageViewController(authenticationViewModel: AuthenticationViewModel) -> UIViewController {
-		let controller = HomeViewController(authenticationViewModel: authenticationViewModel)
+	func makeHomePageViewController() -> UIViewController {
+		let controller = HomeViewController()
 		return controller
 	}
 	

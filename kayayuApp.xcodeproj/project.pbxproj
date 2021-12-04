@@ -54,6 +54,7 @@
 		FD2C4D80275B508400A8C50F /* KayayuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2C4D7F275B508400A8C50F /* KayayuModel.swift */; };
 		FD2C4D81275B508400A8C50F /* KayayuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2C4D7F275B508400A8C50F /* KayayuModel.swift */; };
 		FD2C4D82275B508400A8C50F /* KayayuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2C4D7F275B508400A8C50F /* KayayuModel.swift */; };
+		FD2C4DC6275B5AF900A8C50F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2C4DC5275B5AF900A8C50F /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,7 +109,7 @@
 		822540B0945D1E91F4C2F699 /* Pods_kayayuAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kayayuAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF020192274252C60033D067 /* TransactionTableNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableNode.swift; sourceTree = "<group>"; };
 		AF0201972742545C0033D067 /* TransactionCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCellNode.swift; sourceTree = "<group>"; };
-		AF065E3B2754A27A00433BB1 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthenticationViewModel.swift; path = kayayuApp/Views/AuthenticationViewModel.swift; sourceTree = SOURCE_ROOT; };
+		AF065E3B2754A27A00433BB1 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthenticationViewModel.swift; path = kayayuApp/ViewModel/AuthenticationViewModel.swift; sourceTree = SOURCE_ROOT; };
 		AF2C1866274607AB00482D6E /* CalendarHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHelper.swift; sourceTree = "<group>"; };
 		AF2C18742746165600482D6E /* TransactionTableHeaderNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableHeaderNode.swift; sourceTree = "<group>"; };
 		AF2C18842746477E00482D6E /* TransactionDateCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDateCellNode.swift; sourceTree = "<group>"; };
@@ -129,6 +130,7 @@
 		F4903A224266B6B0E1497275 /* Pods-kayayuApp-kayayuAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuApp-kayayuAppUITests.release.xcconfig"; path = "Target Support Files/Pods-kayayuApp-kayayuAppUITests/Pods-kayayuApp-kayayuAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		FD2C4D75275B441600A8C50F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FD2C4D7F275B508400A8C50F /* KayayuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KayayuModel.swift; sourceTree = "<group>"; };
+		FD2C4DC5275B5AF900A8C50F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,10 +208,10 @@
 		0ABC6317273929860041087F /* kayayuApp */ = {
 			isa = PBXGroup;
 			children = (
+				FD2C4DC3275B5AB500A8C50F /* ViewModel */,
 				FD2C4D7E275B505100A8C50F /* Model */,
 				AFC65DBE2747B2F70050769D /* Coordinator */,
 				0ABC636D2739335C0041087F /* ViewController */,
-				0ABC636C273933560041087F /* ViewModel */,
 				0ABC636B273933510041087F /* Helper */,
 				0ABC636A2739334B0041087F /* Views */,
 				0ABC6318273929860041087F /* AppDelegate.swift */,
@@ -264,14 +266,6 @@
 				AFBA5F58274DF8F6002455A7 /* KayayuHelper.swift */,
 			);
 			path = Helper;
-			sourceTree = "<group>";
-		};
-		0ABC636C273933560041087F /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				AF065E3B2754A27A00433BB1 /* AuthenticationViewModel.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		0ABC636D2739335C0041087F /* ViewController */ = {
@@ -348,6 +342,15 @@
 			name = Model;
 			path = kayayuApp/Model;
 			sourceTree = SOURCE_ROOT;
+		};
+		FD2C4DC3275B5AB500A8C50F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AF065E3B2754A27A00433BB1 /* AuthenticationViewModel.swift */,
+				FD2C4DC5275B5AF900A8C50F /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -626,6 +629,7 @@
 				AF7591DA274E43DE003B8708 /* StatsDateHeader.swift in Sources */,
 				AF2C18752746165600482D6E /* TransactionTableHeaderNode.swift in Sources */,
 				AF2C188B27464E6A00482D6E /* HomeTableTransaction.swift in Sources */,
+				FD2C4DC6275B5AF900A8C50F /* HomeViewModel.swift in Sources */,
 				0ABC631D273929860041087F /* ViewController.swift in Sources */,
 				AFC65DB52747ABBA0050769D /* LoginViewController.swift in Sources */,
 				0ABC6319273929860041087F /* AppDelegate.swift in Sources */,
