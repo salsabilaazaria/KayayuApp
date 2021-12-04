@@ -13,7 +13,7 @@ class HomeViewController:ASDKViewController<ASDisplayNode> {
 	
 	init(authenticationViewModel: AuthenticationViewModel) {
 		//authenticationViewModel.username -> manggil variable yang ada di AuthenticationViewModel
-		print("auth home vc \(authenticationViewModel.username)")
+//		print("auth home vc \(authenticationViewModel.username)")
 		super.init(node: homeNode)
 	}
 	

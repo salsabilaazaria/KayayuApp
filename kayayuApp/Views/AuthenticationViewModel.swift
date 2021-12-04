@@ -6,18 +6,23 @@
 //
 
 import Foundation
+import FirebaseAuth
 
 class AuthenticationViewModel {
 	//AuthenticationViewModel variable
-	var username: String = ""
+	var email: String = ""
 	
-	func validateLoginData(username: String, password: String) -> Bool{
+	func validateLoginData(email: String, password: String) -> Bool{
 		//put logic to data validation, if data correct return true
-		print("Auth Validate Login Data Username '\(username)' Password '\(password)'")
+		print("Auth Validate Login Data Username '\(email)' Password '\(password)'")
 		//@angie when debugging filter word "auth to see result
-		
+        guard email.isEmpty else {
+            return false
+        }
+        
+        
 		//putting username to variable so it can be accessed by other page
-		self.username = username
+		self.email = email
 		return true
 		
 	}
@@ -26,7 +31,6 @@ class AuthenticationViewModel {
 		//put logic to data validation, if data correct return true
 		print("Auth Validate Register Data \(username), \(email), \(password), \(confirmPassword)")
 		//@angie when debugging filter word "auth to see result
-		self.username = username
 		return true
 		
 	}
@@ -38,4 +42,6 @@ class AuthenticationViewModel {
 		
 	}
 	
+    
+//    FirebaseAuth.Auth.auth()
 }

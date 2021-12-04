@@ -16,7 +16,7 @@ class LoginNode: ASDisplayNode {
 	private let viewModel: AuthenticationViewModel
 	
 	private let greetingText: ASTextNode = ASTextNode()
-	private let usernameTextfield : ASEditableTextNode = ASEditableTextNode()
+	private let emailTextField : ASEditableTextNode = ASEditableTextNode()
 	private let passwordTextfield : ASEditableTextNode = ASEditableTextNode()
 	private var loginButton: BigButton = BigButton()
 	private let singUpText: ASTextNode = ASTextNode()
@@ -29,7 +29,7 @@ class LoginNode: ASDisplayNode {
 		super.init()
 		
 		configureGreetingText()
-		configureUsernameTextfield()
+		configureEmailTextfield()
 		configurePasswordTextfield()
 		configureLoginButton()
 		configureSignUpText()
@@ -44,7 +44,7 @@ class LoginNode: ASDisplayNode {
 											   spacing: 10,
 											   justifyContent: .center,
 											   alignItems: .center,
-											   children: [usernameTextfield, passwordTextfield])
+											   children: [emailTextField, passwordTextfield])
 		
 		let signUpTextSpec = ASStackLayoutSpec(direction: .horizontal,
 											   spacing: 0,
@@ -77,15 +77,15 @@ class LoginNode: ASDisplayNode {
 		greetingText.attributedText = NSAttributedString.bold("Welcome back!\nWe miss you.", 30, kayayuColor.yellow)
 	}
 	
-	private func configureUsernameTextfield() {
-		usernameTextfield.backgroundColor = kayayuColor.softGrey
-		usernameTextfield.style.preferredSize = inputTextFieldSize
-		usernameTextfield.textContainerInset = UIEdgeInsets(top: 10, left: 8, bottom: 10, right: 8)
+	private func configureEmailTextfield() {
+        emailTextField.backgroundColor = kayayuColor.softGrey
+        emailTextField.style.preferredSize = inputTextFieldSize
+        emailTextField.textContainerInset = UIEdgeInsets(top: 10, left: 8, bottom: 10, right: 8)
 		
-		usernameTextfield.textView.delegate = self
-		usernameTextfield.textView.text = "Username"
-		usernameTextfield.textView.textColor = .gray
-		usernameTextfield.textView.textContainer.maximumNumberOfLines = 1
+        emailTextField.textView.delegate = self
+        emailTextField.textView.text = "Email"
+        emailTextField.textView.textColor = .gray
+        emailTextField.textView.textContainer.maximumNumberOfLines = 1
 	}
 	
 	private func configurePasswordTextfield() {
@@ -116,12 +116,12 @@ class LoginNode: ASDisplayNode {
 	}
 	
 	@objc func loginButtonTapped(sender: ASButtonNode) {
-		guard let username = self.usernameTextfield.textView.text,
+		guard let email = self.emailTextField.textView.text,
 			  let password = self.passwordTextfield.textView.text else {
 			return
 		}
 		
-		let dataIsValid = self.viewModel.validateLoginData(username: username, password: password)
+		let dataIsValid = self.viewModel.validateLoginData(email: email, password: password)
 		
 		if dataIsValid {
 			self.onOpenHomePage?()
@@ -153,8 +153,8 @@ extension LoginNode: UITextViewDelegate {
 		if textView.text.isEmpty {
 			DispatchQueue.main.async {
 				textView.textColor = kayayuColor.softGrey
-				if textView == self.usernameTextfield {
-					textView.text = "Username"
+				if textView == self.emailTextField {
+					textView.text = "Email"
 				}
 				if textView == self.passwordTextfield {
 					textView.text = "Password"
