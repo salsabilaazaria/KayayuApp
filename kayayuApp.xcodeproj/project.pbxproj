@@ -48,6 +48,9 @@
 		AFC65DC02747B35F0050769D /* HomeComponentNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC65DBF2747B35F0050769D /* HomeComponentNode.swift */; };
 		C85222BDFC0C4353EF0EF0BD /* Pods_kayayuApp_kayayuAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA298E0F630B182870A43DB /* Pods_kayayuApp_kayayuAppUITests.framework */; };
 		CF5F6A57A2C96269113C4B45 /* Pods_kayayuAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 822540B0945D1E91F4C2F699 /* Pods_kayayuAppTests.framework */; };
+		FD2C4D76275B441600A8C50F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FD2C4D75275B441600A8C50F /* GoogleService-Info.plist */; };
+		FD2C4D77275B441600A8C50F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FD2C4D75275B441600A8C50F /* GoogleService-Info.plist */; };
+		FD2C4D78275B441600A8C50F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FD2C4D75275B441600A8C50F /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +124,7 @@
 		B887FE174A81196E743E9593 /* Pods-kayayuApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuApp.release.xcconfig"; path = "Target Support Files/Pods-kayayuApp/Pods-kayayuApp.release.xcconfig"; sourceTree = "<group>"; };
 		DCA298E0F630B182870A43DB /* Pods_kayayuApp_kayayuAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kayayuApp_kayayuAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4903A224266B6B0E1497275 /* Pods-kayayuApp-kayayuAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuApp-kayayuAppUITests.release.xcconfig"; path = "Target Support Files/Pods-kayayuApp-kayayuAppUITests/Pods-kayayuApp-kayayuAppUITests.release.xcconfig"; sourceTree = "<group>"; };
+		FD2C4D75275B441600A8C50F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,6 +284,7 @@
 		7F7DCAB52298946E2AF28AC9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FD2C4D75275B441600A8C50F /* GoogleService-Info.plist */,
 				B24C4321B5D25F3735CC2CE2 /* Pods_kayayuApp.framework */,
 				DCA298E0F630B182870A43DB /* Pods_kayayuApp_kayayuAppUITests.framework */,
 				822540B0945D1E91F4C2F699 /* Pods_kayayuAppTests.framework */,
@@ -441,6 +446,7 @@
 			files = (
 				0ABC6328273929880041087F /* LaunchScreen.storyboard in Resources */,
 				0ABC6325273929880041087F /* Assets.xcassets in Resources */,
+				FD2C4D76275B441600A8C50F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +454,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD2C4D77275B441600A8C50F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,6 +462,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD2C4D78275B441600A8C50F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

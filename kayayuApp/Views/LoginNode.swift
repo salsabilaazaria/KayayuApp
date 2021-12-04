@@ -34,6 +34,10 @@ class LoginNode: ASDisplayNode {
 		configureLoginButton()
 		configureSignUpText()
 		configueSignUpButton()
+        
+        viewModel.onOpenHomePage = { 
+            self.onOpenHomePage?()
+        }
 		
 		backgroundColor = .white
 		automaticallyManagesSubnodes = true
@@ -121,13 +125,8 @@ class LoginNode: ASDisplayNode {
 			return
 		}
 		
-		let dataIsValid = self.viewModel.validateLoginData(email: email, password: password)
+		self.viewModel.validateLoginData(email: email, password: password)
 		
-		if dataIsValid {
-			self.onOpenHomePage?()
-		} else {
-			print("DATA IS NOT VALID, WRONG INPUT")
-		}
 	}
 	
 	@objc func signUpButtonTapped(sender: ASButtonNode) {

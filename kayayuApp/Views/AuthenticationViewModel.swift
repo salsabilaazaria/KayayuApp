@@ -6,40 +6,72 @@
 //
 
 import Foundation
+import Firebase
 import FirebaseAuth
 
 class AuthenticationViewModel {
 	//AuthenticationViewModel variable
+    var onOpenHomePage: (() -> Void)?
 	var email: String = ""
 	
-	func validateLoginData(email: String, password: String) -> Bool{
+	func validateLoginData(email: String, password: String) {
 		//put logic to data validation, if data correct return true
 		print("Auth Validate Login Data Username '\(email)' Password '\(password)'")
-		//@angie when debugging filter word "auth to see result
-        guard email.isEmpty else {
+
+        guard !email.isEmpty,
+              !password.isEmpty else {
+            return
+        }
+        
+        FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password, completion: { [weak self] result, error in
+            guard let self = self else {
+                return
+            }
+            guard error == nil else {
+                print("KAYAYU Login Failed")
+                return
+            }
+            
+            self.onOpenHomePage?()
+            print("KAYAYU Login Success")
+         
+       
+        })
+   
+	}
+	
+	func validateRegisterData(username: String, email: String, password: String, confirmPassword: String) -> Bool{
+        print("Auth Validate Register Data \(username), \(email), \(password), \(confirmPassword)")
+        guard !username.isEmpty,
+              !email.isEmpty,
+              !password.isEmpty,
+              !confirmPassword.isEmpty,
+              password == confirmPassword else {
             return false
         }
         
         
-		//putting username to variable so it can be accessed by other page
-		self.email = email
-		return true
-		
-	}
-	
-	func validateRegisterData(username: String, email: String, password: String, confirmPassword: String) -> Bool{
-		//put logic to data validation, if data correct return true
-		print("Auth Validate Register Data \(username), \(email), \(password), \(confirmPassword)")
-		//@angie when debugging filter word "auth to see result
 		return true
 		
 	}
 	
 	func addRegisterData(username: String, email: String, password: String, confirmPassword: String) {
-		//put logic to add data to database
+	
 		print("Auth Add Register Data \(username), \(email), \(password), \(confirmPassword)")
-		//@angie when debugging filter word "auth to see result
-		
+        
+        FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password, completion: { [weak self] result, error in
+            guard let self = self else {
+                return
+            }
+            
+            guard error == nil else {
+                print("KAYAYU Registration Failed")
+                return
+            }
+            
+            print("KAYAYU Registration Successful")
+            
+        })
 	}
 	
     
