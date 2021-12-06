@@ -9,6 +9,8 @@ import Foundation
 import AsyncDisplayKit
 
 class ProfileNode: ASDisplayNode {
+	var onOpenSubscriptionPage: (() -> Void)?
+	var onOpenInstallmentPage: (() -> Void)?
 	
 	private let username: ASTextNode = ASTextNode()
 	private let email: ASTextNode = ASTextNode()
@@ -16,7 +18,7 @@ class ProfileNode: ASDisplayNode {
 	private var subscriptionNode: ProfileCellNode = ProfileCellNode()
 	private var installmentNode: ProfileCellNode = ProfileCellNode()
 	private var editProfileNode: ProfileCellNode = ProfileCellNode()
-	private var logouteNode: ProfileCellNode = ProfileCellNode()
+	private var logoutNode: ProfileCellNode = ProfileCellNode()
 	
 	private let scrollNode: ASScrollNode = ASScrollNode()
 	
@@ -61,7 +63,6 @@ class ProfileNode: ASDisplayNode {
 	}
 	
 	private func configureScrollNode() {
-		
 		scrollNode.automaticallyManagesSubnodes = true
 		scrollNode.automaticallyManagesContentSize = true
 		scrollNode.scrollableDirections = [.up, .down]
@@ -91,17 +92,28 @@ class ProfileNode: ASDisplayNode {
 										  spacing: 30,
 										  justifyContent: .start,
 										  alignItems: .stretch,
-										  children: [listSpec, editProfileNode, logouteNode])
+										  children: [listSpec, editProfileNode, logoutNode])
 
 		return mainSpec
 	}
 	
 	private func configureSubscriptionNode() {
 		subscriptionNode = ProfileCellNode(icon: "", title: "Subscription")
+		subscriptionNode.buttonNode.addTarget(self, action: #selector(subscriptionTapped), forControlEvents: .touchUpInside)
+	}
+	
+	@objc func subscriptionTapped(sender: ASButtonNode) {
+		print("subscription tapped")
+		self.onOpenSubscriptionPage?()
 	}
 	
 	private func configureInstallmentNode() {
 		installmentNode = ProfileCellNode(icon: "", title: "Installment")
+		installmentNode.buttonNode.addTarget(self, action: #selector(installmentTapped), forControlEvents: .touchUpInside)
+	}
+	
+	@objc func installmentTapped(sender: ASButtonNode) {
+		self.onOpenInstallmentPage?()
 	}
 	
 	private func configureEditProfileNode() {
@@ -109,7 +121,12 @@ class ProfileNode: ASDisplayNode {
 	}
 	
 	private func configureLogoutNode() {
-		logouteNode = ProfileCellNode(icon: "", title: "Logout")
+		logoutNode = ProfileCellNode(icon: "", title: "Logout")
+		logoutNode.buttonNode.addTarget(self, action: #selector(installmentTapped), forControlEvents: .touchUpInside)
+	}
+	
+	@objc func logoutTapped(sender: ASButtonNode) {
+		self.onOpenInstallmentPage?()
 	}
 	
 	

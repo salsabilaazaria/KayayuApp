@@ -8,15 +8,30 @@
 import Foundation
 import AsyncDisplayKit
 
-class ProfileViewController:ASDKViewController<ASDisplayNode> {
+class ProfileViewController: ASDKViewController<ASDisplayNode> {
+	
+	var onOpenSubscriptionPage: (() -> Void)?
+	var onOpenInstallmentPage: (() -> Void)?
+	
 	private let profileNode: ProfileNode = ProfileNode()
 	
 	override init() {
 		super.init(node: profileNode)
+		configureNode()
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
+	}
+	
+	private func configureNode() {
+		profileNode.onOpenSubscriptionPage = { [weak self] in
+			print("vc tapped")
+			self?.onOpenSubscriptionPage?()
+		}
+		profileNode.onOpenInstallmentPage = { [weak self] in
+			self?.onOpenInstallmentPage?()
+		}
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {

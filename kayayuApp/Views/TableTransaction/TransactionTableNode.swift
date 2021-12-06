@@ -18,9 +18,6 @@ class TransactionTableNode: ASTableNode {
 		backgroundColor = .white
 	}
 	
-	func getTableSize() -> CGSize{
-		return self.view.contentSize
-	}
 }
 
 extension TransactionTableNode: ASTableDataSource, ASTableDelegate {

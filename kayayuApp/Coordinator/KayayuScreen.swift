@@ -23,7 +23,8 @@ final class KayayuScreen {
 		case onOpenStatsPage
 		case onOpenAddRecordPage
 		case onOpenProfilePage
-		
+		case onOpenSubscriptionPage
+		case onOpenInstallmentPage
 	}
 	
 	public init(navigationController: UINavigationController, tabBarController:UITabBarController) {
@@ -116,6 +117,19 @@ final class KayayuScreen {
 	func makeProfileViewController() -> UIViewController {
 		let controller = ProfileViewController()
 		controller.title = "Profile"
+		controller.onOpenSubscriptionPage = { [weak self] in
+			guard let self = self else {
+				return
+			}
+			self.onNavigationEvent?(.onOpenSubscriptionPage)
+		}
+		
+		controller.onOpenInstallmentPage = { [weak self] in
+			guard let self = self else {
+				return
+			}
+			self.onNavigationEvent?(.onOpenInstallmentPage)
+		}
 		return controller
 	}
 	
@@ -124,6 +138,15 @@ final class KayayuScreen {
 		return controller
 	}
 	
+	func makeSubscriptionPageViewController() -> UIViewController {
+		let controller = SubscriptionViewController()
+		return controller
+	}
+	
+	func makeInstallmentPageViewController() -> UIViewController {
+		let controller = InstallmentViewController()
+		return controller
+	}
 	
 }
 

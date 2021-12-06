@@ -31,6 +31,12 @@
 		0ABC637A273933E00041087F /* NSAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC6379273933E00041087F /* NSAttributedString+Extension.swift */; };
 		0ABC637F273934020041087F /* ColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC637E273934020041087F /* ColorHelper.swift */; };
 		0ABC639627393B710041087F /* LoginNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC639527393B710041087F /* LoginNode.swift */; };
+		0ADCBA88275E5F2500F15F5E /* SubscriptionTableNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADCBA87275E5F2500F15F5E /* SubscriptionTableNode.swift */; };
+		0ADCBA90275E5F3100F15F5E /* SubscriptionCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADCBA8F275E5F3100F15F5E /* SubscriptionCellNode.swift */; };
+		0ADCBA95275E793A00F15F5E /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADCBA94275E793A00F15F5E /* SubscriptionViewController.swift */; };
+		0ADCBA9B275E7D9A00F15F5E /* InstallmentTableNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADCBA9A275E7D9A00F15F5E /* InstallmentTableNode.swift */; };
+		0ADCBAA3275E7DB900F15F5E /* InstallmentCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADCBAA2275E7DB900F15F5E /* InstallmentCellNode.swift */; };
+		0ADCBAA8275E7F4A00F15F5E /* InstallmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADCBAA7275E7F4A00F15F5E /* InstallmentViewController.swift */; };
 		465797E2FE63F6017A3D46DA /* Pods_kayayuApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B24C4321B5D25F3735CC2CE2 /* Pods_kayayuApp.framework */; };
 		AF020193274252C60033D067 /* TransactionTableNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF020192274252C60033D067 /* TransactionTableNode.swift */; };
 		AF0201982742545C0033D067 /* TransactionCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0201972742545C0033D067 /* TransactionCellNode.swift */; };
@@ -104,6 +110,12 @@
 		0ABC6379273933E00041087F /* NSAttributedString+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extension.swift"; sourceTree = "<group>"; };
 		0ABC637E273934020041087F /* ColorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHelper.swift; sourceTree = "<group>"; };
 		0ABC639527393B710041087F /* LoginNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginNode.swift; sourceTree = "<group>"; };
+		0ADCBA87275E5F2500F15F5E /* SubscriptionTableNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionTableNode.swift; sourceTree = "<group>"; };
+		0ADCBA8F275E5F3100F15F5E /* SubscriptionCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCellNode.swift; sourceTree = "<group>"; };
+		0ADCBA94275E793A00F15F5E /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
+		0ADCBA9A275E7D9A00F15F5E /* InstallmentTableNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InstallmentTableNode.swift; path = ../../../../../../../InstallmentTableNode.swift; sourceTree = "<group>"; };
+		0ADCBAA2275E7DB900F15F5E /* InstallmentCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallmentCellNode.swift; sourceTree = "<group>"; };
+		0ADCBAA7275E7F4A00F15F5E /* InstallmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallmentViewController.swift; sourceTree = "<group>"; };
 		14A3DB5E594A6ECC0BFCB654 /* Pods-kayayuAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuAppTests.debug.xcconfig"; path = "Target Support Files/Pods-kayayuAppTests/Pods-kayayuAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2127C8BED94B463E5147CB30 /* Pods-kayayuApp-kayayuAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuApp-kayayuAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-kayayuApp-kayayuAppUITests/Pods-kayayuApp-kayayuAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		3A3169E080FFED822273F72A /* Pods-kayayuApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuApp.debug.xcconfig"; path = "Target Support Files/Pods-kayayuApp/Pods-kayayuApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -166,6 +178,8 @@
 		0A337AC7275E541D00B04508 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				0ADCBA99275E7D8700F15F5E /* Installment */,
+				0ADCBA86275E5F1100F15F5E /* Subscription */,
 				0A337AB8275E503900B04508 /* ProfileNode.swift */,
 				0A337AC2275E540500B04508 /* ProfileCellNode.swift */,
 			);
@@ -297,8 +311,28 @@
 				0A8D950C274D2B2400BB55FC /* StatsViewController.swift */,
 				AFA9CDEF274F78A800E520A3 /* AddRecordViewController.swift */,
 				0A337ABD275E517700B04508 /* ProfileViewController.swift */,
+				0ADCBA94275E793A00F15F5E /* SubscriptionViewController.swift */,
+				0ADCBAA7275E7F4A00F15F5E /* InstallmentViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0ADCBA86275E5F1100F15F5E /* Subscription */ = {
+			isa = PBXGroup;
+			children = (
+				0ADCBA87275E5F2500F15F5E /* SubscriptionTableNode.swift */,
+				0ADCBA8F275E5F3100F15F5E /* SubscriptionCellNode.swift */,
+			);
+			path = Subscription;
+			sourceTree = "<group>";
+		};
+		0ADCBA99275E7D8700F15F5E /* Installment */ = {
+			isa = PBXGroup;
+			children = (
+				0ADCBA9A275E7D9A00F15F5E /* InstallmentTableNode.swift */,
+				0ADCBAA2275E7DB900F15F5E /* InstallmentCellNode.swift */,
+			);
+			path = Installment;
 			sourceTree = "<group>";
 		};
 		7F7DCAB52298946E2AF28AC9 /* Frameworks */ = {
@@ -621,6 +655,7 @@
 			files = (
 				AFC65DA027476F000050769D /* KayayuCoordinator.swift in Sources */,
 				0A8D9512274D320700BB55FC /* RealisationStatsNode.swift in Sources */,
+				0ADCBA9B275E7D9A00F15F5E /* InstallmentTableNode.swift in Sources */,
 				AF2C1894274656CE00482D6E /* HomeViewController.swift in Sources */,
 				AF2C18852746477E00482D6E /* TransactionDateCellNode.swift in Sources */,
 				0ABC637F273934020041087F /* ColorHelper.swift in Sources */,
@@ -633,6 +668,7 @@
 				0A8D9517274D333500BB55FC /* PlanStatsNode.swift in Sources */,
 				0A8D950D274D2B2400BB55FC /* StatsViewController.swift in Sources */,
 				AF2C1867274607AC00482D6E /* CalendarHelper.swift in Sources */,
+				0ADCBA90275E5F3100F15F5E /* SubscriptionCellNode.swift in Sources */,
 				AF7591DA274E43DE003B8708 /* StatsDateHeader.swift in Sources */,
 				AF2C18752746165600482D6E /* TransactionTableHeaderNode.swift in Sources */,
 				AF2C188B27464E6A00482D6E /* HomeTableTransaction.swift in Sources */,
@@ -647,18 +683,22 @@
 				0A337AB9275E503900B04508 /* ProfileNode.swift in Sources */,
 				0A8D94E7274D26F300BB55FC /* StatsNode.swift in Sources */,
 				0ABC631B273929860041087F /* SceneDelegate.swift in Sources */,
+				0ADCBAA3275E7DB900F15F5E /* InstallmentCellNode.swift in Sources */,
 				AFA9CDEB274F776C00E520A3 /* AddExpenseRecordNode.swift in Sources */,
 				AFC65DC02747B35F0050769D /* HomeComponentNode.swift in Sources */,
+				0ADCBA95275E793A00F15F5E /* SubscriptionViewController.swift in Sources */,
 				0A20A9C427411024005E8BB6 /* TabBar.swift in Sources */,
 				0A337AC3275E540500B04508 /* ProfileCellNode.swift in Sources */,
 				0ABC6323273929860041087F /* kayayuApp.xcdatamodeld in Sources */,
 				AF7591D5274E4381003B8708 /* RatioRealisationDetailNode.swift in Sources */,
+				0ADCBAA8275E7F4A00F15F5E /* InstallmentViewController.swift in Sources */,
 				AFC65DBA2747ABCA0050769D /* RegisterViewController.swift in Sources */,
 				AFA9CDE2274F766300E520A3 /* AddRecordeNode.swift in Sources */,
 				AFA9CDF0274F78A800E520A3 /* AddRecordViewController.swift in Sources */,
 				0A337ABE275E517700B04508 /* ProfileViewController.swift in Sources */,
 				0AAA268A273AB0700063D876 /* SummaryHeader.swift in Sources */,
 				AFC65DAA274792AD0050769D /* LandingViewController.swift in Sources */,
+				0ADCBA88275E5F2500F15F5E /* SubscriptionTableNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -92,9 +92,19 @@ public final class KayayuCoordinator {
 						self.navigationController.pushViewController(controller, animated: true)
 						
 					}
+				case .onOpenSubscriptionPage:
+					DispatchQueue.main.async {
+						let controller = screen.makeSubscriptionPageViewController()
+						self.navigationController.pushViewController(controller, animated: true)
+						
+					}
+				case .onOpenInstallmentPage:
+					DispatchQueue.main.async {
+						let controller = screen.makeInstallmentPageViewController()
+						self.navigationController.pushViewController(controller, animated: true)
+						
+					}
 			}
-			
-			
 		}
 	}
 }
