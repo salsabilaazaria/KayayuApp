@@ -17,12 +17,14 @@ class AddExpenseRecordNode: ASDisplayNode {
 	private let amountTitle: ASTextNode = ASTextNode()
 	private let totalAmountTitle: ASTextNode = ASTextNode()
 	private let interestTitle: ASTextNode = ASTextNode()
+	private let durationTitle: ASTextNode = ASTextNode()
 	
 	private let dateInputTextField: ASEditableTextNode = ASEditableTextNode()
 	private let descriptionInputTextField: ASEditableTextNode = ASEditableTextNode()
 	private let amountInputTextField: ASEditableTextNode = ASEditableTextNode()
 	private let totalAmountInputTextField: ASEditableTextNode = ASEditableTextNode()
 	private let interestInputTextField: ASEditableTextNode = ASEditableTextNode()
+	private let durationInputTextField: ASEditableTextNode = ASEditableTextNode()
 	
 	private let ratioTitle: ASTextNode = ASTextNode()
 	private var ratioCategory: DropDown = DropDown()
@@ -76,7 +78,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 				elementArray.append(amount)
 			case .subscription:
 				elementArray.append(amount)
-				elementArray.append(recurringType)
+				elementArray.append(createDurationSpec())
 			case .installment:
 				let amountInterestSpec = ASStackLayoutSpec(direction: .horizontal,
 														   spacing: 12,
@@ -134,7 +136,6 @@ class AddExpenseRecordNode: ASDisplayNode {
 	private func configureObserver() {
 		paymenTypeValue.asObservable().distinctUntilChanged().subscribe(onNext: { value in
 			self.setNeedsLayout()
-//			self.layoutIfNeeded()
 		}).disposed(by: disposeBag)
 	}
 	
@@ -179,13 +180,11 @@ class AddExpenseRecordNode: ASDisplayNode {
 		paymentType.font = UIFont.systemFont(ofSize: 14)
 		paymentType.attributedText = NSAttributedString.init(string: paymenTypeValue.value.rawValue)
 		paymentType.didSelect{ [weak self] (selectedText, index, id)  in
-			
 			guard let self = self else {
 				return
 			}
 		
 			self.paymenTypeValue.accept(kayayuPaymentType(rawValue: selectedText) ?? .oneTime)
-	
 		}
 	}
 	
@@ -412,22 +411,32 @@ class AddExpenseRecordNode: ASDisplayNode {
 		let recurringTypeNode = ASDisplayNode()
 	
 		recurringTypeNode.view.addSubview(recurringType)
-		switch paymenTypeValue.value {
-			case .oneTime,.subscription:
-				recurringTypeNode.style.preferredSize = kayayuSize.dropdownSize
-			case .installment:
-				recurringTypeNode.style.preferredSize = kayayuSize.halfDropdownSize
-		}
 		recurringTypeNode.borderWidth = 1
 		recurringTypeNode.borderColor = kayayuColor.softGrey.cgColor
 		
 		let recurringTypeWrap = ASWrapperLayoutSpec(layoutElements: [recurringTypeNode])
 		
+		var reccurringElement: [ASLayoutElement] = []
+		
+		switch paymenTypeValue.value {
+			case .oneTime:
+				recurringTypeNode.style.preferredSize = kayayuSize.dropdownSize
+				reccurringElement.append(recurringTypeTitle)
+				reccurringElement.append(recurringTypeWrap)
+			case .installment:
+				recurringTypeNode.style.preferredSize = kayayuSize.halfDropdownSize
+				reccurringElement.append(recurringTypeTitle)
+				reccurringElement.append(recurringTypeWrap)
+			case .subscription:
+				recurringTypeNode.style.preferredSize = kayayuSize.halfDropdownSize
+				reccurringElement.append(recurringTypeWrap)
+		}
+		
 		let recurringTypeSpec = ASStackLayoutSpec(direction: .vertical,
 										  spacing: spacingTitle,
 										  justifyContent: .start,
 										  alignItems: .start,
-										  children: [recurringTypeTitle, recurringTypeWrap])
+										  children: reccurringElement)
 		
 		return recurringTypeSpec
 	}
@@ -436,21 +445,48 @@ class AddExpenseRecordNode: ASDisplayNode {
 		recurringTypeTitle.attributedText = NSAttributedString.bold("Type", 16, .black)
 		
 		switch paymenTypeValue.value {
-			case .oneTime,.subscription:
+			case .oneTime:
 				recurringType = DropDown(frame: kayayuSize.dropdownRect)
-			case .installment:
+			case .installment, .subscription:
 				recurringType = DropDown(frame: kayayuSize.halfDropdownRect)
 		}
 		
 		//value tenor berapa aja?
 		recurringType.optionArray = ["Monthly", "Yearly"]
-//		installmentType.optionIds = [1,2,3,4,5,6,7,8,9,10,11,12]
 		recurringType.selectedRowColor = kayayuColor.softGrey
 		recurringType.checkMarkEnabled = false
 		recurringType.font = UIFont.systemFont(ofSize: 14)
 		recurringType.didSelect{(selectedText, index, id) in
 			//logic if dropdown is selected
 		}
+	}
+	
+	private func createDurationSpec() -> ASLayoutSpec {
+		durationTitle.attributedText = NSAttributedString.bold("Duration", 14, .black)
+		
+		durationInputTextField.style.preferredSize = CGSize(width: UIScreen.main.bounds.width/2, height: kayayuSize.dropdownSize.height)
+		durationInputTextField.keyboardType = .numberPad
+		durationInputTextField.maximumLinesToDisplay = 1
+		durationInputTextField.textView.inputAccessoryView = toolBar
+		durationInputTextField.textView.font = kayayuFont.inputTextFieldFont
+		durationInputTextField.borderWidth = 1
+		durationInputTextField.borderColor = kayayuColor.softGrey.cgColor
+		
+		let recurring = createRecurringTypeSpec()
+		
+		let inputSpec = ASStackLayoutSpec(direction: .horizontal,
+											 spacing: 0,
+											 justifyContent: .start,
+											 alignItems: .start,
+											 children: [durationInputTextField, recurring])
+		
+		let mainSpec = ASStackLayoutSpec(direction: .vertical,
+											 spacing: spacingTitle,
+											 justifyContent: .start,
+											 alignItems: .start,
+											 children: [durationTitle, inputSpec])
+		
+		return mainSpec
 	}
 	
 	
