@@ -79,7 +79,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 				elementArray.append(recurringType)
 			case .installment:
 				let amountInterestSpec = ASStackLayoutSpec(direction: .horizontal,
-														   spacing: 6,
+														   spacing: 12,
 														   justifyContent: .start,
 														   alignItems: .start,
 														   children: [totalAmount, interest])
@@ -333,7 +333,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 		
 		totalAmountInputTextField.keyboardType = .numberPad
 		totalAmountInputTextField.maximumLinesToDisplay = 1
-		totalAmountInputTextField.style.preferredSize = kayayuSize.halfInputTextFieldSize
+		totalAmountInputTextField.style.preferredSize = CGSize(width: UIScreen.main.bounds.width/2 - 60 - totalAmountTitle.style.preferredSize.width, height: kayayuSize.inputTextFieldSize.height)
 		totalAmountInputTextField.textView.inputAccessoryView = toolBar
 		totalAmountInputTextField.textView.font = kayayuFont.inputTextFieldFont
 		
