@@ -16,8 +16,24 @@ enum kayayuRatio: String, CaseIterable {
 	
 	static var incomeValues: [String] {
 		return kayayuRatio.allCases.map { $0.rawValue }
-}
+	}
 	static let ratioCategory = [needs, wants, savings]
+	
+	static var ratioCategoryString: [String] {
+		return ratioCategory.map{$0.rawValue}
+	}
+	
+}
+
+enum kayayuPaymentType: String, CaseIterable {
+	case oneTime = "One Time"
+	case subscription = "Subscription"
+	case installment = "Installment"
+	
+	static var kayayuPaymentTypeValues: [String] {
+		return kayayuPaymentType.allCases.map { $0.rawValue }
+	}
+	static let paymentTypeArr = [oneTime, subscription, installment]
 	
 }
 
@@ -25,8 +41,18 @@ struct kayayuSize {
 	static let kayayuBarHeight: CGFloat = 30
 	static let kayayuBorderWidth: CGFloat = 0.2
 	static let kayayuBigButton: CGFloat = 40
+	
 	static let bigInputTextField: CGSize = CGSize(width: UIScreen.main.bounds.width - 32, height: 40)
 	static let inputTextFieldSize: CGSize = CGSize(width: UIScreen.main.bounds.width - 32, height: 20)
+	static let halfInputTextFieldSize: CGSize = CGSize(width: UIScreen.main.bounds.width/2 - 32, height: 20)
+	
+	static let dropdownSize: CGSize = CGSize(width: UIScreen.main.bounds.width - 32, height: 30)
+	static let halfDropdownSize: CGSize = CGSize(width: UIScreen.main.bounds.width/2 - 32, height: 30)
+	static let quarterDropdownSize: CGSize = CGSize(width: UIScreen.main.bounds.width/4 - 32, height: 30)
+	
+	static let dropdownRect: CGRect = CGRect(x: 3, y: 1, width: UIScreen.main.bounds.width - 32, height: 30)
+	static let halfDropdownRect: CGRect = CGRect(x: 3, y: 1, width: UIScreen.main.bounds.width/2 - 32, height: 30)
+	static let quarterDropdownRect: CGRect = CGRect(x: 3, y: 1, width: UIScreen.main.bounds.width/4 - 32, height: 30)
 }
 
 struct kayayuFont {
