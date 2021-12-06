@@ -24,13 +24,12 @@ class AddRecordViewController:ASDKViewController<ASDisplayNode> {
 		edgesForExtendedLayout = []
 		super.viewDidLoad()
 		title = "Record"
-		navigationItem.backButtonTitle = "Back"
 		
+	}
 	
-		
-		
-		
-		
+	override func viewWillAppear(_ animated: Bool) {
+
+		self.navigationController?.navigationBar.backItem?.backButtonDisplayMode = .minimal
 	}
 	
 	

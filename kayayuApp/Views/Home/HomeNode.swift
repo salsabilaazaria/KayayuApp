@@ -10,6 +10,8 @@ import AsyncDisplayKit
 
 class HomeNode: ASDisplayNode {
 	var onOpenAddRecordPage: (() -> Void)?
+	var onOpenStatsPage: (() -> Void)?
+	var onOpenProfilePage: (() -> Void)?
 	
 	private let homeNode: HomeComponentNode = HomeComponentNode()
 	private let navBar: TabBar = TabBar()
@@ -46,10 +48,9 @@ class HomeNode: ASDisplayNode {
 		
 		let homeStack = ASStackLayoutSpec(direction: .vertical, spacing: 0, justifyContent: .start, alignItems: .start, children: [homeNode])
 	
-		let navigationBar = ASStackLayoutSpec(direction: .vertical, spacing: 20, justifyContent: .end, alignItems: .end, children: [addRecordBtn,navBar])
+		let tabBar = ASStackLayoutSpec(direction: .vertical, spacing: 20, justifyContent: .end, alignItems: .end, children: [addRecordBtn])
 
-		let mainSpec = ASOverlayLayoutSpec(child: homeStack, overlay: navigationBar)
-		
+		let mainSpec = ASOverlayLayoutSpec(child: homeStack, overlay: tabBar)
 		
 		return mainSpec
 	}

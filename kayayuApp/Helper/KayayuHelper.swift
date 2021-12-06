@@ -38,6 +38,9 @@ enum kayayuPaymentType: String, CaseIterable {
 }
 
 struct kayayuSize {
+	static let kayayuTabBarSize: CGSize = CGSize(width: UIScreen.main.bounds.width, height: 80)
+	static let nodeSize: CGSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width - kayayuTabBarSize.height - 200)
+	
 	static let kayayuBarHeight: CGFloat = 30
 	static let kayayuBorderWidth: CGFloat = 0.2
 	static let kayayuBigButton: CGFloat = 40

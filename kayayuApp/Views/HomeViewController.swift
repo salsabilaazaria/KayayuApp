@@ -33,21 +33,24 @@ class HomeViewController:ASDKViewController<ASDisplayNode> {
 	}
 	
 	// MARK: - Private methods -
-	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		self.navigationController?.navigationBar.prefersLargeTitles = true
+		
+		self.tabBarController?.navigationItem.title = "Hello!"
+	}
 
 	override func viewDidLoad() {
 		edgesForExtendedLayout = []
 		super.viewDidLoad()
-		title = "Hello!"
-		self.navigationController?.navigationBar.prefersLargeTitles = true
+		
 		self.navigationController?.navigationBar.backgroundColor = .white
 		self.navigationController?.navigationItem.largeTitleDisplayMode = .always
-	
-	
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
-		navigationItem.backButtonTitle = "Back"
+		super.viewWillAppear(animated)
 	}
+
 
 }

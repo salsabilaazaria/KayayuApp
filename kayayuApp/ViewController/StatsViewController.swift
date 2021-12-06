@@ -19,13 +19,17 @@ class StatsViewController:ASDKViewController<ASDisplayNode> {
 		super.init(coder: aDecoder)
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		self.navigationItem.hidesBackButton = true
+		self.tabBarController?.navigationItem.title = "Stats"
+	}
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		title = "Stats"
 	
 		edgesForExtendedLayout = []
-		self.navigationController?.navigationBar.isHidden = false
 		self.navigationController?.navigationBar.prefersLargeTitles = true
 		self.navigationController?.navigationBar.backgroundColor = .white
 

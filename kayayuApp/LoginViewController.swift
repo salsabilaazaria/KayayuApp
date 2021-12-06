@@ -47,5 +47,11 @@ class LoginViewController: ASDKViewController<ASDisplayNode> {
 		edgesForExtendedLayout = []
 		self.navigationController?.navigationBar.isHidden = true
 	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		self.navigationController?.navigationBar.isHidden = false
+		self.navigationController?.navigationItem.hidesBackButton = true
+	}
+
 
 }

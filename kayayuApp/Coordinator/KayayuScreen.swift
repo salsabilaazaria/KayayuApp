@@ -10,26 +10,45 @@ import UIKit
 
 final class KayayuScreen {
 	private var navigationController: UINavigationController?
+	let tabBarController: UITabBarController
 	var onNavigationEvent: ((NavigationEvent) -> Void)?
 	
+	
 	enum NavigationEvent {
+		case onCreateTabBar
 		case onOpenHomePage
 		case onOpenLandingPage
 		case onOpenLoginPage
 		case onOpenRegisterPage
 		case onOpenStatsPage
 		case onOpenAddRecordPage
-//		case onOpenProfilePage
+		//		case onOpenProfilePage
 		
 	}
 	
-	public init(navigationController: UINavigationController) {
+	public init(navigationController: UINavigationController, tabBarController:UITabBarController) {
 		self.navigationController = navigationController
+		self.tabBarController = tabBarController
 	}
 	
 	func make() -> UIViewController {
-		let controller = makeHomePageViewController()
+		let controller = makeLandingPageViewController()
 		return controller
+	}
+	
+	func makeTabBarViewController() -> UITabBarController {
+		tabBarController.edgesForExtendedLayout = []
+		
+		let home = makeHomePageViewController()
+		home.tabBarItem.title = "Home"
+		let stats = makeStatsPageViewController()
+	
+		tabBarController.tabBar.tintColor = kayayuColor.yellow
+		tabBarController.setViewControllers([home,stats], animated: true)
+		tabBarController.navigationItem.hidesBackButton = true
+		tabBarController.navigationItem.backButtonDisplayMode = .minimal
+		
+		return tabBarController
 	}
 	
 	func makeLandingPageViewController() -> UIViewController {
@@ -57,7 +76,7 @@ final class KayayuScreen {
 				return
 			}
 			
-			self.onNavigationEvent?(.onOpenHomePage)
+			self.onNavigationEvent?(.onCreateTabBar)
 		}
 		return controller
 	}
@@ -69,13 +88,15 @@ final class KayayuScreen {
 				return
 			}
 			
-			self.onNavigationEvent?(.onOpenHomePage)
+			self.onNavigationEvent?(.onCreateTabBar)
 		}
 		return controller
 	}
 	
 	func makeHomePageViewController() -> UIViewController {
 		let controller = HomeViewController()
+		
+		controller.title = "Hello"
 		controller.onOpenAddRecordPage = { [weak self] in
 			guard let self = self else {
 				return
@@ -87,6 +108,7 @@ final class KayayuScreen {
 	
 	func makeStatsPageViewController() -> UIViewController {
 		let controller = StatsViewController()
+		controller.title = "Stats"
 		return controller
 	}
 	
@@ -94,7 +116,7 @@ final class KayayuScreen {
 		let controller = AddRecordViewController()
 		return controller
 	}
-
-
+	
+	
 }
 

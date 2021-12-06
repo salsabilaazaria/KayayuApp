@@ -55,14 +55,14 @@ class StatsNode: ASDisplayNode {
 										  alignItems: .start,
 										  children: statsElementArray)
 		
-		let tabBarSpec = ASStackLayoutSpec(direction: .vertical, spacing: 20, justifyContent: .end, alignItems: .end, children: [tabBar])
+//		let tabBarSpec = ASStackLayoutSpec(direction: .vertical, spacing: 20, justifyContent: .end, alignItems: .end, children: [tabBar])
 
 
 
-		let mainSpec = ASOverlayLayoutSpec(child: mainStack, overlay: tabBarSpec)
+//		let mainSpec = ASOverlayLayoutSpec(child: mainStack, overlay: tabBarSpec)
 
 
-		return mainSpec
+		return mainStack
 	}
 	
 	private func reloadUI(){
