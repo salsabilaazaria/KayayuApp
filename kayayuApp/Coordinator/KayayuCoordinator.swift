@@ -44,51 +44,57 @@ public final class KayayuCoordinator {
 			}
 			
 			switch navigationEvent {
-			case .onCreateTabBar:
-				DispatchQueue.main.async {
-					let controller = screen.makeTabBarViewController()
-					self.navigationController.pushViewController(controller, animated: true)
-				}
-			case .onOpenHomePage:
-				DispatchQueue.main.async {
-					let controller = screen.makeHomePageViewController()
-					self.navigationController.pushViewController(controller, animated: true)
+				case .onCreateTabBar:
+					DispatchQueue.main.async {
+						let controller = screen.makeTabBarViewController()
+						self.navigationController.pushViewController(controller, animated: true)
+					}
+				case .onOpenHomePage:
+					DispatchQueue.main.async {
+						let controller = screen.makeHomePageViewController()
+						self.navigationController.pushViewController(controller, animated: true)
+						
+					}
+				case .onOpenLandingPage:
+					DispatchQueue.main.async {
+						let controller = screen.makeLandingPageViewController()
+						self.navigationController.pushViewController(controller, animated: true)
+						
+					}
+				case .onOpenLoginPage:
+					DispatchQueue.main.async {
+						let controller = screen.makeLoginPageViewController()
+						self.navigationController.pushViewController(controller, animated: true)
+						
+					}
+				case .onOpenRegisterPage:
+					DispatchQueue.main.async {
+						let controller = screen.makeRegisterPageViewController()
+						self.navigationController.pushViewController(controller, animated: true)
+						
+					}
+				case .onOpenStatsPage:
+					DispatchQueue.main.async {
+						let controller = screen.makeStatsPageViewController()
+						self.navigationController.pushViewController(controller, animated: true)
+						
+					}
 					
-				}
-			case .onOpenLandingPage:
-				DispatchQueue.main.async {
-					let controller = screen.makeLandingPageViewController()
-					self.navigationController.pushViewController(controller, animated: true)
-					
-				}
-			case .onOpenLoginPage:
-				DispatchQueue.main.async {
-					let controller = screen.makeLoginPageViewController()
-					self.navigationController.pushViewController(controller, animated: true)
-					
-				}
-			case .onOpenRegisterPage:
-				DispatchQueue.main.async {
-					let controller = screen.makeRegisterPageViewController()
-					self.navigationController.pushViewController(controller, animated: true)
-					
-				}
-			case .onOpenStatsPage:
-				DispatchQueue.main.async {
-					let controller = screen.makeStatsPageViewController()
-					self.navigationController.pushViewController(controller, animated: true)
-					
-				}
-				
-			case .onOpenAddRecordPage:
-				DispatchQueue.main.async {
-					let controller = screen.makeAddRecordPageViewController()
-					self.navigationController.pushViewController(controller, animated: true)
-					
-				}
-				
+				case .onOpenAddRecordPage:
+					DispatchQueue.main.async {
+						let controller = screen.makeAddRecordPageViewController()
+						self.navigationController.pushViewController(controller, animated: true)
+						
+					}
+				case .onOpenProfilePage:
+					DispatchQueue.main.async {
+						let controller = screen.makeProfileViewController()
+						self.navigationController.pushViewController(controller, animated: true)
+						
+					}
 			}
+			
+			
 		}
 	}
-	
 }

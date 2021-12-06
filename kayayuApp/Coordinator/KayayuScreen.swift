@@ -22,7 +22,7 @@ final class KayayuScreen {
 		case onOpenRegisterPage
 		case onOpenStatsPage
 		case onOpenAddRecordPage
-		//		case onOpenProfilePage
+		case onOpenProfilePage
 		
 	}
 	
@@ -42,9 +42,10 @@ final class KayayuScreen {
 		let home = makeHomePageViewController()
 		home.tabBarItem.title = "Home"
 		let stats = makeStatsPageViewController()
+		let profile = makeProfileViewController()
 	
 		tabBarController.tabBar.tintColor = kayayuColor.yellow
-		tabBarController.setViewControllers([home,stats], animated: true)
+		tabBarController.setViewControllers([home,stats,profile], animated: true)
 		tabBarController.navigationItem.hidesBackButton = true
 		tabBarController.navigationItem.backButtonDisplayMode = .minimal
 		
@@ -109,6 +110,12 @@ final class KayayuScreen {
 	func makeStatsPageViewController() -> UIViewController {
 		let controller = StatsViewController()
 		controller.title = "Stats"
+		return controller
+	}
+	
+	func makeProfileViewController() -> UIViewController {
+		let controller = ProfileViewController()
+		controller.title = "Profile"
 		return controller
 	}
 	
