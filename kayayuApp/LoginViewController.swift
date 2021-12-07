@@ -40,7 +40,10 @@ class LoginViewController: ASDKViewController<ASDisplayNode> {
 	}
 	
 	// MARK: - Private methods -
-	
+	override func viewWillAppear(_ animated: Bool) {
+		self.navigationController?.navigationBar.isHidden = true
+		self.navigationController?.navigationItem.hidesBackButton = true
+	}
 
 	override func viewDidLoad() {
 		super.viewDidLoad()

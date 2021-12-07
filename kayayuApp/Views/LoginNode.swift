@@ -16,13 +16,17 @@ class LoginNode: ASDisplayNode {
 	private let viewModel: AuthenticationViewModel
 	
 	private let greetingText: ASTextNode = ASTextNode()
-	private let emailTextField : ASEditableTextNode = ASEditableTextNode()
-	private let passwordTextfield : ASEditableTextNode = ASEditableTextNode()
+	
+	private let emailTitle: ASTextNode = ASTextNode()
+	private let emailTextfield: ASEditableTextNode = ASEditableTextNode()
+	private let passwordTitle: ASTextNode = ASTextNode()
+	private let passwordTextfield: UITextField = UITextField()
 	private var loginButton: BigButton = BigButton()
+	
 	private let singUpText: ASTextNode = ASTextNode()
 	private let signUpButton: ASButtonNode = ASButtonNode()
 	
-	private let inputTextFieldSize = kayayuSize.bigInputTextField
+	private let toolBar: UIToolbar = UIToolbar()
 	
 	init(viewModel: AuthenticationViewModel) {
 		self.viewModel = viewModel
@@ -35,6 +39,7 @@ class LoginNode: ASDisplayNode {
 		configureLoginButton()
 		configureSignUpText()
 		configueSignUpButton()
+		configureToolBar()
 		
 		backgroundColor = .white
 		automaticallyManagesSubnodes = true
@@ -42,13 +47,13 @@ class LoginNode: ASDisplayNode {
 	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
 		let inputTextfield = ASStackLayoutSpec(direction: .vertical,
-											   spacing: 10,
+											   spacing: 15,
 											   justifyContent: .center,
 											   alignItems: .center,
-											   children: [emailTextField, passwordTextfield])
+											   children: [createEmailTextField(), createPasswordTextField()])
 		
 		let signUpTextSpec = ASStackLayoutSpec(direction: .horizontal,
-											   spacing: 0,
+											   spacing: 4,
 											   justifyContent: .center,
 											   alignItems: .center,
 											   children: [singUpText,signUpButton])
@@ -60,7 +65,7 @@ class LoginNode: ASDisplayNode {
 										   children: [loginButton, signUpTextSpec])
 		
 		let mainSpec = ASStackLayoutSpec(direction: .vertical,
-										 spacing: 40,
+										 spacing: 50,
 										 justifyContent: .center,
 										 alignItems: .start,
 										 children: [greetingText,inputTextfield, buttonSpec])
@@ -80,31 +85,65 @@ class LoginNode: ASDisplayNode {
         }
     }
 	
+	private func configureToolBar() {
+		toolBar.sizeToFit()
+		let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(doneKeyboardTapped))
+		toolBar.setItems([doneButton], animated: true)
+	}
+	
+	@objc func doneKeyboardTapped() {
+		self.view.endEditing(true)
+	}
+	
 	private func configureGreetingText() {
 		greetingText.attributedText = NSAttributedString.bold("Welcome back!\nWe miss you.", 30, kayayuColor.yellow)
 	}
 	
-	private func configureEmailTextfield() {
-        emailTextField.backgroundColor = kayayuColor.softGrey
-        emailTextField.style.preferredSize = inputTextFieldSize
-        emailTextField.textContainerInset = UIEdgeInsets(top: 10, left: 8, bottom: 10, right: 8)
+	private func createEmailTextField() -> ASLayoutSpec {
+		let mainSpec = ASStackLayoutSpec(direction: .vertical,
+										 spacing: 6,
+										 justifyContent: .start,
+										 alignItems: .start,
+										 children: [emailTitle, emailTextfield])
 		
-        emailTextField.textView.delegate = self
-        emailTextField.textView.text = "Email"
-        emailTextField.textView.textColor = .gray
-        emailTextField.textView.textContainer.maximumNumberOfLines = 1
+		return mainSpec
+	}
+	
+	private func configureEmailTextfield() {
+		emailTitle.attributedText = NSAttributedString.semibold("Email", 14, .gray)
+		
+        emailTextfield.backgroundColor = kayayuColor.softGrey
+        emailTextfield.style.preferredSize = kayayuSize.bigInputTextField
+        emailTextfield.textContainerInset = UIEdgeInsets(top: 10, left: 8, bottom: 10, right: 8)
+		
+		emailTextfield.textView.inputAccessoryView = toolBar
+        emailTextfield.textView.textContainer.maximumNumberOfLines = 1
+	}
+	
+	private func createPasswordTextField() -> ASLayoutSpec {
+		let passwordTextfieldNode = ASDisplayNode()
+		passwordTextfieldNode.view.addSubview(passwordTextfield)
+		passwordTextfieldNode.backgroundColor = kayayuColor.softGrey
+		passwordTextfieldNode.style.preferredSize = kayayuSize.bigInputTextField
+		
+		let passwordTextfieldWrap = ASWrapperLayoutSpec(layoutElements: [passwordTextfieldNode])
+		
+		let mainSpec = ASStackLayoutSpec(direction: .vertical,
+										 spacing: 6,
+										 justifyContent: .start,
+										 alignItems: .start,
+										 children: [passwordTitle, passwordTextfieldWrap])
+		
+		return mainSpec
 	}
 	
 	private func configurePasswordTextfield() {
-		passwordTextfield.backgroundColor = kayayuColor.softGrey
-		passwordTextfield.style.preferredSize = inputTextFieldSize
-		passwordTextfield.cornerRadius = 8.0
-		passwordTextfield.textContainerInset = UIEdgeInsets(top: 10, left: 8, bottom: 10, right: 8)
-		
-		passwordTextfield.textView.delegate = self
-		passwordTextfield.textView.text = "Password"
-		passwordTextfield.textView.textColor = .gray
-		passwordTextfield.maximumLinesToDisplay = 1
+		passwordTitle.attributedText = NSAttributedString.semibold("Password", 14, .gray)
+		passwordTextfield.frame = CGRect(x: 8, y: 0, width: UIScreen.main.bounds.width - 48, height: 40)
+		passwordTextfield.layer.cornerRadius = 8.0
+		passwordTextfield.inputAccessoryView = toolBar
+		passwordTextfield.isSecureTextEntry = true
+		passwordTextfield.font = UIFont.systemFont(ofSize: 12)
 		
 	}
 	
@@ -123,8 +162,8 @@ class LoginNode: ASDisplayNode {
 	}
 	
 	@objc func loginButtonTapped(sender: ASButtonNode) {
-		guard let email = self.emailTextField.textView.text,
-			  let password = self.passwordTextfield.textView.text else {
+		guard let email = self.emailTextfield.textView.text,
+			  let password = self.passwordTextfield.text else {
 			return
 		}
 		
@@ -139,31 +178,3 @@ class LoginNode: ASDisplayNode {
 	
 }
 
-extension LoginNode: UITextViewDelegate {
-	
-	func textViewDidBeginEditing(_ textView: UITextView) {
-		textView.textContainerInset =  UIEdgeInsets(top: 10, left: 8, bottom: 10, right: 8)
-		
-		if textView.text == "Username" || textView.text == "Password" {
-			textView.textColor = .black
-			textView.text = nil
-		}
-	}
-	
-	func textViewDidEndEditing(_ textView: UITextView) {
-		textView.textContainerInset =  UIEdgeInsets(top: 10, left: 8, bottom: 10, right: 8)
-		if textView.text.isEmpty {
-			DispatchQueue.main.async {
-				textView.textColor = kayayuColor.softGrey
-				if textView == self.emailTextField {
-					textView.text = "Email"
-				}
-				if textView == self.passwordTextfield {
-					textView.text = "Password"
-				}
-			}
-		} else {
-			textView.textColor = .black
-		}
-	}
-}

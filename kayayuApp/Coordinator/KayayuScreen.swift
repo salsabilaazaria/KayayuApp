@@ -80,6 +80,14 @@ final class KayayuScreen {
 			
 			self.onNavigationEvent?(.onCreateTabBar)
 		}
+		controller.onOpenRegisterPage = { [weak self] in
+			guard let self = self else {
+				return
+			}
+			
+			self.onNavigationEvent?(.onOpenRegisterPage)
+			
+		}
 		return controller
 	}
 	
@@ -91,6 +99,13 @@ final class KayayuScreen {
 			}
 			
 			self.onNavigationEvent?(.onCreateTabBar)
+		}
+		controller.onOpenLoginPage = { [weak self] in
+				guard let self = self else {
+					return
+				}
+				
+				self.onNavigationEvent?(.onOpenLoginPage)
 		}
 		return controller
 	}
