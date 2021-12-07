@@ -27,7 +27,7 @@ final class KayayuScreen {
 		case onOpenInstallmentPage
 	}
 	
-	public init(navigationController: UINavigationController, tabBarController:UITabBarController) {
+	public init(navigationController: UINavigationController, tabBarController: UITabBarController) {
 		self.navigationController = navigationController
 		self.tabBarController = tabBarController
 	}
@@ -39,12 +39,12 @@ final class KayayuScreen {
 	
 	func makeTabBarViewController(homeViewModel: HomeViewModel) -> UITabBarController {
 		tabBarController.edgesForExtendedLayout = []
-		
+
 		let home = makeHomePageViewController(viewModel: homeViewModel)
 		home.tabBarItem.title = "Home"
 		let stats = makeStatsPageViewController()
 		let profile = makeProfileViewController()
-	
+		
 		tabBarController.tabBar.tintColor = kayayuColor.yellow
 		tabBarController.setViewControllers([home,stats,profile], animated: true)
 		tabBarController.navigationItem.hidesBackButton = true

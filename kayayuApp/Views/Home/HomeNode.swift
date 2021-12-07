@@ -45,9 +45,15 @@ class HomeNode: ASDisplayNode {
 		
 		let homeStack = ASStackLayoutSpec(direction: .vertical, spacing: 0, justifyContent: .start, alignItems: .start, children: [homeNode])
 	
-		let tabBar = ASStackLayoutSpec(direction: .vertical, spacing: 20, justifyContent: .end, alignItems: .end, children: [addRecordBtn])
+		let addRecordBtnSpec = ASStackLayoutSpec(direction: .vertical,
+									   spacing: 20,
+									   justifyContent: .end,
+									   alignItems: .end,
+									   children: [addRecordBtn])
+		
+		let addRecordBtnInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 16, bottom: 30, right: 16), child: addRecordBtnSpec)
 
-		let mainSpec = ASOverlayLayoutSpec(child: homeStack, overlay: tabBar)
+		let mainSpec = ASOverlayLayoutSpec(child: homeStack, overlay: addRecordBtnInset)
 		
 		return mainSpec
 	}

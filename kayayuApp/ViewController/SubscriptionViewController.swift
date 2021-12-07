@@ -31,11 +31,15 @@ class SubscriptionViewController: ASDKViewController<ASDisplayNode> {
 	}
 
 	override func viewDidLoad() {
-		super.viewDidLoad()
 		title = "My Subscription"
-	
 		edgesForExtendedLayout = []
+		super.viewDidLoad()
 		self.navigationController?.navigationBar.prefersLargeTitles = false
+		self.navigationController?.navigationBar.backgroundColor = .white
+	}
+	
+	override func viewDidDisappear(_ animated: Bool) {
+		self.navigationController?.navigationBar.prefersLargeTitles = true
 		self.navigationController?.navigationBar.backgroundColor = .white
 
 	}

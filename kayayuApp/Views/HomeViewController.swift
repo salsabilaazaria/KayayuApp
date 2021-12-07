@@ -18,6 +18,8 @@ class HomeViewController:ASDKViewController<ASDisplayNode> {
         self.homeNode = HomeNode(viewModel: viewModel)
 	
         super.init(node: homeNode ?? ASDisplayNode())
+		
+		configureHomeNode()
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -36,7 +38,6 @@ class HomeViewController:ASDKViewController<ASDisplayNode> {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		self.navigationController?.navigationBar.prefersLargeTitles = true
-		
 		self.tabBarController?.navigationItem.title = "Hello!"
 	}
 
@@ -48,9 +49,9 @@ class HomeViewController:ASDKViewController<ASDisplayNode> {
 		self.navigationController?.navigationItem.largeTitleDisplayMode = .always
 	}
 	
-	override func viewWillDisappear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-	}
+//	override func viewWillDisappear(_ animated: Bool) {
+//		super.viewWillAppear(animated)
+//	}
 
 
 }

@@ -37,7 +37,10 @@ class ProfileViewController: ASDKViewController<ASDisplayNode> {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		self.navigationItem.hidesBackButton = true
+		self.navigationController?.navigationBar.prefersLargeTitles = true
 		self.tabBarController?.navigationItem.title = "Profile"
+		self.navigationController?.tabBarController?.tabBar.isTranslucent = false
+		self.navigationController?.tabBarController?.tabBar.isTranslucent = true
 	}
 
 	override func viewDidLoad() {

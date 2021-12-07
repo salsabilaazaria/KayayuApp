@@ -14,7 +14,7 @@ class SubscriptionTableNode: ASTableNode {
 		super.init(style: .plain)
 		self.delegate = self
 		self.dataSource = self
-		
+		automaticallyManagesSubnodes = true
 		backgroundColor = .white
 	}
 	

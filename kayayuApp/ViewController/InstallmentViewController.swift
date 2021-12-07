@@ -26,12 +26,12 @@ class InstallmentViewController: ASDKViewController<ASDisplayNode> {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		self.tabBarController?.navigationItem.title = "My Subscription"
+		self.tabBarController?.navigationItem.title = "My Installment"
 	}
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		title = "My Subscription"
+		title = "My Installment"
 	
 		edgesForExtendedLayout = []
 		self.navigationController?.navigationBar.prefersLargeTitles = false
