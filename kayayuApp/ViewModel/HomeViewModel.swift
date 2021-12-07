@@ -89,8 +89,40 @@ class HomeViewModel {
 		}
 	}
 	
-	private func calculatePerDayIncome() {
+	func calculateIncomePerDay(date: Date) -> Float{
+		guard let transactionsData = self.transactionsData.value else {
+			return 0
+		}
 		
+		var incomeTotal: Float = 0
+		for transData in transactionsData {
+			if let incomeFlag = transData.income_flag, incomeFlag == true,
+			   let amount = transData.amount,
+			   transData.transaction_date == date  {
+				
+				incomeTotal += amount
+			}
+		}
+		
+		return incomeTotal
 	}
-
+	
+	func calculateExpensePerDay(date: Date) -> Float{
+		guard let transactionsData = self.transactionsData.value else {
+			return 0
+		}
+		
+		var expenseTotal: Float = 0
+		for transData in transactionsData {
+			if let incomeFlag = transData.income_flag, incomeFlag == false,
+			   let amount = transData.amount,
+			   transData.transaction_date == date {
+				
+				expenseTotal += amount
+			}
+		}
+		
+		return expenseTotal
+	}
+	
 }

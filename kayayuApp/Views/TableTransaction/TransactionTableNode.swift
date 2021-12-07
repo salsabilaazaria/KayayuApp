@@ -18,6 +18,7 @@ class TransactionTableNode: ASTableNode {
 		self.dataSource = self
 		configureObserver()
 		backgroundColor = .white
+		contentInset.bottom = 100
 	}
 	
 	private func configureObserver() {
@@ -48,25 +49,38 @@ extension TransactionTableNode: ASTableDataSource, ASTableDelegate {
 		
 		if indexPath.row == 0 {
 			//data pertama
-			let cellNode = TransactionCellNode(isIncomeTransaction: isIncomeTransaction, isDate: true, data: transactionsData[indexPath.row])
+			guard let transDate = transactionsData[indexPath.row].transaction_date else {
+				return ASCellNode()
+			}
+
+			let incomePerDay = viewModel.calculateIncomePerDay(date: transDate)
+			let expensePerDay = viewModel.calculateExpensePerDay(date: transDate)
+
+			let cellNode = TransactionCellNode(isIncomeTransaction: isIncomeTransaction, data: transactionsData[indexPath.row], incomePerDay: incomePerDay, expensePerDay: expensePerDay)
 			return cellNode
-		}
-		else if  beforeIndex > 0,
-			let beforeDate = transactionsData[beforeIndex].transaction_date,
-			beforeDate != currDate {
-			//data beda hari
-			let cellNode = TransactionCellNode(isIncomeTransaction: isIncomeTransaction, isDate: true, data: transactionsData[indexPath.row])
-			return cellNode
+		} else if beforeIndex >= 0,
+				let beforeDate = transactionsData[beforeIndex].transaction_date,
+				beforeDate != currDate {
 			
+			//data beda hari
+			guard let transDate = transactionsData[indexPath.row].transaction_date else {
+				return ASCellNode()
+			}
+			
+			let incomePerDay = viewModel.calculateIncomePerDay(date: transDate)
+			let expensePerDay = viewModel.calculateExpensePerDay(date: transDate)
+			
+			let cellNode = TransactionCellNode(isIncomeTransaction: isIncomeTransaction, data: transactionsData[indexPath.row],incomePerDay: incomePerDay, expensePerDay: expensePerDay)
+			return cellNode
 		}
 		else {
 			//data dengan hari yang sama
-			let cellNode = TransactionCellNode(isIncomeTransaction: isIncomeTransaction, isDate: false, data: transactionsData[indexPath.row])
+			let cellNode = TransactionCellNode(isIncomeTransaction: isIncomeTransaction, data: transactionsData[indexPath.row])
 			return cellNode
 		}
 		
-	
-	
+		
+		
 		
 	}
 	

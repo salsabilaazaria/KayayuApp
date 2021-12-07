@@ -13,8 +13,16 @@ class TransactionDateCellNode: ASCellNode {
 	private let totalExpenseAmount: ASTextNode = ASTextNode()
 	private let dateText: ASTextNode = ASTextNode()
 	
-	override init() {
-		
+	private let date: Date
+	private let incomePerDay: Float
+	private let expensePerDay: Float
+	
+	private let calendarHelper: CalendarHelper = CalendarHelper()
+	
+	init(date: Date = Date() , incomePerDay: Float = 0, expensePerDay: Float = 0) {
+		self.date = date
+		self.incomePerDay = incomePerDay
+		self.expensePerDay = expensePerDay
 		super.init()
 		
 		configureDatetext()
@@ -58,16 +66,20 @@ class TransactionDateCellNode: ASCellNode {
 	}
 	
 	private func configureDatetext() {
-		dateText.attributedText = NSAttributedString.bold("01 MON", 15, .black)
+		let dayString = calendarHelper.dayOfDate(date: date)
+		let monthString = calendarHelper.monthString(date: date)
+		let formattedMonthString = monthString.prefix(3)
+
+		dateText.attributedText = NSAttributedString.bold("\(dayString) \(formattedMonthString)", 15, .black)
 		dateText.style.preferredSize = CGSize(width: 60, height: 20)
 		dateText.style.alignSelf = .center
 	}
 	
 	private func configureIncomeAmount() {
-		totalIncomeAmount.attributedText = NSAttributedString.semibold("Rp1.000.000.000", 14, .systemGreen)
+		totalIncomeAmount.attributedText = NSAttributedString.semibold("Rp\(incomePerDay)", 14, .systemGreen)
 	}
 	
 	private func configureExpenseAmount() {
-		totalExpenseAmount.attributedText = NSAttributedString.semibold("Rp1.000.000.000", 14, .systemRed)
+		totalExpenseAmount.attributedText = NSAttributedString.semibold("Rp\(expensePerDay)", 14, .systemRed)
 	}
 }

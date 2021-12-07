@@ -25,6 +25,13 @@ class CalendarHelper {
 		let component = calendar.dateComponents([.day], from: date)
 		return component.day!
 	}
+	
+	func dayString(date: Date) -> String {
+		// monday tuesday
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "EEEE"
+		return dateFormatter.string(from: date)
+	}
 
 	func monthString(date: Date) -> String {
 		//example: 30 Jan 2021 -> January

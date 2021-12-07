@@ -26,7 +26,6 @@ class ProfileViewController: ASDKViewController<ASDisplayNode> {
 	
 	private func configureNode() {
 		profileNode.onOpenSubscriptionPage = { [weak self] in
-			print("vc tapped")
 			self?.onOpenSubscriptionPage?()
 		}
 		profileNode.onOpenInstallmentPage = { [weak self] in

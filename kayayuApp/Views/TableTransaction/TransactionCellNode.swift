@@ -14,23 +14,41 @@ import AsyncDisplayKit
 //}
 
 class TransactionCellNode: ASCellNode {
-	private let isIncomeTransaction: Bool
-	private let isDate: Bool
+	private var isIncomeTransaction: Bool
+	private var isDate: Bool
 	
-	private let dateCellNode: TransactionDateCellNode = TransactionDateCellNode()
+	private var dateCellNode: TransactionDateCellNode = TransactionDateCellNode()
 	private let ratio: ASTextNode = ASTextNode()
 	private let notes: ASTextNode = ASTextNode()
 	private let transactionAmount: ASTextNode = ASTextNode()
 	private let transactionData: Transactions
 	
-	init(isIncomeTransaction: Bool, isDate: Bool, data: Transactions) {
-		
+	init(isIncomeTransaction: Bool, data: Transactions) {
+		//init for creating cell without date
+		self.isDate = false
 		self.isIncomeTransaction = isIncomeTransaction
 		self.transactionData = data
-		self.isDate = isDate
 		
 		super.init()
 		
+		configureRatio()
+		configureNotes()
+		configureTransactionAmount(isIncomeTransaction: self.isIncomeTransaction)
+		
+		backgroundColor = .white
+		automaticallyManagesSubnodes = true
+		
+		style.minHeight = ASDimension(unit: .points, value: 30)
+	}
+	
+	init(isIncomeTransaction: Bool,data: Transactions, incomePerDay: Float, expensePerDay: Float) {
+		//init for creating cell with date
+		self.isDate = true
+		self.transactionData = data
+		self.isIncomeTransaction = isIncomeTransaction
+		
+		super.init()
+		configureDateCell(incomePerDay: incomePerDay, expensePerDay: expensePerDay)
 		configureRatio()
 		configureNotes()
 		configureTransactionAmount(isIncomeTransaction: self.isIncomeTransaction)
@@ -84,6 +102,13 @@ class TransactionCellNode: ASCellNode {
 		
 	}
 	
+	private func configureDateCell(incomePerDay: Float, expensePerDay: Float) {
+		guard let date = transactionData.transaction_date else {
+			return
+		}
+		dateCellNode = TransactionDateCellNode(date: date, incomePerDay: incomePerDay, expensePerDay: expensePerDay)
+	}
+	
 	private func configureRatio() {
 		guard let ratioString = transactionData.category else {
 			return
@@ -93,7 +118,11 @@ class TransactionCellNode: ASCellNode {
 	}
 	
 	private func configureNotes() {
-		notes.attributedText = NSAttributedString.normal("ayam bakar enak banget gaboong lala", 12, .black)
+		guard let notesString = transactionData.description else {
+			return
+		}
+		
+		notes.attributedText = NSAttributedString.normal(notesString, 12, .black)
 		notes.style.width = ASDimension(unit: .points, value: 120)
 	}
 	
