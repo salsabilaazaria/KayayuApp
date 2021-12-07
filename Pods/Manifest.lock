@@ -347,8 +347,6 @@ PODS:
   - Charts (3.6.0):
     - Charts/Core (= 3.6.0)
   - Charts/Core (3.6.0)
-<<<<<<< firebaseDB
-  - Dropdowns (3.1.0)
   - Firebase/Analytics (8.10.0):
     - Firebase/Core
   - Firebase/Auth (8.10.0):
@@ -482,15 +480,13 @@ PODS:
     - gRPC-Core/Interface (= 1.28.2)
   - gRPC-Core/Interface (1.28.2)
   - GTMSessionFetcher/Core (1.7.0)
+  - iOSDropDown (0.3.4)
   - leveldb-library (1.22.1)
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
-=======
-  - iOSDropDown (0.3.4)
->>>>>>> add income page all input text field done
   - PINCache (3.0.3):
     - PINCache/Arc-exception-safe (= 3.0.3)
     - PINCache/Core (= 3.0.3)
@@ -506,12 +502,6 @@ PODS:
   - PINRemoteImage/PINCache (3.0.3):
     - PINCache (~> 3.0.3)
     - PINRemoteImage/Core
-  - RxCocoa (5.1.3):
-    - RxRelay (~> 5)
-    - RxSwift (~> 5)
-  - RxRelay (5.1.3):
-    - RxSwift (~> 5)
-  - RxSwift (5.1.3)
   - PromisesObjC (2.0.0)
   - RxCocoa (5.1.3):
     - RxRelay (~> 5)
@@ -542,14 +532,12 @@ PODS:
 
 DEPENDENCIES:
   - Charts
-  - iOSDropDown
-  - RxCocoa (~> 5)
-  - RxSwift (~> 5)
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Firestore
   - FirebaseFirestoreSwift (> 7.0-beta)
+  - iOSDropDown
   - RxCocoa (~> 5)
   - RxSwift (~> 5)
   - Texture
@@ -559,8 +547,6 @@ SPEC REPOS:
     - abseil
     - BoringSSL-GRPC
     - Charts
-<<<<<<< firebaseDB
-    - Dropdowns
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -575,17 +561,12 @@ SPEC REPOS:
     - "gRPC-C++"
     - gRPC-Core
     - GTMSessionFetcher
+    - iOSDropDown
     - leveldb-library
     - nanopb
-=======
-    - iOSDropDown
->>>>>>> add income page all input text field done
     - PINCache
     - PINOperation
     - PINRemoteImage
-    - RxCocoa
-    - RxRelay
-    - RxSwift
     - PromisesObjC
     - RxCocoa
     - RxRelay
@@ -596,8 +577,6 @@ SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
   Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
-<<<<<<< firebaseDB
-  Dropdowns: 9a567e54ced34ecdc93d97d865ab6075fde09093
   Firebase: 44213362f1dcc52555b935dc925ed35ac55f1b20
   FirebaseAnalytics: 319c9b3b1bdd400d60e2f415dff0c5f6959e6760
   FirebaseAuth: 59a2d2b933b5b79e18fb1e6ad230c6abdaa73d26
@@ -612,28 +591,18 @@ SPEC CHECKSUMS:
   "gRPC-C++": 13d8ccef97d5c3c441b7e3c529ef28ebee86fad2
   gRPC-Core: 4afa11bfbedf7cdecd04de535a9e046893404ed5
   GTMSessionFetcher: 43748f93435c2aa068b1cbe39655aaf600652e91
+  iOSDropDown: c10a761f9a00c3f1cc9d3bce43ae504628e2f692
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
-=======
-  iOSDropDown: c10a761f9a00c3f1cc9d3bce43ae504628e2f692
->>>>>>> add income page all input text field done
   PINCache: 7a8fc1a691173d21dbddbf86cd515de6efa55086
   PINOperation: 00c935935f1e8cf0d1e2d6b542e75b88fc3e5e20
   PINRemoteImage: f1295b29f8c5e640e25335a1b2bd9d805171bd01
-  RxCocoa: e2ed092d5432e4296aa818021d27de4090ac0354
-  RxRelay: 5a18c2eb2d68326ebaf0112f80d837ae41b92b97
-  RxSwift: 915abbdfb62214aa89ccd0b194d44fb478019b27
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   RxCocoa: e2ed092d5432e4296aa818021d27de4090ac0354
   RxRelay: 5a18c2eb2d68326ebaf0112f80d837ae41b92b97
   RxSwift: 915abbdfb62214aa89ccd0b194d44fb478019b27
   Texture: 2e8ab2519452515f7f5a520f5a8f7e0a413abfa3
 
-<<<<<<< firebaseDB
-PODFILE CHECKSUM: 4eebc33468b90f29e2cbc0b9a2805149600c32e4
-PODFILE CHECKSUM: 865279c25e6c8745a6d743fe6737aec5092b445c
-=======
-PODFILE CHECKSUM: 1e840eae7ef17374880aff7d1457eb65dda14fd2
->>>>>>> add income page all input text field done
+PODFILE CHECKSUM: f1f439299af6a9a416c7ec296aa14ab81f3fd78f
 
-COCOAPODS: 1.10.2
+COCOAPODS: 1.11.2

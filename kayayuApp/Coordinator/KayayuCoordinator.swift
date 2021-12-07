@@ -46,12 +46,14 @@ public final class KayayuCoordinator {
 			switch navigationEvent {
 				case .onCreateTabBar:
 					DispatchQueue.main.async {
-						let controller = screen.makeTabBarViewController()
+						let homeViewModel = HomeViewModel()
+						let controller = screen.makeTabBarViewController(homeViewModel: homeViewModel)
 						self.navigationController.pushViewController(controller, animated: true)
 					}
 				case .onOpenHomePage:
+					let viewModel = HomeViewModel()
 					DispatchQueue.main.async {
-						let controller = screen.makeHomePageViewController()
+						let controller = screen.makeHomePageViewController(viewModel: viewModel)
 						self.navigationController.pushViewController(controller, animated: true)
 						
 					}
@@ -63,13 +65,15 @@ public final class KayayuCoordinator {
 					}
 				case .onOpenLoginPage:
 					DispatchQueue.main.async {
-						let controller = screen.makeLoginPageViewController()
+						let viewModel = AuthenticationViewModel()
+						let controller = screen.makeLoginPageViewController(viewModel: viewModel)
 						self.navigationController.pushViewController(controller, animated: true)
 						
 					}
 				case .onOpenRegisterPage:
 					DispatchQueue.main.async {
-						let controller = screen.makeRegisterPageViewController()
+						let viewModel = AuthenticationViewModel()
+						let controller = screen.makeRegisterPageViewController(viewModel: viewModel)
 						self.navigationController.pushViewController(controller, animated: true)
 						
 					}

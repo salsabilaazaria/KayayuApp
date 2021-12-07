@@ -37,10 +37,10 @@ final class KayayuScreen {
 		return controller
 	}
 	
-	func makeTabBarViewController() -> UITabBarController {
+	func makeTabBarViewController(homeViewModel: HomeViewModel) -> UITabBarController {
 		tabBarController.edgesForExtendedLayout = []
 		
-		let home = makeHomePageViewController()
+		let home = makeHomePageViewController(viewModel: homeViewModel)
 		home.tabBarItem.title = "Home"
 		let stats = makeStatsPageViewController()
 		let profile = makeProfileViewController()
@@ -71,8 +71,8 @@ final class KayayuScreen {
 		return controller
 	}
 	
-	func makeLoginPageViewController() -> UIViewController {
-		let controller = LoginViewController()
+	func makeLoginPageViewController(viewModel: AuthenticationViewModel) -> UIViewController {
+		let controller = LoginViewController(authenticationViewModel: viewModel)
 		controller.onOpenHomePage = { [weak self] in
 			guard let self = self else {
 				return
@@ -83,8 +83,8 @@ final class KayayuScreen {
 		return controller
 	}
 	
-	func makeRegisterPageViewController() -> UIViewController {
-		let controller = RegisterViewController()
+	func makeRegisterPageViewController(viewModel: AuthenticationViewModel) -> UIViewController {
+		let controller = RegisterViewController(authenticationViewModel: viewModel)
 		controller.onOpenHomePage = { [weak self] in
 			guard let self = self else {
 				return
@@ -95,8 +95,8 @@ final class KayayuScreen {
 		return controller
 	}
 	
-	func makeHomePageViewController() -> UIViewController {
-		let controller = HomeViewController()
+	func makeHomePageViewController(viewModel: HomeViewModel) -> UIViewController {
+		let controller = HomeViewController(viewModel: viewModel)
 		
 		controller.title = "Hello"
 		controller.onOpenAddRecordPage = { [weak self] in

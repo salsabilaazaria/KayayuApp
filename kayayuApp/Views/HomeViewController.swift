@@ -27,7 +27,7 @@ class HomeViewController:ASDKViewController<ASDisplayNode> {
 	}
 	
 	private func configureHomeNode() {
-		homeNode.onOpenAddRecordPage = { [weak self] in
+		homeNode?.onOpenAddRecordPage = { [weak self] in
 			self?.onOpenAddRecordPage?()
 		}
 	}

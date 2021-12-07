@@ -11,6 +11,11 @@ target 'kayayuApp' do
 	pod 'iOSDropDown'
    	pod 'RxSwift', '~> 5'
     	pod 'RxCocoa', '~> 5'
+	pod 'Firebase/Analytics'
+	pod 'Firebase/Auth'
+	pod 'Firebase/Core'
+	pod 'Firebase/Firestore'
+	pod 'FirebaseFirestoreSwift', '> 7.0-beta'
   target 'kayayuAppTests' do
     inherit! :search_paths
     # Pods for testing

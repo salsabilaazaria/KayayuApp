@@ -13,7 +13,7 @@ class HomeNode: ASDisplayNode {
 	var onOpenStatsPage: (() -> Void)?
 	var onOpenProfilePage: (() -> Void)?
 	
-	private let homeNode: HomeComponentNode = HomeComponentNode()
+	private let homeNode: HomeComponentNode
 	private let navBar: TabBar = TabBar()
 	private let addRecordBtn: ASButtonNode = ASButtonNode()
     private let viewModel: HomeViewModel

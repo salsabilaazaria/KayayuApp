@@ -113,6 +113,7 @@ install_dsym() {
       rsync --delete -av "${RSYNC_PROTECT_TMP_FILES[@]}" --links --filter "- CVS/" --filter "- .svn/" --filter "- .git/" --filter "- .hg/" --filter "- Headers" --filter "- PrivateHeaders" --filter "- Modules" "${DERIVED_FILES_DIR}/${basename}.dSYM" "${DWARF_DSYM_FOLDER_PATH}"
     else
       # The dSYM was not stripped at all, in this case touch a fake folder so the input/output paths from Xcode do not reexecute this script because the file is missing.
+      mkdir -p "${DWARF_DSYM_FOLDER_PATH}"
       touch "${DWARF_DSYM_FOLDER_PATH}/${basename}.dSYM"
     fi
   fi
@@ -177,8 +178,6 @@ code_sign_if_enabled() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Charts/Charts.framework"
-<<<<<<< firebaseDB
-<<<<<<< firebaseDB
   install_framework "${BUILT_PRODUCTS_DIR}/FirebaseAuth/FirebaseAuth.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics.framework"
@@ -192,33 +191,20 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/PINOperation/PINOperation.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PINRemoteImage/PINRemoteImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework"
-=======
-  install_framework "${BUILT_PRODUCTS_DIR}/Dropdowns/Dropdowns.framework"
-=======
->>>>>>> add income page all input text field done
-  install_framework "${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/PINOperation/PINOperation.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/PINRemoteImage/PINRemoteImage.framework"
->>>>>>> adding rxswift and rxcocoa
   install_framework "${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Texture/AsyncDisplayKit.framework"
-<<<<<<< firebaseDB
   install_framework "${BUILT_PRODUCTS_DIR}/abseil/absl.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/iOSDropDown/iOSDropDown.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework"
-=======
-  install_framework "${BUILT_PRODUCTS_DIR}/iOSDropDown/iOSDropDown.framework"
->>>>>>> add income page all input text field done
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Charts/Charts.framework"
-<<<<<<< firebaseDB
-<<<<<<< firebaseDB
   install_framework "${BUILT_PRODUCTS_DIR}/FirebaseAuth/FirebaseAuth.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics.framework"
@@ -232,27 +218,16 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/PINOperation/PINOperation.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PINRemoteImage/PINRemoteImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework"
-=======
-  install_framework "${BUILT_PRODUCTS_DIR}/Dropdowns/Dropdowns.framework"
-=======
->>>>>>> add income page all input text field done
-  install_framework "${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/PINOperation/PINOperation.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/PINRemoteImage/PINRemoteImage.framework"
->>>>>>> adding rxswift and rxcocoa
   install_framework "${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Texture/AsyncDisplayKit.framework"
-<<<<<<< firebaseDB
   install_framework "${BUILT_PRODUCTS_DIR}/abseil/absl.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/iOSDropDown/iOSDropDown.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework"
-=======
-  install_framework "${BUILT_PRODUCTS_DIR}/iOSDropDown/iOSDropDown.framework"
->>>>>>> add income page all input text field done
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait
