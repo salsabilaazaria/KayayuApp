@@ -15,6 +15,8 @@ import RxSwift
 
 
 class HomeViewModel {
+	var reloadUI: (() -> Void)?
+	
 	let database = Firestore.firestore()
 	var user: BehaviorRelay<Users?> = BehaviorRelay<Users?>(value: nil)
 	var transactionsData: BehaviorRelay<[Transactions]?> = BehaviorRelay<[Transactions]?>(value: nil)
@@ -24,6 +26,13 @@ class HomeViewModel {
 	init() {
 		self.getUserData()
 		self.getTransactionData()
+		self.configureObserver()
+	}
+	
+	func configureObserver() {
+		self.transactionsData.asObservable().subscribe(onNext: { _ in
+			self.reloadUI?()
+		})
 	}
 	
 	func getUserId() -> String{
@@ -77,8 +86,11 @@ class HomeViewModel {
 				}
 				self.transactionsData.accept(docummentArray)
 			}
-			
 		}
+	}
+	
+	private func calculatePerDayIncome() {
+		
 	}
 
 }

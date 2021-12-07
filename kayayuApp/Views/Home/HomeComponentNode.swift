@@ -14,8 +14,6 @@ class HomeComponentNode: ASDisplayNode {
 	private var summaryBalanceNode: SummaryHeader = SummaryHeader()
 
 	private let lineSpacing: CGFloat = 8
-	private let sidePadding: CGFloat = 28
-	private let cellAspectRatio: CGFloat = 128/375
     
     private let viewModel: HomeViewModel
 	
@@ -24,7 +22,7 @@ class HomeComponentNode: ASDisplayNode {
         self.tableTransaction = HomeTableTransaction(viewModel: viewModel)
 		super.init()
 		configureTableTransaction()
-		configureSummaryBalance()
+		configureObserver()
 		
 		backgroundColor = .white
 		automaticallyManagesSubnodes = true
@@ -50,24 +48,26 @@ class HomeComponentNode: ASDisplayNode {
 		return mainSpec
 	}
 	
+	private func configureObserver() {
+		viewModel.user.asObservable().subscribe(onNext: { [weak self] userData in
+			guard let balance = userData?.balance_total else {
+				return
+			}
+			DispatchQueue.main.async {
+				self?.configureSummaryBalance(balance: balance)
+				self?.setNeedsLayout()
+			}
+		   
+		})
+	}
 	
 	
 	private func configureTableTransaction() {
-//		tableTransaction.style.preferredSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 3/4)
+		tableTransaction.style.preferredSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 3/4)
 	}
 	
-	private func configureSummaryBalance() {
-        viewModel.user.asObservable().subscribe(onNext: { [weak self] userData in
-//            print("KAYAYU USER HOME \(userData)")
-            guard let balance = userData?.balance_total else {
-                return
-            }
-            DispatchQueue.main.async {
-                self?.summaryBalanceNode = SummaryHeader(summary: .balance, subtitleText: "Rp\(balance)")
-                self?.setNeedsLayout()
-            }
-           
-        })
+	private func configureSummaryBalance(balance: Float) {
+		summaryBalanceNode = SummaryHeader(summary: .balance, subtitleText: "Rp\(balance)")
    
 	}
 	

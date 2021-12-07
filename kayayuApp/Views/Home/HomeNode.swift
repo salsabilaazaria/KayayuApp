@@ -22,9 +22,6 @@ class HomeNode: ASDisplayNode {
         self.viewModel = viewModel
         self.homeNode = HomeComponentNode(viewModel: viewModel)
 		super.init()
-//        print(viewModel.user.value?.balance_total)
-//        viewModel.getUserData()
-        
      
 		configureAddRecordBtn()
 		backgroundColor = .white

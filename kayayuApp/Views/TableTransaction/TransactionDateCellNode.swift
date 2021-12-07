@@ -20,7 +20,8 @@ class TransactionDateCellNode: ASCellNode {
 		configureDatetext()
 		configureIncomeAmount()
 		configureExpenseAmount()
-		
+		borderWidth = 1
+		borderColor = kayayuColor.softGrey.cgColor
 		backgroundColor = .white
 		automaticallyManagesSubnodes = true
 		
@@ -53,14 +54,7 @@ class TransactionDateCellNode: ASCellNode {
 		
 		mainSpec.style.preferredSize = CGSize(width: UIScreen.main.bounds.width - 24, height: 30)
 		
-		let mainInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0,
-															   left: 8,
-															   bottom: 0,
-															   right: 8),
-										  child: mainSpec)
-		
-		
-		return mainInset
+		return mainSpec
 	}
 	
 	private func configureDatetext() {

@@ -367,9 +367,9 @@
 		AF2C188927464E2700482D6E /* TableTransaction */ = {
 			isa = PBXGroup;
 			children = (
+				AF2C18742746165600482D6E /* TransactionTableHeaderNode.swift */,
 				AF020192274252C60033D067 /* TransactionTableNode.swift */,
 				AF0201972742545C0033D067 /* TransactionCellNode.swift */,
-				AF2C18742746165600482D6E /* TransactionTableHeaderNode.swift */,
 				AF2C18842746477E00482D6E /* TransactionDateCellNode.swift */,
 			);
 			path = TableTransaction;

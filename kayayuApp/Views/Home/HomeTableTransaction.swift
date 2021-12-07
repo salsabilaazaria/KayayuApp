@@ -11,12 +11,15 @@ import AsyncDisplayKit
 class HomeTableTransaction: ASDisplayNode {
 	
 	private let transactionTableHeader: TransactionTableHeaderNode = TransactionTableHeaderNode()
-	private let transactionTableNode: TransactionTableNode = TransactionTableNode()
+	private let transactionTableNode: TransactionTableNode
+	private let viewModel: HomeViewModel
 	
     init(viewModel: HomeViewModel) {
+		self.viewModel = viewModel
+		self.transactionTableNode = TransactionTableNode(viewModel: viewModel)
 		super.init()
 		
-		transactionTableNode.style.preferredSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 7/10)
+		transactionTableNode.style.preferredSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.5)
 		backgroundColor = kayayuColor.softGrey
 		automaticallyManagesSubnodes = true
 	}
@@ -31,8 +34,8 @@ class HomeTableTransaction: ASDisplayNode {
 		
 		let tableSpec = ASStackLayoutSpec(direction: .vertical,
 										 spacing: 10,
-										 justifyContent: .center,
-										 alignItems: .center,
+										 justifyContent: .start,
+										 alignItems: .start,
 										 children: [transactionTableHeader, tableTransactionInset])
 		
 		return tableSpec
