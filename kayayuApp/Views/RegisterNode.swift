@@ -30,6 +30,8 @@ class RegisterNode: ASDisplayNode {
 	private let loginText: ASTextNode = ASTextNode()
 	private let loginButton: ASButtonNode = ASButtonNode()
 	
+	private let alertText: ASTextNode = ASTextNode()
+	
 	private let toolBar: UIToolbar = UIToolbar()
 	
 	private let inputTextFieldSize = kayayuSize.bigInputTextField
@@ -37,6 +39,9 @@ class RegisterNode: ASDisplayNode {
 	init(viewModel: AuthenticationViewModel) {
 		self.viewModel = viewModel
 		super.init()
+		
+		configureViewModel()
+		configureToolBar()
 		
 		configureGreetingText()
 		configureUsernameTextfield()
@@ -46,7 +51,7 @@ class RegisterNode: ASDisplayNode {
 		configureSignUpButton()
 		configureLoginText()
 		configureLoginButton()
-		configureToolBar()
+		configureAlertText()
 		
 		backgroundColor = .white
 		automaticallyManagesSubnodes = true
@@ -55,9 +60,9 @@ class RegisterNode: ASDisplayNode {
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
 		let inputTextfield = ASStackLayoutSpec(direction: .vertical,
 											   spacing: 10,
-											   justifyContent: .center,
-											   alignItems: .center,
-											   children: [createUsernameTextField(), createEmailTextField(), createPasswordTextField(), createConfirmPasswordTextField()])
+											   justifyContent: .start,
+											   alignItems: .start,
+											   children: [createUsernameTextField(), createEmailTextField(), createPasswordTextField(), createConfirmPasswordTextField(), alertText])
 		
 		let loginTextSpec = ASStackLayoutSpec(direction: .horizontal,
 											   spacing: 0,
@@ -84,6 +89,22 @@ class RegisterNode: ASDisplayNode {
 										  child: mainSpec)
 		
 		return mainInset
+	}
+	
+	private func configureViewModel() {
+		viewModel.onOpenHomePage = {
+			self.onOpenHomePage?()
+		}
+		
+		viewModel.showAlert = {
+			print("SHOW ALERT")
+			self.alertText.isHidden = false
+		}
+	}
+	
+	private func configureAlertText() {
+		alertText.attributedText = NSAttributedString.semibold("There is invalid data, please try again.", 14, .systemRed)
+		alertText.isHidden = true
 	}
 	
 	private func configureToolBar() {
@@ -222,18 +243,9 @@ class RegisterNode: ASDisplayNode {
 			return
 		}
 		
-		
-		let dataIsValid = self.viewModel.validateRegisterData(username: username, email: email, password: password, confirmPassword: confirmPassword)
-		
-		if dataIsValid {
-			self.viewModel.addRegisterData(username: username, email: email, password: password, confirmPassword: confirmPassword)
-			
-		} else {
-			print("DATA IS NOT VALID, WRONG INPUT")
-		}
+		self.viewModel.addRegisterData(username: username, email: email, password: password, confirmPassword: confirmPassword)
 	
 	}
-
 	
 }
 

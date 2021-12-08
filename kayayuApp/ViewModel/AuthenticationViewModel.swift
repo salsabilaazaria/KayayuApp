@@ -14,6 +14,7 @@ import FirebaseFirestoreSwift
 class AuthenticationViewModel {
     //AuthenticationViewModel variable
     var onOpenHomePage: (() -> Void)?
+	var showAlert: (() -> Void)?
     var email: String = ""
     let database = Firestore.firestore()
     
@@ -31,6 +32,7 @@ class AuthenticationViewModel {
                 return
             }
             guard error == nil else {
+				self.showAlert?()
                 print("KAYAYU Login Failed")
                 return
             }
@@ -59,7 +61,14 @@ class AuthenticationViewModel {
     }
     
     func addRegisterData(username: String, email: String, password: String, confirmPassword: String) {
-        
+		
+		let dataIsValid = self.validateRegisterData(username: username, email: email, password: password, confirmPassword: confirmPassword)
+		
+		guard dataIsValid else {
+			self.showAlert?()
+			return
+		}
+		
         print("Auth Add Register Data \(username), \(email), \(password), \(confirmPassword)")
         
         FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password, completion: { [weak self] result, error in
@@ -68,7 +77,8 @@ class AuthenticationViewModel {
             }
             
             guard error == nil else {
-                print("KAYAYU Registration Failed")
+				self.showAlert?()
+                print("KAYAYU Registration Failed \(error)")
                 return
             }
             guard let userId = Auth.auth().currentUser?.uid else { return }
@@ -84,7 +94,7 @@ class AuthenticationViewModel {
             do {
                 try self.database.collection("users").document("\(userId)").setData(from: user)
             } catch let error {
-                print("KAYAYU gabisa masuk ke firestore")
+                print("KAYAYU gabisa masuk ke firestore ")
             }
         
             self.onOpenHomePage?()

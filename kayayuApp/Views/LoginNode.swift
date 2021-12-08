@@ -23,6 +23,8 @@ class LoginNode: ASDisplayNode {
 	private let passwordTextfield: UITextField = UITextField()
 	private var loginButton: BigButton = BigButton()
 	
+	private let alertText: ASTextNode = ASTextNode()
+	
 	private let singUpText: ASTextNode = ASTextNode()
 	private let signUpButton: ASButtonNode = ASButtonNode()
 	
@@ -40,6 +42,7 @@ class LoginNode: ASDisplayNode {
 		configureSignUpText()
 		configueSignUpButton()
 		configureToolBar()
+		configureAlertText()
 		
 		backgroundColor = .white
 		automaticallyManagesSubnodes = true
@@ -48,9 +51,9 @@ class LoginNode: ASDisplayNode {
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
 		let inputTextfield = ASStackLayoutSpec(direction: .vertical,
 											   spacing: 15,
-											   justifyContent: .center,
-											   alignItems: .center,
-											   children: [createEmailTextField(), createPasswordTextField()])
+											   justifyContent: .start,
+											   alignItems: .start,
+											   children: [createEmailTextField(), createPasswordTextField(), alertText])
 		
 		let signUpTextSpec = ASStackLayoutSpec(direction: .horizontal,
 											   spacing: 4,
@@ -68,7 +71,7 @@ class LoginNode: ASDisplayNode {
 										 spacing: 50,
 										 justifyContent: .center,
 										 alignItems: .start,
-										 children: [greetingText,inputTextfield, buttonSpec])
+										 children: [greetingText,inputTextfield ,buttonSpec])
 		
 		let mainInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0,
 															   left: 16,
@@ -83,6 +86,11 @@ class LoginNode: ASDisplayNode {
         viewModel.onOpenHomePage = {
             self.onOpenHomePage?()
         }
+		
+		viewModel.showAlert = {
+			print("SHOW ALERT")
+			self.alertText.isHidden = false
+		}
     }
 	
 	private func configureToolBar() {
@@ -93,6 +101,11 @@ class LoginNode: ASDisplayNode {
 	
 	@objc func doneKeyboardTapped() {
 		self.view.endEditing(true)
+	}
+	
+	private func configureAlertText() {
+		alertText.attributedText = NSAttributedString.semibold("Oops, Invalid email or password.", 14, .systemRed)
+		alertText.isHidden = true
 	}
 	
 	private func configureGreetingText() {
