@@ -14,6 +14,8 @@ class StatsDateHeader: ASDisplayNode {
 	private let nextMonthButton: ASButtonNode = ASButtonNode()
 	private let prevMonthButton: ASButtonNode = ASButtonNode()
 	private let monthYearText: ASTextNode = ASTextNode()
+	
+	private let arrowButtonSIze: CGSize = CGSize(width: 10, height: 20)
 	var selectedDate: Date = Date()
 	
 	override init() {
@@ -61,7 +63,7 @@ class StatsDateHeader: ASDisplayNode {
 	}
 	
 	private func configureNextMonthButton() {
-		nextMonthButton.setAttributedTitle(NSAttributedString.bold(">", 14, .black), for: .normal)
+		nextMonthButton.setImage(UIImage(named: "arrow.png")?.scalePreservingAspectRatio(targetSize: arrowButtonSIze), for: .normal)
 		nextMonthButton.addTarget(self, action: #selector(nextMonthTapped), forControlEvents: .touchUpInside)
 	}
 	
@@ -71,7 +73,7 @@ class StatsDateHeader: ASDisplayNode {
 	}
 	
 	private func configurePrevMonthButton() {
-		prevMonthButton.setAttributedTitle(NSAttributedString.bold("<", 14, .black), for: .normal)
+		prevMonthButton.setImage(UIImage(named: "backArrow.png")?.scalePreservingAspectRatio(targetSize: arrowButtonSIze), for: .normal)
 		prevMonthButton.addTarget(self, action: #selector(prevMonthTapped), forControlEvents: .touchUpInside)
 	}
 	

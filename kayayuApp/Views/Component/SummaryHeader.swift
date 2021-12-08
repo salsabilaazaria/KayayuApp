@@ -109,7 +109,7 @@ class SummaryHeader: ASCellNode {
 	}
 	
 	private func configureIcon() {
-		icon.image = UIImage(named: "\(summary.rawValue).png")
+		icon.image = UIImage(named: "\(summary.rawValue)Icon.png")
 		icon.style.preferredSize = CGSize(width: 40, height: 40)
 	}
 	

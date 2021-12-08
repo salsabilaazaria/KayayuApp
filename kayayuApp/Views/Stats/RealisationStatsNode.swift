@@ -88,7 +88,7 @@ class RealisationStatsNode: ASDisplayNode {
 		
 		
 		let dataSet = PieChartDataSet(entries: entries, label: "label")
-		dataSet.colors = [.blue,.yellow,.green]
+		dataSet.colors = kayayuColor.pieCharArrColor
 		planPieChart.data = PieChartData(dataSet: dataSet)
 		
 	}
@@ -118,7 +118,7 @@ class RealisationStatsNode: ASDisplayNode {
 										  alignItems: .stretch,
 										  children: [ratioSummary])
 		
-		let inset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 0), child: mainStack)
+		let inset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0), child: mainStack)
 		return inset
 	}
 	
@@ -143,15 +143,15 @@ class RealisationStatsNode: ASDisplayNode {
 	}
 	
 	private func configureNeedsSummary() {
-		needsSummary = SummaryHeader(summary: .needs, ratio: 0.3, progressColor: .yellow, baseColor: .green, progressBarText: "RpXX.XXX.XXX Remaining")
+		needsSummary = SummaryHeader(summary: .needs, ratio: 0.3, progressColor: kayayuColor.needsLight, baseColor: kayayuColor.needsDark, progressBarText: "RpXX.XXX.XXX Remaining")
 	}
 	
 	private func configureWantsSummary() {
-		wantsSummary = SummaryHeader(summary: .wants, ratio: 0.3, progressColor: .yellow, baseColor: .green, progressBarText: "RpXX.XXX.XXX Remaining")
+		wantsSummary = SummaryHeader(summary: .wants, ratio: 0.3, progressColor: kayayuColor.wantsLight, baseColor: kayayuColor.wantsDark, progressBarText: "RpXX.XXX.XXX Remaining")
 	}
 	
 	private func configureSavingsSummary() {
-		savingsSummary = SummaryHeader(summary: .savings, ratio: 0.3, progressColor: .yellow, baseColor: .green, progressBarText: "RpXX.XXX.XXX Remaining")
+		savingsSummary = SummaryHeader(summary: .savings, ratio: 0.3, progressColor: kayayuColor.savingsLight, baseColor: kayayuColor.savingsDark, progressBarText: "RpXX.XXX.XXX Remaining")
 	}
 	
 	
