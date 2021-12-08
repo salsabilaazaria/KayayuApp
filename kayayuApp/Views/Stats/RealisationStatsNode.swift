@@ -50,13 +50,20 @@ class RealisationStatsNode: ASDisplayNode {
 											  alignItems: .center,
 											  children: [planTitle, planPieChartNode])
 		
+		let summaryTitle = ASStackLayoutSpec(direction: .vertical,
+											 spacing: 10,
+										  justifyContent: .start,
+										  alignItems: .start,
+										  children: [ratioTitle])
+		
+		let summaryTitleSpec = ASAbsoluteLayoutSpec(children: [summaryTitle])
+		let summaryTitleInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0), child: summaryTitleSpec)
 		
 		let mainStack = ASStackLayoutSpec(direction: .vertical,
 										  spacing: 10,
 										  justifyContent: .start,
 										  alignItems: .center,
-										  children: [statsDateHeader, pieChartStack, balanceSummary, scrollNode])
-		
+										  children: [statsDateHeader, pieChartStack, balanceSummary, summaryTitleInset, scrollNode])
 		
 		
 		return mainStack
@@ -128,7 +135,7 @@ class RealisationStatsNode: ASDisplayNode {
 												  spacing: 10,
 												  justifyContent: .start,
 												  alignItems: .start,
-												  children: [ratioTitle, needsSummary, wantsSummary, savingsSummary])
+												  children: [needsSummary, wantsSummary, savingsSummary])
 		
 		
 		return summaryRatioSpec

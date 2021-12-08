@@ -19,7 +19,7 @@ class StatsNode: ASDisplayNode {
 
 	override init() {
 		super.init()
-		let nodeSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - TabBar().style.preferredSize.height)
+		let nodeSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - TabBar().style.preferredSize.height - 200)
 		planNode.style.preferredSize = nodeSize
 		realisationNode.style.preferredSize = nodeSize
 		

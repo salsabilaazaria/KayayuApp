@@ -13,7 +13,6 @@ final class KayayuScreen {
 	let tabBarController: UITabBarController
 	var onNavigationEvent: ((NavigationEvent) -> Void)?
 	
-	
 	enum NavigationEvent {
 		case onCreateTabBar
 		case onOpenHomePage
@@ -33,7 +32,7 @@ final class KayayuScreen {
 	}
 	
 	func make() -> UIViewController {
-		let controller = makeLandingPageViewController()
+		let controller = makeStatsPageViewController()
 		return controller
 	}
 	
