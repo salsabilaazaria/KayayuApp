@@ -28,6 +28,9 @@
 		0A8D950D274D2B2400BB55FC /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8D950C274D2B2400BB55FC /* StatsViewController.swift */; };
 		0A8D9512274D320700BB55FC /* RealisationStatsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8D9511274D320600BB55FC /* RealisationStatsNode.swift */; };
 		0A8D9517274D333500BB55FC /* PlanStatsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8D9516274D333500BB55FC /* PlanStatsNode.swift */; };
+		0A91DDD62760D7300075BF93 /* InstallmentTableNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A91DDD52760D7300075BF93 /* InstallmentTableNode.swift */; };
+		0A91DDD72760D7300075BF93 /* InstallmentTableNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A91DDD52760D7300075BF93 /* InstallmentTableNode.swift */; };
+		0A91DDD82760D7300075BF93 /* InstallmentTableNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A91DDD52760D7300075BF93 /* InstallmentTableNode.swift */; };
 		0AAA2674273A65900063D876 /* BigButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAA2673273A65900063D876 /* BigButton.swift */; };
 		0AAA2685273AAA230063D876 /* RegisterNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAA2684273AAA230063D876 /* RegisterNode.swift */; };
 		0AAA268A273AB0700063D876 /* SummaryHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAA2689273AB0700063D876 /* SummaryHeader.swift */; };
@@ -46,7 +49,6 @@
 		0ADCBA88275E5F2500F15F5E /* SubscriptionTableNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADCBA87275E5F2500F15F5E /* SubscriptionTableNode.swift */; };
 		0ADCBA90275E5F3100F15F5E /* SubscriptionCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADCBA8F275E5F3100F15F5E /* SubscriptionCellNode.swift */; };
 		0ADCBA95275E793A00F15F5E /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADCBA94275E793A00F15F5E /* SubscriptionViewController.swift */; };
-		0ADCBA9B275E7D9A00F15F5E /* InstallmentTableNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADCBA9A275E7D9A00F15F5E /* InstallmentTableNode.swift */; };
 		0ADCBAA3275E7DB900F15F5E /* InstallmentCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADCBAA2275E7DB900F15F5E /* InstallmentCellNode.swift */; };
 		0ADCBAA8275E7F4A00F15F5E /* InstallmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADCBAA7275E7F4A00F15F5E /* InstallmentViewController.swift */; };
 		6916C7B701A4377071A725EF /* Pods_kayayuApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94871052B2ECA01C85FD32F4 /* Pods_kayayuApp.framework */; };
@@ -105,6 +107,7 @@
 		0A8D950C274D2B2400BB55FC /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		0A8D9511274D320600BB55FC /* RealisationStatsNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealisationStatsNode.swift; sourceTree = "<group>"; };
 		0A8D9516274D333500BB55FC /* PlanStatsNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanStatsNode.swift; sourceTree = "<group>"; };
+		0A91DDD52760D7300075BF93 /* InstallmentTableNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstallmentTableNode.swift; sourceTree = "<group>"; };
 		0AAA2673273A65900063D876 /* BigButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigButton.swift; sourceTree = "<group>"; };
 		0AAA2684273AAA230063D876 /* RegisterNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterNode.swift; sourceTree = "<group>"; };
 		0AAA2689273AB0700063D876 /* SummaryHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryHeader.swift; sourceTree = "<group>"; };
@@ -129,7 +132,6 @@
 		0ADCBA87275E5F2500F15F5E /* SubscriptionTableNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionTableNode.swift; sourceTree = "<group>"; };
 		0ADCBA8F275E5F3100F15F5E /* SubscriptionCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCellNode.swift; sourceTree = "<group>"; };
 		0ADCBA94275E793A00F15F5E /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
-		0ADCBA9A275E7D9A00F15F5E /* InstallmentTableNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InstallmentTableNode.swift; path = ../../../../../../../InstallmentTableNode.swift; sourceTree = "<group>"; };
 		0ADCBAA2275E7DB900F15F5E /* InstallmentCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallmentCellNode.swift; sourceTree = "<group>"; };
 		0ADCBAA7275E7F4A00F15F5E /* InstallmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallmentViewController.swift; sourceTree = "<group>"; };
 		1A51DCA78B1EA1188AFB6B09 /* Pods-kayayuApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuApp.debug.xcconfig"; path = "Target Support Files/Pods-kayayuApp/Pods-kayayuApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -357,7 +359,7 @@
 		0ADCBA99275E7D8700F15F5E /* Installment */ = {
 			isa = PBXGroup;
 			children = (
-				0ADCBA9A275E7D9A00F15F5E /* InstallmentTableNode.swift */,
+				0A91DDD52760D7300075BF93 /* InstallmentTableNode.swift */,
 				0ADCBAA2275E7DB900F15F5E /* InstallmentCellNode.swift */,
 			);
 			path = Installment;
@@ -686,9 +688,9 @@
 			files = (
 				AFC65DA027476F000050769D /* KayayuCoordinator.swift in Sources */,
 				0A8D9512274D320700BB55FC /* RealisationStatsNode.swift in Sources */,
-				0ADCBA9B275E7D9A00F15F5E /* InstallmentTableNode.swift in Sources */,
 				AF2C1894274656CE00482D6E /* HomeViewController.swift in Sources */,
 				AF2C18852746477E00482D6E /* TransactionDateCellNode.swift in Sources */,
+				0A91DDD62760D7300075BF93 /* InstallmentTableNode.swift in Sources */,
 				0ABC637F273934020041087F /* ColorHelper.swift in Sources */,
 				0ABC639627393B710041087F /* LoginNode.swift in Sources */,
 				0AAA2674273A65900063D876 /* BigButton.swift in Sources */,
@@ -741,6 +743,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A2D89A9275F424B00F1F9C7 /* AuthenticationViewModel.swift in Sources */,
+				0A91DDD72760D7300075BF93 /* InstallmentTableNode.swift in Sources */,
 				0A2D89F9275F42F600F1F9C7 /* KayayuModel.swift in Sources */,
 				0A2D89AC275F424B00F1F9C7 /* HomeViewModel.swift in Sources */,
 				0ABC6333273929880041087F /* kayayuAppTests.swift in Sources */,
@@ -752,6 +755,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A2D89AA275F424B00F1F9C7 /* AuthenticationViewModel.swift in Sources */,
+				0A91DDD82760D7300075BF93 /* InstallmentTableNode.swift in Sources */,
 				0A2D89FA275F42F600F1F9C7 /* KayayuModel.swift in Sources */,
 				0A2D89AD275F424B00F1F9C7 /* HomeViewModel.swift in Sources */,
 				0ABC633E273929880041087F /* kayayuAppUITests.swift in Sources */,
