@@ -29,13 +29,13 @@ class HomeViewModel {
 		self.configureObserver()
 	}
 	
-	func configureObserver() {
+	private func configureObserver() {
 		self.transactionsData.asObservable().subscribe(onNext: { _ in
 			self.reloadUI?()
 		})
 	}
 	
-	func getUserId() -> String{
+	private func getUserId() -> String{
 		guard let userId = Auth.auth().currentUser?.uid else { return "" }
 		print("KAYAYU USER ID \(userId)")
 		return userId
@@ -87,6 +87,19 @@ class HomeViewModel {
 				self.transactionsData.accept(docummentArray)
 			}
 		}
+	}
+	
+	func deleteTransactionData(transactionDelete: Transactions) {
+		guard var tempTransactionData = self.transactionsData.value,
+			  let indexDelete = tempTransactionData.firstIndex(where: { data in
+				return data.transaction_id == transactionDelete.transaction_id
+			  }) else {
+			return
+		}
+		
+		tempTransactionData.remove(at: indexDelete)
+		
+		self.transactionsData.accept(tempTransactionData)
 	}
 	
 	func calculateIncomePerDay(date: Date) -> Float{

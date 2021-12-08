@@ -30,7 +30,7 @@ class TransactionTableNode: ASTableNode {
 }
 
 extension TransactionTableNode: ASTableDataSource, ASTableDelegate {
-	
+	// table view need to change by sections after array of data is grouped by day
 	func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
 		guard let count = viewModel.transactionsData.value?.count else {
 			return 1
@@ -79,9 +79,21 @@ extension TransactionTableNode: ASTableDataSource, ASTableDelegate {
 			return cellNode
 		}
 		
-		
-		
-		
+	}
+	
+	func tableView(tableView: UITableView!, canEditRowAtIndexPath indexPath: NSIndexPath!) -> Bool {
+		return true
+	}
+
+	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+		if editingStyle == .delete {
+			guard let tempTransactionsData = viewModel.transactionsData.value else {
+				return
+			}
+//			viewModel.deleteTransactionData(transactionDelete: tempTransactionsData[indexPath.row])
+//
+//			tableView.deleteRows(at: [indexPath], with: .fade)
+		}
 	}
 	
 }
