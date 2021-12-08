@@ -64,7 +64,7 @@ class RealisationStatsNode: ASDisplayNode {
 	}
 	
 	private func configurePlanTitle() {
-		planTitle.attributedText = NSAttributedString.bold("PLAN", 16, .black)
+		planTitle.attributedText = NSAttributedString.bold("REALISATION", 16, .black)
 	}
 	
 	private func configurePlanPieChartNode() {
@@ -101,7 +101,7 @@ class RealisationStatsNode: ASDisplayNode {
 		scrollNode.style.flexGrow = 1.0
 		scrollNode.style.flexShrink = 1.0
 		scrollNode.view.bounces = true
-		scrollNode.view.showsVerticalScrollIndicator = true
+		scrollNode.view.showsVerticalScrollIndicator = false
 		scrollNode.view.isScrollEnabled = true
 		scrollNode.layoutSpecBlock = { [weak self] _, constrainedSize in
 			print("scrollnode")
@@ -114,11 +114,11 @@ class RealisationStatsNode: ASDisplayNode {
 		let ratioSummary = createRatioSummarySpec()
 		let mainStack = ASStackLayoutSpec(direction: .vertical,
 										  spacing: 0,
-										  justifyContent: .start,
+										  justifyContent: .center,
 										  alignItems: .stretch,
 										  children: [ratioSummary])
 		
-		let inset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16), child: mainStack)
+		let inset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 0), child: mainStack)
 		return inset
 	}
 	
