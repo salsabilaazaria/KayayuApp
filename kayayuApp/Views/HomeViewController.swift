@@ -34,7 +34,7 @@ class HomeViewController:ASDKViewController<ASDisplayNode> {
 		}
 	}
 	
-	// MARK: - Private methods -
+
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		self.navigationController?.navigationBar.prefersLargeTitles = true
@@ -47,11 +47,11 @@ class HomeViewController:ASDKViewController<ASDisplayNode> {
 		
 		self.navigationController?.navigationBar.backgroundColor = .white
 		self.navigationController?.navigationItem.largeTitleDisplayMode = .always
+		
+		let customTabBarItem:UITabBarItem = UITabBarItem(title: "Home", image: UIImage(named: "homeUnselected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize), selectedImage: UIImage(named: "homeSelected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize))
+		self.tabBarItem = customTabBarItem
 	}
 	
-//	override func viewWillDisappear(_ animated: Bool) {
-//		super.viewWillAppear(animated)
-//	}
 
 
 }

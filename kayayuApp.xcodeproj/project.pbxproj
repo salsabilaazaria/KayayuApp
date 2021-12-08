@@ -61,6 +61,7 @@
 		AF2C18852746477E00482D6E /* TransactionDateCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2C18842746477E00482D6E /* TransactionDateCellNode.swift */; };
 		AF2C188B27464E6A00482D6E /* HomeTableTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2C188A27464E6A00482D6E /* HomeTableTransaction.swift */; };
 		AF2C1894274656CE00482D6E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2C1893274656CE00482D6E /* HomeViewController.swift */; };
+		AF52E8EF2761011800D5DCE7 /* UIImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF52E8EE2761011800D5DCE7 /* UIImageHelper.swift */; };
 		AF7591D5274E4381003B8708 /* RatioRealisationDetailNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7591D4274E4381003B8708 /* RatioRealisationDetailNode.swift */; };
 		AF7591DA274E43DE003B8708 /* StatsDateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7591D9274E43DE003B8708 /* StatsDateHeader.swift */; };
 		AFA9CDD5274F759A00E520A3 /* AddIncomeRecordNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA9CDD4274F759A00E520A3 /* AddIncomeRecordNode.swift */; };
@@ -147,6 +148,7 @@
 		AF2C18842746477E00482D6E /* TransactionDateCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDateCellNode.swift; sourceTree = "<group>"; };
 		AF2C188A27464E6A00482D6E /* HomeTableTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableTransaction.swift; sourceTree = "<group>"; };
 		AF2C1893274656CE00482D6E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = kayayuApp/Views/HomeViewController.swift; sourceTree = SOURCE_ROOT; };
+		AF52E8EE2761011800D5DCE7 /* UIImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageHelper.swift; sourceTree = "<group>"; };
 		AF7591D4274E4381003B8708 /* RatioRealisationDetailNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioRealisationDetailNode.swift; sourceTree = "<group>"; };
 		AF7591D9274E43DE003B8708 /* StatsDateHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsDateHeader.swift; sourceTree = "<group>"; };
 		AFA9CDD4274F759A00E520A3 /* AddIncomeRecordNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIncomeRecordNode.swift; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 				0ABC637E273934020041087F /* ColorHelper.swift */,
 				AF2C1866274607AB00482D6E /* CalendarHelper.swift */,
 				AFBA5F58274DF8F6002455A7 /* KayayuHelper.swift */,
+				AF52E8EE2761011800D5DCE7 /* UIImageHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -717,6 +720,7 @@
 				0A2D89F8275F42F600F1F9C7 /* KayayuModel.swift in Sources */,
 				AF020193274252C60033D067 /* TransactionTableNode.swift in Sources */,
 				0A337AB9275E503900B04508 /* ProfileNode.swift in Sources */,
+				AF52E8EF2761011800D5DCE7 /* UIImageHelper.swift in Sources */,
 				0A8D94E7274D26F300BB55FC /* StatsNode.swift in Sources */,
 				0ABC631B273929860041087F /* SceneDelegate.swift in Sources */,
 				0ADCBAA3275E7DB900F15F5E /* InstallmentCellNode.swift in Sources */,
