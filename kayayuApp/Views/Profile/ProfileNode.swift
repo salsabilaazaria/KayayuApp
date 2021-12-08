@@ -98,7 +98,7 @@ class ProfileNode: ASDisplayNode {
 	}
 	
 	private func configureSubscriptionNode() {
-		subscriptionNode = ProfileCellNode(icon: "", title: "Subscription")
+		subscriptionNode = ProfileCellNode(icon: "subscription.png", title: "Subscription")
 		subscriptionNode.buttonNode.addTarget(self, action: #selector(subscriptionTapped), forControlEvents: .touchUpInside)
 	}
 	
@@ -108,7 +108,7 @@ class ProfileNode: ASDisplayNode {
 	}
 	
 	private func configureInstallmentNode() {
-		installmentNode = ProfileCellNode(icon: "", title: "Installment")
+		installmentNode = ProfileCellNode(icon: "installment.png", title: "Installment")
 		installmentNode.buttonNode.addTarget(self, action: #selector(installmentTapped), forControlEvents: .touchUpInside)
 	}
 	
@@ -117,11 +117,11 @@ class ProfileNode: ASDisplayNode {
 	}
 	
 	private func configureEditProfileNode() {
-		editProfileNode = ProfileCellNode(icon: "", title: "Edit Profile")
+		editProfileNode = ProfileCellNode(icon: "editProfile.png", title: "Edit Profile")
 	}
 	
 	private func configureLogoutNode() {
-		logoutNode = ProfileCellNode(icon: "", title: "Logout")
+		logoutNode = ProfileCellNode(icon: "logout.png", title: "Logout")
 		logoutNode.buttonNode.addTarget(self, action: #selector(installmentTapped), forControlEvents: .touchUpInside)
 	}
 	

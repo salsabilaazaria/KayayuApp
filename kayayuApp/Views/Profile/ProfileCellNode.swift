@@ -52,7 +52,6 @@ class ProfileCellNode: ASDisplayNode {
 
 	private func configureIcon() {
 		icon.image = UIImage(named: iconImageName)
-		icon.backgroundColor = .cyan
 		icon.style.preferredSize = CGSize(width: 30, height: 30)
 	}
 	
@@ -61,8 +60,7 @@ class ProfileCellNode: ASDisplayNode {
 	}
 	
 	private func configureArrow() {
-		arrow.image = UIImage(named: "backButton")
-		arrow.backgroundColor = .cyan
+		arrow.image = UIImage(named: "arrow.png")
 		arrow.style.preferredSize = CGSize(width: 10, height: 20)
 	}
 	

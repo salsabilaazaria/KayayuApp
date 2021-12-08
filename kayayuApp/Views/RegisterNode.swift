@@ -217,7 +217,7 @@ class RegisterNode: ASDisplayNode {
 	}
 	
 	private func configureSignUpButton() {
-		signUpButton = BigButton(buttonText: "SIGN UP", buttonColor: kayayuColor.yellow, borderColor: kayayuColor.yellow)
+		signUpButton = BigButton(buttonText: "REGISTER", buttonColor: kayayuColor.yellow, borderColor: kayayuColor.yellow)
 		//NEED TO CONFIRM: setelah sign up mau ke home apa ke login?
 		signUpButton.addTarget(self, action: #selector(signUpButtonTapped), forControlEvents: .touchUpInside)
 	}
