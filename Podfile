@@ -16,6 +16,7 @@ target 'kayayuApp' do
 	pod 'Firebase/Core'
 	pod 'Firebase/Firestore'
 	pod 'FirebaseFirestoreSwift', '> 7.0-beta'
+	pod 'Firebase/Database'
   target 'kayayuAppTests' do
     inherit! :search_paths
     # Pods for testing

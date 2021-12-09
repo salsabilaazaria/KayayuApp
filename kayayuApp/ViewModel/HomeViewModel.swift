@@ -22,7 +22,7 @@ class HomeViewModel {
 	var transactionsData: BehaviorRelay<[Transactions]?> = BehaviorRelay<[Transactions]?>(value: nil)
 	
 	var userBalanceTotal: Float = 0
-	
+    
 	init() {
 		self.getUserData()
 		self.getTransactionData()
@@ -62,7 +62,7 @@ class HomeViewModel {
 	}
 	
 	func getTransactionData () {
-		database.collection("transactions").whereField("user_id", isEqualTo: getUserId()).getDocuments() { (documentSnapshot, errorMsg) in
+        database.collection("transactions").whereField("user_id", isEqualTo: getUserId()).order(by: "transaction_date", descending: true).getDocuments() { (documentSnapshot, errorMsg) in
 			if let errorMsg = errorMsg {
 				print("Error get Transaction Data \(errorMsg)")
 			}

@@ -32,7 +32,7 @@ final class KayayuScreen {
 	}
 	
 	func make() -> UIViewController {
-		let controller = makeStatsPageViewController()
+		let controller = makeLandingPageViewController()
 		return controller
 	}
 	
