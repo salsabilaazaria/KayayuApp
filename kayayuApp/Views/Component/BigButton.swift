@@ -25,7 +25,7 @@ class BigButton: ASButtonNode {
 	private func configureBigButton(){
 		setAttributedTitle(NSAttributedString.semibold(buttonText, 14, .black), for: .normal)
 		
-		style.preferredSize = CGSize(width: UIScreen.main.bounds.width - 32, height: kayayuSize.kayayuBarHeight)
+		style.preferredSize = CGSize(width: UIScreen.main.bounds.width - 32, height: kayayuSize.kayayuBigButton)
 		backgroundColor = background
 		borderColor = border.cgColor
 		borderWidth = 1.0

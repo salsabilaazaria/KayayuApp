@@ -81,7 +81,7 @@ class PlanStatsNode: ASDisplayNode {
 		
 		
 		let dataSet = PieChartDataSet(entries: entries, label: "label")
-		dataSet.colors = [.blue,.yellow,.green]
+		dataSet.colors = kayayuColor.pieCharArrColor
 		planPieChart.data = PieChartData(dataSet: dataSet)
 		
 	}

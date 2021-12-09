@@ -22,6 +22,10 @@ class TabBar: ASDisplayNode {
 	private let profileIcon: ASImageNode = ASImageNode()
 	private let profileText: ASTextNode = ASTextNode()
 	
+	private let iconSize: CGSize = CGSize(width: 30, height: 30)
+	private let itemSize: CGSize = CGSize(width: UIScreen.main.bounds.width/3, height: 80)
+	private let titleSpacing: CGFloat = 6
+	
 	
 	override init() {
 		super.init()
@@ -39,44 +43,47 @@ class TabBar: ASDisplayNode {
 		let profile = configureProfileNavbar()
 		
 		let mainSpec = ASStackLayoutSpec(direction: .horizontal,
-										  spacing: 0,
+										  spacing: 8,
 										  justifyContent: .center,
 										  alignItems: .center,
 										  children: [home,stats,profile])
+		
 		return mainSpec
 	}
 	
 
 	private func configureHomeNavbar() -> ASLayoutSpec {
-		homeIcon.style.preferredSize = CGSize(width: 40, height: 40)
+		homeIcon.style.preferredSize = iconSize
 		homeIcon.backgroundColor = .red
 //		homeIcon.image = UIImage(named: "")
 		
-		homeText.attributedText = NSAttributedString.normal("", 10, .darkGray)
+		homeText.attributedText = NSAttributedString.normal("Home", 10, .darkGray)
+		homeButton.backgroundColor = .clear
 		
 		let homeDisplay = ASStackLayoutSpec(direction: .vertical,
-											spacing: 0,
+											spacing: titleSpacing,
 											justifyContent: .center,
 											alignItems: .center,
 											children: [homeIcon, homeText])
-		
+		homeDisplay.style.preferredSize = itemSize
 		let homeButtonOverlay = ASOverlayLayoutSpec(child: homeDisplay, overlay: homeButton)
 		
 		return homeButtonOverlay
 	}
 	
 	private func configureStatsNavbar() -> ASLayoutSpec {
-		statsIcon.style.preferredSize = CGSize(width: 40, height: 40)
+		statsIcon.style.preferredSize = iconSize
 		statsIcon.backgroundColor = .red
 //		statsIcon.image = UIImage(named: "")
 		
-		statsText.attributedText = NSAttributedString.normal("", 10, .darkGray)
-		
+		statsText.attributedText = NSAttributedString.normal("Stats", 10, .darkGray)
+		statsButton.backgroundColor = .clear
 		let statsDisplay = ASStackLayoutSpec(direction: .vertical,
-											spacing: 0,
+											spacing: titleSpacing,
 											justifyContent: .center,
 											alignItems: .center,
 											children: [statsIcon, statsText])
+		statsDisplay.style.preferredSize = itemSize
 		
 		let statsButtonOverlay = ASOverlayLayoutSpec(child: statsDisplay, overlay: statsButton)
 		
@@ -84,20 +91,21 @@ class TabBar: ASDisplayNode {
 	}
 	
 	private func configureProfileNavbar() -> ASLayoutSpec {
-		profileIcon.style.preferredSize = CGSize(width: 40, height: 40)
+		profileIcon.style.preferredSize = iconSize
 		profileIcon.backgroundColor = .red
 //		profileIcon.image = UIImage(named: "")
 		
-		profileText.attributedText = NSAttributedString.normal("", 10, .darkGray)
-		
+		profileText.attributedText = NSAttributedString.normal("Profile", 10, .darkGray)
+		profileButton.backgroundColor = .clear
 		let profileDisplay = ASStackLayoutSpec(direction: .vertical,
-											spacing: 0,
+											spacing: titleSpacing,
 											justifyContent: .center,
 											alignItems: .center,
 											children: [profileIcon, profileText])
+		profileDisplay.style.preferredSize = itemSize
 		
 		let profileButtonOverlay = ASOverlayLayoutSpec(child: profileDisplay, overlay: profileButton)
-		
+	
 		return profileButtonOverlay
 	}
 	

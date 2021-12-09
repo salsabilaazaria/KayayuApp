@@ -109,7 +109,7 @@ class SummaryHeader: ASCellNode {
 	}
 	
 	private func configureIcon() {
-		icon.image = UIImage(named: "\(summary.rawValue).png")
+		icon.image = UIImage(named: "\(summary.rawValue)Icon.png")
 		icon.style.preferredSize = CGSize(width: 40, height: 40)
 	}
 	
@@ -118,8 +118,7 @@ class SummaryHeader: ASCellNode {
 	}
 	
 	private func configureSubtitle() {
-		print("configure subtitle with \(subtitleText)")
-		subtitle.attributedText = NSAttributedString.normal(subtitleText, 12, .black)
+		subtitle.attributedText = NSAttributedString.normal(subtitleText, 14, .black)
 	}
 	
 	private func configureProgressBarText(text: String) {

@@ -10,83 +10,162 @@ import UIKit
 
 final class KayayuScreen {
 	private var navigationController: UINavigationController?
+	let tabBarController: UITabBarController
 	var onNavigationEvent: ((NavigationEvent) -> Void)?
 	
 	enum NavigationEvent {
+		case onCreateTabBar
+		case onOpenHomePage
 		case onOpenLandingPage
-		case onOpenHomePage(authenticationViewModel: AuthenticationViewModel)
-		case onOpenLoginPage(authenticationViewModel: AuthenticationViewModel)
-		case onOpenRegisterPage(authenticationViewModel: AuthenticationViewModel)
+		case onOpenLoginPage
+		case onOpenRegisterPage
 		case onOpenStatsPage
-//		case onOpenProfilePage
-//		case onOpenRecordIncomePage
-//		case onOpenRecordExpensePage
-		
+		case onOpenAddRecordPage
+		case onOpenProfilePage
+		case onOpenSubscriptionPage
+		case onOpenInstallmentPage
 	}
 	
-	public init(navigationController: UINavigationController) {
+	public init(navigationController: UINavigationController, tabBarController: UITabBarController) {
 		self.navigationController = navigationController
+		self.tabBarController = tabBarController
 	}
 	
 	func make() -> UIViewController {
-		let controller = makeLandingPageViewController()
+		let controller = makeStatsPageViewController()
 		return controller
+	}
+	
+	func makeTabBarViewController(homeViewModel: HomeViewModel) -> UITabBarController {
+		tabBarController.edgesForExtendedLayout = []
+
+		let home = makeHomePageViewController(viewModel: homeViewModel)
+		home.tabBarItem.image = UIImage(named: "homeUnselected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize)
+		home.tabBarItem.selectedImage = UIImage(named: "homeSelected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize)
+		let stats = makeStatsPageViewController()
+		stats.tabBarItem.image = UIImage(named: "statsUnselected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize)
+		stats.tabBarItem.selectedImage = UIImage(named: "statsSelected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize)
+		let profile = makeProfileViewController()
+		profile.tabBarItem.image = UIImage(named: "accUnselected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize)
+		profile.tabBarItem.selectedImage = UIImage(named: "accSelected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize)
+		
+		tabBarController.tabBar.tintColor = kayayuColor.yellow
+		tabBarController.setViewControllers([home,stats,profile], animated: true)
+		tabBarController.navigationItem.hidesBackButton = true
+		tabBarController.navigationItem.backButtonDisplayMode = .minimal
+		
+		return tabBarController
 	}
 	
 	func makeLandingPageViewController() -> UIViewController {
 		let controller = LandingViewController()
-		let viewModel = AuthenticationViewModel()
 		controller.onOpenLoginPage = { [weak self] in
 			guard let self = self else {
 				return
 			}
-			print("screen on open login")
-			self.onNavigationEvent?(.onOpenLoginPage(authenticationViewModel: viewModel))
+			self.onNavigationEvent?(.onOpenLoginPage)
 		}
 		controller.onOpenRegisterPage = { [weak self] in
 			guard let self = self else {
 				return
 			}
 			
-			self.onNavigationEvent?(.onOpenRegisterPage(authenticationViewModel: viewModel))
+			self.onNavigationEvent?(.onOpenRegisterPage)
 		}
 		return controller
 	}
 	
-	func makeLoginPageViewController(authenticationViewModel: AuthenticationViewModel) -> UIViewController {
-		let controller = LoginViewController(authenticationViewModel: authenticationViewModel)
+	func makeLoginPageViewController(viewModel: AuthenticationViewModel) -> UIViewController {
+		let controller = LoginViewController(authenticationViewModel: viewModel)
 		controller.onOpenHomePage = { [weak self] in
 			guard let self = self else {
 				return
 			}
 			
-			self.onNavigationEvent?(.onOpenHomePage(authenticationViewModel: authenticationViewModel))
+			self.onNavigationEvent?(.onCreateTabBar)
+		}
+		controller.onOpenRegisterPage = { [weak self] in
+			guard let self = self else {
+				return
+			}
+			
+			self.onNavigationEvent?(.onOpenRegisterPage)
+			
 		}
 		return controller
 	}
 	
-	func makeRegisterPageViewController(authenticationViewModel: AuthenticationViewModel) -> UIViewController {
-		let controller = RegisterViewController(authenticationViewModel: authenticationViewModel)
+	func makeRegisterPageViewController(viewModel: AuthenticationViewModel) -> UIViewController {
+		let controller = RegisterViewController(authenticationViewModel: viewModel)
 		controller.onOpenHomePage = { [weak self] in
 			guard let self = self else {
 				return
 			}
 			
-			self.onNavigationEvent?(.onOpenHomePage(authenticationViewModel: authenticationViewModel))
+			self.onNavigationEvent?(.onCreateTabBar)
+		}
+		controller.onOpenLoginPage = { [weak self] in
+				guard let self = self else {
+					return
+				}
+				
+				self.onNavigationEvent?(.onOpenLoginPage)
 		}
 		return controller
 	}
 	
-	func makeHomePageViewController(authenticationViewModel: AuthenticationViewModel) -> UIViewController {
-		let controller = HomeViewController(authenticationViewModel: authenticationViewModel)
+	func makeHomePageViewController(viewModel: HomeViewModel) -> UIViewController {
+		let controller = HomeViewController(viewModel: viewModel)
+		
+		controller.title = "Hello"
+		controller.onOpenAddRecordPage = { [weak self] in
+			guard let self = self else {
+				return
+			}
+			self.onNavigationEvent?(.onOpenAddRecordPage)
+		}
 		return controller
 	}
 	
 	func makeStatsPageViewController() -> UIViewController {
 		let controller = StatsViewController()
+		controller.title = "Stats"
 		return controller
 	}
-
-
+	
+	func makeProfileViewController() -> UIViewController {
+		let controller = ProfileViewController()
+		controller.title = "Profile"
+		controller.onOpenSubscriptionPage = { [weak self] in
+			guard let self = self else {
+				return
+			}
+			self.onNavigationEvent?(.onOpenSubscriptionPage)
+		}
+		
+		controller.onOpenInstallmentPage = { [weak self] in
+			guard let self = self else {
+				return
+			}
+			self.onNavigationEvent?(.onOpenInstallmentPage)
+		}
+		return controller
+	}
+	
+	func makeAddRecordPageViewController() -> UIViewController {
+		let controller = AddRecordViewController()
+		return controller
+	}
+	
+	func makeSubscriptionPageViewController() -> UIViewController {
+		let controller = SubscriptionViewController()
+		return controller
+	}
+	
+	func makeInstallmentPageViewController() -> UIViewController {
+		let controller = InstallmentViewController()
+		return controller
+	}
+	
 }
 

@@ -13,8 +13,9 @@ class ViewController: ASDKViewController<ASDisplayNode> {
 	override init() {
 //		let mainNode = LandingNode()
 //		let mainNode = SummaryHeader()
-		let mainNode = HomeNode()
-		super.init(node: mainNode)
+//		let mainNode = HomeNode()
+//		super.init(node: mainNode)
+        super.init()
 	}
 	
 	required init?(coder: NSCoder) {

@@ -40,11 +40,20 @@ class RegisterViewController: ASDKViewController<ASDisplayNode> {
 	
 	// MARK: - Private methods -
 	
-
+	override func viewWillAppear(_ animated: Bool) {
+		self.navigationController?.navigationBar.isHidden = true
+		self.navigationController?.navigationItem.hidesBackButton = true
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		edgesForExtendedLayout = []
 		self.navigationController?.navigationBar.isHidden = true
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		self.navigationController?.navigationBar.isHidden = false
+		self.navigationController?.navigationItem.hidesBackButton = true
 	}
 
 }

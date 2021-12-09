@@ -50,13 +50,20 @@ class RealisationStatsNode: ASDisplayNode {
 											  alignItems: .center,
 											  children: [planTitle, planPieChartNode])
 		
+		let summaryTitle = ASStackLayoutSpec(direction: .vertical,
+											 spacing: 10,
+										  justifyContent: .start,
+										  alignItems: .start,
+										  children: [ratioTitle])
+		
+		let summaryTitleSpec = ASAbsoluteLayoutSpec(children: [summaryTitle])
+		let summaryTitleInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0), child: summaryTitleSpec)
 		
 		let mainStack = ASStackLayoutSpec(direction: .vertical,
 										  spacing: 10,
 										  justifyContent: .start,
 										  alignItems: .center,
-										  children: [statsDateHeader, pieChartStack, balanceSummary, scrollNode])
-		
+										  children: [statsDateHeader, pieChartStack, balanceSummary, summaryTitleInset, scrollNode])
 		
 		
 		return mainStack
@@ -64,7 +71,7 @@ class RealisationStatsNode: ASDisplayNode {
 	}
 	
 	private func configurePlanTitle() {
-		planTitle.attributedText = NSAttributedString.bold("PLAN", 16, .black)
+		planTitle.attributedText = NSAttributedString.bold("REALISATION", 16, .black)
 	}
 	
 	private func configurePlanPieChartNode() {
@@ -88,7 +95,7 @@ class RealisationStatsNode: ASDisplayNode {
 		
 		
 		let dataSet = PieChartDataSet(entries: entries, label: "label")
-		dataSet.colors = [.blue,.yellow,.green]
+		dataSet.colors = kayayuColor.pieCharArrColor
 		planPieChart.data = PieChartData(dataSet: dataSet)
 		
 	}
@@ -101,7 +108,7 @@ class RealisationStatsNode: ASDisplayNode {
 		scrollNode.style.flexGrow = 1.0
 		scrollNode.style.flexShrink = 1.0
 		scrollNode.view.bounces = true
-		scrollNode.view.showsVerticalScrollIndicator = true
+		scrollNode.view.showsVerticalScrollIndicator = false
 		scrollNode.view.isScrollEnabled = true
 		scrollNode.layoutSpecBlock = { [weak self] _, constrainedSize in
 			print("scrollnode")
@@ -114,11 +121,11 @@ class RealisationStatsNode: ASDisplayNode {
 		let ratioSummary = createRatioSummarySpec()
 		let mainStack = ASStackLayoutSpec(direction: .vertical,
 										  spacing: 0,
-										  justifyContent: .start,
+										  justifyContent: .center,
 										  alignItems: .stretch,
 										  children: [ratioSummary])
 		
-		let inset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16), child: mainStack)
+		let inset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0), child: mainStack)
 		return inset
 	}
 	
@@ -128,7 +135,7 @@ class RealisationStatsNode: ASDisplayNode {
 												  spacing: 10,
 												  justifyContent: .start,
 												  alignItems: .start,
-												  children: [ratioTitle, needsSummary, wantsSummary, savingsSummary])
+												  children: [needsSummary, wantsSummary, savingsSummary])
 		
 		
 		return summaryRatioSpec
@@ -143,15 +150,15 @@ class RealisationStatsNode: ASDisplayNode {
 	}
 	
 	private func configureNeedsSummary() {
-		needsSummary = SummaryHeader(summary: .needs, ratio: 0.3, progressColor: .yellow, baseColor: .green, progressBarText: "RpXX.XXX.XXX Remaining")
+		needsSummary = SummaryHeader(summary: .needs, ratio: 0.3, progressColor: kayayuColor.needsLight, baseColor: kayayuColor.needsDark, progressBarText: "RpXX.XXX.XXX Remaining")
 	}
 	
 	private func configureWantsSummary() {
-		wantsSummary = SummaryHeader(summary: .wants, ratio: 0.3, progressColor: .yellow, baseColor: .green, progressBarText: "RpXX.XXX.XXX Remaining")
+		wantsSummary = SummaryHeader(summary: .wants, ratio: 0.3, progressColor: kayayuColor.wantsLight, baseColor: kayayuColor.wantsDark, progressBarText: "RpXX.XXX.XXX Remaining")
 	}
 	
 	private func configureSavingsSummary() {
-		savingsSummary = SummaryHeader(summary: .savings, ratio: 0.3, progressColor: .yellow, baseColor: .green, progressBarText: "RpXX.XXX.XXX Remaining")
+		savingsSummary = SummaryHeader(summary: .savings, ratio: 0.3, progressColor: kayayuColor.savingsLight, baseColor: kayayuColor.savingsDark, progressBarText: "RpXX.XXX.XXX Remaining")
 	}
 	
 	

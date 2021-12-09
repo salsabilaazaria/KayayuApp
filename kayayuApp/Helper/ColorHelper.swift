@@ -11,6 +11,20 @@ import UIKit
 struct kayayuColor {
 	static let yellow = ColorHelper.hexToColor(hex: "#FFCC00")
 	static let softGrey = ColorHelper.hexToColor(hex: "#F2F2F2")
+	
+	static let needsLight = ColorHelper.hexToColor(hex: "#bedaed")
+	static let needsDark = ColorHelper.hexToColor(hex: "#4081ad")
+	
+	
+	static let wantsLight = ColorHelper.hexToColor(hex: "#ffa8f0")
+	static let wantsDark = ColorHelper.hexToColor(hex: "#a63f94")
+	
+	
+	static let savingsLight = ColorHelper.hexToColor(hex: "#f6f781")
+	static let savingsDark = ColorHelper.hexToColor(hex: "#8a8a2f")
+	
+	static let pieCharArrColor = [kayayuColor.needsLight,kayayuColor.wantsLight,kayayuColor.savingsLight]
+
 }
 
 class ColorHelper {

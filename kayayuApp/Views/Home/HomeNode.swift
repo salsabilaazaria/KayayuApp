@@ -9,12 +9,20 @@ import Foundation
 import AsyncDisplayKit
 
 class HomeNode: ASDisplayNode {
-	private let homeNode: HomeComponentNode = HomeComponentNode()
+	var onOpenAddRecordPage: (() -> Void)?
+	var onOpenStatsPage: (() -> Void)?
+	var onOpenProfilePage: (() -> Void)?
+	
+	private let homeNode: HomeComponentNode
 	private let navBar: TabBar = TabBar()
 	private let addRecordBtn: ASButtonNode = ASButtonNode()
-	
-	override init() {
+    private let viewModel: HomeViewModel
+    
+    init(viewModel: HomeViewModel) {
+        self.viewModel = viewModel
+        self.homeNode = HomeComponentNode(viewModel: viewModel)
 		super.init()
+     
 		configureAddRecordBtn()
 		backgroundColor = .white
 		automaticallyManagesSubnodes = true
@@ -24,6 +32,12 @@ class HomeNode: ASDisplayNode {
 	private func configureAddRecordBtn() {
 		addRecordBtn.setImage(UIImage(named: "addRecordBtn.png"), for: .normal)
 		addRecordBtn.style.preferredSize = CGSize(width: 80, height: 80)
+		addRecordBtn.addTarget(self, action: #selector(goToAddRecord), forControlEvents: .touchUpInside)
+	}
+	
+	@objc func goToAddRecord() {
+		print("add button tapped")
+		self.onOpenAddRecordPage?()
 	}
 	
 	
@@ -31,10 +45,15 @@ class HomeNode: ASDisplayNode {
 		
 		let homeStack = ASStackLayoutSpec(direction: .vertical, spacing: 0, justifyContent: .start, alignItems: .start, children: [homeNode])
 	
-		let navigationBar = ASStackLayoutSpec(direction: .vertical, spacing: 20, justifyContent: .end, alignItems: .end, children: [addRecordBtn,navBar])
-
-		let mainSpec = ASOverlayLayoutSpec(child: homeStack, overlay: navigationBar)
+		let addRecordBtnSpec = ASStackLayoutSpec(direction: .vertical,
+									   spacing: 20,
+									   justifyContent: .end,
+									   alignItems: .end,
+									   children: [addRecordBtn])
 		
+		let addRecordBtnInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 16, bottom: 30, right: 16), child: addRecordBtnSpec)
+
+		let mainSpec = ASOverlayLayoutSpec(child: homeStack, overlay: addRecordBtnInset)
 		
 		return mainSpec
 	}

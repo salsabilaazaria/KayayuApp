@@ -9,10 +9,28 @@
 /* Begin PBXBuildFile section */
 		0A20A9C427411024005E8BB6 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A20A9C327411024005E8BB6 /* TabBar.swift */; };
 		0A2A6894273D5FFF0062501C /* HomeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2A6893273D5FFF0062501C /* HomeNode.swift */; };
+		0A2D89A8275F424B00F1F9C7 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2D89A6275F424B00F1F9C7 /* AuthenticationViewModel.swift */; };
+		0A2D89A9275F424B00F1F9C7 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2D89A6275F424B00F1F9C7 /* AuthenticationViewModel.swift */; };
+		0A2D89AA275F424B00F1F9C7 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2D89A6275F424B00F1F9C7 /* AuthenticationViewModel.swift */; };
+		0A2D89AB275F424B00F1F9C7 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2D89A7275F424B00F1F9C7 /* HomeViewModel.swift */; };
+		0A2D89AC275F424B00F1F9C7 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2D89A7275F424B00F1F9C7 /* HomeViewModel.swift */; };
+		0A2D89AD275F424B00F1F9C7 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2D89A7275F424B00F1F9C7 /* HomeViewModel.swift */; };
+		0A2D89F8275F42F600F1F9C7 /* KayayuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2D89F7275F42F600F1F9C7 /* KayayuModel.swift */; };
+		0A2D89F9275F42F600F1F9C7 /* KayayuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2D89F7275F42F600F1F9C7 /* KayayuModel.swift */; };
+		0A2D89FA275F42F600F1F9C7 /* KayayuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2D89F7275F42F600F1F9C7 /* KayayuModel.swift */; };
+		0A2D8A02275F4AE600F1F9C7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A2D8A01275F4AE600F1F9C7 /* GoogleService-Info.plist */; };
+		0A2D8A03275F4AE600F1F9C7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A2D8A01275F4AE600F1F9C7 /* GoogleService-Info.plist */; };
+		0A2D8A04275F4AE600F1F9C7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A2D8A01275F4AE600F1F9C7 /* GoogleService-Info.plist */; };
+		0A337AB9275E503900B04508 /* ProfileNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A337AB8275E503900B04508 /* ProfileNode.swift */; };
+		0A337ABE275E517700B04508 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A337ABD275E517700B04508 /* ProfileViewController.swift */; };
+		0A337AC3275E540500B04508 /* ProfileCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A337AC2275E540500B04508 /* ProfileCellNode.swift */; };
 		0A8D94E7274D26F300BB55FC /* StatsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8D94E6274D26F300BB55FC /* StatsNode.swift */; };
 		0A8D950D274D2B2400BB55FC /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8D950C274D2B2400BB55FC /* StatsViewController.swift */; };
 		0A8D9512274D320700BB55FC /* RealisationStatsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8D9511274D320600BB55FC /* RealisationStatsNode.swift */; };
 		0A8D9517274D333500BB55FC /* PlanStatsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8D9516274D333500BB55FC /* PlanStatsNode.swift */; };
+		0A91DDD62760D7300075BF93 /* InstallmentTableNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A91DDD52760D7300075BF93 /* InstallmentTableNode.swift */; };
+		0A91DDD72760D7300075BF93 /* InstallmentTableNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A91DDD52760D7300075BF93 /* InstallmentTableNode.swift */; };
+		0A91DDD82760D7300075BF93 /* InstallmentTableNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A91DDD52760D7300075BF93 /* InstallmentTableNode.swift */; };
 		0AAA2674273A65900063D876 /* BigButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAA2673273A65900063D876 /* BigButton.swift */; };
 		0AAA2685273AAA230063D876 /* RegisterNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAA2684273AAA230063D876 /* RegisterNode.swift */; };
 		0AAA268A273AB0700063D876 /* SummaryHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAA2689273AB0700063D876 /* SummaryHeader.swift */; };
@@ -28,17 +46,28 @@
 		0ABC637A273933E00041087F /* NSAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC6379273933E00041087F /* NSAttributedString+Extension.swift */; };
 		0ABC637F273934020041087F /* ColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC637E273934020041087F /* ColorHelper.swift */; };
 		0ABC639627393B710041087F /* LoginNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC639527393B710041087F /* LoginNode.swift */; };
-		465797E2FE63F6017A3D46DA /* Pods_kayayuApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B24C4321B5D25F3735CC2CE2 /* Pods_kayayuApp.framework */; };
+		0ADCBA88275E5F2500F15F5E /* SubscriptionTableNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADCBA87275E5F2500F15F5E /* SubscriptionTableNode.swift */; };
+		0ADCBA90275E5F3100F15F5E /* SubscriptionCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADCBA8F275E5F3100F15F5E /* SubscriptionCellNode.swift */; };
+		0ADCBA95275E793A00F15F5E /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADCBA94275E793A00F15F5E /* SubscriptionViewController.swift */; };
+		0ADCBAA3275E7DB900F15F5E /* InstallmentCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADCBAA2275E7DB900F15F5E /* InstallmentCellNode.swift */; };
+		0ADCBAA8275E7F4A00F15F5E /* InstallmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADCBAA7275E7F4A00F15F5E /* InstallmentViewController.swift */; };
+		6916C7B701A4377071A725EF /* Pods_kayayuApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94871052B2ECA01C85FD32F4 /* Pods_kayayuApp.framework */; };
+		7E6FA510A9B0699D067C119E /* Pods_kayayuAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A04CC9B26CC4EDE50348DAE3 /* Pods_kayayuAppTests.framework */; };
+		8E3B83BD239A3B70CAFB2B55 /* Pods_kayayuApp_kayayuAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D7BAEEB79E23F89561638DD /* Pods_kayayuApp_kayayuAppUITests.framework */; };
 		AF020193274252C60033D067 /* TransactionTableNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF020192274252C60033D067 /* TransactionTableNode.swift */; };
 		AF0201982742545C0033D067 /* TransactionCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0201972742545C0033D067 /* TransactionCellNode.swift */; };
-		AF065E3C2754A27A00433BB1 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF065E3B2754A27A00433BB1 /* AuthenticationViewModel.swift */; };
 		AF2C1867274607AC00482D6E /* CalendarHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2C1866274607AB00482D6E /* CalendarHelper.swift */; };
 		AF2C18752746165600482D6E /* TransactionTableHeaderNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2C18742746165600482D6E /* TransactionTableHeaderNode.swift */; };
 		AF2C18852746477E00482D6E /* TransactionDateCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2C18842746477E00482D6E /* TransactionDateCellNode.swift */; };
 		AF2C188B27464E6A00482D6E /* HomeTableTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2C188A27464E6A00482D6E /* HomeTableTransaction.swift */; };
 		AF2C1894274656CE00482D6E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2C1893274656CE00482D6E /* HomeViewController.swift */; };
+		AF52E8EF2761011800D5DCE7 /* UIImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF52E8EE2761011800D5DCE7 /* UIImageHelper.swift */; };
 		AF7591D5274E4381003B8708 /* RatioRealisationDetailNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7591D4274E4381003B8708 /* RatioRealisationDetailNode.swift */; };
 		AF7591DA274E43DE003B8708 /* StatsDateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7591D9274E43DE003B8708 /* StatsDateHeader.swift */; };
+		AFA9CDD5274F759A00E520A3 /* AddIncomeRecordNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA9CDD4274F759A00E520A3 /* AddIncomeRecordNode.swift */; };
+		AFA9CDE2274F766300E520A3 /* AddRecordeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA9CDE1274F766300E520A3 /* AddRecordeNode.swift */; };
+		AFA9CDEB274F776C00E520A3 /* AddExpenseRecordNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA9CDEA274F776C00E520A3 /* AddExpenseRecordNode.swift */; };
+		AFA9CDF0274F78A800E520A3 /* AddRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA9CDEF274F78A800E520A3 /* AddRecordViewController.swift */; };
 		AFBA5F59274DF8F6002455A7 /* KayayuHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBA5F58274DF8F6002455A7 /* KayayuHelper.swift */; };
 		AFC65DA027476F000050769D /* KayayuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC65D9F27476F000050769D /* KayayuCoordinator.swift */; };
 		AFC65DA5274771650050769D /* KayayuScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC65DA4274771650050769D /* KayayuScreen.swift */; };
@@ -46,8 +75,6 @@
 		AFC65DB52747ABBA0050769D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC65DB42747ABBA0050769D /* LoginViewController.swift */; };
 		AFC65DBA2747ABCA0050769D /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC65DB92747ABCA0050769D /* RegisterViewController.swift */; };
 		AFC65DC02747B35F0050769D /* HomeComponentNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC65DBF2747B35F0050769D /* HomeComponentNode.swift */; };
-		C85222BDFC0C4353EF0EF0BD /* Pods_kayayuApp_kayayuAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA298E0F630B182870A43DB /* Pods_kayayuApp_kayayuAppUITests.framework */; };
-		CF5F6A57A2C96269113C4B45 /* Pods_kayayuAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 822540B0945D1E91F4C2F699 /* Pods_kayayuAppTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,10 +97,18 @@
 /* Begin PBXFileReference section */
 		0A20A9C327411024005E8BB6 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		0A2A6893273D5FFF0062501C /* HomeNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNode.swift; sourceTree = "<group>"; };
+		0A2D89A6275F424B00F1F9C7 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
+		0A2D89A7275F424B00F1F9C7 /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		0A2D89F7275F42F600F1F9C7 /* KayayuModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KayayuModel.swift; sourceTree = "<group>"; };
+		0A2D8A01275F4AE600F1F9C7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		0A337AB8275E503900B04508 /* ProfileNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNode.swift; sourceTree = "<group>"; };
+		0A337ABD275E517700B04508 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		0A337AC2275E540500B04508 /* ProfileCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCellNode.swift; sourceTree = "<group>"; };
 		0A8D94E6274D26F300BB55FC /* StatsNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsNode.swift; sourceTree = "<group>"; };
 		0A8D950C274D2B2400BB55FC /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		0A8D9511274D320600BB55FC /* RealisationStatsNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealisationStatsNode.swift; sourceTree = "<group>"; };
 		0A8D9516274D333500BB55FC /* PlanStatsNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanStatsNode.swift; sourceTree = "<group>"; };
+		0A91DDD52760D7300075BF93 /* InstallmentTableNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstallmentTableNode.swift; sourceTree = "<group>"; };
 		0AAA2673273A65900063D876 /* BigButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigButton.swift; sourceTree = "<group>"; };
 		0AAA2684273AAA230063D876 /* RegisterNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterNode.swift; sourceTree = "<group>"; };
 		0AAA2689273AB0700063D876 /* SummaryHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryHeader.swift; sourceTree = "<group>"; };
@@ -95,21 +130,31 @@
 		0ABC6379273933E00041087F /* NSAttributedString+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extension.swift"; sourceTree = "<group>"; };
 		0ABC637E273934020041087F /* ColorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHelper.swift; sourceTree = "<group>"; };
 		0ABC639527393B710041087F /* LoginNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginNode.swift; sourceTree = "<group>"; };
-		14A3DB5E594A6ECC0BFCB654 /* Pods-kayayuAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuAppTests.debug.xcconfig"; path = "Target Support Files/Pods-kayayuAppTests/Pods-kayayuAppTests.debug.xcconfig"; sourceTree = "<group>"; };
-		2127C8BED94B463E5147CB30 /* Pods-kayayuApp-kayayuAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuApp-kayayuAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-kayayuApp-kayayuAppUITests/Pods-kayayuApp-kayayuAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		3A3169E080FFED822273F72A /* Pods-kayayuApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuApp.debug.xcconfig"; path = "Target Support Files/Pods-kayayuApp/Pods-kayayuApp.debug.xcconfig"; sourceTree = "<group>"; };
-		57BE6B92567BB1BD82ACD311 /* Pods-kayayuAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuAppTests.release.xcconfig"; path = "Target Support Files/Pods-kayayuAppTests/Pods-kayayuAppTests.release.xcconfig"; sourceTree = "<group>"; };
-		822540B0945D1E91F4C2F699 /* Pods_kayayuAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kayayuAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0ADCBA87275E5F2500F15F5E /* SubscriptionTableNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionTableNode.swift; sourceTree = "<group>"; };
+		0ADCBA8F275E5F3100F15F5E /* SubscriptionCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCellNode.swift; sourceTree = "<group>"; };
+		0ADCBA94275E793A00F15F5E /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
+		0ADCBAA2275E7DB900F15F5E /* InstallmentCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallmentCellNode.swift; sourceTree = "<group>"; };
+		0ADCBAA7275E7F4A00F15F5E /* InstallmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallmentViewController.swift; sourceTree = "<group>"; };
+		1A51DCA78B1EA1188AFB6B09 /* Pods-kayayuApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuApp.debug.xcconfig"; path = "Target Support Files/Pods-kayayuApp/Pods-kayayuApp.debug.xcconfig"; sourceTree = "<group>"; };
+		21DE8A6C94BB7D396555A35F /* Pods-kayayuAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuAppTests.debug.xcconfig"; path = "Target Support Files/Pods-kayayuAppTests/Pods-kayayuAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		3D7BAEEB79E23F89561638DD /* Pods_kayayuApp_kayayuAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kayayuApp_kayayuAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		616EBEC6E3A4BA25FDC8CA23 /* Pods-kayayuAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuAppTests.release.xcconfig"; path = "Target Support Files/Pods-kayayuAppTests/Pods-kayayuAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		94871052B2ECA01C85FD32F4 /* Pods_kayayuApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kayayuApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A04CC9B26CC4EDE50348DAE3 /* Pods_kayayuAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kayayuAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF020192274252C60033D067 /* TransactionTableNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableNode.swift; sourceTree = "<group>"; };
 		AF0201972742545C0033D067 /* TransactionCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCellNode.swift; sourceTree = "<group>"; };
-		AF065E3B2754A27A00433BB1 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthenticationViewModel.swift; path = kayayuApp/Views/AuthenticationViewModel.swift; sourceTree = SOURCE_ROOT; };
 		AF2C1866274607AB00482D6E /* CalendarHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHelper.swift; sourceTree = "<group>"; };
 		AF2C18742746165600482D6E /* TransactionTableHeaderNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableHeaderNode.swift; sourceTree = "<group>"; };
 		AF2C18842746477E00482D6E /* TransactionDateCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDateCellNode.swift; sourceTree = "<group>"; };
 		AF2C188A27464E6A00482D6E /* HomeTableTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableTransaction.swift; sourceTree = "<group>"; };
 		AF2C1893274656CE00482D6E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = kayayuApp/Views/HomeViewController.swift; sourceTree = SOURCE_ROOT; };
+		AF52E8EE2761011800D5DCE7 /* UIImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageHelper.swift; sourceTree = "<group>"; };
 		AF7591D4274E4381003B8708 /* RatioRealisationDetailNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioRealisationDetailNode.swift; sourceTree = "<group>"; };
 		AF7591D9274E43DE003B8708 /* StatsDateHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsDateHeader.swift; sourceTree = "<group>"; };
+		AFA9CDD4274F759A00E520A3 /* AddIncomeRecordNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIncomeRecordNode.swift; sourceTree = "<group>"; };
+		AFA9CDE1274F766300E520A3 /* AddRecordeNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordeNode.swift; sourceTree = "<group>"; };
+		AFA9CDEA274F776C00E520A3 /* AddExpenseRecordNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseRecordNode.swift; sourceTree = "<group>"; };
+		AFA9CDEF274F78A800E520A3 /* AddRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordViewController.swift; sourceTree = "<group>"; };
 		AFBA5F58274DF8F6002455A7 /* KayayuHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KayayuHelper.swift; sourceTree = "<group>"; };
 		AFC65D9F27476F000050769D /* KayayuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KayayuCoordinator.swift; sourceTree = "<group>"; };
 		AFC65DA4274771650050769D /* KayayuScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KayayuScreen.swift; sourceTree = "<group>"; };
@@ -117,10 +162,9 @@
 		AFC65DB42747ABBA0050769D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = kayayuApp/LoginViewController.swift; sourceTree = SOURCE_ROOT; };
 		AFC65DB92747ABCA0050769D /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RegisterViewController.swift; path = kayayuApp/RegisterViewController.swift; sourceTree = SOURCE_ROOT; };
 		AFC65DBF2747B35F0050769D /* HomeComponentNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeComponentNode.swift; sourceTree = "<group>"; };
-		B24C4321B5D25F3735CC2CE2 /* Pods_kayayuApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kayayuApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B887FE174A81196E743E9593 /* Pods-kayayuApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuApp.release.xcconfig"; path = "Target Support Files/Pods-kayayuApp/Pods-kayayuApp.release.xcconfig"; sourceTree = "<group>"; };
-		DCA298E0F630B182870A43DB /* Pods_kayayuApp_kayayuAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kayayuApp_kayayuAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F4903A224266B6B0E1497275 /* Pods-kayayuApp-kayayuAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuApp-kayayuAppUITests.release.xcconfig"; path = "Target Support Files/Pods-kayayuApp-kayayuAppUITests/Pods-kayayuApp-kayayuAppUITests.release.xcconfig"; sourceTree = "<group>"; };
+		C38129C91BEF170882976105 /* Pods-kayayuApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuApp.release.xcconfig"; path = "Target Support Files/Pods-kayayuApp/Pods-kayayuApp.release.xcconfig"; sourceTree = "<group>"; };
+		CD62154645A87E11302368DD /* Pods-kayayuApp-kayayuAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuApp-kayayuAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-kayayuApp-kayayuAppUITests/Pods-kayayuApp-kayayuAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E5EF96CDCC12CC6B377D880A /* Pods-kayayuApp-kayayuAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuApp-kayayuAppUITests.release.xcconfig"; path = "Target Support Files/Pods-kayayuApp-kayayuAppUITests/Pods-kayayuApp-kayayuAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,7 +172,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				465797E2FE63F6017A3D46DA /* Pods_kayayuApp.framework in Frameworks */,
+				6916C7B701A4377071A725EF /* Pods_kayayuApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,7 +180,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CF5F6A57A2C96269113C4B45 /* Pods_kayayuAppTests.framework in Frameworks */,
+				7E6FA510A9B0699D067C119E /* Pods_kayayuAppTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,13 +188,32 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C85222BDFC0C4353EF0EF0BD /* Pods_kayayuApp_kayayuAppUITests.framework in Frameworks */,
+				8E3B83BD239A3B70CAFB2B55 /* Pods_kayayuApp_kayayuAppUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A2D89F6275F42F600F1F9C7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0A2D89F7275F42F600F1F9C7 /* KayayuModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0A337AC7275E541D00B04508 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				0ADCBA99275E7D8700F15F5E /* Installment */,
+				0ADCBA86275E5F1100F15F5E /* Subscription */,
+				0A337AB8275E503900B04508 /* ProfileNode.swift */,
+				0A337AC2275E540500B04508 /* ProfileCellNode.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		0A8D951B274D333B00BB55FC /* Stats */ = {
 			isa = PBXGroup;
 			children = (
@@ -181,7 +244,7 @@
 				0ABC633C273929880041087F /* kayayuAppUITests */,
 				0ABC6316273929860041087F /* Products */,
 				E949D484373EE7F83AF88521 /* Pods */,
-				7F7DCAB52298946E2AF28AC9 /* Frameworks */,
+				6D91C9C9C268CC614EC29944 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -198,6 +261,7 @@
 		0ABC6317273929860041087F /* kayayuApp */ = {
 			isa = PBXGroup;
 			children = (
+				0A2D89F6275F42F600F1F9C7 /* Model */,
 				AFC65DBE2747B2F70050769D /* Coordinator */,
 				0ABC636D2739335C0041087F /* ViewController */,
 				0ABC636C273933560041087F /* ViewModel */,
@@ -210,6 +274,7 @@
 				0ABC6326273929880041087F /* LaunchScreen.storyboard */,
 				0ABC6329273929880041087F /* Info.plist */,
 				0ABC6321273929860041087F /* kayayuApp.xcdatamodeld */,
+				0A2D8A01275F4AE600F1F9C7 /* GoogleService-Info.plist */,
 			);
 			path = kayayuApp;
 			sourceTree = "<group>";
@@ -235,10 +300,12 @@
 		0ABC636A2739334B0041087F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0AAA2672273A65750063D876 /* Component */,
+				AFA9CDE6274F767200E520A3 /* Add Record */,
 				0A8D951B274D333B00BB55FC /* Stats */,
 				AF2C188F27464FF400482D6E /* Home */,
 				AF2C188927464E2700482D6E /* TableTransaction */,
-				0AAA2672273A65750063D876 /* Component */,
+				0A337AC7275E541D00B04508 /* Profile */,
 				0ABC636E273933800041087F /* LandingNode.swift */,
 				0ABC639527393B710041087F /* LoginNode.swift */,
 				0AAA2684273AAA230063D876 /* RegisterNode.swift */,
@@ -253,6 +320,7 @@
 				0ABC637E273934020041087F /* ColorHelper.swift */,
 				AF2C1866274607AB00482D6E /* CalendarHelper.swift */,
 				AFBA5F58274DF8F6002455A7 /* KayayuHelper.swift */,
+				AF52E8EE2761011800D5DCE7 /* UIImageHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -260,7 +328,8 @@
 		0ABC636C273933560041087F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				AF065E3B2754A27A00433BB1 /* AuthenticationViewModel.swift */,
+				0A2D89A6275F424B00F1F9C7 /* AuthenticationViewModel.swift */,
+				0A2D89A7275F424B00F1F9C7 /* HomeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -273,16 +342,38 @@
 				AFC65DB42747ABBA0050769D /* LoginViewController.swift */,
 				AFC65DB92747ABCA0050769D /* RegisterViewController.swift */,
 				0A8D950C274D2B2400BB55FC /* StatsViewController.swift */,
+				AFA9CDEF274F78A800E520A3 /* AddRecordViewController.swift */,
+				0A337ABD275E517700B04508 /* ProfileViewController.swift */,
+				0ADCBA94275E793A00F15F5E /* SubscriptionViewController.swift */,
+				0ADCBAA7275E7F4A00F15F5E /* InstallmentViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		7F7DCAB52298946E2AF28AC9 /* Frameworks */ = {
+		0ADCBA86275E5F1100F15F5E /* Subscription */ = {
 			isa = PBXGroup;
 			children = (
-				B24C4321B5D25F3735CC2CE2 /* Pods_kayayuApp.framework */,
-				DCA298E0F630B182870A43DB /* Pods_kayayuApp_kayayuAppUITests.framework */,
-				822540B0945D1E91F4C2F699 /* Pods_kayayuAppTests.framework */,
+				0ADCBA87275E5F2500F15F5E /* SubscriptionTableNode.swift */,
+				0ADCBA8F275E5F3100F15F5E /* SubscriptionCellNode.swift */,
+			);
+			path = Subscription;
+			sourceTree = "<group>";
+		};
+		0ADCBA99275E7D8700F15F5E /* Installment */ = {
+			isa = PBXGroup;
+			children = (
+				0A91DDD52760D7300075BF93 /* InstallmentTableNode.swift */,
+				0ADCBAA2275E7DB900F15F5E /* InstallmentCellNode.swift */,
+			);
+			path = Installment;
+			sourceTree = "<group>";
+		};
+		6D91C9C9C268CC614EC29944 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				94871052B2ECA01C85FD32F4 /* Pods_kayayuApp.framework */,
+				3D7BAEEB79E23F89561638DD /* Pods_kayayuApp_kayayuAppUITests.framework */,
+				A04CC9B26CC4EDE50348DAE3 /* Pods_kayayuAppTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -290,9 +381,9 @@
 		AF2C188927464E2700482D6E /* TableTransaction */ = {
 			isa = PBXGroup;
 			children = (
+				AF2C18742746165600482D6E /* TransactionTableHeaderNode.swift */,
 				AF020192274252C60033D067 /* TransactionTableNode.swift */,
 				AF0201972742545C0033D067 /* TransactionCellNode.swift */,
-				AF2C18742746165600482D6E /* TransactionTableHeaderNode.swift */,
 				AF2C18842746477E00482D6E /* TransactionDateCellNode.swift */,
 			);
 			path = TableTransaction;
@@ -308,6 +399,16 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		AFA9CDE6274F767200E520A3 /* Add Record */ = {
+			isa = PBXGroup;
+			children = (
+				AFA9CDE1274F766300E520A3 /* AddRecordeNode.swift */,
+				AFA9CDD4274F759A00E520A3 /* AddIncomeRecordNode.swift */,
+				AFA9CDEA274F776C00E520A3 /* AddExpenseRecordNode.swift */,
+			);
+			path = "Add Record";
+			sourceTree = "<group>";
+		};
 		AFC65DBE2747B2F70050769D /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
@@ -320,12 +421,12 @@
 		E949D484373EE7F83AF88521 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3A3169E080FFED822273F72A /* Pods-kayayuApp.debug.xcconfig */,
-				B887FE174A81196E743E9593 /* Pods-kayayuApp.release.xcconfig */,
-				2127C8BED94B463E5147CB30 /* Pods-kayayuApp-kayayuAppUITests.debug.xcconfig */,
-				F4903A224266B6B0E1497275 /* Pods-kayayuApp-kayayuAppUITests.release.xcconfig */,
-				14A3DB5E594A6ECC0BFCB654 /* Pods-kayayuAppTests.debug.xcconfig */,
-				57BE6B92567BB1BD82ACD311 /* Pods-kayayuAppTests.release.xcconfig */,
+				1A51DCA78B1EA1188AFB6B09 /* Pods-kayayuApp.debug.xcconfig */,
+				C38129C91BEF170882976105 /* Pods-kayayuApp.release.xcconfig */,
+				CD62154645A87E11302368DD /* Pods-kayayuApp-kayayuAppUITests.debug.xcconfig */,
+				E5EF96CDCC12CC6B377D880A /* Pods-kayayuApp-kayayuAppUITests.release.xcconfig */,
+				21DE8A6C94BB7D396555A35F /* Pods-kayayuAppTests.debug.xcconfig */,
+				616EBEC6E3A4BA25FDC8CA23 /* Pods-kayayuAppTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -337,11 +438,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0ABC6342273929880041087F /* Build configuration list for PBXNativeTarget "kayayuApp" */;
 			buildPhases = (
-				D44A8F23A22F084655FD64BF /* [CP] Check Pods Manifest.lock */,
+				CF831298C77CC05CD1EBFF42 /* [CP] Check Pods Manifest.lock */,
 				0ABC6311273929860041087F /* Sources */,
 				0ABC6312273929860041087F /* Frameworks */,
 				0ABC6313273929860041087F /* Resources */,
-				5D68EFE78A7714D6DDE14EA9 /* [CP] Embed Pods Frameworks */,
+				F6A3056DE2038CC97CACE744 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -356,11 +457,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0ABC6345273929880041087F /* Build configuration list for PBXNativeTarget "kayayuAppTests" */;
 			buildPhases = (
-				5CADA0A0D12C2114F5CE5E1A /* [CP] Check Pods Manifest.lock */,
+				6A53C342DDA20B6A9267FAEF /* [CP] Check Pods Manifest.lock */,
 				0ABC632A273929880041087F /* Sources */,
 				0ABC632B273929880041087F /* Frameworks */,
 				0ABC632C273929880041087F /* Resources */,
-				2A79F44FC0648474CF0699F3 /* [CP] Embed Pods Frameworks */,
+				B1251BAED6F5C973A36CDC07 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -376,11 +477,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0ABC6348273929880041087F /* Build configuration list for PBXNativeTarget "kayayuAppUITests" */;
 			buildPhases = (
-				C07D930ADBA4306273A56924 /* [CP] Check Pods Manifest.lock */,
+				F685009DFCD43BE6E84D108B /* [CP] Check Pods Manifest.lock */,
 				0ABC6335273929880041087F /* Sources */,
 				0ABC6336273929880041087F /* Frameworks */,
 				0ABC6337273929880041087F /* Resources */,
-				171FDCE12709EC3B1D71836C /* [CP] Embed Pods Frameworks */,
+				D0781F17FED62EC29C688D74 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -441,6 +542,7 @@
 			files = (
 				0ABC6328273929880041087F /* LaunchScreen.storyboard in Resources */,
 				0ABC6325273929880041087F /* Assets.xcassets in Resources */,
+				0A2D8A02275F4AE600F1F9C7 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +550,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A2D8A03275F4AE600F1F9C7 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,47 +558,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A2D8A04275F4AE600F1F9C7 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		171FDCE12709EC3B1D71836C /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-kayayuApp-kayayuAppUITests/Pods-kayayuApp-kayayuAppUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-kayayuApp-kayayuAppUITests/Pods-kayayuApp-kayayuAppUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-kayayuApp-kayayuAppUITests/Pods-kayayuApp-kayayuAppUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2A79F44FC0648474CF0699F3 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-kayayuAppTests/Pods-kayayuAppTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-kayayuAppTests/Pods-kayayuAppTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-kayayuAppTests/Pods-kayayuAppTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5CADA0A0D12C2114F5CE5E1A /* [CP] Check Pods Manifest.lock */ = {
+		6A53C342DDA20B6A9267FAEF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -517,46 +587,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5D68EFE78A7714D6DDE14EA9 /* [CP] Embed Pods Frameworks */ = {
+		B1251BAED6F5C973A36CDC07 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-kayayuApp/Pods-kayayuApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-kayayuAppTests/Pods-kayayuAppTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-kayayuApp/Pods-kayayuApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-kayayuAppTests/Pods-kayayuAppTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-kayayuApp/Pods-kayayuApp-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-kayayuAppTests/Pods-kayayuAppTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C07D930ADBA4306273A56924 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-kayayuApp-kayayuAppUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D44A8F23A22F084655FD64BF /* [CP] Check Pods Manifest.lock */ = {
+		CF831298C77CC05CD1EBFF42 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -578,6 +626,62 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		D0781F17FED62EC29C688D74 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-kayayuApp-kayayuAppUITests/Pods-kayayuApp-kayayuAppUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-kayayuApp-kayayuAppUITests/Pods-kayayuApp-kayayuAppUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-kayayuApp-kayayuAppUITests/Pods-kayayuApp-kayayuAppUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F685009DFCD43BE6E84D108B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-kayayuApp-kayayuAppUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F6A3056DE2038CC97CACE744 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-kayayuApp/Pods-kayayuApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-kayayuApp/Pods-kayayuApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-kayayuApp/Pods-kayayuApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -587,9 +691,9 @@
 			files = (
 				AFC65DA027476F000050769D /* KayayuCoordinator.swift in Sources */,
 				0A8D9512274D320700BB55FC /* RealisationStatsNode.swift in Sources */,
-				AF065E3C2754A27A00433BB1 /* AuthenticationViewModel.swift in Sources */,
 				AF2C1894274656CE00482D6E /* HomeViewController.swift in Sources */,
 				AF2C18852746477E00482D6E /* TransactionDateCellNode.swift in Sources */,
+				0A91DDD62760D7300075BF93 /* InstallmentTableNode.swift in Sources */,
 				0ABC637F273934020041087F /* ColorHelper.swift in Sources */,
 				0ABC639627393B710041087F /* LoginNode.swift in Sources */,
 				0AAA2674273A65900063D876 /* BigButton.swift in Sources */,
@@ -600,25 +704,41 @@
 				0A8D9517274D333500BB55FC /* PlanStatsNode.swift in Sources */,
 				0A8D950D274D2B2400BB55FC /* StatsViewController.swift in Sources */,
 				AF2C1867274607AC00482D6E /* CalendarHelper.swift in Sources */,
+				0ADCBA90275E5F3100F15F5E /* SubscriptionCellNode.swift in Sources */,
 				AF7591DA274E43DE003B8708 /* StatsDateHeader.swift in Sources */,
 				AF2C18752746165600482D6E /* TransactionTableHeaderNode.swift in Sources */,
 				AF2C188B27464E6A00482D6E /* HomeTableTransaction.swift in Sources */,
+				0A2D89AB275F424B00F1F9C7 /* HomeViewModel.swift in Sources */,
+				AFA9CDD5274F759A00E520A3 /* AddIncomeRecordNode.swift in Sources */,
 				0ABC631D273929860041087F /* ViewController.swift in Sources */,
 				AFC65DB52747ABBA0050769D /* LoginViewController.swift in Sources */,
 				0ABC6319273929860041087F /* AppDelegate.swift in Sources */,
 				0ABC637A273933E00041087F /* NSAttributedString+Extension.swift in Sources */,
 				0A2A6894273D5FFF0062501C /* HomeNode.swift in Sources */,
+				0A2D89A8275F424B00F1F9C7 /* AuthenticationViewModel.swift in Sources */,
 				AF0201982742545C0033D067 /* TransactionCellNode.swift in Sources */,
+				0A2D89F8275F42F600F1F9C7 /* KayayuModel.swift in Sources */,
 				AF020193274252C60033D067 /* TransactionTableNode.swift in Sources */,
+				0A337AB9275E503900B04508 /* ProfileNode.swift in Sources */,
+				AF52E8EF2761011800D5DCE7 /* UIImageHelper.swift in Sources */,
 				0A8D94E7274D26F300BB55FC /* StatsNode.swift in Sources */,
 				0ABC631B273929860041087F /* SceneDelegate.swift in Sources */,
+				0ADCBAA3275E7DB900F15F5E /* InstallmentCellNode.swift in Sources */,
+				AFA9CDEB274F776C00E520A3 /* AddExpenseRecordNode.swift in Sources */,
 				AFC65DC02747B35F0050769D /* HomeComponentNode.swift in Sources */,
+				0ADCBA95275E793A00F15F5E /* SubscriptionViewController.swift in Sources */,
 				0A20A9C427411024005E8BB6 /* TabBar.swift in Sources */,
+				0A337AC3275E540500B04508 /* ProfileCellNode.swift in Sources */,
 				0ABC6323273929860041087F /* kayayuApp.xcdatamodeld in Sources */,
 				AF7591D5274E4381003B8708 /* RatioRealisationDetailNode.swift in Sources */,
+				0ADCBAA8275E7F4A00F15F5E /* InstallmentViewController.swift in Sources */,
 				AFC65DBA2747ABCA0050769D /* RegisterViewController.swift in Sources */,
+				AFA9CDE2274F766300E520A3 /* AddRecordeNode.swift in Sources */,
+				AFA9CDF0274F78A800E520A3 /* AddRecordViewController.swift in Sources */,
+				0A337ABE275E517700B04508 /* ProfileViewController.swift in Sources */,
 				0AAA268A273AB0700063D876 /* SummaryHeader.swift in Sources */,
 				AFC65DAA274792AD0050769D /* LandingViewController.swift in Sources */,
+				0ADCBA88275E5F2500F15F5E /* SubscriptionTableNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -626,6 +746,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A2D89A9275F424B00F1F9C7 /* AuthenticationViewModel.swift in Sources */,
+				0A91DDD72760D7300075BF93 /* InstallmentTableNode.swift in Sources */,
+				0A2D89F9275F42F600F1F9C7 /* KayayuModel.swift in Sources */,
+				0A2D89AC275F424B00F1F9C7 /* HomeViewModel.swift in Sources */,
 				0ABC6333273929880041087F /* kayayuAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -634,6 +758,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A2D89AA275F424B00F1F9C7 /* AuthenticationViewModel.swift in Sources */,
+				0A91DDD82760D7300075BF93 /* InstallmentTableNode.swift in Sources */,
+				0A2D89FA275F42F600F1F9C7 /* KayayuModel.swift in Sources */,
+				0A2D89AD275F424B00F1F9C7 /* HomeViewModel.swift in Sources */,
 				0ABC633E273929880041087F /* kayayuAppUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -783,7 +911,7 @@
 		};
 		0ABC6343273929880041087F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3A3169E080FFED822273F72A /* Pods-kayayuApp.debug.xcconfig */;
+			baseConfigurationReference = 1A51DCA78B1EA1188AFB6B09 /* Pods-kayayuApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -803,7 +931,7 @@
 		};
 		0ABC6344273929880041087F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B887FE174A81196E743E9593 /* Pods-kayayuApp.release.xcconfig */;
+			baseConfigurationReference = C38129C91BEF170882976105 /* Pods-kayayuApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -823,7 +951,7 @@
 		};
 		0ABC6346273929880041087F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 14A3DB5E594A6ECC0BFCB654 /* Pods-kayayuAppTests.debug.xcconfig */;
+			baseConfigurationReference = 21DE8A6C94BB7D396555A35F /* Pods-kayayuAppTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -846,7 +974,7 @@
 		};
 		0ABC6347273929880041087F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 57BE6B92567BB1BD82ACD311 /* Pods-kayayuAppTests.release.xcconfig */;
+			baseConfigurationReference = 616EBEC6E3A4BA25FDC8CA23 /* Pods-kayayuAppTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -869,7 +997,7 @@
 		};
 		0ABC6349273929880041087F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2127C8BED94B463E5147CB30 /* Pods-kayayuApp-kayayuAppUITests.debug.xcconfig */;
+			baseConfigurationReference = CD62154645A87E11302368DD /* Pods-kayayuApp-kayayuAppUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -890,7 +1018,7 @@
 		};
 		0ABC634A273929880041087F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F4903A224266B6B0E1497275 /* Pods-kayayuApp-kayayuAppUITests.release.xcconfig */;
+			baseConfigurationReference = E5EF96CDCC12CC6B377D880A /* Pods-kayayuApp-kayayuAppUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

@@ -13,14 +13,13 @@ class StatsNode: ASDisplayNode {
 	private let realisationButton: ASButtonNode = ASButtonNode()
 	private let planNode: PlanStatsNode = PlanStatsNode()
 	private let realisationNode: RealisationStatsNode = RealisationStatsNode()
-	private let tabBar: TabBar = TabBar()
 	
 	private let buttonSize = CGSize(width: UIScreen.main.bounds.width/2, height: kayayuSize.kayayuBarHeight)
 	private var goToPlanNode: Bool = false
 
 	override init() {
 		super.init()
-		let nodeSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - tabBar.style.preferredSize.height - 200)
+		let nodeSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - TabBar().style.preferredSize.height - 200)
 		planNode.style.preferredSize = nodeSize
 		realisationNode.style.preferredSize = nodeSize
 		
@@ -55,14 +54,9 @@ class StatsNode: ASDisplayNode {
 										  alignItems: .start,
 										  children: statsElementArray)
 		
-		let tabBarSpec = ASStackLayoutSpec(direction: .vertical, spacing: 20, justifyContent: .end, alignItems: .end, children: [tabBar])
 
 
-
-		let mainSpec = ASOverlayLayoutSpec(child: mainStack, overlay: tabBarSpec)
-
-
-		return mainSpec
+		return mainStack
 	}
 	
 	private func reloadUI(){
