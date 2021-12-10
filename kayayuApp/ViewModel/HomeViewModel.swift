@@ -14,10 +14,12 @@ import RxCocoa
 import RxSwift
 
 
+
 class HomeViewModel {
 	var reloadUI: (() -> Void)?
 	
 	let database = Firestore.firestore()
+    let calendarHelper = CalendarHelper()
 	var user: BehaviorRelay<Users?> = BehaviorRelay<Users?>(value: nil)
 	var transactionsData: BehaviorRelay<[Transactions]?> = BehaviorRelay<[Transactions]?>(value: nil)
 	
@@ -62,7 +64,7 @@ class HomeViewModel {
 	}
 	
 	func getTransactionData () {
-        database.collection("transactions").whereField("user_id", isEqualTo: getUserId()).order(by: "transaction_date", descending: true).getDocuments() { (documentSnapshot, errorMsg) in
+        database.collection("transactions").whereField("user_id", isEqualTo: getUserId()).whereField("transaction_date", isGreaterThan: calendarHelper.getCurrStartMonth()).whereField("transaction_date", isLessThan: calendarHelper.getCurrEndMonth()).order(by: "transaction_date", descending: true).getDocuments() { (documentSnapshot, errorMsg) in
 			if let errorMsg = errorMsg {
 				print("Error get Transaction Data \(errorMsg)")
 			}
@@ -88,6 +90,34 @@ class HomeViewModel {
 			}
 		}
 	}
+    
+    func getTransactionData2 () {
+        database.collection("transactions").whereField("user_id", isEqualTo: getUserId()).order(by: "transaction_date", descending: true).getDocuments() { (documentSnapshot, errorMsg) in
+            if let errorMsg = errorMsg {
+                print("Error get Transaction Data \(errorMsg)")
+            }
+            else {
+                var count = 0
+                var docummentArray: [Transactions] = []
+                for document in documentSnapshot!.documents {
+                    count += 1
+                    
+                    do {
+                        guard let trans = try document.data(as: Transactions.self) else {
+                            print("KAYAYU failed get transactionData")
+                            return
+                        }
+                        docummentArray.append(trans)
+                        
+                    } catch {
+                        print(error)
+                    }
+                    
+                }
+                self.transactionsData.accept(docummentArray)
+            }
+        }
+    }
 	
 	func deleteTransactionData(transactionDelete: Transactions) {
 		guard var tempTransactionData = self.transactionsData.value,

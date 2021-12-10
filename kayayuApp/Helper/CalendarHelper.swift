@@ -9,8 +9,29 @@ import Foundation
 import UIKit
 
 class CalendarHelper {
-	let calendar = Calendar.current
-	
+    let calendar = Calendar.current
+  
+   
+    func getCurrStartMonth() -> Date {
+        
+        let components:NSDateComponents = calendar.dateComponents([.year, .month], from: Date()) as NSDateComponents
+        components.hour = 7
+        
+//        print("CurrStart: \(calendar.date(from: components as DateComponents)!)")
+        return calendar.date(from: components as DateComponents)!
+    }
+    
+    func getCurrEndMonth() -> Date {
+        let components:NSDateComponents = calendar.dateComponents([.year, .month], from: Date()) as NSDateComponents
+        components.month += 1
+        components.hour = 6
+        components.minute = 59
+        components.second = 59
+        
+//        print("CurrEnd: \(calendar.date(from: components as DateComponents)!)")
+        return calendar.date(from: components as DateComponents)!
+    }
+    
 	func plusMonth(date: Date) -> Date {
 		return calendar.date(byAdding: .month, value: 1, to: date)!
 	}
