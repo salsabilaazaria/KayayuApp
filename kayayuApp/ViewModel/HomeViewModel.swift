@@ -27,7 +27,8 @@ class HomeViewModel {
     
 	init() {
 		self.getUserData()
-		self.getTransactionData()
+//		self.getTransactionData()
+        self.getTransactionDataSpecMonth(diff: 11) //diff masukin month yg mo ditampilin
 		self.configureObserver()
 	}
 	
@@ -91,8 +92,8 @@ class HomeViewModel {
 		}
 	}
     
-    func getTransactionData2 () {
-        database.collection("transactions").whereField("user_id", isEqualTo: getUserId()).order(by: "transaction_date", descending: true).getDocuments() { (documentSnapshot, errorMsg) in
+    func getTransactionDataSpecMonth (diff: Int) {
+        database.collection("transactions").whereField("user_id", isEqualTo: getUserId()).whereField("transaction_date", isGreaterThan: calendarHelper.getSpecStartMonth(diff: diff)).whereField("transaction_date", isLessThan: calendarHelper.getSpecEndMonth(diff: diff)).order(by: "transaction_date", descending: true).getDocuments() { (documentSnapshot, errorMsg) in
             if let errorMsg = errorMsg {
                 print("Error get Transaction Data \(errorMsg)")
             }

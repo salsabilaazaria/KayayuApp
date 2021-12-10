@@ -10,7 +10,7 @@ import UIKit
 
 class CalendarHelper {
     let calendar = Calendar.current
-  
+
    
     func getCurrStartMonth() -> Date {
         
@@ -29,6 +29,27 @@ class CalendarHelper {
         components.second = 59
         
 //        print("CurrEnd: \(calendar.date(from: components as DateComponents)!)")
+        return calendar.date(from: components as DateComponents)!
+    }
+    
+    
+    func getSpecStartMonth(diff: Int) -> Date {
+        let components:NSDateComponents = calendar.dateComponents([.year, .month], from: Date()) as NSDateComponents
+        components.month = diff
+        components.hour = 7
+        
+//        print("SpecStart: \(calendar.date(from: components as DateComponents)!)")
+        return calendar.date(from: components as DateComponents)!
+    }
+    
+    func getSpecEndMonth(diff: Int) -> Date {
+        let components:NSDateComponents = calendar.dateComponents([.year, .month], from: Date()) as NSDateComponents
+        components.month = diff+1
+        components.hour = 6
+        components.minute = 59
+        components.second = 59
+        
+//        print("SpecEnd: \(calendar.date(from: components as DateComponents)!)")
         return calendar.date(from: components as DateComponents)!
     }
     
