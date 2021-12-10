@@ -98,5 +98,13 @@ class CalendarHelper {
 		return dateFormatter.string(from: date)
 	}
 
+	func formatDayDate(date: Date) -> String {
+		
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "E d"
+		dateFormatter.calendar = Calendar(identifier: .gregorian)
+		
+		return dateFormatter.string(from: date)
+	}
 
 }

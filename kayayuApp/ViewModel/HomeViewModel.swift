@@ -22,9 +22,14 @@ class HomeViewModel {
     let calendarHelper = CalendarHelper()
 	var user: BehaviorRelay<Users?> = BehaviorRelay<Users?>(value: nil)
 	var transactionsData: BehaviorRelay<[Transactions]?> = BehaviorRelay<[Transactions]?>(value: nil)
+	var dictTransactionData: BehaviorRelay<[TransactionDateDictionary]?> = BehaviorRelay<[TransactionDateDictionary]?>(value: nil)
+	
+	
 	
 	var userBalanceTotal: Float = 0
-    
+	
+	private let calendarHelper: CalendarHelper = CalendarHelper()
+	
 	init() {
 		self.getUserData()
 		self.getTransactionData()
@@ -38,6 +43,10 @@ class HomeViewModel {
     
 	private func configureObserver() {
 		self.transactionsData.asObservable().subscribe(onNext: { _ in
+			self.groupedTransaction()
+		})
+		
+		self.dictTransactionData.asObservable().subscribe(onNext: { _ in
 			self.reloadUI?()
 		})
 	}
@@ -138,38 +147,57 @@ class HomeViewModel {
 	}
 	
 	func calculateIncomePerDay(date: Date) -> Float{
-		guard let transactionsData = self.transactionsData.value else {
+		guard let transactionsDict = self.dictTransactionData.value else {
 			return 0
 		}
 		
 		var incomeTotal: Float = 0
-		for transData in transactionsData {
-			if let incomeFlag = transData.income_flag, incomeFlag == true,
-			   let amount = transData.amount,
-			   transData.transaction_date == date  {
-				
-				incomeTotal += amount
+		
+		for transDict in transactionsDict {
+			if let transactionsData = transDict.transaction,
+			   let dateComponents = transDict.date,
+			   let formattedDateComponent = Calendar.current.date(from: dateComponents),
+			   calendarHelper.formatFullDate(date: date) == calendarHelper.formatFullDate(date: formattedDateComponent)  {
+				for transData in transactionsData {
+					if let incomeFlag = transData.income_flag, incomeFlag == true,
+					   let amount = transData.amount,
+					   let transDataDate = transData.transaction_date,
+					   calendarHelper.formatDayDate(date: transDataDate) == calendarHelper.formatDayDate(date: date) {
+						
+						incomeTotal += amount
+					}
+					
+				}
 			}
+			
 		}
 		
 		return incomeTotal
 	}
 	
 	func calculateExpensePerDay(date: Date) -> Float{
-		guard let transactionsData = self.transactionsData.value else {
+		guard let transactionsDict = self.dictTransactionData.value  else {
 			return 0
 		}
 		
 		var expenseTotal: Float = 0
-		for transData in transactionsData {
-			if let incomeFlag = transData.income_flag, incomeFlag == false,
-			   let amount = transData.amount,
-			   transData.transaction_date == date {
-				
-				expenseTotal += amount
+		for transDict in transactionsDict {
+			if let transactionsData = transDict.transaction,
+			   let dateComponents = transDict.date,
+			   let formattedDateComponent = Calendar.current.date(from: dateComponents),
+			   calendarHelper.formatFullDate(date: date) == calendarHelper.formatFullDate(date: formattedDateComponent)  {
+				for transData in transactionsData {
+					if let incomeFlag = transData.income_flag, incomeFlag == false,
+					   let amount = transData.amount,
+					   let transDataDate = transData.transaction_date,
+					   calendarHelper.formatDayDate(date: transDataDate) == calendarHelper.formatDayDate(date: date) {
+						expenseTotal += amount
+					}
+					
+				}
 			}
+			
 		}
-		
 		return expenseTotal
 	}
     
@@ -346,4 +374,23 @@ class HomeViewModel {
 //    }
     
     
+	
+	func groupedTransaction() {
+		guard let transDatas = transactionsData.value else {
+			return
+		}
+		let groupedDictionary = Dictionary(grouping: transDatas) { (transData) -> DateComponents in
+			
+			let date = Calendar.current.dateComponents([.day, .year, .month], from: (transData.transaction_date)!)
+			
+			return date
+		}
+		
+		let arrayOfDictionary = groupedDictionary.map { (date, trans) in
+			return TransactionDateDictionary(date: date, transaction: trans)
+		}
+		print("DATA DICTIONARY \(arrayOfDictionary)")
+		self.dictTransactionData.accept(arrayOfDictionary)
+	}
+	
 }

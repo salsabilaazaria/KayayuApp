@@ -8,7 +8,7 @@
 import Foundation
 import AsyncDisplayKit
 
-class TransactionDateCellNode: ASCellNode {
+class TransactionDateCellNode: ASDisplayNode {
 	private let totalIncomeAmount: ASTextNode = ASTextNode()
 	private let totalExpenseAmount: ASTextNode = ASTextNode()
 	private let dateText: ASTextNode = ASTextNode()
@@ -30,10 +30,11 @@ class TransactionDateCellNode: ASCellNode {
 		configureExpenseAmount()
 		borderWidth = 1
 		borderColor = kayayuColor.softGrey.cgColor
-		backgroundColor = .white
+		
+		backgroundColor = .cyan
 		automaticallyManagesSubnodes = true
 		
-		style.minHeight = ASDimension(unit: .points, value: 30)
+		style.preferredSize = CGSize(width: UIScreen.main.bounds.width - 64, height: 30)
 	}
 	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
