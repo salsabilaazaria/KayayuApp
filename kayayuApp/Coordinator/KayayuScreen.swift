@@ -157,8 +157,8 @@ final class KayayuScreen {
 		return controller
 	}
 	
-	func makeSubscriptionPageViewController() -> UIViewController {
-		let controller = SubscriptionViewController()
+    func makeSubscriptionPageViewController(viewModel: ProfileViewModel) -> UIViewController {
+		let controller = SubscriptionViewController(viewModel: ProfileViewModel)
 		return controller
 	}
 	

@@ -15,15 +15,28 @@ class SubscriptionCellNode: ASCellNode {
 	private let typeSubs: ASTextNode = ASTextNode()
 	private let endDateSubs: ASTextNode = ASTextNode()
 	private let dueDate: ASTextNode = ASTextNode()
+    
+    private let subsData: RecurringTransactions
 	
-	override init() {
-		super.init()
-		
-		configureInformation()
-		
-		backgroundColor = .white
-		automaticallyManagesSubnodes = true
-	}
+//	override init() {
+//		super.init()
+//
+//		configureInformation()
+//
+//		backgroundColor = .white
+//		automaticallyManagesSubnodes = true
+//	}
+    
+    init(data: RecurringTransactions){
+        self.subsData = data
+        super.init()
+        
+        configureInformation()
+        
+        backgroundColor = .white
+        automaticallyManagesSubnodes = true
+    }
+    
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
 
 		let mainSpec = ASStackLayoutSpec(direction: .vertical,

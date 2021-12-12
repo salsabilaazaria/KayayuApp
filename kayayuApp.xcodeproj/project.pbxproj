@@ -75,6 +75,7 @@
 		AFC65DB52747ABBA0050769D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC65DB42747ABBA0050769D /* LoginViewController.swift */; };
 		AFC65DBA2747ABCA0050769D /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC65DB92747ABCA0050769D /* RegisterViewController.swift */; };
 		AFC65DC02747B35F0050769D /* HomeComponentNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC65DBF2747B35F0050769D /* HomeComponentNode.swift */; };
+		FD2C4EBA276388ED00A8C50F /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2C4EB9276388ED00A8C50F /* ProfileViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -165,6 +166,7 @@
 		C38129C91BEF170882976105 /* Pods-kayayuApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuApp.release.xcconfig"; path = "Target Support Files/Pods-kayayuApp/Pods-kayayuApp.release.xcconfig"; sourceTree = "<group>"; };
 		CD62154645A87E11302368DD /* Pods-kayayuApp-kayayuAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuApp-kayayuAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-kayayuApp-kayayuAppUITests/Pods-kayayuApp-kayayuAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		E5EF96CDCC12CC6B377D880A /* Pods-kayayuApp-kayayuAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuApp-kayayuAppUITests.release.xcconfig"; path = "Target Support Files/Pods-kayayuApp-kayayuAppUITests/Pods-kayayuApp-kayayuAppUITests.release.xcconfig"; sourceTree = "<group>"; };
+		FD2C4EB9276388ED00A8C50F /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -330,6 +332,7 @@
 			children = (
 				0A2D89A6275F424B00F1F9C7 /* AuthenticationViewModel.swift */,
 				0A2D89A7275F424B00F1F9C7 /* HomeViewModel.swift */,
+				FD2C4EB9276388ED00A8C50F /* ProfileViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -719,6 +722,7 @@
 				AF0201982742545C0033D067 /* TransactionCellNode.swift in Sources */,
 				0A2D89F8275F42F600F1F9C7 /* KayayuModel.swift in Sources */,
 				AF020193274252C60033D067 /* TransactionTableNode.swift in Sources */,
+				FD2C4EBA276388ED00A8C50F /* ProfileViewModel.swift in Sources */,
 				0A337AB9275E503900B04508 /* ProfileNode.swift in Sources */,
 				AF52E8EF2761011800D5DCE7 /* UIImageHelper.swift in Sources */,
 				0A8D94E7274D26F300BB55FC /* StatsNode.swift in Sources */,

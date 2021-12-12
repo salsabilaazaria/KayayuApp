@@ -10,7 +10,12 @@ import AsyncDisplayKit
 
 class SubscriptionTableNode: ASTableNode {
 	
-	init() {
+    private let viewModel: ProfileViewModel
+    private let subsTable: SubscriptionTableNode
+    
+    init(viewModel: ProfileViewModel) {
+        self.viewModel = viewModel
+        self.subsTable = SubscriptionTableNode(viewModel: ProfileViewModel)
 		super.init(style: .plain)
 		self.delegate = self
 		self.dataSource = self

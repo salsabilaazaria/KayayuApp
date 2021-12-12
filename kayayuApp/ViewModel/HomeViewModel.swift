@@ -27,8 +27,8 @@ class HomeViewModel {
     
 	init() {
 		self.getUserData()
-//		self.getTransactionData()
-        self.getTransactionDataSpecMonth(diff: 11) //diff masukin month yg mo ditampilin
+		self.getTransactionData()
+//        self.getTransactionDataSpecMonth(diff: 11) //diff masukin month yg mo ditampilin
 		self.configureObserver()
 	}
 	

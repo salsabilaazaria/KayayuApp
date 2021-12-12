@@ -17,7 +17,7 @@ class CalendarHelper {
         let components:NSDateComponents = calendar.dateComponents([.year, .month], from: Date()) as NSDateComponents
         components.hour = 7
         
-//        print("CurrStart: \(calendar.date(from: components as DateComponents)!)")
+        print("CurrStart: \(calendar.date(from: components as DateComponents)!)")
         return calendar.date(from: components as DateComponents)!
     }
     
@@ -28,7 +28,7 @@ class CalendarHelper {
         components.minute = 59
         components.second = 59
         
-//        print("CurrEnd: \(calendar.date(from: components as DateComponents)!)")
+        print("CurrEnd: \(calendar.date(from: components as DateComponents)!)")
         return calendar.date(from: components as DateComponents)!
     }
     
