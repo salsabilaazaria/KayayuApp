@@ -47,7 +47,8 @@ public final class KayayuCoordinator {
 				case .onCreateTabBar:
 					DispatchQueue.main.async {
 						let homeViewModel = HomeViewModel()
-						let controller = screen.makeTabBarViewController(homeViewModel: homeViewModel)
+						let profileViewModel = ProfileViewModel()
+						let controller = screen.makeTabBarViewController(homeViewModel: homeViewModel, profileViewModel: profileViewModel)
 						self.navigationController.pushViewController(controller, animated: true)
 					}
 				case .onOpenHomePage:
@@ -90,15 +91,15 @@ public final class KayayuCoordinator {
 						self.navigationController.pushViewController(controller, animated: true)
 						
 					}
-				case .onOpenProfilePage:
+				case .onOpenProfilePage(let viewModel):
 					DispatchQueue.main.async {
-						let controller = screen.makeProfileViewController()
+						let controller = screen.makeProfileViewController(viewModel: viewModel)
 						self.navigationController.pushViewController(controller, animated: true)
 						
 					}
-				case .onOpenSubscriptionPage:
+				case .onOpenSubscriptionPage(let viewModel):
 					DispatchQueue.main.async {
-						let controller = screen.makeSubscriptionPageViewController()
+						let controller = screen.makeSubscriptionPageViewController(viewModel: viewModel)
 						self.navigationController.pushViewController(controller, animated: true)
 						
 					}

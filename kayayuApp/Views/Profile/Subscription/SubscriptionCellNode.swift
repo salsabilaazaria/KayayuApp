@@ -17,15 +17,6 @@ class SubscriptionCellNode: ASCellNode {
 	private let dueDate: ASTextNode = ASTextNode()
     
     private let subsData: RecurringTransactions
-	
-//	override init() {
-//		super.init()
-//
-//		configureInformation()
-//
-//		backgroundColor = .white
-//		automaticallyManagesSubnodes = true
-//	}
     
     init(data: RecurringTransactions){
         self.subsData = data
@@ -93,11 +84,12 @@ class SubscriptionCellNode: ASCellNode {
 	
 	private func configureInformation() {
 		subscriptionName.attributedText = NSAttributedString.bold("Subscription", 14, .black)
-		amountSubs.attributedText = NSAttributedString.normal("Rp", 14, .black)
-		dateSubs.attributedText = NSAttributedString.normal("Billing Date:", 14, .black)
-		typeSubs.attributedText = NSAttributedString.normal("Billed ", 14, .black)
-		endDateSubs.attributedText = NSAttributedString.normal("End of Subscription Date: ", 14, .black)
+		amountSubs.attributedText = NSAttributedString.normal("Rp\(subsData.total_amount)", 14, .black)
+		dateSubs.attributedText = NSAttributedString.normal("Billing Date: \(subsData.start_billing_date)", 14, .black)
+		typeSubs.attributedText = NSAttributedString.normal("Billed: \(subsData.billing_type)", 14, .black)
 		
+		//need to prepare data
+		endDateSubs.attributedText = NSAttributedString.normal("End of Subscription Date: ", 14, .black)
 		dueDate.attributedText = NSAttributedString.normal("Due in", 14, .black)
 	}
 	

@@ -13,19 +13,29 @@ import FirebaseFirestoreSwift
 import RxCocoa
 import RxSwift
 
-class ProfileViewModel{
+class ProfileViewModel {
     var reloadUI: (() -> Void)?
     
     let database = Firestore.firestore()
     let calendarHelper = CalendarHelper()
     var user: BehaviorRelay<Users?> = BehaviorRelay<Users?>(value: nil)
-    var RecurringData: BehaviorRelay<[RecurringTransactions]?> = BehaviorRelay<[RecurringTransactions]?>(value: nil)
+    var recurringData: BehaviorRelay<[RecurringTransactions]?> = BehaviorRelay<[RecurringTransactions]?>(value: nil)
     
     init() {
         self.getUserData()
         self.getRecurringSubsData()
         self.getRecurringInstlData()
+		// UNCOMMENT IF DATA STILL NOT SHOW IN UI
+//		self.configureObserver()
     }
+	
+	//UNCOMMENT IF DATA STILL NOT SHOW IN UI
+//	private func configureObserver() {
+//		self.recurringData.asObservable().subscribe(onNext: {
+//			self.reloadUI?()
+//		})
+//	}
+	
     
     private func getUserId() -> String{
         guard let userId = Auth.auth().currentUser?.uid else { return "" }
@@ -78,7 +88,7 @@ class ProfileViewModel{
                     print("\(document.data())")
                     
                 }
-                self.RecurringData.accept(docummentArray)
+                self.recurringData.accept(docummentArray)
             }
         }
     }
@@ -108,7 +118,7 @@ class ProfileViewModel{
                     print("\(document.data())")
                     
                 }
-                self.RecurringData.accept(docummentArray)
+                self.recurringData.accept(docummentArray)
             }
         }
     }

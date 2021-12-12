@@ -14,13 +14,16 @@ class ProfileViewController: ASDKViewController<ASDisplayNode> {
 	var onOpenInstallmentPage: (() -> Void)?
 	
 	private let profileNode: ProfileNode = ProfileNode()
+	let viewModel: ProfileViewModel?
 	
-	override init() {
+	init(viewModel: ProfileViewModel) {
+		self.viewModel = viewModel
 		super.init(node: profileNode)
 		configureNode()
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
+		self.viewModel = nil
 		super.init(coder: aDecoder)
 	}
 	

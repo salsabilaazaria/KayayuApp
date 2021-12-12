@@ -21,8 +21,8 @@ final class KayayuScreen {
 		case onOpenRegisterPage
 		case onOpenStatsPage
 		case onOpenAddRecordPage
-		case onOpenProfilePage
-		case onOpenSubscriptionPage
+		case onOpenProfilePage(viewModel: ProfileViewModel)
+		case onOpenSubscriptionPage(viewModel: ProfileViewModel)
 		case onOpenInstallmentPage
 	}
 	
@@ -36,16 +36,18 @@ final class KayayuScreen {
 		return controller
 	}
 	
-	func makeTabBarViewController(homeViewModel: HomeViewModel) -> UITabBarController {
+	func makeTabBarViewController(homeViewModel: HomeViewModel, profileViewModel: ProfileViewModel) -> UITabBarController {
 		tabBarController.edgesForExtendedLayout = []
 
 		let home = makeHomePageViewController(viewModel: homeViewModel)
 		home.tabBarItem.image = UIImage(named: "homeUnselected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize)
 		home.tabBarItem.selectedImage = UIImage(named: "homeSelected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize)
+		
 		let stats = makeStatsPageViewController()
 		stats.tabBarItem.image = UIImage(named: "statsUnselected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize)
 		stats.tabBarItem.selectedImage = UIImage(named: "statsSelected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize)
-		let profile = makeProfileViewController()
+		
+		let profile = makeProfileViewController(viewModel: profileViewModel)
 		profile.tabBarItem.image = UIImage(named: "accUnselected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize)
 		profile.tabBarItem.selectedImage = UIImage(named: "accSelected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize)
 		
@@ -133,14 +135,14 @@ final class KayayuScreen {
 		return controller
 	}
 	
-	func makeProfileViewController() -> UIViewController {
-		let controller = ProfileViewController()
+	func makeProfileViewController(viewModel: ProfileViewModel) -> UIViewController {
+		let controller = ProfileViewController(viewModel: viewModel)
 		controller.title = "Profile"
 		controller.onOpenSubscriptionPage = { [weak self] in
 			guard let self = self else {
 				return
 			}
-			self.onNavigationEvent?(.onOpenSubscriptionPage)
+			self.onNavigationEvent?(.onOpenSubscriptionPage(viewModel: viewModel))
 		}
 		
 		controller.onOpenInstallmentPage = { [weak self] in
@@ -158,7 +160,7 @@ final class KayayuScreen {
 	}
 	
     func makeSubscriptionPageViewController(viewModel: ProfileViewModel) -> UIViewController {
-		let controller = SubscriptionViewController(viewModel: ProfileViewModel)
+		let controller = SubscriptionViewController(viewModel: viewModel)
 		return controller
 	}
 	

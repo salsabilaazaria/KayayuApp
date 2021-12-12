@@ -11,16 +11,23 @@ import AsyncDisplayKit
 class SubscriptionTableNode: ASTableNode {
 	
     private let viewModel: ProfileViewModel
-    private let subsTable: SubscriptionTableNode
     
     init(viewModel: ProfileViewModel) {
         self.viewModel = viewModel
-        self.subsTable = SubscriptionTableNode(viewModel: ProfileViewModel)
 		super.init(style: .plain)
 		self.delegate = self
 		self.dataSource = self
+		
+		configureObserver()
+		
 		automaticallyManagesSubnodes = true
 		backgroundColor = .white
+	}
+	
+	private func configureObserver() {
+		viewModel.reloadUI = {
+			self.reloadData()
+		}
 	}
 	
 }
@@ -28,11 +35,18 @@ class SubscriptionTableNode: ASTableNode {
 extension SubscriptionTableNode: ASTableDataSource, ASTableDelegate {
 	
 	func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
-		return 10
+		guard let subsDataCount = viewModel.recurringData.value?.count else {
+			return 0
+		}
+		return subsDataCount
 	}
 	
 	func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
-		let cellNode = SubscriptionCellNode()
+		guard let allSubsData = viewModel.recurringData.value else {
+			return ASCellNode()
+		}
+		let subsData = allSubsData[indexPath.row]
+		let cellNode = SubscriptionCellNode(data: subsData)
 		return cellNode
 	}
 	

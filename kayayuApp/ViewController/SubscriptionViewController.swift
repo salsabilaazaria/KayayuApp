@@ -10,35 +10,20 @@ import Foundation
 import AsyncDisplayKit
 
 class SubscriptionViewController: ASDKViewController<ASDisplayNode> {
-//    private let homeNode: HomeNode?
-//    private let viewModel: HomeViewModel?
-//    var onOpenAddRecordPage: (() -> Void)?
-//
-//    init(viewModel: HomeViewModel) {
-//        self.viewModel = viewModel
-//        self.homeNode = HomeNode(viewModel: viewModel)
-//
-//        super.init(node: homeNode ?? ASDisplayNode())
-//
-//        configureHomeNode()
-//    }
-    
-//    private let subsNode: SubscriptionTableNode?
-    private let subsNode: SubscriptionTableNode = SubscriptionTableNode(viewModel: ProfileViewModel)
+
+    private let subsNode: SubscriptionTableNode?
     private let viewModel: ProfileViewModel?
     
     init(viewModel: ProfileViewModel){
         self.viewModel = viewModel
-        self.subsNode = SubscriptionTableNode(viewModel: ProfileViewModel)
+        self.subsNode = SubscriptionTableNode(viewModel: viewModel)
 
         super.init(node: subsNode ?? ASDisplayNode())
     }
-    
-//	override init() {
-//		super.init(node: subsNode)
-//	}
-	
+
 	required init?(coder aDecoder: NSCoder) {
+		self.subsNode = nil
+		self.viewModel = nil
 		super.init(coder: aDecoder)
 	}
 	
