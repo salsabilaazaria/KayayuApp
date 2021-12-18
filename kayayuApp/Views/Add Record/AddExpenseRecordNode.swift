@@ -145,23 +145,38 @@ class AddExpenseRecordNode: ASDisplayNode {
 	@objc func saveButtonTapped() {
 		let paymentType = self.paymenTypeValue.value
 			
-		guard let ratio = ratio,
+		guard let category = ratio,
 			  let date = self.dateInputTextField.textView.text,
 			  let desc = self.descriptionInputTextField.textView.text else {
 			return
 		}
 		
+		let timeInputted = calendarHelper.stringToDateAndTime(dateString: "\(date) \(calendarHelper.getCurrentTimeString())")
+		
 		switch  paymentType {
 		case .oneTime:
-			guard let amount = self.amountInputTextField.textView.text else {
+			guard let amount = Float(self.amountInputTextField.textView.text) else {
 				return
 			}
-			print("onetime")
+			self.viewModel.addTransactionData(category: category,
+											  income_flag: false,
+											  transaction_date: timeInputted,
+											  description: desc,
+											  recurring_flag: false,
+											  amount: amount)
 		case .subscription:
-			guard let subsDuration = self.durationInputTextField.textView.text,
-				  let recurringType = self.recurringTypeString else {
+			guard let subsDuration = Int(self.durationInputTextField.textView.text),
+				  let recurringType = self.recurringTypeString,
+				  let amount = Float(self.amountInputTextField.textView.text) else {
 				return
 			}
+			
+			self.viewModel.addRecurringSubsData(total_amount: amount,
+												billing_type: recurringType,
+												start_billing_date: timeInputted,
+												tenor: subsDuration,
+												category: category,
+												description: desc)
 		case .installment:
 			guard let totalAmount = self.totalAmountInputTextField.textView.text,
 				  let interest = self.interestInputTextField.textView.text,

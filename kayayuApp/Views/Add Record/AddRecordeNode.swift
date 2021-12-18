@@ -31,7 +31,7 @@ class AddRecordeNode: ASDisplayNode {
 		
 		configureIncomeButton()
 		configureExpenseButton()
-		onfigureNode()
+		configureNode()
 
 		automaticallyManagesSubnodes = true
 		

@@ -363,6 +363,8 @@ class HomeViewModel {
         } catch {
             print("Error setting next transaction data to transactionDetail firestore \(error)")
         }
+		
+		self.onOpenHomePage?()
     }
     
     
