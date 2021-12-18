@@ -45,8 +45,12 @@ class AddRecordeNode: ASDisplayNode {
 		var statsElementArray: [ASLayoutElement] = [buttonStack]
 		
 		if goToIncomePage {
+			incomeButton.setAttributedTitle(NSAttributedString.semibold("INCOME", 16, .systemGreen), for: .normal)
+			expenseButton.setAttributedTitle(NSAttributedString.semibold("EXPENSE", 16, .black), for: .normal)
 			statsElementArray.append(incomeNode)
 		} else {
+			incomeButton.setAttributedTitle(NSAttributedString.semibold("INCOME", 16, .black), for: .normal)
+			expenseButton.setAttributedTitle(NSAttributedString.semibold("EXPENSE", 16, .systemRed), for: .normal)
 			statsElementArray.append(expenseNode)
 		}
 		
@@ -70,11 +74,10 @@ class AddRecordeNode: ASDisplayNode {
 		incomeButton.cornerRadius = 5
 		incomeButton.borderWidth = kayayuSize.kayayuBorderWidth
 		incomeButton.borderColor = UIColor.black.cgColor
-		incomeButton.setAttributedTitle(NSAttributedString.semibold("INCOME", 16, .black), for: .normal)
-		incomeButton.addTarget(self, action: #selector(planButtonTapped), forControlEvents: .touchUpInside)
+		incomeButton.addTarget(self, action: #selector(incomeButtonTapped), forControlEvents: .touchUpInside)
 	}
 	
-	@objc func planButtonTapped(sender: ASButtonNode) {
+	@objc func incomeButtonTapped(sender: ASButtonNode) {
 		goToIncomePage = true
 		self.reloadUI()
 		print("Plan")
