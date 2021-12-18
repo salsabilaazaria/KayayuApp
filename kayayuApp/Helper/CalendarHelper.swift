@@ -14,43 +14,43 @@ class CalendarHelper {
    
     func getCurrStartMonth() -> Date {
         
-        let components:DateComponents = calendar.dateComponents([.year, .month], from: Date())
-//        components.hour = 7 //ini harus di +7 soalny current time ambil di greenwich jd kurang 7 jem
+        var components:DateComponents = calendar.dateComponents([.year, .month], from: Date())
+        components.hour = 7 //ini harus di +7 soalny current time ambil di greenwich jd kurang 7 jem
         
-        print("\(Date()) asd CurrStart: \(calendar.date(from: components )!)")
-        return calendar.date(from: components )!
+        print("asd CurrStart: \(calendar.date(from: components)!)")
+        return calendar.date(from: components)!
     }
     
     func getCurrEndMonth() -> Date {
-        let components:NSDateComponents = calendar.dateComponents([.year, .month], from: Date()) as NSDateComponents
-        components.month += 1
-//        components.hour = 6
-//        components.minute = 59
-//        components.second = 59
+        var components:DateComponents = calendar.dateComponents([.year, .month], from: Date())
+        components.month! += 1
+        components.hour = 6
+        components.minute = 59
+        components.second = 59
         
-        print("asd CurrEnd: \(calendar.date(from: components as DateComponents)!)")
-        return calendar.date(from: components as DateComponents)!
+        print("asd CurrEnd: \(calendar.date(from: components)!)")
+        return calendar.date(from: components)!
     }
     
     
     func getSpecStartMonth(diff: Int) -> Date {
-        let components:NSDateComponents = calendar.dateComponents([.year, .month], from: Date()) as NSDateComponents
+        var components:DateComponents = calendar.dateComponents([.year, .month], from: Date())
         components.month = diff
-//        components.hour = 7
+        components.hour = 7
         
-        print("asd SpecStart: \(calendar.date(from: components as DateComponents)!)")
+        print("asd SpecStart: \(calendar.date(from: components)!)")
         return calendar.date(from: components as DateComponents)!
     }
     
     func getSpecEndMonth(diff: Int) -> Date {
-        let components:NSDateComponents = calendar.dateComponents([.year, .month], from: Date()) as NSDateComponents
+        var components:DateComponents = calendar.dateComponents([.year, .month], from: Date())
         components.month = diff+1
-//        components.hour = 6
-//        components.minute = 59
-//        components.second = 59
+        components.hour = 6
+        components.minute = 59
+        components.second = 59
         
-        print("asd SpecEnd: \(calendar.date(from: components as DateComponents)!)")
-        return calendar.date(from: components as DateComponents)!
+        print("asd SpecEnd: \(calendar.date(from: components)!)")
+        return calendar.date(from: components)!
     }
     
 	func plusMonth(date: Date) -> Date {
@@ -92,7 +92,7 @@ class CalendarHelper {
 	func formatFullDate(date: Date) -> String {
 		
 		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
+		dateFormatter.dateFormat = "dd/MM/yyyy"
 		dateFormatter.calendar = Calendar(identifier: .gregorian)
 		
 		return dateFormatter.string(from: date)
