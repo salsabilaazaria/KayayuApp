@@ -11,6 +11,7 @@ import AsyncDisplayKit
 class ProfileNode: ASDisplayNode {
 	var onOpenSubscriptionPage: (() -> Void)?
 	var onOpenInstallmentPage: (() -> Void)?
+    var onLogout: (() -> Void)?
 	
 	private let username: ASTextNode = ASTextNode()
 	private let email: ASTextNode = ASTextNode()
@@ -122,11 +123,11 @@ class ProfileNode: ASDisplayNode {
 	
 	private func configureLogoutNode() {
 		logoutNode = ProfileCellNode(icon: "logout.png", title: "Logout")
-		logoutNode.buttonNode.addTarget(self, action: #selector(installmentTapped), forControlEvents: .touchUpInside)
+		logoutNode.buttonNode.addTarget(self, action: #selector(logoutTapped), forControlEvents: .touchUpInside)
 	}
 	
 	@objc func logoutTapped(sender: ASButtonNode) {
-		self.onOpenInstallmentPage?()
+        self.onLogout?()
 	}
 	
 	

@@ -151,6 +151,14 @@ final class KayayuScreen {
 			}
             self.onNavigationEvent?(.onOpenInstallmentPage(viewModel: viewModel))
 		}
+        
+        controller.onLogout = { [weak self] in
+            guard let self = self else {
+                return
+            }
+            self.onNavigationEvent?(.onOpenLandingPage)
+        }
+        
 		return controller
 	}
 	

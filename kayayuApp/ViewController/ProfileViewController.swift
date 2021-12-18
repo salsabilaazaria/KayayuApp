@@ -12,6 +12,7 @@ class ProfileViewController: ASDKViewController<ASDisplayNode> {
 	
 	var onOpenSubscriptionPage: (() -> Void)?
 	var onOpenInstallmentPage: (() -> Void)?
+    var onLogout: (() -> Void)?
 	
 	private let profileNode: ProfileNode = ProfileNode()
 	let viewModel: ProfileViewModel?
@@ -34,6 +35,9 @@ class ProfileViewController: ASDKViewController<ASDisplayNode> {
 		profileNode.onOpenInstallmentPage = { [weak self] in
 			self?.onOpenInstallmentPage?()
 		}
+        profileNode.onLogout = { [weak self] in
+            self?.onLogout?()
+        }
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
