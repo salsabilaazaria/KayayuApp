@@ -26,7 +26,7 @@ struct Transactions: Codable {
     var income_flag: Bool?
     var transaction_date: Date?
     var description: String?
-    var reccuring_flag: Bool?
+    var recurring_flag: Bool?
     var amount: Float?
 }
 
