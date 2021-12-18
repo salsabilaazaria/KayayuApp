@@ -19,7 +19,7 @@ class HomeViewModel {
 	var reloadUI: (() -> Void)?
 	
 	let database = Firestore.firestore()
-    let calendarHelper = CalendarHelper()
+    private let calendarHelper = CalendarHelper()
 	var user: BehaviorRelay<Users?> = BehaviorRelay<Users?>(value: nil)
 	var transactionsData: BehaviorRelay<[Transactions]?> = BehaviorRelay<[Transactions]?>(value: nil)
 	var dictTransactionData: BehaviorRelay<[TransactionDateDictionary]?> = BehaviorRelay<[TransactionDateDictionary]?>(value: nil)
@@ -27,8 +27,7 @@ class HomeViewModel {
 	
 	
 	var userBalanceTotal: Float = 0
-	
-	private let calendarHelper: CalendarHelper = CalendarHelper()
+
 	
 	init() {
 		self.getUserData()
