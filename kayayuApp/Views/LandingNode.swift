@@ -9,7 +9,6 @@ import Foundation
 import AsyncDisplayKit
 
 class LandingNode: ASDisplayNode {
-	//ngajarin angie
 	var onOpenLoginPage: (() -> Void)?
 	var onOpenRegisterPage: (() -> Void)?
 	

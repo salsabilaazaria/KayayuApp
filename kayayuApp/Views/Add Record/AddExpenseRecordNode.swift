@@ -178,12 +178,20 @@ class AddExpenseRecordNode: ASDisplayNode {
 												category: category,
 												description: desc)
 		case .installment:
-			guard let totalAmount = self.totalAmountInputTextField.textView.text,
-				  let interest = self.interestInputTextField.textView.text,
-				  let tenor = self.tenorInputTextField.textView.text,
+			guard let totalAmount = Float(self.totalAmountInputTextField.textView.text),
+				  let interest = Int(self.interestInputTextField.textView.text),
+				  let tenor = Int(self.tenorInputTextField.textView.text),
 				  let recurringType = self.recurringTypeString else {
 				return
 			}
+			//feli, kalau mau ubah parameter add installment
+			self.viewModel.addRecurringInstData(total_amount: totalAmount,
+												billing_type: recurringType,
+												start_billing_date: timeInputted,
+												tenor: tenor,
+												category: category,
+												description: desc,
+												interest: interest)
 		default:
 			break
 			

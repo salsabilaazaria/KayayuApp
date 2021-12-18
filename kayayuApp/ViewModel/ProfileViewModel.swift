@@ -129,7 +129,7 @@ class ProfileViewModel {
                         print("error")
                     }
                 }
-                print("subs due: \(documentArray)")
+//                print("subs due: \(documentArray)")
 
                 self.detailTrans.accept(documentArray)
                 
@@ -145,7 +145,7 @@ class ProfileViewModel {
             return Date()
         }
 
-        print("next subs due: \(nextBillDate)")
+//        print("next subs due: \(nextBillDate)")
         return nextBillDate
     }
     

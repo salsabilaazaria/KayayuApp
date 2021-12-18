@@ -31,7 +31,7 @@ class TransactionDateCellNode: ASDisplayNode {
 		borderWidth = 1
 		borderColor = kayayuColor.softGrey.cgColor
 		
-		backgroundColor = .cyan
+		backgroundColor = .white
 		automaticallyManagesSubnodes = true
 		
 		style.preferredSize = CGSize(width: UIScreen.main.bounds.width - 64, height: 30)
@@ -63,7 +63,12 @@ class TransactionDateCellNode: ASDisplayNode {
 		
 		mainSpec.style.preferredSize = CGSize(width: UIScreen.main.bounds.width - 24, height: 30)
 		
-		return mainSpec
+		let insetMain = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0,
+															   left: 16,
+															   bottom: 0,
+															   right: 16), child: mainSpec)
+		
+		return insetMain
 	}
 	
 	private func configureDatetext() {
