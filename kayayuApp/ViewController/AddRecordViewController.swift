@@ -9,6 +9,8 @@ import Foundation
 import AsyncDisplayKit
 
 class AddRecordViewController:ASDKViewController<ASDisplayNode> {
+	var onOpenHomePage: (() -> Void)?
+	
 	private let addRecordNode: AddRecordeNode?
 	private let viewModel: HomeViewModel?
 	
@@ -16,12 +18,20 @@ class AddRecordViewController:ASDKViewController<ASDisplayNode> {
 		self.viewModel = viewModel
 		self.addRecordNode = AddRecordeNode(viewModel: viewModel)
 		super.init(node: addRecordNode ?? ASDisplayNode())
+		configureNode()
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
 		self.viewModel = nil
 		self.addRecordNode = nil
 		super.init(coder: aDecoder)
+	}
+	
+	private func configureNode() {
+		addRecordNode?.onOpenHomePage = { [weak self] in
+			self?.onOpenHomePage?()
+			
+		}
 	}
 	
 	override func viewDidLoad() {

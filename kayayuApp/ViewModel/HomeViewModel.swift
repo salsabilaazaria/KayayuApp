@@ -16,6 +16,7 @@ import RxSwift
 
 
 class HomeViewModel {
+	var onOpenHomePage: (() -> Void)?
 	var reloadUI: (() -> Void)?
 	
 	let database = Firestore.firestore()
@@ -225,6 +226,7 @@ class HomeViewModel {
         
         do {
             try database.collection("transactions").document(ref!.documentID).setData(from: data)
+			self.onOpenHomePage?()
         } catch {
             print("Error setting data to transactions firestore \(error)")
         }

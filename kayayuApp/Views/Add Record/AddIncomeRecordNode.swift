@@ -9,6 +9,8 @@ import AsyncDisplayKit
 import iOSDropDown
 
 class AddIncomeRecordNode: ASDisplayNode {
+	var onOpenHomePage: (() -> Void)?
+	
 	private let dateTitle: ASTextNode = ASTextNode()
 	private let descTitle: ASTextNode = ASTextNode()
 	private let amountTitle: ASTextNode = ASTextNode()
@@ -30,11 +32,15 @@ class AddIncomeRecordNode: ASDisplayNode {
 	
 	private var ratio: String?
 	
-	override init() {
+	private let viewModel: HomeViewModel
+	
+	init(viewModel: HomeViewModel) {
+		self.viewModel = viewModel
 		super.init()
 		automaticallyManagesSubnodes = true
 		configureToolBar()
 		configureSaveButton()
+		configureViewModel()
 	}
 
 	
@@ -69,6 +75,12 @@ class AddIncomeRecordNode: ASDisplayNode {
 		return insetMainSpec
 	}
 	
+	private func configureViewModel() {
+		viewModel.onOpenHomePage = { [weak self] in
+			self?.onOpenHomePage?()
+		}
+	}
+	
 	private func configureToolBar() {
 		toolBar.sizeToFit()
 		let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(doneKeyboardTapped))
@@ -87,13 +99,20 @@ class AddIncomeRecordNode: ASDisplayNode {
 	}
 	
 	@objc func saveButtonTapped() {
-		guard let ratio = ratio,
+		guard let category = ratio,
 			  let date = self.dateInputTextField.textView.text,
 			  let desc = self.descriptionInputTextField.textView.text,
-			  let amount = self.amountInputTextField.textView.text else {
+			  let amount = Float(self.amountInputTextField.textView.text) else {
 			return
 		}
 
+		let timeInputted = calendarHelper.stringToDateAndTime(dateString: "\(date) \(calendarHelper.getCurrentTimeString())")
+		self.viewModel.addTransactionData(category: category,
+										  income_flag: true,
+										  transaction_date: timeInputted,
+										  description: desc,
+										  recurring_flag: false,
+										  amount: amount)
 	}
 	
 	private func createRatioCategorySpec() -> ASLayoutSpec{

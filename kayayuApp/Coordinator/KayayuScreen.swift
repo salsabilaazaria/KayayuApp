@@ -164,6 +164,13 @@ final class KayayuScreen {
 	
 	func makeAddRecordPageViewController(viewModel: HomeViewModel) -> UIViewController {
 		let controller = AddRecordViewController(viewModel: viewModel)
+		
+		controller.onOpenHomePage = { [weak self] in
+			guard let self = self else {
+				return
+			}
+			self.onNavigationEvent?(.onOpenHomePage)
+		}
 		return controller
 	}
 	

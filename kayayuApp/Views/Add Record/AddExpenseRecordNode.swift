@@ -12,6 +12,7 @@ import RxRelay
 import RxSwift
 
 class AddExpenseRecordNode: ASDisplayNode {
+	var onOpenHomePage: (() -> Void)?
 	private let dateTitle: ASTextNode = ASTextNode()
 	private let descTitle: ASTextNode = ASTextNode()
 	private let amountTitle: ASTextNode = ASTextNode()
@@ -47,14 +48,17 @@ class AddExpenseRecordNode: ASDisplayNode {
 	private var recurringTypeString: String?
 	
 	private let disposeBag = DisposeBag()
+	private let viewModel: HomeViewModel
 
-	override init() {
+	init(viewModel: HomeViewModel) {
+		self.viewModel = viewModel
 		
 		super.init()
 		
 		configureToolBar()
 		configureSaveButton()
 		configureObserver()
+		configureViewModel()
 		
 		backgroundColor = .white
 		automaticallyManagesSubnodes = true
@@ -125,6 +129,12 @@ class AddExpenseRecordNode: ASDisplayNode {
 		let insetMainSpec = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 16, left: 16, bottom: 48, right: 16), child: mainSpec)
 		
 		return insetMainSpec
+	}
+	
+	private func configureViewModel() {
+		viewModel.onOpenHomePage = { [weak self] in
+			self?.onOpenHomePage?()
+		}
 	}
 	
 	private func configureSaveButton() {

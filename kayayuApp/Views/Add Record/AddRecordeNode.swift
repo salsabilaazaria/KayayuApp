@@ -9,10 +9,12 @@ import Foundation
 import AsyncDisplayKit
 
 class AddRecordeNode: ASDisplayNode {
+	var onOpenHomePage: (() -> Void)?
+	
 	private let incomeButton: ASButtonNode = ASButtonNode()
 	private let expenseButton: ASButtonNode = ASButtonNode()
-	private let incomeNode: AddIncomeRecordNode = AddIncomeRecordNode()
-	private let expenseNode: AddExpenseRecordNode = AddExpenseRecordNode()
+	private let incomeNode: AddIncomeRecordNode
+	private let expenseNode: AddExpenseRecordNode
 	
 	private let buttonSize = CGSize(width: UIScreen.main.bounds.width/2, height: kayayuSize.kayayuBarHeight)
 	private var goToIncomePage: Bool = false
@@ -20,6 +22,8 @@ class AddRecordeNode: ASDisplayNode {
 
 	init(viewModel: HomeViewModel) {
 		self.viewModel = viewModel
+		self.incomeNode = AddIncomeRecordNode(viewModel: viewModel)
+		self.expenseNode = AddExpenseRecordNode(viewModel: viewModel)
 		super.init()
 		let nodeSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 200)
 		incomeNode.style.preferredSize = nodeSize
@@ -27,6 +31,7 @@ class AddRecordeNode: ASDisplayNode {
 		
 		configureIncomeButton()
 		configureExpenseButton()
+		onfigureNode()
 
 		automaticallyManagesSubnodes = true
 		
@@ -66,6 +71,16 @@ class AddRecordeNode: ASDisplayNode {
 	private func reloadUI(){
 		self.setNeedsLayout()
 		self.layoutIfNeeded()
+	}
+	
+	private func configureNode() {
+		incomeNode.onOpenHomePage = { [weak self] in
+			self?.onOpenHomePage?()
+		}
+		
+		expenseNode.onOpenHomePage = { [weak self] in
+			self?.onOpenHomePage?()
+		}
 	}
 
 	private func configureIncomeButton() {
