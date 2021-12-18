@@ -16,8 +16,10 @@ class AddRecordeNode: ASDisplayNode {
 	
 	private let buttonSize = CGSize(width: UIScreen.main.bounds.width/2, height: kayayuSize.kayayuBarHeight)
 	private var goToIncomePage: Bool = false
+	private let viewModel: HomeViewModel
 
-	override init() {
+	init(viewModel: HomeViewModel) {
+		self.viewModel = viewModel
 		super.init()
 		let nodeSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 200)
 		incomeNode.style.preferredSize = nodeSize

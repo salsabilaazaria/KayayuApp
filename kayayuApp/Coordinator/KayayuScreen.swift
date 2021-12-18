@@ -162,8 +162,8 @@ final class KayayuScreen {
 		return controller
 	}
 	
-	func makeAddRecordPageViewController() -> UIViewController {
-		let controller = AddRecordViewController()
+	func makeAddRecordPageViewController(viewModel: HomeViewModel) -> UIViewController {
+		let controller = AddRecordViewController(viewModel: viewModel)
 		return controller
 	}
 	

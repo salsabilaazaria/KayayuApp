@@ -9,14 +9,18 @@ import Foundation
 import AsyncDisplayKit
 
 class AddRecordViewController:ASDKViewController<ASDisplayNode> {
-	private let addRecordNode: AddRecordeNode = AddRecordeNode()
+	private let addRecordNode: AddRecordeNode?
+	private let viewModel: HomeViewModel?
 	
-	override init() {
-		
-		super.init(node: addRecordNode)
+	init(viewModel: HomeViewModel) {
+		self.viewModel = viewModel
+		self.addRecordNode = AddRecordeNode(viewModel: viewModel)
+		super.init(node: addRecordNode ?? ASDisplayNode())
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
+		self.viewModel = nil
+		self.addRecordNode = nil
 		super.init(coder: aDecoder)
 	}
 	

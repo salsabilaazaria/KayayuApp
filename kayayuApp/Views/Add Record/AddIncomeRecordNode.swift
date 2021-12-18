@@ -28,6 +28,8 @@ class AddIncomeRecordNode: ASDisplayNode {
 	private let datePicker = UIDatePicker()
 	private let calendarHelper = CalendarHelper()
 	
+	private var ratio: String?
+	
 	override init() {
 		super.init()
 		automaticallyManagesSubnodes = true
@@ -81,10 +83,17 @@ class AddIncomeRecordNode: ASDisplayNode {
 	
 	private func configureSaveButton() {
 		saveButton = BigButton(buttonText: "SAVE", buttonColor: kayayuColor.yellow, borderColor: kayayuColor.yellow)
+		saveButton.addTarget(self, action: #selector(saveButtonTapped), forControlEvents: .touchUpInside)
 	}
 	
 	@objc func saveButtonTapped() {
-	
+		guard let ratio = ratio,
+			  let date = self.dateInputTextField.textView.text,
+			  let desc = self.descriptionInputTextField.textView.text,
+			  let amount = self.amountInputTextField.textView.text else {
+			return
+		}
+
 	}
 	
 	private func createRatioCategorySpec() -> ASLayoutSpec{
@@ -115,7 +124,7 @@ class AddIncomeRecordNode: ASDisplayNode {
 		ratioCategory.checkMarkEnabled = false
 		ratioCategory.font = UIFont.systemFont(ofSize: 14)
 		ratioCategory.didSelect{(selectedText, index, id) in
-			//logic if dropdown is selected
+			self.ratio = selectedText
 		}
 	}
 	
