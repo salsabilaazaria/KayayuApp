@@ -29,14 +29,6 @@ class ProfileViewModel {
         self.getRecurringInstlData()
         self.getTransactionDetailData()
     }
-	
-	//UNCOMMENT IF DATA STILL NOT SHOW IN UI
-//	private func configureObserver() {
-//		self.recurringData.asObservable().subscribe(onNext: {
-//			self.reloadUI?()
-//		})
-//	}
-	
     
     private func getUserId() -> String{
         guard let userId = Auth.auth().currentUser?.uid else { return "" }

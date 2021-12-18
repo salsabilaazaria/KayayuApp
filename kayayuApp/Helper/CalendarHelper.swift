@@ -46,20 +46,20 @@ class CalendarHelper {
     func getSpecStartMonth(diff: Int) -> Date {
         let components:NSDateComponents = calendar.dateComponents([.year, .month], from: Date()) as NSDateComponents
         components.month = diff
-        components.hour = 7
+//        components.hour = 7
         
-//        print("SpecStart: \(calendar.date(from: components as DateComponents)!)")
+        print("asd SpecStart: \(calendar.date(from: components as DateComponents)!)")
         return calendar.date(from: components as DateComponents)!
     }
     
     func getSpecEndMonth(diff: Int) -> Date {
         let components:NSDateComponents = calendar.dateComponents([.year, .month], from: Date()) as NSDateComponents
         components.month = diff+1
-        components.hour = 6
-        components.minute = 59
-        components.second = 59
+//        components.hour = 6
+//        components.minute = 59
+//        components.second = 59
         
-//        print("SpecEnd: \(calendar.date(from: components as DateComponents)!)")
+        print("asd SpecEnd: \(calendar.date(from: components as DateComponents)!)")
         return calendar.date(from: components as DateComponents)!
     }
     
@@ -102,7 +102,7 @@ class CalendarHelper {
 	func formatFullDate(date: Date) -> String {
 		
 		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "dd/MM/yyyy"
+		dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
 		dateFormatter.calendar = Calendar(identifier: .gregorian)
 		
 		return dateFormatter.string(from: date)
