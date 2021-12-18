@@ -64,9 +64,9 @@ class TransactionDateCellNode: ASDisplayNode {
 		mainSpec.style.preferredSize = CGSize(width: UIScreen.main.bounds.width - 24, height: 30)
 		
 		let insetMain = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0,
-															   left: 16,
+															   left: 8,
 															   bottom: 0,
-															   right: 16), child: mainSpec)
+															   right: 8), child: mainSpec)
 		
 		return insetMain
 	}

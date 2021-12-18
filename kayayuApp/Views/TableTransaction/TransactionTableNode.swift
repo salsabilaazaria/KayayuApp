@@ -105,7 +105,7 @@ extension TransactionTableNode: ASTableDataSource, ASTableDelegate {
 			guard let tempTransactionsData = viewModel.transactionsData.value else {
 				return
 			}
-			//			viewModel.deleteTransactionData(transactionDelete: tempTransactionsData[indexPath.row])
+			viewModel.deleteTransactionData(transactionDelete: tempTransactionsData[indexPath.row])
 			//
 			//			tableView.deleteRows(at: [indexPath], with: .fade)
 		}
