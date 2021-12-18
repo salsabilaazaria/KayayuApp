@@ -32,10 +32,11 @@ struct Transactions: Codable {
 
 struct RecurringTransactions: Codable {
     var recurring_id:String = UUID().uuidString
+    var user_id:String?
     var recurring_type:String?
     var total_amount: Float?
     var billing_type: String?
-    var start_billing_date: String?
+    var start_billing_date: Date?
     var tenor: Int?
     var interest: Float?
 }
@@ -45,7 +46,8 @@ struct TransactionDetail: Codable {
     var transaction_id:String?
     var user_id:String?
     var recurring_id: String?
-    var number_of_installment: String?
+    var billing_date: Date?
+    var number_of_installment: Int?
     var amount: Float?
     var amount_paid: Float?
     var amount_havent_paid: Float?

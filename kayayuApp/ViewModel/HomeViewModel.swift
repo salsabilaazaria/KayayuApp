@@ -71,7 +71,7 @@ class HomeViewModel {
 			}
 			else {
 				var count = 0
-				var docummentArray: [Transactions] = []
+				var documentArray: [Transactions] = []
 				for document in documentSnapshot!.documents {
 					count += 1
 					
@@ -80,14 +80,14 @@ class HomeViewModel {
 							print("KAYAYU failed get transactionData")
 							return
 						}
-						docummentArray.append(trans)
+                        documentArray.append(trans)
 						
 					} catch {
 						print(error)
 					}
 					
 				}
-				self.transactionsData.accept(docummentArray)
+				self.transactionsData.accept(documentArray)
 			}
 		}
 	}
@@ -99,7 +99,7 @@ class HomeViewModel {
             }
             else {
                 var count = 0
-                var docummentArray: [Transactions] = []
+                var documentArray: [Transactions] = []
                 for document in documentSnapshot!.documents {
                     count += 1
                     
@@ -108,14 +108,14 @@ class HomeViewModel {
                             print("KAYAYU failed get transactionData")
                             return
                         }
-                        docummentArray.append(trans)
+                        documentArray.append(trans)
                         
                     } catch {
                         print(error)
                     }
                     
                 }
-                self.transactionsData.accept(docummentArray)
+                self.transactionsData.accept(documentArray)
             }
         }
     }

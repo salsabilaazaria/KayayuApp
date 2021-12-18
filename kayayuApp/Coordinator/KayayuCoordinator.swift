@@ -103,9 +103,9 @@ public final class KayayuCoordinator {
 						self.navigationController.pushViewController(controller, animated: true)
 						
 					}
-				case .onOpenInstallmentPage:
+				case .onOpenInstallmentPage(let viewModel):
 					DispatchQueue.main.async {
-						let controller = screen.makeInstallmentPageViewController()
+						let controller = screen.makeInstallmentPageViewController(viewModel: viewModel)
 						self.navigationController.pushViewController(controller, animated: true)
 						
 					}

@@ -17,10 +17,21 @@ class SubscriptionCellNode: ASCellNode {
 	private let dueDate: ASTextNode = ASTextNode()
     
     private let subsData: RecurringTransactions
+    private let nextBillDate: Date
+    private let dueIn: Int
+//    private let detailSubsData: TransactionDetail
     
-    init(data: RecurringTransactions){
+//    private let viewModel: ProfileViewModel
+    let calendarHelper = CalendarHelper()
+    
+    init(data: RecurringTransactions, nextBillDate: Date, dueIn: Int){
         self.subsData = data
+        self.nextBillDate = nextBillDate
+        self.dueIn = dueIn
+//        self.detailSubsData = detailData
         super.init()
+//        super.init(viewModel: ProfileViewModel)
+//        self.viewModel = viewModel
         
         configureInformation()
         
@@ -83,14 +94,13 @@ class SubscriptionCellNode: ASCellNode {
 	}
 	
 	private func configureInformation() {
-		subscriptionName.attributedText = NSAttributedString.bold("Subscription", 14, .black)
-		amountSubs.attributedText = NSAttributedString.normal("Rp\(subsData.total_amount)", 14, .black)
-		dateSubs.attributedText = NSAttributedString.normal("Billing Date: \(subsData.start_billing_date)", 14, .black)
-		typeSubs.attributedText = NSAttributedString.normal("Billed: \(subsData.billing_type)", 14, .black)
-		
-		//need to prepare data
-		endDateSubs.attributedText = NSAttributedString.normal("End of Subscription Date: ", 14, .black)
-		dueDate.attributedText = NSAttributedString.normal("Due in", 14, .black)
-	}
-	
+        subscriptionName.attributedText = NSAttributedString.bold("Subscription", 14, .black)
+        amountSubs.attributedText = NSAttributedString.normal("Rp\(subsData.total_amount ?? 0)", 14, .black)
+        dateSubs.attributedText = NSAttributedString.normal("Billing Date: \(calendarHelper.formatFullDate(date: nextBillDate))", 14, .black)
+        typeSubs.attributedText = NSAttributedString.normal("Billed: \(subsData.billing_type ?? " ")", 14, .black)
+        endDateSubs.attributedText = NSAttributedString.normal("End of Subscription Date: ", 14, .black)
+        dueDate.attributedText = NSAttributedString.normal("Due in: \(dueIn) days", 14, .black)
+
+    }
+
 }

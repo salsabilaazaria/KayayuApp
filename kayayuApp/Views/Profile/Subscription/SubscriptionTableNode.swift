@@ -35,20 +35,26 @@ class SubscriptionTableNode: ASTableNode {
 extension SubscriptionTableNode: ASTableDataSource, ASTableDelegate {
 	
 	func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
-		guard let subsDataCount = viewModel.recurringData.value?.count else {
+        guard let subsDataCount = viewModel.recurringSubsData.value?.count else {
 			return 0
 		}
 		return subsDataCount
 	}
 	
 	func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
-		guard let allSubsData = viewModel.recurringData.value else {
+		guard let allSubsData = viewModel.recurringSubsData.value else {
 			return ASCellNode()
 		}
+        
+
 		let subsData = allSubsData[indexPath.row]
-		let cellNode = SubscriptionCellNode(data: subsData)
+
+        let nextBillDate = self.viewModel.getNextBillDate(recurringId: subsData.recurring_id)
+        let dueIn = self.viewModel.getDueIn(recurringId: subsData.recurring_id)
+        
+        let cellNode = SubscriptionCellNode(data: subsData, nextBillDate: nextBillDate, dueIn: dueIn)
 		return cellNode
 	}
-	
+    
 }
 

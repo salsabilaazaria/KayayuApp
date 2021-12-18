@@ -18,8 +18,11 @@ class InstallmentCellNode: ASCellNode {
 	private let remainingAmount: ASTextNode = ASTextNode()
 	private let endDateInstallment: ASTextNode = ASTextNode()
 	private let dueDate: ASTextNode = ASTextNode()
+    
+    private let instlData: RecurringTransactions
 	
-	override init() {
+    init(data: RecurringTransactions) {
+        self.instlData = data
 		super.init()
 		
 		configureInformation()
@@ -82,12 +85,12 @@ class InstallmentCellNode: ASCellNode {
 	}
 	
 	private func configureInformation() {
-		installmentName.attributedText = NSAttributedString.bold("Subscription", 14, .black)
-		interest.attributedText = NSAttributedString.normal("Interest: %", 14, .black)
-		billingDateInstallment.attributedText = NSAttributedString.normal("Billing Date:", 14, .black)
-		typeInstallment.attributedText = NSAttributedString.normal("Billed ", 14, .black)
-		remainingAmount.attributedText = NSAttributedString.normal("Remaining Amount: Rp", 14, .black)
-		totalAmount.attributedText = NSAttributedString.normal("Total Amount: Rp", 14, .black)
+		installmentName.attributedText = NSAttributedString.bold("Installment", 14, .black)
+        interest.attributedText = NSAttributedString.normal("Interest: \(instlData.interest ?? 0)%", 14, .black)
+        billingDateInstallment.attributedText = NSAttributedString.normal("Billing Date: \(instlData.start_billing_date?.addingTimeInterval(7 * 3600) ?? Date())", 14, .black)
+        typeInstallment.attributedText = NSAttributedString.normal("Billed: \(instlData.billing_type ?? " ")", 14, .black)
+        remainingAmount.attributedText = NSAttributedString.normal("Remaining Amount: Rp", 14, .black)
+        totalAmount.attributedText = NSAttributedString.normal("Total Amount: Rp\(instlData.total_amount ?? 0)", 14, .black)
 		endDateInstallment.attributedText = NSAttributedString.normal("End of Installment Date: ", 14, .black)
 		
 		dueDate.attributedText = NSAttributedString.normal("Due in", 14, .black)
