@@ -21,6 +21,7 @@ class HomeViewModel {
 	
 	let database = Firestore.firestore()
     private let calendarHelper = CalendarHelper()
+	
 	var user: BehaviorRelay<Users?> = BehaviorRelay<Users?>(value: nil)
 	var transactionsData: BehaviorRelay<[Transactions]?> = BehaviorRelay<[Transactions]?>(value: nil)
 	var dictTransactionData: BehaviorRelay<[TransactionDateDictionary]?> = BehaviorRelay<[TransactionDateDictionary]?>(value: nil)
@@ -43,11 +44,8 @@ class HomeViewModel {
     
 	private func configureObserver() {
 		self.transactionsData.asObservable().subscribe(onNext: { _ in
-			self.getDictionaryTransaction()
-		})
-		
-		self.dictTransactionData.asObservable().subscribe(onNext: { _ in
 			self.reloadUI?()
+			self.getDictionaryTransaction()
 		})
 	}
 	
@@ -373,6 +371,27 @@ class HomeViewModel {
 	}
 	
 	//EXTRAS
+	
+	func calculateIncomePerMonth(date: Date) -> Float{
+		guard let transactionsData = self.transactionsData.value else {
+			return 0
+		}
+		
+		var incomeTotal: Float = 0
+		
+		for transData in transactionsData {
+			if let transDate = transData.transaction_date,
+			   calendarHelper.monthString(date: date) == calendarHelper.monthString(date: transDate),
+			   let incomeFlag = transData.income_flag, incomeFlag == true,
+			   let amount = transData.amount {
+				incomeTotal += amount
+			}
+		}
+		
+		return incomeTotal
+	}
+	
+	
 	func calculateIncomePerDay(date: Date) -> Float{
 		guard let transactionsDict = self.dictTransactionData.value else {
 			return 0
@@ -400,6 +419,25 @@ class HomeViewModel {
 		}
 		
 		return incomeTotal
+	}
+	
+	func calculateExpensePerMonth(date: Date) -> Float{
+		guard let transactionsData = self.transactionsData.value else {
+			return 0
+		}
+		
+		var expenseTotal: Float = 0
+		
+		for transData in transactionsData {
+			if let transDate = transData.transaction_date,
+			   calendarHelper.monthString(date: date) == calendarHelper.monthString(date: transDate),
+			   let incomeFlag = transData.income_flag, incomeFlag == false,
+			   let amount = transData.amount {
+				expenseTotal += amount
+			}
+		}
+		
+		return expenseTotal
 	}
 	
 	func calculateExpensePerDay(date: Date) -> Float{

@@ -23,9 +23,9 @@ class TransactionTableNode: ASTableNode {
 	}
 	
 	private func configureObserver() {
-		viewModel.reloadUI = {
+		self.viewModel.dictTransactionData.asObservable().subscribe(onNext: { _ in
 			self.reloadData()
-		}
+		})
 	}
 	
 }
@@ -37,8 +37,7 @@ extension TransactionTableNode: ASTableDataSource, ASTableDelegate {
 		}
 		return count
 	}
-	
-	// table view need to change by sections after array of data is grouped by day
+
 	func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
 		guard let transData = viewModel.dictTransactionData.value,
 			  let count = transData[section].transaction?.count else {

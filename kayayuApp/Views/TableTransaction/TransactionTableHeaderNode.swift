@@ -21,14 +21,21 @@ class TransactionTableHeaderNode: ASCellNode {
 	private let totalAmount: ASTextNode = ASTextNode()
 	private let backgroundSummary: ASDisplayNode = ASDisplayNode()
 	
+	private let viewModel: HomeViewModel
+	
+	private let calendarHelper: CalendarHelper = CalendarHelper()
+	private var selectedDate: Date = Date()
+	
 	private let buttonSize = CGSize(width: 30, height: 30)
 	
-	override init() {
+	init(viewModel: HomeViewModel) {
+		self.viewModel = viewModel
 		super.init()
 		
 		configurePrevBtn()
 		configureNextBtn()
 		configureDateText()
+		configureViewModel()
 		
 		backgroundColor = kayayuColor.softGrey
 		style.preferredSize = CGSize(width: UIScreen.main.bounds.width, height: 100)
@@ -55,6 +62,14 @@ class TransactionTableHeaderNode: ASCellNode {
 		return mainInset
 	}
 	
+	private func configureViewModel() {
+		viewModel.reloadUI = { [weak self] in
+			self?.configureIncomeText()
+			self?.configureExpenseText()
+			
+		}
+	}
+	
 	private func makeHeaderTitle() -> ASLayoutSpec {
 		
 		let buttonStack = ASStackLayoutSpec(direction: .horizontal,
@@ -79,21 +94,37 @@ class TransactionTableHeaderNode: ASCellNode {
 	}
 	
 	private func configureDateText() {
-		dateText.attributedText = NSAttributedString.bold("JULY 2021", 17, .black)
+		let monthYear = "\(calendarHelper.monthString(date: selectedDate)) \(calendarHelper.yearString(date: selectedDate))"
+		
+		let monthString = calendarHelper.monthString(date: Date())
+		let yearString = calendarHelper.yearString(date: Date())
+		dateText.attributedText = NSAttributedString.bold("\(monthYear)", 17, .black)
 	}
 	
 	private func configurePrevBtn() {
 		prevButton.setImage(UIImage(named: "backArrowBtn.png"), for: .normal)
 		prevButton.imageNode.style.preferredSize = buttonSize
 		prevButton.style.preferredSize = buttonSize
+		prevButton.addTarget(self, action: #selector(prevMonthTapped), forControlEvents: .touchUpInside)
 	}
+	
+	@objc func prevMonthTapped(sender: ASButtonNode) {
+		selectedDate = CalendarHelper().minusMonth(date: selectedDate)
+		configureDateText()
+	}
+	
 	
 	private func configureNextBtn() {
 		nextButton.setImage(UIImage(named: "nextArrowBtn.png"), for: .normal)
 		nextButton.style.preferredSize = buttonSize
 		nextButton.imageNode.style.preferredSize = buttonSize
+		nextButton.addTarget(self, action: #selector(nextMonthTapped), forControlEvents: .touchUpInside)
 	}
 	
+	@objc func nextMonthTapped(sender: ASButtonNode) {
+		selectedDate = CalendarHelper().plusMonth(date: selectedDate)
+		configureDateText()
+	}
 	
 	private func makeSummarySpec() -> ASLayoutSpec {
 		backgroundSummary.backgroundColor = .white
@@ -116,8 +147,10 @@ class TransactionTableHeaderNode: ASCellNode {
 	}
 	
 	private func configureIncomeText() -> ASLayoutSpec {
+		let incomePerMonth = viewModel.calculateIncomePerMonth(date: Date())
+		
 		incomeTitle.attributedText = NSAttributedString.bold("Income", 14, .systemGreen)
-		incomeAmount.attributedText = NSAttributedString.semibold("Rp1.000.000", 14, .systemGreen)
+		incomeAmount.attributedText = NSAttributedString.semibold("Rp\(incomePerMonth)", 14, .systemGreen)
 		
 		let incomeSpec = ASStackLayoutSpec(direction: .vertical,
 										   spacing: 5,
@@ -129,8 +162,10 @@ class TransactionTableHeaderNode: ASCellNode {
 	}
 	
 	private func configureExpenseText() -> ASLayoutSpec {
+		let expensePerMonth = viewModel.calculateExpensePerMonth(date: Date())
+		
 		expenseTitle.attributedText = NSAttributedString.bold("Expense", 14, .systemRed)
-		expenseAmount.attributedText = NSAttributedString.semibold("Rp600.000", 14, .systemRed)
+		expenseAmount.attributedText = NSAttributedString.semibold("Rp\(expensePerMonth)", 14, .systemRed)
 		
 		let expenseSpec = ASStackLayoutSpec(direction: .vertical,
 										   spacing: 5,
