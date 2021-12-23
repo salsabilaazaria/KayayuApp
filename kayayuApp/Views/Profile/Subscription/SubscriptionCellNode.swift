@@ -94,8 +94,12 @@ class SubscriptionCellNode: ASCellNode {
 	}
 	
 	private func configureInformation() {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = NumberFormatter.Style.decimal
+        let finalAmount = numberFormatter.number(from: "\(subsData.total_amount ?? 0)")
+        
         subscriptionName.attributedText = NSAttributedString.bold("\(subsData.description ?? " ")", 14, .black)
-        amountSubs.attributedText = NSAttributedString.normal("Rp\(subsData.total_amount ?? 0)", 14, .black)
+        amountSubs.attributedText = NSAttributedString.normal("Rp\(finalAmount ?? NSNumber(value: subsData.total_amount ?? 0))", 14, .black)
         dateSubs.attributedText = NSAttributedString.normal("Billing Date: \(calendarHelper.formatFullDate(date: nextBillDate))", 14, .black)
         typeSubs.attributedText = NSAttributedString.normal("Billed: \(subsData.billing_type ?? " ")", 14, .black)
         endDateSubs.attributedText = NSAttributedString.normal("End of Subscription Date: ", 14, .black)

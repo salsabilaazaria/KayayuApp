@@ -91,12 +91,16 @@ class InstallmentCellNode: ASCellNode {
 	}
 	
 	private func configureInformation() {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = NumberFormatter.Style.decimal
+        let finalAmount = numberFormatter.number(from: "\(instlData.total_amount ?? 0)")
+        
         installmentName.attributedText = NSAttributedString.bold("\(instlData.description ?? " ")", 14, .black)
         interest.attributedText = NSAttributedString.normal("Interest: \(instlData.interest ?? 0)%", 14, .black)
         billingDateInstallment.attributedText = NSAttributedString.normal("Billing Date: \(calendarHelper.formatFullDate(date: nextBillDate))", 14, .black)
         typeInstallment.attributedText = NSAttributedString.normal("Billed: \(instlData.billing_type ?? " ")", 14, .black)
         remainingAmount.attributedText = NSAttributedString.normal("Remaining Amount: Rp", 14, .black)
-        totalAmount.attributedText = NSAttributedString.normal("Total Amount: Rp\(instlData.total_amount ?? 0)", 14, .black)
+        totalAmount.attributedText = NSAttributedString.normal("Total Amount: Rp\(finalAmount ?? NSNumber(value: instlData.total_amount ?? 0))", 14, .black)
 		endDateInstallment.attributedText = NSAttributedString.normal("End of Installment Date: ", 14, .black)
 		
 		dueDate.attributedText = NSAttributedString.normal("Due in: \(dueIn) days", 14, .black)

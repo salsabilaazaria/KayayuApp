@@ -82,10 +82,18 @@ class TransactionDateCellNode: ASDisplayNode {
 	}
 	
 	private func configureIncomeAmount() {
-		totalIncomeAmount.attributedText = NSAttributedString.semibold("Rp\(incomePerDay)", 14, .systemGreen)
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = NumberFormatter.Style.decimal
+        let finalIncomePerDay = numberFormatter.number(from: "\(incomePerDay)")
+        
+		totalIncomeAmount.attributedText = NSAttributedString.semibold("Rp\(finalIncomePerDay ?? NSNumber(value: incomePerDay))", 14, .systemGreen)
 	}
 	
 	private func configureExpenseAmount() {
-		totalExpenseAmount.attributedText = NSAttributedString.semibold("Rp\(expensePerDay)", 14, .systemRed)
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = NumberFormatter.Style.decimal
+        let finalExpensePerDay = numberFormatter.number(from: "\(expensePerDay)")
+        
+        totalExpenseAmount.attributedText = NSAttributedString.semibold("Rp\(finalExpensePerDay ?? NSNumber(value: expensePerDay))", 14, .systemRed)
 	}
 }

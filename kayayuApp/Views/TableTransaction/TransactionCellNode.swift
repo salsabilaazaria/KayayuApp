@@ -130,10 +130,15 @@ class TransactionCellNode: ASCellNode {
 		guard let amount = transactionData.amount else {
 			return
 		}
+        
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = NumberFormatter.Style.decimal
+        let finalAmount = numberFormatter.number(from: "\(amount)")
+        
 		if isIncomeTransaction {
-			transactionAmount.attributedText = NSAttributedString.normal("Rp\(amount)", 14, .systemGreen)
+            transactionAmount.attributedText = NSAttributedString.normal("Rp\(finalAmount ?? NSNumber(value: amount))", 14, .systemGreen)
 		} else {
-			transactionAmount.attributedText = NSAttributedString.normal("Rp\(amount)", 14, .systemRed)
+            transactionAmount.attributedText = NSAttributedString.normal("Rp\(finalAmount ?? NSNumber(value: amount))", 14, .systemRed)
 		}
 		
 	}
