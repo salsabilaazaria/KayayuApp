@@ -23,6 +23,8 @@ class TransactionCellNode: ASCellNode {
 	private let transactionAmount: ASTextNode = ASTextNode()
 	private let transactionData: Transactions
 	
+	private let numberHelper: NumberHelper = NumberHelper()
+	
 	init(isIncomeTransaction: Bool, data: Transactions) {
 		//init for creating cell without date
 		self.isDate = false
@@ -130,15 +132,13 @@ class TransactionCellNode: ASCellNode {
 		guard let amount = transactionData.amount else {
 			return
 		}
-        
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = NumberFormatter.Style.decimal
-        let finalAmount = numberFormatter.number(from: "\(amount)")
+		
+		let formattedAmount = numberHelper.floatToString(beforeFormatted: amount)
         
 		if isIncomeTransaction {
-            transactionAmount.attributedText = NSAttributedString.normal("Rp\(finalAmount ?? NSNumber(value: amount))", 14, .systemGreen)
+            transactionAmount.attributedText = NSAttributedString.normal("Rp\(formattedAmount)", 14, .systemGreen)
 		} else {
-            transactionAmount.attributedText = NSAttributedString.normal("Rp\(finalAmount ?? NSNumber(value: amount))", 14, .systemRed)
+            transactionAmount.attributedText = NSAttributedString.normal("Rp\(formattedAmount)", 14, .systemRed)
 		}
 		
 	}

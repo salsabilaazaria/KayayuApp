@@ -26,6 +26,8 @@ class TransactionTableHeaderNode: ASCellNode {
 	private let viewModel: HomeViewModel
 	
 	private let calendarHelper: CalendarHelper = CalendarHelper()
+	private let numberHelper: NumberHelper = NumberHelper()
+	
 	private var selectedDate: Date = Date()
 	
 	private let buttonSize = CGSize(width: 30, height: 30)
@@ -152,9 +154,10 @@ class TransactionTableHeaderNode: ASCellNode {
 	
 	private func configureIncomeText() -> ASLayoutSpec {
 		let incomePerMonth = viewModel.calculateIncomePerMonth(date: selectedDate)
+		let formattedIncome = numberHelper.floatToString(beforeFormatted: incomePerMonth)
 		
 		incomeTitle.attributedText = NSAttributedString.bold("Income", 14, .systemGreen)
-		incomeAmount.attributedText = NSAttributedString.semibold("Rp\(incomePerMonth)", 14, .systemGreen)
+		incomeAmount.attributedText = NSAttributedString.semibold("Rp\(formattedIncome)", 14, .systemGreen)
 		
 		let incomeSpec = ASStackLayoutSpec(direction: .vertical,
 										   spacing: 5,
@@ -167,9 +170,10 @@ class TransactionTableHeaderNode: ASCellNode {
 	
 	private func configureExpenseText() -> ASLayoutSpec {
 		let expensePerMonth = viewModel.calculateExpensePerMonth(date: selectedDate)
+		let formattedExpense = numberHelper.floatToString(beforeFormatted: expensePerMonth)
 		
 		expenseTitle.attributedText = NSAttributedString.bold("Expense", 14, .systemRed)
-		expenseAmount.attributedText = NSAttributedString.semibold("Rp\(expensePerMonth)", 14, .systemRed)
+		expenseAmount.attributedText = NSAttributedString.semibold("Rp\(formattedExpense)", 14, .systemRed)
 		
 		let expenseSpec = ASStackLayoutSpec(direction: .vertical,
 										   spacing: 5,
@@ -183,8 +187,10 @@ class TransactionTableHeaderNode: ASCellNode {
 	
 	private func configureTotalText() -> ASLayoutSpec {
 		let total = viewModel.calculateTotalPerMonth(date: selectedDate)
+		let formattedTotal = numberHelper.floatToString(beforeFormatted: total)
+		
 		totalTitle.attributedText = NSAttributedString.bold("Total", 14, .black)
-		totalAmount.attributedText = NSAttributedString.semibold("Rp\(total)", 14, .black)
+		totalAmount.attributedText = NSAttributedString.semibold("Rp\(formattedTotal)", 14, .black)
 		
 		let totalSpec = ASStackLayoutSpec(direction: .vertical,
 										   spacing: 5,

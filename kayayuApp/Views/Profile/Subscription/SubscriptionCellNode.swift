@@ -22,7 +22,9 @@ class SubscriptionCellNode: ASCellNode {
 //    private let detailSubsData: TransactionDetail
     
 //    private let viewModel: ProfileViewModel
-    let calendarHelper = CalendarHelper()
+	private let calendarHelper: CalendarHelper = CalendarHelper()
+	private let numberHelper: NumberHelper = NumberHelper()
+	
     
     init(data: RecurringTransactions, nextBillDate: Date, dueIn: Int){
         self.subsData = data
@@ -94,13 +96,13 @@ class SubscriptionCellNode: ASCellNode {
 	}
 	
 	private func configureInformation() {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = NumberFormatter.Style.decimal
-        let finalAmount = numberFormatter.number(from: "\(subsData.total_amount ?? 0)")
-        
         subscriptionName.attributedText = NSAttributedString.bold("\(subsData.description ?? " ")", 14, .black)
-        amountSubs.attributedText = NSAttributedString.normal("Rp\(finalAmount ?? NSNumber(value: subsData.total_amount ?? 0))", 14, .black)
+		
+		let formattedInstallmentAmount = numberHelper.floatToString(beforeFormatted: subsData.total_amount ?? 0)
+        amountSubs.attributedText = NSAttributedString.normal("Rp\(formattedInstallmentAmount)", 14, .black)
+		
         dateSubs.attributedText = NSAttributedString.normal("Billing Date: \(calendarHelper.formatFullDate(date: nextBillDate))", 14, .black)
+		
         typeSubs.attributedText = NSAttributedString.normal("Billed: \(subsData.billing_type ?? " ")", 14, .black)
         endDateSubs.attributedText = NSAttributedString.normal("End of Subscription Date: \(calendarHelper.formatFullDate(date: subsData.end_billing_date ?? Date()))", 14, .black)
         dueDate.attributedText = NSAttributedString.normal("Due in: \(dueIn) days", 14, .black)

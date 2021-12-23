@@ -62,6 +62,7 @@
 		AF2C188B27464E6A00482D6E /* HomeTableTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2C188A27464E6A00482D6E /* HomeTableTransaction.swift */; };
 		AF2C1894274656CE00482D6E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2C1893274656CE00482D6E /* HomeViewController.swift */; };
 		AF52E8EF2761011800D5DCE7 /* UIImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF52E8EE2761011800D5DCE7 /* UIImageHelper.swift */; };
+		AF54297E2774D10400312953 /* NumberHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF54297D2774D10400312953 /* NumberHelper.swift */; };
 		AF7591D5274E4381003B8708 /* RatioRealisationDetailNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7591D4274E4381003B8708 /* RatioRealisationDetailNode.swift */; };
 		AF7591DA274E43DE003B8708 /* StatsDateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7591D9274E43DE003B8708 /* StatsDateHeader.swift */; };
 		AFA9CDD5274F759A00E520A3 /* AddIncomeRecordNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA9CDD4274F759A00E520A3 /* AddIncomeRecordNode.swift */; };
@@ -150,6 +151,7 @@
 		AF2C188A27464E6A00482D6E /* HomeTableTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableTransaction.swift; sourceTree = "<group>"; };
 		AF2C1893274656CE00482D6E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = kayayuApp/Views/HomeViewController.swift; sourceTree = SOURCE_ROOT; };
 		AF52E8EE2761011800D5DCE7 /* UIImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageHelper.swift; sourceTree = "<group>"; };
+		AF54297D2774D10400312953 /* NumberHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberHelper.swift; sourceTree = "<group>"; };
 		AF7591D4274E4381003B8708 /* RatioRealisationDetailNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioRealisationDetailNode.swift; sourceTree = "<group>"; };
 		AF7591D9274E43DE003B8708 /* StatsDateHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsDateHeader.swift; sourceTree = "<group>"; };
 		AFA9CDD4274F759A00E520A3 /* AddIncomeRecordNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIncomeRecordNode.swift; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 				AF2C1866274607AB00482D6E /* CalendarHelper.swift */,
 				AFBA5F58274DF8F6002455A7 /* KayayuHelper.swift */,
 				AF52E8EE2761011800D5DCE7 /* UIImageHelper.swift */,
+				AF54297D2774D10400312953 /* NumberHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -702,6 +705,7 @@
 				0AAA2674273A65900063D876 /* BigButton.swift in Sources */,
 				AFBA5F59274DF8F6002455A7 /* KayayuHelper.swift in Sources */,
 				AFC65DA5274771650050769D /* KayayuScreen.swift in Sources */,
+				AF54297E2774D10400312953 /* NumberHelper.swift in Sources */,
 				0AAA2685273AAA230063D876 /* RegisterNode.swift in Sources */,
 				0ABC636F273933800041087F /* LandingNode.swift in Sources */,
 				0A8D9517274D333500BB55FC /* PlanStatsNode.swift in Sources */,

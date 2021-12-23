@@ -18,6 +18,7 @@ class TransactionDateCellNode: ASDisplayNode {
 	private let expensePerDay: Float
 	
 	private let calendarHelper: CalendarHelper = CalendarHelper()
+	private let numberHelper: NumberHelper = NumberHelper()
 	
 	init(date: Date = Date() , incomePerDay: Float = 0, expensePerDay: Float = 0) {
 		self.date = date
@@ -82,18 +83,14 @@ class TransactionDateCellNode: ASDisplayNode {
 	}
 	
 	private func configureIncomeAmount() {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = NumberFormatter.Style.decimal
-        let finalIncomePerDay = numberFormatter.number(from: "\(incomePerDay)")
+		let formattedAmount = numberHelper.floatToString(beforeFormatted: incomePerDay)
         
-		totalIncomeAmount.attributedText = NSAttributedString.semibold("Rp\(finalIncomePerDay ?? NSNumber(value: incomePerDay))", 14, .systemGreen)
+		totalIncomeAmount.attributedText = NSAttributedString.semibold("Rp\(formattedAmount)", 14, .systemGreen)
 	}
 	
 	private func configureExpenseAmount() {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = NumberFormatter.Style.decimal
-        let finalExpensePerDay = numberFormatter.number(from: "\(expensePerDay)")
+		let formattedAmount = numberHelper.floatToString(beforeFormatted: expensePerDay)
         
-        totalExpenseAmount.attributedText = NSAttributedString.semibold("Rp\(finalExpensePerDay ?? NSNumber(value: expensePerDay))", 14, .systemRed)
+        totalExpenseAmount.attributedText = NSAttributedString.semibold("Rp\(formattedAmount)", 14, .systemRed)
 	}
 }
