@@ -12,18 +12,16 @@ struct kayayuColor {
 	static let yellow = ColorHelper.hexToColor(hex: "#FFCC00")
 	static let softGrey = ColorHelper.hexToColor(hex: "#F2F2F2")
 	
-	static let needsLight = ColorHelper.hexToColor(hex: "#bedaed")
-	static let needsDark = ColorHelper.hexToColor(hex: "#4081ad")
+	static let needsLight = ColorHelper.hexToColor(hex: "#CFDDEA")
+	static let needsDark = ColorHelper.hexToColor(hex: "#1977CD")
 	
+	static let wantsLight = ColorHelper.hexToColor(hex: "#E5CFE2")
+	static let wantsDark = ColorHelper.hexToColor(hex: "#B01898")
 	
-	static let wantsLight = ColorHelper.hexToColor(hex: "#ffa8f0")
-	static let wantsDark = ColorHelper.hexToColor(hex: "#a63f94")
+	static let savingsLight = ColorHelper.hexToColor(hex: "#CDE4D8")
+	static let savingsDark = ColorHelper.hexToColor(hex: "#0FA958")
 	
-	
-	static let savingsLight = ColorHelper.hexToColor(hex: "#f6f781")
-	static let savingsDark = ColorHelper.hexToColor(hex: "#8a8a2f")
-	
-	static let pieCharArrColor = [kayayuColor.needsLight,kayayuColor.wantsLight,kayayuColor.savingsLight]
+	static let pieCharArrColor = [kayayuColor.needsDark,kayayuColor.wantsDark,kayayuColor.savingsDark]
 
 }
 
@@ -40,8 +38,8 @@ class ColorHelper {
 			 return UIColor.gray
 		 }
 
-		 var rgbValue:UInt64 = 0
-		 Scanner(string: cString).scanHexInt64(&rgbValue)
+		 var rgbValue:UInt32 = 0
+		 Scanner(string: cString).scanHexInt32(&rgbValue)
 
 		 return UIColor(
 			 red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
