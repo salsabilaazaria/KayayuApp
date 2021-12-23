@@ -47,7 +47,10 @@ extension InstallmentTableNode: ASTableDataSource, ASTableDelegate {
         
         let instlData = allInstlData[indexPath.row]
         
-        let cellNode = InstallmentCellNode(data: instlData)
+        let nextBillDate = self.viewModel.getNextBillDate(recurringId: instlData.recurring_id)
+        let dueIn = self.viewModel.getDueIn(recurringId: instlData.recurring_id)
+        
+        let cellNode = InstallmentCellNode(data: instlData, nextBillDate: nextBillDate, dueIn: dueIn)
 		return cellNode
 	}
 	

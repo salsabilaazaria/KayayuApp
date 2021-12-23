@@ -158,7 +158,9 @@ class ProfileViewModel {
             return -1
         }
 
-        let dueIn = Calendar.current.dateComponents([.day], from: Date(), to: data.billing_date ?? Date()).day!
+        let dueIn = Calendar.current.dateComponents([.day], from: calendarHelper.dateOnly(date: Date()), to: calendarHelper.dateOnly(date: data.billing_date ?? Date())).day!
+        
+//        print("due in data: \(calendarHelper.dateOnly(date: Date())), \(calendarHelper.dateOnly(date: data.billing_date ?? Date())), \(dueIn), \(Calendar.current.dateComponents([.day], from: calendarHelper.dateOnly(date: Date()), to: calendarHelper.dateOnly(date: data.billing_date ?? Date())))")
         
         return dueIn
     }

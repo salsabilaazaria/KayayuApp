@@ -258,6 +258,7 @@ class HomeViewModel {
         let recSubsData = RecurringTransactions(
             recurring_id: refRecSubs!.documentID,
             user_id: self.getUserId(),
+            description: description,
             recurring_type: "subscription",
             total_amount: total_amount,
             billing_type: final_billing_type,

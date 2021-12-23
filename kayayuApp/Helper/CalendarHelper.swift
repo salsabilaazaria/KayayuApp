@@ -115,5 +115,11 @@ class CalendarHelper {
 		
 		return dateFormatter.date(from: dateString) ?? Date()
 	}
+    
+    func dateOnly(date: Date) -> Date {
+        let finalDate = Calendar.current.date(bySettingHour: 7, minute: 0, second: 0, of: date)!
+        
+        return finalDate
+    }
 
 }

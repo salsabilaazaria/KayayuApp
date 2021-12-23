@@ -94,7 +94,7 @@ class SubscriptionCellNode: ASCellNode {
 	}
 	
 	private func configureInformation() {
-        subscriptionName.attributedText = NSAttributedString.bold("Subscription", 14, .black)
+        subscriptionName.attributedText = NSAttributedString.bold("\(subsData.description ?? " ")", 14, .black)
         amountSubs.attributedText = NSAttributedString.normal("Rp\(subsData.total_amount ?? 0)", 14, .black)
         dateSubs.attributedText = NSAttributedString.normal("Billing Date: \(calendarHelper.formatFullDate(date: nextBillDate))", 14, .black)
         typeSubs.attributedText = NSAttributedString.normal("Billed: \(subsData.billing_type ?? " ")", 14, .black)

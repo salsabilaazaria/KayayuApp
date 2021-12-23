@@ -20,9 +20,15 @@ class InstallmentCellNode: ASCellNode {
 	private let dueDate: ASTextNode = ASTextNode()
     
     private let instlData: RecurringTransactions
-	
-    init(data: RecurringTransactions) {
+    private let nextBillDate: Date
+    private let dueIn: Int
+    
+    let calendarHelper = CalendarHelper()
+    
+    init(data: RecurringTransactions, nextBillDate: Date, dueIn: Int) {
         self.instlData = data
+        self.nextBillDate = nextBillDate
+        self.dueIn = dueIn
 		super.init()
 		
 		configureInformation()
@@ -85,15 +91,15 @@ class InstallmentCellNode: ASCellNode {
 	}
 	
 	private func configureInformation() {
-		installmentName.attributedText = NSAttributedString.bold("Installment", 14, .black)
+        installmentName.attributedText = NSAttributedString.bold("\(instlData.description ?? " ")", 14, .black)
         interest.attributedText = NSAttributedString.normal("Interest: \(instlData.interest ?? 0)%", 14, .black)
-        billingDateInstallment.attributedText = NSAttributedString.normal("Billing Date: \(instlData.start_billing_date?.addingTimeInterval(7 * 3600) ?? Date())", 14, .black)
+        billingDateInstallment.attributedText = NSAttributedString.normal("Billing Date: \(calendarHelper.formatFullDate(date: nextBillDate))", 14, .black)
         typeInstallment.attributedText = NSAttributedString.normal("Billed: \(instlData.billing_type ?? " ")", 14, .black)
         remainingAmount.attributedText = NSAttributedString.normal("Remaining Amount: Rp", 14, .black)
         totalAmount.attributedText = NSAttributedString.normal("Total Amount: Rp\(instlData.total_amount ?? 0)", 14, .black)
 		endDateInstallment.attributedText = NSAttributedString.normal("End of Installment Date: ", 14, .black)
 		
-		dueDate.attributedText = NSAttributedString.normal("Due in", 14, .black)
+		dueDate.attributedText = NSAttributedString.normal("Due in: \(dueIn) days", 14, .black)
 	}
 	
 }
