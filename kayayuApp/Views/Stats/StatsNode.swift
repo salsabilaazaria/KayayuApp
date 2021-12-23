@@ -68,7 +68,7 @@ class StatsNode: ASDisplayNode {
 		planButton.style.preferredSize = buttonSize
 		planButton.backgroundColor = .white
 		planButton.cornerRadius = 5
-		planButton.borderWidth = kayayuSize.kayayuBorderWidth
+		planButton.borderWidth = kayayuSize.kayayuBigButtonBorderWidth
 		planButton.borderColor = UIColor.black.cgColor
 		planButton.setAttributedTitle(NSAttributedString.semibold("PLAN", 16, .black), for: .normal)
 		planButton.addTarget(self, action: #selector(planButtonTapped), forControlEvents: .touchUpInside)
@@ -84,7 +84,7 @@ class StatsNode: ASDisplayNode {
 		realisationButton.style.preferredSize = buttonSize
 		realisationButton.backgroundColor = .white
 		realisationButton.cornerRadius = 5
-		realisationButton.borderWidth = kayayuSize.kayayuBorderWidth
+		realisationButton.borderWidth = kayayuSize.kayayuBigButtonBorderWidth
 		realisationButton.borderColor = UIColor.black.cgColor
 		realisationButton.setAttributedTitle(NSAttributedString.semibold("REALISATION", 16, .black), for: .normal)
 		realisationButton.addTarget(self, action: #selector(realisationButtonTapped), forControlEvents: .touchUpInside)

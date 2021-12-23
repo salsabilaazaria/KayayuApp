@@ -43,7 +43,8 @@ struct kayayuSize {
 	static let nodeSize: CGSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width - kayayuTabBarSize.height - 200)
 	
 	static let kayayuBarHeight: CGFloat = 30
-	static let kayayuBorderWidth: CGFloat = 0.2
+	static let kayayuInputTextFieldBorderWidth: CGFloat = 2
+	static let kayayuBigButtonBorderWidth: CGFloat = 0.2
 	static let kayayuBigButton: CGFloat = 40
 	
 	static let bigInputTextField: CGSize = CGSize(width: UIScreen.main.bounds.width - 32, height: 40)

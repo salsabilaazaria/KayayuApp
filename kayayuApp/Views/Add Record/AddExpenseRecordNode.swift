@@ -59,6 +59,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 		configureSaveButton()
 		configureObserver()
 		configureViewModel()
+		configureDateInputTextField()
 		
 		backgroundColor = .white
 		automaticallyManagesSubnodes = true
@@ -77,7 +78,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 		let interest = createInterestInputSpec()
 		let tenorSpec = createTenorTypeSpec()
 		
-		var elementArray: [ASLayoutElement] = [paymentType, date, desc, category]
+		var elementArray: [ASLayoutElement] = [date, paymentType, desc, category]
 		
 		switch paymenTypeValue.value {
 			case .oneTime:
@@ -222,7 +223,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 		let paymentTypeNode = ASDisplayNode()
 		paymentTypeNode.view.addSubview(paymentType)
 		paymentTypeNode.style.preferredSize = CGSize(width: UIScreen.main.bounds.width - 32, height: 30)
-		paymentTypeNode.borderWidth = 1
+		paymentTypeNode.borderWidth = kayayuSize.kayayuInputTextFieldBorderWidth
 		paymentTypeNode.borderColor = kayayuColor.softGrey.cgColor
 		
 		let paymentTypeWrap = ASWrapperLayoutSpec(layoutElements: [paymentTypeNode])
@@ -259,7 +260,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 		let ratioCategoryNode = ASDisplayNode()
 		ratioCategoryNode.view.addSubview(ratioCategory)
 		ratioCategoryNode.style.preferredSize = CGSize(width: UIScreen.main.bounds.width - 32, height: 30)
-		ratioCategoryNode.borderWidth = 1
+		ratioCategoryNode.borderWidth = kayayuSize.kayayuInputTextFieldBorderWidth
 		ratioCategoryNode.borderColor = kayayuColor.softGrey.cgColor
 		
 		let ratioCategoryWrap = ASWrapperLayoutSpec(layoutElements: [ratioCategoryNode])
@@ -287,7 +288,6 @@ class AddExpenseRecordNode: ASDisplayNode {
 	}
 	
 	private func createDateInputSpec() -> ASLayoutSpec {
-		configureDateInputTextField()
 		let dateSpec = ASStackLayoutSpec(direction: .vertical,
 										 spacing: spacingTitle,
 										 justifyContent: .start,
@@ -331,7 +331,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 		
 		descriptionInputTextField.maximumLinesToDisplay = 3
 		descriptionInputTextField.style.preferredSize = kayayuSize.bigInputTextField
-		descriptionInputTextField.borderWidth = 1
+		descriptionInputTextField.borderWidth = kayayuSize.kayayuInputTextFieldBorderWidth
 		descriptionInputTextField.borderColor = kayayuColor.softGrey.cgColor
 		descriptionInputTextField.textView.inputAccessoryView = toolBar
 		descriptionInputTextField.textView.font = kayayuFont.inputTextFieldFont
@@ -459,7 +459,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 		tenorInputTextField.textView.inputAccessoryView = toolBar
 		tenorInputTextField.textView.font = kayayuFont.inputTextFieldFont
 		tenorInputTextField.borderColor = kayayuColor.softGrey.cgColor
-		tenorInputTextField.borderWidth = 1.0
+		tenorInputTextField.borderWidth = kayayuSize.kayayuInputTextFieldBorderWidth
 	}
 	
 	private func createRecurringTypeSpec() -> ASLayoutSpec{
@@ -467,7 +467,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 		let recurringTypeNode = ASDisplayNode()
 	
 		recurringTypeNode.view.addSubview(recurringType)
-		recurringTypeNode.borderWidth = 1
+		recurringTypeNode.borderWidth = kayayuSize.kayayuInputTextFieldBorderWidth
 		recurringTypeNode.borderColor = kayayuColor.softGrey.cgColor
 		
 		let recurringTypeWrap = ASWrapperLayoutSpec(layoutElements: [recurringTypeNode])
@@ -526,7 +526,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 		durationInputTextField.maximumLinesToDisplay = 1
 		durationInputTextField.textView.inputAccessoryView = toolBar
 		durationInputTextField.textView.font = kayayuFont.inputTextFieldFont
-		durationInputTextField.borderWidth = 1
+		durationInputTextField.borderWidth = kayayuSize.kayayuInputTextFieldBorderWidth
 		durationInputTextField.borderColor = kayayuColor.softGrey.cgColor
 		
 		let recurring = createRecurringTypeSpec()

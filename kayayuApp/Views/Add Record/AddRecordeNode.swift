@@ -87,7 +87,7 @@ class AddRecordeNode: ASDisplayNode {
 		incomeButton.style.preferredSize = buttonSize
 		incomeButton.backgroundColor = .white
 		incomeButton.cornerRadius = 5
-		incomeButton.borderWidth = kayayuSize.kayayuBorderWidth
+		incomeButton.borderWidth = kayayuSize.kayayuBigButtonBorderWidth
 		incomeButton.borderColor = UIColor.black.cgColor
 		incomeButton.addTarget(self, action: #selector(incomeButtonTapped), forControlEvents: .touchUpInside)
 	}
@@ -102,7 +102,7 @@ class AddRecordeNode: ASDisplayNode {
 		expenseButton.style.preferredSize = buttonSize
 		expenseButton.backgroundColor = .white
 		expenseButton.cornerRadius = 5
-		expenseButton.borderWidth = kayayuSize.kayayuBorderWidth
+		expenseButton.borderWidth = kayayuSize.kayayuBigButtonBorderWidth
 		expenseButton.borderColor = UIColor.black.cgColor
 		expenseButton.setAttributedTitle(NSAttributedString.semibold("EXPENSE", 16, .black), for: .normal)
 		expenseButton.addTarget(self, action: #selector(realisationButtonTapped), forControlEvents: .touchUpInside)

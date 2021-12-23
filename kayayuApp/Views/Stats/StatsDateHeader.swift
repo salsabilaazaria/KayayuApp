@@ -33,7 +33,7 @@ class StatsDateHeader: ASDisplayNode {
 		let backgroundHeader = ASDisplayNode()
 		backgroundHeader.backgroundColor = .white
 		backgroundHeader.cornerRadius = 5
-		backgroundHeader.borderWidth = kayayuSize.kayayuBorderWidth
+		backgroundHeader.borderWidth = kayayuSize.kayayuBigButtonBorderWidth
 		backgroundHeader.borderColor = UIColor.black.cgColor
 		backgroundHeader.style.preferredSize = monthYearHeaderSize
 		

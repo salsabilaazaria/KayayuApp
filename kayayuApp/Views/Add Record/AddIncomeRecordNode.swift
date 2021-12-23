@@ -122,7 +122,7 @@ class AddIncomeRecordNode: ASDisplayNode {
 		let ratioCategoryNode = ASDisplayNode()
 		ratioCategoryNode.view.addSubview(ratioCategory)
 		ratioCategoryNode.style.preferredSize = CGSize(width: UIScreen.main.bounds.width - 32, height: 30)
-		ratioCategoryNode.borderWidth = 1
+		ratioCategoryNode.borderWidth = kayayuSize.kayayuInputTextFieldBorderWidth
 		ratioCategoryNode.borderColor = kayayuColor.softGrey.cgColor
 		
 		let ratioCategoryWrap = ASWrapperLayoutSpec(layoutElements: [ratioCategoryNode])
@@ -202,7 +202,7 @@ class AddIncomeRecordNode: ASDisplayNode {
 		
 		descriptionInputTextField.maximumLinesToDisplay = 3
 		descriptionInputTextField.style.preferredSize = kayayuSize.bigInputTextField
-		descriptionInputTextField.borderWidth = 1
+		descriptionInputTextField.borderWidth = kayayuSize.kayayuInputTextFieldBorderWidth
 		descriptionInputTextField.borderColor = kayayuColor.softGrey.cgColor
 		descriptionInputTextField.textView.inputAccessoryView = toolBar
 		descriptionInputTextField.textView.font = kayayuFont.inputTextFieldFont
