@@ -86,6 +86,13 @@ class CalendarHelper {
 		return dateFormatter.string(from: date)
 	}
 	
+	func monthInt(date: Date) -> Int {
+		//example: 30 Jan 2021 -> 01
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "MM"
+		return Int(dateFormatter.string(from: date)) ?? 0
+	}
+	
 	func yearString(date: Date) -> String {
 		//example: 30 Jan 2021 -> 2021
 		let dateFormatter = DateFormatter()

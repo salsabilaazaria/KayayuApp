@@ -9,18 +9,22 @@ import Foundation
 import AsyncDisplayKit
 
 class HomeTableTransaction: ASDisplayNode {
-	
+	var changeMonthData: ((Date) -> Void)?
 	private let transactionTableHeader: TransactionTableHeaderNode
 	private let transactionTableNode: TransactionTableNode
 	private let viewModel: HomeViewModel
+	
+	private let calendarHelper: CalendarHelper = CalendarHelper()
 	
     init(viewModel: HomeViewModel) {
 		self.viewModel = viewModel
 		self.transactionTableNode = TransactionTableNode(viewModel: viewModel)
 		self.transactionTableHeader = TransactionTableHeaderNode(viewModel: viewModel)
+		
 		super.init()
 		
-		transactionTableNode.style.preferredSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.5)
+		configureNode()
+	
 		backgroundColor = kayayuColor.softGrey
 		automaticallyManagesSubnodes = true
 	}
@@ -40,6 +44,16 @@ class HomeTableTransaction: ASDisplayNode {
 										 children: [transactionTableHeader, tableTransactionInset])
 		
 		return tableSpec
+	}
+	
+	private func configureNode() {
+		transactionTableNode.style.preferredSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.5)
+		
+		transactionTableHeader.changeMonthData = { [weak self] date in
+			let monthInt = self?.calendarHelper.monthInt(date: date)
+			self?.viewModel.getTransactionDataSpecMonth(diff: monthInt ?? 0)
+			
+		}
 	}
 	
 }

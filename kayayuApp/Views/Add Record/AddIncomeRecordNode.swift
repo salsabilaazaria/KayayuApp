@@ -21,6 +21,7 @@ class AddIncomeRecordNode: ASDisplayNode {
 	
 	private let ratioTitle: ASTextNode = ASTextNode()
 	private var ratioCategory: DropDown = DropDown()
+	private let ratioDescription: ASTextNode = ASTextNode()
 	
 	private var saveButton: BigButton = BigButton()
 	
@@ -41,6 +42,7 @@ class AddIncomeRecordNode: ASDisplayNode {
 		configureToolBar()
 		configureSaveButton()
 		configureViewModel()
+		configureDateInputTextField()
 	}
 
 	
@@ -125,11 +127,19 @@ class AddIncomeRecordNode: ASDisplayNode {
 		
 		let ratioCategoryWrap = ASWrapperLayoutSpec(layoutElements: [ratioCategoryNode])
 		
+		var elementArray: [ASLayoutElement] = [ratioTitle, ratioCategoryWrap]
+		
+		if ratio == kayayuRatio.all.rawValue {
+			ratioDescription.attributedText = NSAttributedString.normal("Income amount will be automatically calculated based on The Balance Money Formula (50:30:20 Ratio)", 12, .black)
+			ratioDescription.style.preferredSize = CGSize(width: UIScreen.main.bounds.width - 16, height: 40)
+			elementArray.append(ratioDescription)
+		}
+		
 		let ratioSpec = ASStackLayoutSpec(direction: .vertical,
 										  spacing: spacingTitle,
 										  justifyContent: .start,
 										  alignItems: .start,
-										  children: [ratioTitle, ratioCategoryWrap])
+										  children: elementArray)
 		
 		return ratioSpec
 	}
@@ -142,13 +152,14 @@ class AddIncomeRecordNode: ASDisplayNode {
 		ratioCategory.selectedRowColor = kayayuColor.softGrey
 		ratioCategory.checkMarkEnabled = false
 		ratioCategory.font = UIFont.systemFont(ofSize: 14)
+		ratioCategory.text = ratio
 		ratioCategory.didSelect{(selectedText, index, id) in
 			self.ratio = selectedText
+			self.reloadUI()
 		}
 	}
 	
 	private func createDateInputSpec() -> ASLayoutSpec {
-		configureDateInputTextField()
 		let dateSpec = ASStackLayoutSpec(direction: .vertical,
 										 spacing: spacingTitle,
 										 justifyContent: .start,
@@ -173,7 +184,6 @@ class AddIncomeRecordNode: ASDisplayNode {
 		dateInputTextField.textView.inputView = datePicker
 		dateInputTextField.textView.inputAccessoryView = toolBar
 		dateInputTextField.textView.font = kayayuFont.inputTextFieldFont
-
 	}
 	
 	private func createDescInputSpec() -> ASLayoutSpec {
@@ -196,7 +206,6 @@ class AddIncomeRecordNode: ASDisplayNode {
 		descriptionInputTextField.borderColor = kayayuColor.softGrey.cgColor
 		descriptionInputTextField.textView.inputAccessoryView = toolBar
 		descriptionInputTextField.textView.font = kayayuFont.inputTextFieldFont
-	
 	}
 	
 	private func createAmountInputSpec() -> ASLayoutSpec {
@@ -228,7 +237,21 @@ class AddIncomeRecordNode: ASDisplayNode {
 		amountInputTextField.style.preferredSize = kayayuSize.inputTextFieldSize
 		amountInputTextField.textView.inputAccessoryView = toolBar
 		amountInputTextField.textView.font = kayayuFont.inputTextFieldFont
-		
+		amountInputTextField.delegate = self
+	}
+	
+	private func reloadUI() {
+		self.setNeedsLayout()
+		self.layoutIfNeeded()
+	}
+	
+}
+
+extension AddIncomeRecordNode: ASEditableTextNodeDelegate {
+	
+	public func editableTextNode(_ editableTextNode: ASEditableTextNode, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+		let invalidCharacters = CharacterSet(charactersIn: "0123456789").inverted
+		return (text.rangeOfCharacter(from: invalidCharacters) == nil)
 	}
 	
 }

@@ -26,6 +26,8 @@ class HomeViewModel {
 	var transactionsData: BehaviorRelay<[Transactions]?> = BehaviorRelay<[Transactions]?>(value: nil)
 	var dictTransactionData: BehaviorRelay<[TransactionDateDictionary]?> = BehaviorRelay<[TransactionDateDictionary]?>(value: nil)
 	
+	var incomePerMonth: BehaviorRelay<Float?> = BehaviorRelay<Float?>(value: nil)
+	var expensePerMonth: BehaviorRelay<Float?> = BehaviorRelay<Float?>(value: nil)
 	
 	
 	var userBalanceTotal: Float = 0
@@ -43,9 +45,11 @@ class HomeViewModel {
 	}
     
 	private func configureObserver() {
-		self.transactionsData.asObservable().subscribe(onNext: { _ in
-			self.reloadUI?()
+		
+		self.transactionsData.asObservable().subscribe(onNext: { transData in
+	
 			self.getDictionaryTransaction()
+			self.reloadUI?()
 		})
 	}
 	
@@ -372,7 +376,7 @@ class HomeViewModel {
 	
 	//EXTRAS
 	
-	func calculateIncomePerMonth(date: Date) -> Float{
+	func calculateIncomePerMonth(date: Date) -> Float {
 		guard let transactionsData = self.transactionsData.value else {
 			return 0
 		}
@@ -387,7 +391,7 @@ class HomeViewModel {
 				incomeTotal += amount
 			}
 		}
-		
+		self.incomePerMonth.accept(incomeTotal)
 		return incomeTotal
 	}
 	
@@ -436,6 +440,7 @@ class HomeViewModel {
 				expenseTotal += amount
 			}
 		}
+		self.expensePerMonth.accept(expenseTotal)
 		
 		return expenseTotal
 	}

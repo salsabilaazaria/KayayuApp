@@ -9,6 +9,8 @@ import Foundation
 import AsyncDisplayKit
 
 class TransactionTableHeaderNode: ASCellNode {
+	var changeMonthData: ((Date) -> Void)?
+	
 	private let dateText: ASTextNode = ASTextNode()
 	private let prevButton: ASButtonNode = ASButtonNode()
 	private let nextButton: ASButtonNode = ASButtonNode()
@@ -110,6 +112,7 @@ class TransactionTableHeaderNode: ASCellNode {
 	
 	@objc func prevMonthTapped(sender: ASButtonNode) {
 		selectedDate = CalendarHelper().minusMonth(date: selectedDate)
+		self.changeMonthData?(selectedDate)
 		configureDateText()
 	}
 	
@@ -123,6 +126,7 @@ class TransactionTableHeaderNode: ASCellNode {
 	
 	@objc func nextMonthTapped(sender: ASButtonNode) {
 		selectedDate = CalendarHelper().plusMonth(date: selectedDate)
+		self.changeMonthData?(selectedDate)
 		configureDateText()
 	}
 	
@@ -147,7 +151,7 @@ class TransactionTableHeaderNode: ASCellNode {
 	}
 	
 	private func configureIncomeText() -> ASLayoutSpec {
-		let incomePerMonth = viewModel.calculateIncomePerMonth(date: Date())
+		let incomePerMonth = viewModel.calculateIncomePerMonth(date: selectedDate)
 		
 		incomeTitle.attributedText = NSAttributedString.bold("Income", 14, .systemGreen)
 		incomeAmount.attributedText = NSAttributedString.semibold("Rp\(incomePerMonth)", 14, .systemGreen)
@@ -162,7 +166,7 @@ class TransactionTableHeaderNode: ASCellNode {
 	}
 	
 	private func configureExpenseText() -> ASLayoutSpec {
-		let expensePerMonth = viewModel.calculateExpensePerMonth(date: Date())
+		let expensePerMonth = viewModel.calculateExpensePerMonth(date: selectedDate)
 		
 		expenseTitle.attributedText = NSAttributedString.bold("Expense", 14, .systemRed)
 		expenseAmount.attributedText = NSAttributedString.semibold("Rp\(expensePerMonth)", 14, .systemRed)
