@@ -182,8 +182,9 @@ class TransactionTableHeaderNode: ASCellNode {
 	}
 	
 	private func configureTotalText() -> ASLayoutSpec {
+		let total = viewModel.calculateTotalPerMonth(date: selectedDate)
 		totalTitle.attributedText = NSAttributedString.bold("Total", 14, .black)
-		totalAmount.attributedText = NSAttributedString.semibold("Rp400.000", 14, .black)
+		totalAmount.attributedText = NSAttributedString.semibold("Rp\(total)", 14, .black)
 		
 		let totalSpec = ASStackLayoutSpec(direction: .vertical,
 										   spacing: 5,

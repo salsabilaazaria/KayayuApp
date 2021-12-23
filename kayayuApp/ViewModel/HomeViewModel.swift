@@ -470,4 +470,9 @@ class HomeViewModel {
 		}
 		return expenseTotal
 	}
+	
+	func calculateTotalPerMonth(date: Date) -> Float{
+		let total = self.calculateIncomePerMonth(date: date) - self.calculateExpensePerMonth(date: date)
+		return total
+	}
 }
