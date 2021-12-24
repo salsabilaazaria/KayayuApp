@@ -83,13 +83,13 @@ class TransactionDateCellNode: ASDisplayNode {
 	}
 	
 	private func configureIncomeAmount() {
-		let formattedAmount = numberHelper.floatToString(beforeFormatted: incomePerDay)
+		let formattedAmount = numberHelper.idAmountFormat(beforeFormatted: incomePerDay)
         
 		totalIncomeAmount.attributedText = NSAttributedString.semibold("Rp\(formattedAmount)", 14, .systemGreen)
 	}
 	
 	private func configureExpenseAmount() {
-		let formattedAmount = numberHelper.floatToString(beforeFormatted: expensePerDay)
+		let formattedAmount = numberHelper.idAmountFormat(beforeFormatted: expensePerDay)
         
         totalExpenseAmount.attributedText = NSAttributedString.semibold("Rp\(formattedAmount)", 14, .systemRed)
 	}

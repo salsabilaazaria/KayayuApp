@@ -101,7 +101,7 @@ class InstallmentCellNode: ASCellNode {
         typeInstallment.attributedText = NSAttributedString.normal("Billed: \(instlData.billing_type ?? " ")", 14, .black)
 		
         remainingAmount.attributedText = NSAttributedString.normal("Remaining Amount: Rp", 14, .black)
-		let formattedInstallmentAmount = numberHelper.floatToString(beforeFormatted: instlData.total_amount ?? 0)
+		let formattedInstallmentAmount = numberHelper.idAmountFormat(beforeFormatted: instlData.total_amount ?? 0)
 		
         totalAmount.attributedText = NSAttributedString.normal("Total Amount: Rp\(formattedInstallmentAmount)", 14, .black)
 		
