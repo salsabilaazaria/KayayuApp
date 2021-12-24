@@ -34,11 +34,20 @@ class ProfileCellNode: ASDisplayNode {
 	}
 	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-		let itemSpec = ASStackLayoutSpec(direction: .horizontal,
+		var itemSpec = ASLayoutSpec()
+		if iconImageName != "" {
+			itemSpec = ASStackLayoutSpec(direction: .horizontal,
 										 spacing: 10,
 										 justifyContent: .center,
 										 alignItems: .center,
 										 children: [icon, title, arrow])
+		} else {
+			itemSpec = ASStackLayoutSpec(direction: .horizontal,
+										 spacing: 10,
+										 justifyContent: .center,
+										 alignItems: .center,
+										 children: [title, arrow])
+		}
 		
 		itemSpec.style.preferredSize = CGSize(width: UIScreen.main.bounds.width, height: 50)
 		title.style.flexGrow = 1

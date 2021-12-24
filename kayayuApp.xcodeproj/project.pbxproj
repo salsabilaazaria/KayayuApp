@@ -64,7 +64,14 @@
 		AF52E8EF2761011800D5DCE7 /* UIImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF52E8EE2761011800D5DCE7 /* UIImageHelper.swift */; };
 		AF54297E2774D10400312953 /* NumberHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF54297D2774D10400312953 /* NumberHelper.swift */; };
 		AF67289D2775D3D300EFD5DE /* StatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67289C2775D3D300EFD5DE /* StatsViewModel.swift */; };
-		AF7591D5274E4381003B8708 /* RatioRealisationDetailNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7591D4274E4381003B8708 /* RatioRealisationDetailNode.swift */; };
+		AF6728B227763FDF00EFD5DE /* ChangeEmailNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6728B127763FDF00EFD5DE /* ChangeEmailNode.swift */; };
+		AF6728BA2776418200EFD5DE /* ChangeUsernameNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6728B92776418200EFD5DE /* ChangeUsernameNode.swift */; };
+		AF6728C22776420500EFD5DE /* ChangePasswordNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6728C12776420500EFD5DE /* ChangePasswordNode.swift */; };
+		AF6728C7277643E200EFD5DE /* ChangeUsernameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6728C6277643E200EFD5DE /* ChangeUsernameController.swift */; };
+		AF6728CC277643ED00EFD5DE /* ChangeEmailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6728CB277643ED00EFD5DE /* ChangeEmailController.swift */; };
+		AF6728D1277643FE00EFD5DE /* ChangePasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6728D0277643FE00EFD5DE /* ChangePasswordController.swift */; };
+		AF6728DC277645CA00EFD5DE /* EditProfileNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6728DB277645CA00EFD5DE /* EditProfileNode.swift */; };
+		AF6728E127764BE200EFD5DE /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6728E027764BE200EFD5DE /* EditProfileController.swift */; };
 		AF7591DA274E43DE003B8708 /* StatsDateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7591D9274E43DE003B8708 /* StatsDateHeader.swift */; };
 		AFA9CDD5274F759A00E520A3 /* AddIncomeRecordNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA9CDD4274F759A00E520A3 /* AddIncomeRecordNode.swift */; };
 		AFA9CDE2274F766300E520A3 /* AddRecordeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA9CDE1274F766300E520A3 /* AddRecordeNode.swift */; };
@@ -150,11 +157,18 @@
 		AF2C18742746165600482D6E /* TransactionTableHeaderNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableHeaderNode.swift; sourceTree = "<group>"; };
 		AF2C18842746477E00482D6E /* TransactionDateCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDateCellNode.swift; sourceTree = "<group>"; };
 		AF2C188A27464E6A00482D6E /* HomeTableTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableTransaction.swift; sourceTree = "<group>"; };
-		AF2C1893274656CE00482D6E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = kayayuApp/Views/HomeViewController.swift; sourceTree = SOURCE_ROOT; };
+		AF2C1893274656CE00482D6E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = kayayuApp/ViewController/Home/HomeViewController.swift; sourceTree = SOURCE_ROOT; };
 		AF52E8EE2761011800D5DCE7 /* UIImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageHelper.swift; sourceTree = "<group>"; };
 		AF54297D2774D10400312953 /* NumberHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberHelper.swift; sourceTree = "<group>"; };
 		AF67289C2775D3D300EFD5DE /* StatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewModel.swift; sourceTree = "<group>"; };
-		AF7591D4274E4381003B8708 /* RatioRealisationDetailNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioRealisationDetailNode.swift; sourceTree = "<group>"; };
+		AF6728B127763FDF00EFD5DE /* ChangeEmailNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailNode.swift; sourceTree = "<group>"; };
+		AF6728B92776418200EFD5DE /* ChangeUsernameNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeUsernameNode.swift; sourceTree = "<group>"; };
+		AF6728C12776420500EFD5DE /* ChangePasswordNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordNode.swift; sourceTree = "<group>"; };
+		AF6728C6277643E200EFD5DE /* ChangeUsernameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeUsernameController.swift; sourceTree = "<group>"; };
+		AF6728CB277643ED00EFD5DE /* ChangeEmailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailController.swift; sourceTree = "<group>"; };
+		AF6728D0277643FE00EFD5DE /* ChangePasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordController.swift; sourceTree = "<group>"; };
+		AF6728DB277645CA00EFD5DE /* EditProfileNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileNode.swift; sourceTree = "<group>"; };
+		AF6728E027764BE200EFD5DE /* EditProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileController.swift; sourceTree = "<group>"; };
 		AF7591D9274E43DE003B8708 /* StatsDateHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsDateHeader.swift; sourceTree = "<group>"; };
 		AFA9CDD4274F759A00E520A3 /* AddIncomeRecordNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIncomeRecordNode.swift; sourceTree = "<group>"; };
 		AFA9CDE1274F766300E520A3 /* AddRecordeNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordeNode.swift; sourceTree = "<group>"; };
@@ -212,6 +226,7 @@
 		0A337AC7275E541D00B04508 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				AF6728B027763FD100EFD5DE /* Edit Profile */,
 				0ADCBA99275E7D8700F15F5E /* Installment */,
 				0ADCBA86275E5F1100F15F5E /* Subscription */,
 				0A337AB8275E503900B04508 /* ProfileNode.swift */,
@@ -226,7 +241,6 @@
 				0A8D94E6274D26F300BB55FC /* StatsNode.swift */,
 				0A8D9511274D320600BB55FC /* RealisationStatsNode.swift */,
 				0A8D9516274D333500BB55FC /* PlanStatsNode.swift */,
-				AF7591D4274E4381003B8708 /* RatioRealisationDetailNode.swift */,
 				AF7591D9274E43DE003B8708 /* StatsDateHeader.swift */,
 			);
 			path = Stats;
@@ -346,15 +360,12 @@
 		0ABC636D2739335C0041087F /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				AF2C1893274656CE00482D6E /* HomeViewController.swift */,
 				AFC65DA9274792AD0050769D /* LandingViewController.swift */,
 				AFC65DB42747ABBA0050769D /* LoginViewController.swift */,
 				AFC65DB92747ABCA0050769D /* RegisterViewController.swift */,
 				0A8D950C274D2B2400BB55FC /* StatsViewController.swift */,
-				AFA9CDEF274F78A800E520A3 /* AddRecordViewController.swift */,
-				0A337ABD275E517700B04508 /* ProfileViewController.swift */,
-				0ADCBA94275E793A00F15F5E /* SubscriptionViewController.swift */,
-				0ADCBAA7275E7F4A00F15F5E /* InstallmentViewController.swift */,
+				AF6728D72776455800EFD5DE /* Home */,
+				AF6728D52776453100EFD5DE /* Profile */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -404,6 +415,48 @@
 				0A2A6893273D5FFF0062501C /* HomeNode.swift */,
 				AF2C188A27464E6A00482D6E /* HomeTableTransaction.swift */,
 				AFC65DBF2747B35F0050769D /* HomeComponentNode.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		AF6728B027763FD100EFD5DE /* Edit Profile */ = {
+			isa = PBXGroup;
+			children = (
+				AF6728B127763FDF00EFD5DE /* ChangeEmailNode.swift */,
+				AF6728B92776418200EFD5DE /* ChangeUsernameNode.swift */,
+				AF6728C12776420500EFD5DE /* ChangePasswordNode.swift */,
+				AF6728DB277645CA00EFD5DE /* EditProfileNode.swift */,
+			);
+			path = "Edit Profile";
+			sourceTree = "<group>";
+		};
+		AF6728D52776453100EFD5DE /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				0A337ABD275E517700B04508 /* ProfileViewController.swift */,
+				0ADCBA94275E793A00F15F5E /* SubscriptionViewController.swift */,
+				0ADCBAA7275E7F4A00F15F5E /* InstallmentViewController.swift */,
+				AF6728D62776454200EFD5DE /* Edit Profile */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		AF6728D62776454200EFD5DE /* Edit Profile */ = {
+			isa = PBXGroup;
+			children = (
+				AF6728E027764BE200EFD5DE /* EditProfileController.swift */,
+				AF6728C6277643E200EFD5DE /* ChangeUsernameController.swift */,
+				AF6728CB277643ED00EFD5DE /* ChangeEmailController.swift */,
+				AF6728D0277643FE00EFD5DE /* ChangePasswordController.swift */,
+			);
+			path = "Edit Profile";
+			sourceTree = "<group>";
+		};
+		AF6728D72776455800EFD5DE /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				AF2C1893274656CE00482D6E /* HomeViewController.swift */,
+				AFA9CDEF274F78A800E520A3 /* AddRecordViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -699,6 +752,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFC65DA027476F000050769D /* KayayuCoordinator.swift in Sources */,
+				AF6728B227763FDF00EFD5DE /* ChangeEmailNode.swift in Sources */,
 				0A8D9512274D320700BB55FC /* RealisationStatsNode.swift in Sources */,
 				AF2C1894274656CE00482D6E /* HomeViewController.swift in Sources */,
 				AF2C18852746477E00482D6E /* TransactionDateCellNode.swift in Sources */,
@@ -707,6 +761,7 @@
 				0ABC639627393B710041087F /* LoginNode.swift in Sources */,
 				0AAA2674273A65900063D876 /* BigButton.swift in Sources */,
 				AFBA5F59274DF8F6002455A7 /* KayayuHelper.swift in Sources */,
+				AF6728D1277643FE00EFD5DE /* ChangePasswordController.swift in Sources */,
 				AF67289D2775D3D300EFD5DE /* StatsViewModel.swift in Sources */,
 				AFC65DA5274771650050769D /* KayayuScreen.swift in Sources */,
 				AF54297E2774D10400312953 /* NumberHelper.swift in Sources */,
@@ -732,8 +787,14 @@
 				AF020193274252C60033D067 /* TransactionTableNode.swift in Sources */,
 				FD2C4EBA276388ED00A8C50F /* ProfileViewModel.swift in Sources */,
 				0A337AB9275E503900B04508 /* ProfileNode.swift in Sources */,
+				AF6728DC277645CA00EFD5DE /* EditProfileNode.swift in Sources */,
+				AF6728C7277643E200EFD5DE /* ChangeUsernameController.swift in Sources */,
+				AF6728BA2776418200EFD5DE /* ChangeUsernameNode.swift in Sources */,
 				AF52E8EF2761011800D5DCE7 /* UIImageHelper.swift in Sources */,
+				AF6728CC277643ED00EFD5DE /* ChangeEmailController.swift in Sources */,
+				AF6728E127764BE200EFD5DE /* EditProfileController.swift in Sources */,
 				0A8D94E7274D26F300BB55FC /* StatsNode.swift in Sources */,
+				AF6728C22776420500EFD5DE /* ChangePasswordNode.swift in Sources */,
 				0ABC631B273929860041087F /* SceneDelegate.swift in Sources */,
 				0ADCBAA3275E7DB900F15F5E /* InstallmentCellNode.swift in Sources */,
 				AFA9CDEB274F776C00E520A3 /* AddExpenseRecordNode.swift in Sources */,
@@ -742,7 +803,6 @@
 				0A20A9C427411024005E8BB6 /* TabBar.swift in Sources */,
 				0A337AC3275E540500B04508 /* ProfileCellNode.swift in Sources */,
 				0ABC6323273929860041087F /* kayayuApp.xcdatamodeld in Sources */,
-				AF7591D5274E4381003B8708 /* RatioRealisationDetailNode.swift in Sources */,
 				0ADCBAA8275E7F4A00F15F5E /* InstallmentViewController.swift in Sources */,
 				AFC65DBA2747ABCA0050769D /* RegisterViewController.swift in Sources */,
 				AFA9CDE2274F766300E520A3 /* AddRecordeNode.swift in Sources */,

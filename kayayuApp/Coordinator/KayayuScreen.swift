@@ -24,6 +24,10 @@ final class KayayuScreen {
 		case onOpenProfilePage(viewModel: ProfileViewModel)
 		case onOpenSubscriptionPage(viewModel: ProfileViewModel)
         case onOpenInstallmentPage(viewModel: ProfileViewModel)
+		case onOpenEditProfile(viewModel: ProfileViewModel)
+		case onOpenChangeEmail(viewModel: ProfileViewModel)
+		case onOpenChangeUsername(viewModel: ProfileViewModel)
+		case onOpenChangePassword(viewModel: ProfileViewModel)
 	}
 	
 	public init(navigationController: UINavigationController, tabBarController: UITabBarController) {
@@ -129,6 +133,18 @@ final class KayayuScreen {
 		return controller
 	}
 	
+	func makeAddRecordPageViewController(viewModel: HomeViewModel) -> UIViewController {
+		let controller = AddRecordViewController(viewModel: viewModel)
+		
+		controller.onOpenHomePage = { [weak self] in
+			guard let self = self else {
+				return
+			}
+			self.onNavigationEvent?(.onOpenHomePage)
+		}
+		return controller
+	}
+	
 	func makeStatsPageViewController(viewModel: StatsViewModel) -> UIViewController {
 		let controller = StatsViewController(viewModel: viewModel)
 		controller.title = "Stats"
@@ -151,6 +167,15 @@ final class KayayuScreen {
 			}
             self.onNavigationEvent?(.onOpenInstallmentPage(viewModel: viewModel))
 		}
+		
+		controller.onOpenEditProfile = { [weak self] in
+			guard let self = self else {
+				return
+			}
+			
+			self.onNavigationEvent?(.onOpenEditProfile(viewModel: viewModel))
+			
+		}
         
         controller.onLogout = { [weak self] in
             guard let self = self else {
@@ -162,18 +187,6 @@ final class KayayuScreen {
 		return controller
 	}
 	
-	func makeAddRecordPageViewController(viewModel: HomeViewModel) -> UIViewController {
-		let controller = AddRecordViewController(viewModel: viewModel)
-		
-		controller.onOpenHomePage = { [weak self] in
-			guard let self = self else {
-				return
-			}
-			self.onNavigationEvent?(.onOpenHomePage)
-		}
-		return controller
-	}
-	
     func makeSubscriptionPageViewController(viewModel: ProfileViewModel) -> UIViewController {
 		let controller = SubscriptionViewController(viewModel: viewModel)
 		return controller
@@ -181,6 +194,48 @@ final class KayayuScreen {
 	
     func makeInstallmentPageViewController(viewModel: ProfileViewModel) -> UIViewController {
 		let controller = InstallmentViewController(viewModel: viewModel)
+		return controller
+	}
+	
+	func makeEditProfilePageViewController(viewModel: ProfileViewModel) -> UIViewController {
+		let controller = EditProfileController(viewModel: viewModel)
+		
+		controller.onOpenChangeUsernamePage = { [weak self] in
+			guard let self = self else {
+				return
+			}
+			self.onNavigationEvent?(.onOpenChangeUsername(viewModel: viewModel))
+		}
+		
+		controller.onOpenChangeEmailPage = { [weak self] in
+			guard let self = self else {
+				return
+			}
+			self.onNavigationEvent?(.onOpenChangeEmail(viewModel: viewModel))
+		}
+		
+		controller.onOpenChangePasswordPage = { [weak self] in
+			guard let self = self else {
+				return
+			}
+			self.onNavigationEvent?(.onOpenChangePassword(viewModel: viewModel))
+		}
+		
+		return controller
+	}
+	
+	func makeChangeUsernamePageViewController(viewModel: ProfileViewModel) -> UIViewController {
+		let controller = ChangeUsernameController(viewModel: viewModel)
+		return controller
+	}
+	
+	func makeChangeEmailPageViewController(viewModel: ProfileViewModel) -> UIViewController {
+		let controller = ChangeEmailController(viewModel: viewModel)
+		return controller
+	}
+	
+	func makeChangePasswordPageViewController(viewModel: ProfileViewModel) -> UIViewController {
+		let controller = ChangePasswordController(viewModel: viewModel)
 		return controller
 	}
 	

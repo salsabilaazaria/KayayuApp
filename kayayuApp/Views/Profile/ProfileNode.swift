@@ -11,6 +11,7 @@ import AsyncDisplayKit
 class ProfileNode: ASDisplayNode {
 	var onOpenSubscriptionPage: (() -> Void)?
 	var onOpenInstallmentPage: (() -> Void)?
+	var onOpenEditProfile: (() -> Void)?
     var onLogout: (() -> Void)?
     
 //    private let viewModel: AuthenticationViewModel
@@ -128,6 +129,11 @@ class ProfileNode: ASDisplayNode {
 	
 	private func configureEditProfileNode() {
 		editProfileNode = ProfileCellNode(icon: "editProfile.png", title: "Edit Profile")
+		editProfileNode.buttonNode.addTarget(self, action: #selector(editProfileTapped), forControlEvents: .touchUpInside)
+	}
+	
+	@objc func editProfileTapped(sender: ASButtonNode) {
+		self.onOpenEditProfile?()
 	}
 	
 	private func configureLogoutNode() {

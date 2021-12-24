@@ -44,72 +44,96 @@ public final class KayayuCoordinator {
 			}
 			
 			switch navigationEvent {
-				case .onCreateTabBar:
-					DispatchQueue.main.async {
-						let homeViewModel = HomeViewModel()
-						let profileViewModel = ProfileViewModel()
-						let statsViewModel = StatsViewModel()
-						let controller = screen.makeTabBarViewController(homeViewModel: homeViewModel, statsViewModel: statsViewModel, profileViewModel: profileViewModel)
-						self.navigationController.pushViewController(controller, animated: true)
-					}
-					
-				case .onOpenHomePage:
+			case .onCreateTabBar:
+				DispatchQueue.main.async {
+					let homeViewModel = HomeViewModel()
+					let profileViewModel = ProfileViewModel()
+					let statsViewModel = StatsViewModel()
+					let controller = screen.makeTabBarViewController(homeViewModel: homeViewModel, statsViewModel: statsViewModel, profileViewModel: profileViewModel)
+					self.navigationController.pushViewController(controller, animated: true)
+				}
+				
+			case .onOpenHomePage:
+				let viewModel = HomeViewModel()
+				DispatchQueue.main.async {
+					let controller = screen.makeHomePageViewController(viewModel: viewModel)
+					self.navigationController.pushViewController(controller, animated: true)
+				}
+				
+			case .onOpenLandingPage:
+				DispatchQueue.main.async {
+					let controller = screen.makeLandingPageViewController()
+					self.navigationController.pushViewController(controller, animated: true)
+				}
+				
+			case .onOpenLoginPage:
+				DispatchQueue.main.async {
+					let viewModel = AuthenticationViewModel()
+					let controller = screen.makeLoginPageViewController(viewModel: viewModel)
+					self.navigationController.pushViewController(controller, animated: true)
+				}
+				
+			case .onOpenRegisterPage:
+				DispatchQueue.main.async {
+					let viewModel = AuthenticationViewModel()
+					let controller = screen.makeRegisterPageViewController(viewModel: viewModel)
+					self.navigationController.pushViewController(controller, animated: true)
+				}
+				
+			case .onOpenStatsPage(let viewModel):
+				DispatchQueue.main.async {
+					let controller = screen.makeStatsPageViewController(viewModel: viewModel)
+					self.navigationController.pushViewController(controller, animated: true)
+				}
+				
+			case .onOpenAddRecordPage:
+				DispatchQueue.main.async {
 					let viewModel = HomeViewModel()
-					DispatchQueue.main.async {
-						let controller = screen.makeHomePageViewController(viewModel: viewModel)
-						self.navigationController.pushViewController(controller, animated: true)
-					}
-					
-				case .onOpenLandingPage:
-					DispatchQueue.main.async {
-						let controller = screen.makeLandingPageViewController()
-						self.navigationController.pushViewController(controller, animated: true)
-					}
-					
-				case .onOpenLoginPage:
-					DispatchQueue.main.async {
-						let viewModel = AuthenticationViewModel()
-						let controller = screen.makeLoginPageViewController(viewModel: viewModel)
-						self.navigationController.pushViewController(controller, animated: true)
-					}
-					
-				case .onOpenRegisterPage:
-					DispatchQueue.main.async {
-						let viewModel = AuthenticationViewModel()
-						let controller = screen.makeRegisterPageViewController(viewModel: viewModel)
-						self.navigationController.pushViewController(controller, animated: true)
-					}
-					
-				case .onOpenStatsPage(let viewModel):
-					DispatchQueue.main.async {
-						let controller = screen.makeStatsPageViewController(viewModel: viewModel)
-						self.navigationController.pushViewController(controller, animated: true)
-					}
-					
-				case .onOpenAddRecordPage:
-					DispatchQueue.main.async {
-						let viewModel = HomeViewModel()
-						let controller = screen.makeAddRecordPageViewController(viewModel: viewModel)
-						self.navigationController.pushViewController(controller, animated: true)
-					}
-					
-				case .onOpenProfilePage(let viewModel):
-					DispatchQueue.main.async {
-						let controller = screen.makeProfileViewController(viewModel: viewModel)
-						self.navigationController.pushViewController(controller, animated: true)
-					}
-					
-				case .onOpenSubscriptionPage(let viewModel):
-					DispatchQueue.main.async {
-						let controller = screen.makeSubscriptionPageViewController(viewModel: viewModel)
-						self.navigationController.pushViewController(controller, animated: true)
-					}
-					
-				case .onOpenInstallmentPage(let viewModel):
-					DispatchQueue.main.async {
-						let controller = screen.makeInstallmentPageViewController(viewModel: viewModel)
-						self.navigationController.pushViewController(controller, animated: true)
-					}
+					let controller = screen.makeAddRecordPageViewController(viewModel: viewModel)
+					self.navigationController.pushViewController(controller, animated: true)
+				}
+				
+			case .onOpenProfilePage(let viewModel):
+				DispatchQueue.main.async {
+					let controller = screen.makeProfileViewController(viewModel: viewModel)
+					self.navigationController.pushViewController(controller, animated: true)
+				}
+				
+			case .onOpenSubscriptionPage(let viewModel):
+				DispatchQueue.main.async {
+					let controller = screen.makeSubscriptionPageViewController(viewModel: viewModel)
+					self.navigationController.pushViewController(controller, animated: true)
+				}
+				
+			case .onOpenInstallmentPage(let viewModel):
+				DispatchQueue.main.async {
+					let controller = screen.makeInstallmentPageViewController(viewModel: viewModel)
+					self.navigationController.pushViewController(controller, animated: true)
+				}
+				
+			case .onOpenEditProfile(let viewModel):
+				DispatchQueue.main.async {
+					let controller = screen.makeEditProfilePageViewController(viewModel: viewModel)
+					self.navigationController.pushViewController(controller, animated: true)
+				}
+				
+			case .onOpenChangeEmail(let viewModel):
+				DispatchQueue.main.async {
+					let controller = screen.makeChangeEmailPageViewController(viewModel: viewModel)
+					self.navigationController.pushViewController(controller, animated: true)
+				}
+				
+			case .onOpenChangeUsername(let viewModel):
+				DispatchQueue.main.async {
+					let controller = screen.makeChangeUsernamePageViewController(viewModel: viewModel)
+					self.navigationController.pushViewController(controller, animated: true)
+				}
+				
+			case .onOpenChangePassword(let viewModel):
+				DispatchQueue.main.async {
+					let controller = screen.makeChangePasswordPageViewController(viewModel: viewModel)
+					self.navigationController.pushViewController(controller, animated: true)
+				}
 			}
 		}
 	}
