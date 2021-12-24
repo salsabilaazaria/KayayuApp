@@ -19,7 +19,7 @@ final class KayayuScreen {
 		case onOpenLandingPage
 		case onOpenLoginPage
 		case onOpenRegisterPage
-		case onOpenStatsPage
+		case onOpenStatsPage(viewModel: StatsViewModel)
 		case onOpenAddRecordPage
 		case onOpenProfilePage(viewModel: ProfileViewModel)
 		case onOpenSubscriptionPage(viewModel: ProfileViewModel)
@@ -36,14 +36,14 @@ final class KayayuScreen {
 		return controller
 	}
 	
-	func makeTabBarViewController(homeViewModel: HomeViewModel, profileViewModel: ProfileViewModel) -> UITabBarController {
+	func makeTabBarViewController(homeViewModel: HomeViewModel, statsViewModel: StatsViewModel, profileViewModel: ProfileViewModel) -> UITabBarController {
 		tabBarController.edgesForExtendedLayout = []
 
 		let home = makeHomePageViewController(viewModel: homeViewModel)
 		home.tabBarItem.image = UIImage(named: "homeUnselected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize)
 		home.tabBarItem.selectedImage = UIImage(named: "homeSelected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize)
 		
-		let stats = makeStatsPageViewController()
+		let stats = makeStatsPageViewController(viewModel: statsViewModel)
 		stats.tabBarItem.image = UIImage(named: "statsUnselected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize)
 		stats.tabBarItem.selectedImage = UIImage(named: "statsSelected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize)
 		
@@ -129,8 +129,8 @@ final class KayayuScreen {
 		return controller
 	}
 	
-	func makeStatsPageViewController() -> UIViewController {
-		let controller = StatsViewController()
+	func makeStatsPageViewController(viewModel: StatsViewModel) -> UIViewController {
+		let controller = StatsViewController(viewModel: viewModel)
 		controller.title = "Stats"
 		return controller
 	}

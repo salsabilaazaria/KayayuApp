@@ -21,22 +21,37 @@ class PlanStatsNode: ASDisplayNode {
 	private var wantsSummary: SummaryHeader = SummaryHeader()
 	private var savingsSummary: SummaryHeader = SummaryHeader()
 	
-	override init() {
-		
+	private let numberHelper: NumberHelper = NumberHelper()
+	
+	private let viewModel: StatsViewModel
+	
+	init(viewModel: StatsViewModel) {
+		self.viewModel = viewModel
 		super.init()
 		automaticallyManagesSubnodes = true
 		backgroundColor = .white
 		
-		configurePlanPieChartNode()
-		configurePlanPieChart()
 		configurePlanTitle()
 		configureRatioTitle()
-		configureNeedsSummary()
-		configureWantsSummary()
-		configureSavingsSummary()
+		configureViewModel()
+
 	}
 	
+	private func configureViewModel() {
+		viewModel.reloadUI = {
+			self.reloadUI()
+		}
+	}
+	
+	private func reloadUI(){
+		self.setNeedsLayout()
+		self.layoutIfNeeded()
+	}
+	
+	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
+		configurePlanPieChartNode()
+		configurePlanPieChart()
 		let summaryStack = createRatioSummarySpec()
 
 		let pieChartStack = ASStackLayoutSpec(direction: .vertical,
@@ -74,20 +89,31 @@ class PlanStatsNode: ASDisplayNode {
 		
 		planPieChart.legend.enabled = false
 		
-		//data dummy
-		let entries: [PieChartDataEntry] = [PieChartDataEntry(value: 10000, label: "First"),
-											PieChartDataEntry(value: 2000, label: "second"),
-											PieChartDataEntry(value: 30000, label: "third")]
+		guard let needsBalance = viewModel.user.value?.balance_needs,
+			  let wantsBalance = viewModel.user.value?.balance_wants,
+			  let savingsBalance = viewModel.user.value?.balance_savings else {
+			return
+		}
+
+		let entries: [PieChartDataEntry] = [PieChartDataEntry(value: Double(needsBalance), label: "\(kayayuRatio.needs.rawValue)"),
+											PieChartDataEntry(value: Double(wantsBalance), label: "\(kayayuRatio.wants.rawValue)"),
+											PieChartDataEntry(value: Double(savingsBalance), label: "\(kayayuRatio.savings.rawValue)")]
 		
-		
-		let dataSet = PieChartDataSet(entries: entries, label: "label")
+		let dataSet = PieChartDataSet(entries: entries, label: "")
 		dataSet.colors = kayayuColor.pieCharArrColor
 		planPieChart.data = PieChartData(dataSet: dataSet)
+
+
 		
 	}
 	
 	
 	private func createRatioSummarySpec() -> ASLayoutSpec {
+		
+		configureNeedsSummary()
+		configureWantsSummary()
+		configureSavingsSummary()
+		
 		let summaryStack = ASStackLayoutSpec(direction: .vertical,
 											 spacing: 10,
 											 justifyContent: .center,
@@ -107,15 +133,24 @@ class PlanStatsNode: ASDisplayNode {
 	}
 	
 	private func configureNeedsSummary() {
-		needsSummary = SummaryHeader(summary: .needs, subtitleText: "RpNEEDS")
+		guard let needsBalance = viewModel.user.value?.balance_needs else {
+			return
+		}
+		needsSummary = SummaryHeader(summary: .needs, subtitleText: "Rp\(numberHelper.idAmountFormat(beforeFormatted: needsBalance))")
 	}
 	
 	private func configureWantsSummary() {
-		wantsSummary = SummaryHeader(summary: .wants, subtitleText: "RpWANTS")
+		guard let wantsBalance = viewModel.user.value?.balance_wants else {
+			return
+		}
+		wantsSummary = SummaryHeader(summary: .wants, subtitleText: "Rp\(numberHelper.idAmountFormat(beforeFormatted: wantsBalance))")
 	}
 	
 	private func configureSavingsSummary() {
-		savingsSummary = SummaryHeader(summary: .savings, subtitleText: "RpSAVINGS")
+		guard let savingsBalance = viewModel.user.value?.balance_savings else {
+			return
+		}
+		savingsSummary = SummaryHeader(summary: .savings, subtitleText: "Rp\(numberHelper.idAmountFormat(beforeFormatted: savingsBalance))")
 	}
 	
 	

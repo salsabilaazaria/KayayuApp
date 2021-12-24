@@ -48,41 +48,42 @@ public final class KayayuCoordinator {
 					DispatchQueue.main.async {
 						let homeViewModel = HomeViewModel()
 						let profileViewModel = ProfileViewModel()
-						let controller = screen.makeTabBarViewController(homeViewModel: homeViewModel, profileViewModel: profileViewModel)
+						let statsViewModel = StatsViewModel()
+						let controller = screen.makeTabBarViewController(homeViewModel: homeViewModel, statsViewModel: statsViewModel, profileViewModel: profileViewModel)
 						self.navigationController.pushViewController(controller, animated: true)
 					}
+					
 				case .onOpenHomePage:
 					let viewModel = HomeViewModel()
 					DispatchQueue.main.async {
 						let controller = screen.makeHomePageViewController(viewModel: viewModel)
 						self.navigationController.pushViewController(controller, animated: true)
-						
 					}
+					
 				case .onOpenLandingPage:
 					DispatchQueue.main.async {
 						let controller = screen.makeLandingPageViewController()
 						self.navigationController.pushViewController(controller, animated: true)
-						
 					}
+					
 				case .onOpenLoginPage:
 					DispatchQueue.main.async {
 						let viewModel = AuthenticationViewModel()
 						let controller = screen.makeLoginPageViewController(viewModel: viewModel)
 						self.navigationController.pushViewController(controller, animated: true)
-						
 					}
+					
 				case .onOpenRegisterPage:
 					DispatchQueue.main.async {
 						let viewModel = AuthenticationViewModel()
 						let controller = screen.makeRegisterPageViewController(viewModel: viewModel)
 						self.navigationController.pushViewController(controller, animated: true)
-						
 					}
-				case .onOpenStatsPage:
+					
+				case .onOpenStatsPage(let viewModel):
 					DispatchQueue.main.async {
-						let controller = screen.makeStatsPageViewController()
+						let controller = screen.makeStatsPageViewController(viewModel: viewModel)
 						self.navigationController.pushViewController(controller, animated: true)
-						
 					}
 					
 				case .onOpenAddRecordPage:
@@ -90,25 +91,24 @@ public final class KayayuCoordinator {
 						let viewModel = HomeViewModel()
 						let controller = screen.makeAddRecordPageViewController(viewModel: viewModel)
 						self.navigationController.pushViewController(controller, animated: true)
-						
 					}
+					
 				case .onOpenProfilePage(let viewModel):
 					DispatchQueue.main.async {
 						let controller = screen.makeProfileViewController(viewModel: viewModel)
 						self.navigationController.pushViewController(controller, animated: true)
-						
 					}
+					
 				case .onOpenSubscriptionPage(let viewModel):
 					DispatchQueue.main.async {
 						let controller = screen.makeSubscriptionPageViewController(viewModel: viewModel)
 						self.navigationController.pushViewController(controller, animated: true)
-						
 					}
+					
 				case .onOpenInstallmentPage(let viewModel):
 					DispatchQueue.main.async {
 						let controller = screen.makeInstallmentPageViewController(viewModel: viewModel)
 						self.navigationController.pushViewController(controller, animated: true)
-						
 					}
 			}
 		}

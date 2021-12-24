@@ -11,13 +11,18 @@ import AsyncDisplayKit
 class StatsNode: ASDisplayNode {
 	private let planButton: ASButtonNode = ASButtonNode()
 	private let realisationButton: ASButtonNode = ASButtonNode()
-	private let planNode: PlanStatsNode = PlanStatsNode()
-	private let realisationNode: RealisationStatsNode = RealisationStatsNode()
+	private let planNode: PlanStatsNode
+	private let realisationNode: RealisationStatsNode
 	
 	private let buttonSize = CGSize(width: UIScreen.main.bounds.width/2, height: kayayuSize.kayayuBarHeight)
 	private var goToPlanNode: Bool = false
+	
+	private let viewModel: StatsViewModel
 
-	override init() {
+	init(viewModel: StatsViewModel) {
+		self.viewModel = viewModel
+		self.planNode = PlanStatsNode(viewModel: viewModel)
+		self.realisationNode = RealisationStatsNode(viewModel: viewModel)
 		super.init()
 		let nodeSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - TabBar().style.preferredSize.height - 200)
 		planNode.style.preferredSize = nodeSize
@@ -25,9 +30,16 @@ class StatsNode: ASDisplayNode {
 		
 		configurePlanButton()
 		configureRealisationButton()
+		configureViewModel()
 
 		automaticallyManagesSubnodes = true
 		
+	}
+	
+	private func configureViewModel() {
+		viewModel.reloadUI = {
+//			self.reloadUI()
+		}
 	}
 	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {

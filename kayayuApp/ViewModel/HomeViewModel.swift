@@ -32,10 +32,11 @@ class HomeViewModel {
 	
 	var userBalanceTotal: Float = 0
 
+	private let disposeBag = DisposeBag()
 	
 	init() {
 		self.getUserData()
-		self.getTransactionData()
+		self.getTransactionDataSpecMonth(diff: calendarHelper.monthInt(date: Date()))
 //        self.getTransactionDataSpecMonth(diff: 11) //diff masukin month yg mo ditampilin
 		self.configureObserver()
         
@@ -47,10 +48,9 @@ class HomeViewModel {
 	private func configureObserver() {
 		
 		self.transactionsData.asObservable().subscribe(onNext: { transData in
-	
 			self.getDictionaryTransaction()
 			self.reloadUI?()
-		})
+		}).disposed(by: disposeBag)
 	}
 	
 	private func getUserId() -> String{
@@ -79,33 +79,33 @@ class HomeViewModel {
 		})
 	}
 	
-	func getTransactionData () {
-        database.collection("transactions").whereField("user_id", isEqualTo: getUserId()).whereField("transaction_date", isGreaterThan: calendarHelper.getCurrStartMonth()).whereField("transaction_date", isLessThan: calendarHelper.getCurrEndMonth()).order(by: "transaction_date", descending: true).getDocuments() { (documentSnapshot, errorMsg) in
-			if let errorMsg = errorMsg {
-				print("Error get Transaction Data \(errorMsg)")
-			}
-			else {
-				var count = 0
-				var documentArray: [Transactions] = []
-				for document in documentSnapshot!.documents {
-					count += 1
-					
-					do {
-						guard let trans = try document.data(as: Transactions.self) else {
-							print("KAYAYU failed get transactionData")
-							return
-						}
-                        documentArray.append(trans)
-						
-					} catch {
-						print(error)
-					}
-					
-				}
-				self.transactionsData.accept(documentArray)
-			}
-		}
-	}
+//	func getTransactionData () {
+//        database.collection("transactions").whereField("user_id", isEqualTo: getUserId()).whereField("transaction_date", isGreaterThan: calendarHelper.getCurrStartMonth()).whereField("transaction_date", isLessThan: calendarHelper.getCurrEndMonth()).order(by: "transaction_date", descending: true).getDocuments() { (documentSnapshot, errorMsg) in
+//			if let errorMsg = errorMsg {
+//				print("Error get Transaction Data \(errorMsg)")
+//			}
+//			else {
+//				var count = 0
+//				var documentArray: [Transactions] = []
+//				for document in documentSnapshot!.documents {
+//					count += 1
+//
+//					do {
+//						guard let trans = try document.data(as: Transactions.self) else {
+//							print("KAYAYU failed get transactionData")
+//							return
+//						}
+//                        documentArray.append(trans)
+//
+//					} catch {
+//						print(error)
+//					}
+//
+//				}
+//				self.transactionsData.accept(documentArray)
+//			}
+//		}
+//	}
     
     func getTransactionDataSpecMonth (diff: Int) {
         database.collection("transactions").whereField("user_id", isEqualTo: getUserId()).whereField("transaction_date", isGreaterThan: calendarHelper.getSpecStartMonth(diff: diff)).whereField("transaction_date", isLessThan: calendarHelper.getSpecEndMonth(diff: diff)).order(by: "transaction_date", descending: true).getDocuments() { (documentSnapshot, errorMsg) in
@@ -135,7 +135,7 @@ class HomeViewModel {
         }
     }
 	
-	func getDictionaryTransaction() {
+	private func getDictionaryTransaction() {
 		guard let transDatas = transactionsData.value else {
 			return
 		}

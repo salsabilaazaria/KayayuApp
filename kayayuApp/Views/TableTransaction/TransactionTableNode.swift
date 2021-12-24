@@ -7,10 +7,14 @@
 
 import Foundation
 import AsyncDisplayKit
+import RxCocoa
+import RxSwift
 
 class TransactionTableNode: ASTableNode {
 	private let viewModel: HomeViewModel
 	private let calendarHelper: CalendarHelper = CalendarHelper()
+	
+	private let disposeBag = DisposeBag()
 	
 	init(viewModel: HomeViewModel) {
 		self.viewModel = viewModel
@@ -25,7 +29,7 @@ class TransactionTableNode: ASTableNode {
 	private func configureObserver() {
 		self.viewModel.dictTransactionData.asObservable().subscribe(onNext: { _ in
 			self.reloadData()
-		})
+		}).disposed(by: disposeBag)
 	}
 	
 }

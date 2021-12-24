@@ -25,24 +25,40 @@ class RealisationStatsNode: ASDisplayNode {
 	
 	private var scrollNode: ASScrollNode = ASScrollNode()
 	
-	override init() {
-		
+	private let numberHelper: NumberHelper = NumberHelper()
+	private let viewModel: StatsViewModel
+	
+	init(viewModel: StatsViewModel) {
+		self.viewModel = viewModel
 		super.init()
 		automaticallyManagesSubnodes = true
 		backgroundColor = .white
 		configureScrollNode()
-		configurePlanPieChartNode()
-		configurePlanPieChart()
+	
 		configurePlanTitle()
 		configureRatioTitle()
+		configureViewModel()
+		
+	}
+	
+	private func configureViewModel() {
+		viewModel.reloadUI = {
+			self.reloadUI()
+		}
+	}
+	
+	private func reloadUI(){
+		self.setNeedsLayout()
+		self.layoutIfNeeded()
+	}
+	
+	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
+		configurePlanPieChart()
+		configurePlanPieChartNode()
 		configureBalanceSummary()
 		configureNeedsSummary()
 		configureWantsSummary()
 		configureSavingsSummary()
-		
-	}
-	
-	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
 		
 		let pieChartStack = ASStackLayoutSpec(direction: .vertical,
 											  spacing: 10,
@@ -88,13 +104,19 @@ class RealisationStatsNode: ASDisplayNode {
 		
 		planPieChart.legend.enabled = false
 		
-		//data dummy
-		let entries: [PieChartDataEntry] = [PieChartDataEntry(value: 10000, label: "First"),
-											PieChartDataEntry(value: 2000, label: "second"),
-											PieChartDataEntry(value: 30000, label: "third")]
+		guard let needsAmount = viewModel.needsTotalTransaction.value,
+			  let wantsAmount = viewModel.wantsTotalTransaction.value,
+			  let savingsAmount = viewModel.savingsTotalTransaction.value else {
+			return
+		}
 		
+		let entries: [PieChartDataEntry] = [PieChartDataEntry(value: Double(needsAmount), label: "\(kayayuRatio.needs.rawValue)"),
+											PieChartDataEntry(value: Double(wantsAmount), label: "\(kayayuRatio.wants.rawValue)"),
+											PieChartDataEntry(value: Double(savingsAmount), label: "\(kayayuRatio.savings.rawValue)")]
+
 		
 		let dataSet = PieChartDataSet(entries: entries, label: "label")
+		
 		dataSet.colors = kayayuColor.pieCharArrColor
 		planPieChart.data = PieChartData(dataSet: dataSet)
 		
@@ -146,19 +168,43 @@ class RealisationStatsNode: ASDisplayNode {
 	}
 	
 	private func configureBalanceSummary() {
-		balanceSummary = SummaryHeader(summary: .balance, subtitleText: "Rp1.000.000")
+		guard let totalBalance = viewModel.user.value?.balance_total else {
+			return
+		}
+		balanceSummary = SummaryHeader(summary: .balance, subtitleText: numberHelper.idAmountFormat(beforeFormatted: totalBalance))
 	}
 	
 	private func configureNeedsSummary() {
-		needsSummary = SummaryHeader(summary: .needs, ratio: 0.3, progressColor: kayayuColor.needsLight, baseColor: kayayuColor.needsDark, progressBarText: "RpXX.XXX.XXX Remaining")
+		let needsRatio = viewModel.calculateNeedsProgressBarRatio()
+		guard let needsTransaction = viewModel.needsTotalTransaction.value,
+			  let needsBalance = viewModel.user.value?.balance_needs else {
+			return
+		}
+		
+		let needsRemaining = needsBalance - needsTransaction
+		needsSummary = SummaryHeader(summary: .needs, ratio: needsRatio, progressColor: kayayuColor.needsLight, baseColor: kayayuColor.needsDark, progressBarText: "Rp\(numberHelper.idAmountFormat(beforeFormatted: needsRemaining)) Remaining")
 	}
 	
 	private func configureWantsSummary() {
-		wantsSummary = SummaryHeader(summary: .wants, ratio: 0.3, progressColor: kayayuColor.wantsLight, baseColor: kayayuColor.wantsDark, progressBarText: "RpXX.XXX.XXX Remaining")
+		let wantsRatio = viewModel.calculateWantsProgressBarRatio()
+		guard let wantsTransaction = viewModel.wantsTotalTransaction.value,
+			  let wantsBalance = viewModel.user.value?.balance_wants else {
+			return
+		}
+		
+		let remainingWants = wantsBalance - wantsTransaction
+		wantsSummary = SummaryHeader(summary: .wants, ratio: wantsRatio, progressColor: kayayuColor.wantsLight, baseColor: kayayuColor.wantsDark, progressBarText: "Rp\(numberHelper.idAmountFormat(beforeFormatted: remainingWants)) Remaining")
 	}
 	
 	private func configureSavingsSummary() {
-		savingsSummary = SummaryHeader(summary: .savings, ratio: 0.3, progressColor: kayayuColor.savingsLight, baseColor: kayayuColor.savingsDark, progressBarText: "RpXX.XXX.XXX Remaining")
+		let savingsRatio = viewModel.calculateSavingsProgressBarRatio()
+		guard let savingsTransaction = viewModel.savingsTotalTransaction.value,
+			  let savingsBalance = viewModel.user.value?.balance_savings else {
+			return
+		}
+		
+		let remainingSavings = savingsBalance - savingsTransaction
+		savingsSummary = SummaryHeader(summary: .savings, ratio: savingsRatio, progressColor: kayayuColor.savingsLight, baseColor: kayayuColor.savingsDark, progressBarText: "Rp\(numberHelper.idAmountFormat(beforeFormatted: remainingSavings)) Remaining")
 	}
 	
 	
