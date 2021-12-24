@@ -43,6 +43,7 @@ struct RecurringTransactions: Codable {
     var total_amount: Float?
     var billing_type: String?
     var start_billing_date: Date?
+    var end_billing_date: Date?
     var tenor: Int?
     var interest: Float?
 }
@@ -53,7 +54,7 @@ struct TransactionDetail: Codable {
     var user_id:String?
     var recurring_id: String?
     var billing_date: Date?
-    var number_of_installment: Int?
+    var number_of_recurring: Int?
     var amount: Float?
     var amount_paid: Float?
     var amount_havent_paid: Float?

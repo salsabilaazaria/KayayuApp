@@ -122,4 +122,14 @@ class CalendarHelper {
         return finalDate
     }
 
+    func getEndDay() -> Date {
+        var components:DateComponents = calendar.dateComponents([.year, .month, .day], from: Date())
+        components.day! += 1
+        components.hour = 6
+        components.minute = 59
+        components.second = 59
+        
+        print("asd EndDay: \(calendar.date(from: components)!)")
+        return calendar.date(from: components)!
+    }
 }

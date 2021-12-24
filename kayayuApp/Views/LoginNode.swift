@@ -174,7 +174,7 @@ class LoginNode: ASDisplayNode {
 		signUpButton.addTarget(self, action: #selector(signUpButtonTapped), forControlEvents: .touchUpInside)
 	}
 	
-	@objc func loginButtonTapped(sender: ASButtonNode) {
+	@objc private func loginButtonTapped(sender: ASButtonNode) {
 		guard let email = self.emailTextfield.textView.text,
 			  let password = self.passwordTextfield.text else {
 			return

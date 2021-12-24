@@ -57,7 +57,7 @@ class ProfileViewModel {
     }
     
     private func getRecurringSubsData () {
-        database.collection("recurringTransactions").whereField("user_id", isEqualTo: getUserId()).whereField("recurring_type", isEqualTo: "subscription").order(by: "start_billing_date", descending: true).getDocuments() { (documentSnapshot, errorMsg) in
+        database.collection("recurringTransactions").whereField("user_id", isEqualTo: getUserId()).whereField("recurring_type", isEqualTo: "subscription").order(by: "end_billing_date", descending: true).whereField("end_billing_date", isGreaterThan: self.calendarHelper.getEndDay()) .getDocuments() { (documentSnapshot, errorMsg) in
             if let errorMsg = errorMsg {
                 print("Error get Subscription Data \(errorMsg)")
             }
@@ -75,7 +75,6 @@ class ProfileViewModel {
                     } catch {
                         print("error")
                     }
-                    
                 }
                 self.recurringSubsData.accept(documentArray)
             }
@@ -83,7 +82,7 @@ class ProfileViewModel {
     }
     
     private func getRecurringInstlData () {
-        database.collection("recurringTransactions").whereField("user_id", isEqualTo: getUserId()).whereField("recurring_type", isEqualTo: "installment").order(by: "start_billing_date", descending: true).getDocuments() { (documentSnapshot, errorMsg) in
+        database.collection("recurringTransactions").whereField("user_id", isEqualTo: getUserId()).whereField("recurring_type", isEqualTo: "installment").order(by: "end_billing_date", descending: true).whereField("end_billing_date", isGreaterThan: self.calendarHelper.getEndDay()) .getDocuments() { (documentSnapshot, errorMsg) in
             if let errorMsg = errorMsg {
                 print("Error get Installment Data \(errorMsg)")
             }
