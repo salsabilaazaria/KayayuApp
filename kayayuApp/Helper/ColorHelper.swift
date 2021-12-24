@@ -11,6 +11,7 @@ import UIKit
 struct kayayuColor {
 	static let yellow = ColorHelper.hexToColor(hex: "#FFCC00")
 	static let softGrey = ColorHelper.hexToColor(hex: "#F2F2F2")
+	static let borderInputTextField: UIColor = .darkGray
 	
 	static let needsLight = ColorHelper.hexToColor(hex: "#CFDDEA")
 	static let needsDark = ColorHelper.hexToColor(hex: "#1977CD")

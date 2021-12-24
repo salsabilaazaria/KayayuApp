@@ -14,7 +14,6 @@ class HomeNode: ASDisplayNode {
 	var onOpenProfilePage: (() -> Void)?
 	
 	private let homeNode: HomeComponentNode
-	private let navBar: TabBar = TabBar()
 	private let addRecordBtn: ASButtonNode = ASButtonNode()
     private let viewModel: HomeViewModel
     

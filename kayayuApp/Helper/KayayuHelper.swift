@@ -43,7 +43,7 @@ struct kayayuSize {
 	static let nodeSize: CGSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width - kayayuTabBarSize.height - 200)
 	
 	static let kayayuBarHeight: CGFloat = 30
-	static let kayayuInputTextFieldBorderWidth: CGFloat = 2
+	static let kayayuInputTextFieldBorderWidth: CGFloat = 0.2
 	static let kayayuBigButtonBorderWidth: CGFloat = 0.2
 	static let kayayuBigButton: CGFloat = 40
 	
@@ -58,6 +58,8 @@ struct kayayuSize {
 	static let dropdownRect: CGRect = CGRect(x: 3, y: 1, width: UIScreen.main.bounds.width - 32, height: 30)
 	static let halfDropdownRect: CGRect = CGRect(x: 3, y: 1, width: UIScreen.main.bounds.width/2 - 32, height: 30)
 	static let quarterDropdownRect: CGRect = CGRect(x: 3, y: 1, width: UIScreen.main.bounds.width/4 - 32, height: 30)
+	
+	static let inputTextFieldCornerRadius:CGFloat = 8.0
 }
 
 struct kayayuFont {

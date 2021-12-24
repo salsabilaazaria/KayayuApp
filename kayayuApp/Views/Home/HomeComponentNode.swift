@@ -17,6 +17,8 @@ class HomeComponentNode: ASDisplayNode {
     
     private let viewModel: HomeViewModel
 	
+	private let numberHelper: NumberHelper = NumberHelper()
+	
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
         self.tableTransaction = HomeTableTransaction(viewModel: viewModel)
@@ -67,7 +69,7 @@ class HomeComponentNode: ASDisplayNode {
 	}
 	
 	private func configureSummaryBalance(balance: Float) {
-		summaryBalanceNode = SummaryHeader(summary: .balance, subtitleText: "Rp\(balance)")
+		summaryBalanceNode = SummaryHeader(summary: .balance, subtitleText: "Rp\(numberHelper.idAmountFormat(beforeFormatted: balance))")
    
 	}
 	

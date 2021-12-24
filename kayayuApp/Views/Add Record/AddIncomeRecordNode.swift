@@ -123,7 +123,8 @@ class AddIncomeRecordNode: ASDisplayNode {
 		ratioCategoryNode.view.addSubview(ratioCategory)
 		ratioCategoryNode.style.preferredSize = CGSize(width: UIScreen.main.bounds.width - 32, height: 30)
 		ratioCategoryNode.borderWidth = kayayuSize.kayayuInputTextFieldBorderWidth
-		ratioCategoryNode.borderColor = kayayuColor.softGrey.cgColor
+		ratioCategoryNode.borderColor = kayayuColor.borderInputTextField.cgColor
+		ratioCategoryNode.layer.cornerRadius = kayayuSize.inputTextFieldCornerRadius
 		
 		let ratioCategoryWrap = ASWrapperLayoutSpec(layoutElements: [ratioCategoryNode])
 		
@@ -203,9 +204,11 @@ class AddIncomeRecordNode: ASDisplayNode {
 		descriptionInputTextField.maximumLinesToDisplay = 3
 		descriptionInputTextField.style.preferredSize = kayayuSize.bigInputTextField
 		descriptionInputTextField.borderWidth = kayayuSize.kayayuInputTextFieldBorderWidth
-		descriptionInputTextField.borderColor = kayayuColor.softGrey.cgColor
+		descriptionInputTextField.borderColor = kayayuColor.borderInputTextField.cgColor
+		descriptionInputTextField.layer.cornerRadius = kayayuSize.inputTextFieldCornerRadius
 		descriptionInputTextField.textView.inputAccessoryView = toolBar
 		descriptionInputTextField.textView.font = kayayuFont.inputTextFieldFont
+		descriptionInputTextField.textContainerInset = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
 	}
 	
 	private func createAmountInputSpec() -> ASLayoutSpec {
@@ -238,6 +241,8 @@ class AddIncomeRecordNode: ASDisplayNode {
 		amountInputTextField.textView.inputAccessoryView = toolBar
 		amountInputTextField.textView.font = kayayuFont.inputTextFieldFont
 		amountInputTextField.delegate = self
+		
+		amountInputTextField.textView.text = "0"
 	}
 	
 	private func reloadUI() {
@@ -253,6 +258,15 @@ extension AddIncomeRecordNode: ASEditableTextNodeDelegate {
 		let invalidCharacters = CharacterSet(charactersIn: "0123456789").inverted
 		return (text.rangeOfCharacter(from: invalidCharacters) == nil)
 	}
+	
+	func editableTextNodeDidBeginEditing(_ editableTextNode: ASEditableTextNode) {
+		if editableTextNode == amountInputTextField {
+			if editableTextNode.textView.text == "0" {
+				editableTextNode.textView.text = ""
+			}
+		}
+	}
+
 	
 }
 

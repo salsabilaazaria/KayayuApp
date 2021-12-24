@@ -168,7 +168,7 @@ class RealisationStatsNode: ASDisplayNode {
 	}
 	
 	private func configureBalanceSummary() {
-		guard let totalBalance = viewModel.user.value?.balance_total else {
+		guard let totalBalance = viewModel.user.value?.balance_month else {
 			return
 		}
 		balanceSummary = SummaryHeader(summary: .balance, subtitleText: numberHelper.idAmountFormat(beforeFormatted: totalBalance))
