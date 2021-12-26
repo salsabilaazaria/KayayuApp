@@ -21,14 +21,16 @@ class InstallmentCellNode: ASCellNode {
     
     private let instlData: RecurringTransactions
     private let nextBillDate: Date
+    private let remainingAmountValue: Float
     private let dueIn: Int
     
     private let calendarHelper = CalendarHelper()
 	private let numberHelper = NumberHelper()
     
-    init(data: RecurringTransactions, nextBillDate: Date, dueIn: Int) {
+    init(data: RecurringTransactions, nextBillDate: Date, remainingAmount: Float, dueIn: Int) {
         self.instlData = data
         self.nextBillDate = nextBillDate
+        self.remainingAmountValue = remainingAmount
         self.dueIn = dueIn
 		super.init()
 		
@@ -100,12 +102,13 @@ class InstallmentCellNode: ASCellNode {
 		
         typeInstallment.attributedText = NSAttributedString.normal("Billed: \(instlData.billing_type ?? " ")", 14, .black)
 		
-        remainingAmount.attributedText = NSAttributedString.normal("Remaining Amount: Rp", 14, .black)
+        let formattedRemaingingAmount = numberHelper.idAmountFormat(beforeFormatted: remainingAmountValue)
+        remainingAmount.attributedText = NSAttributedString.normal("Remaining Amount: Rp\(formattedRemaingingAmount)", 14, .black)
+        
 		let formattedInstallmentAmount = numberHelper.idAmountFormat(beforeFormatted: instlData.total_amount ?? 0)
-		
         totalAmount.attributedText = NSAttributedString.normal("Total Amount: Rp\(formattedInstallmentAmount)", 14, .black)
 		
-		endDateInstallment.attributedText = NSAttributedString.normal("End of Installment Date: ", 14, .black)
+		endDateInstallment.attributedText = NSAttributedString.normal("End of Installment Date: \(calendarHelper.formatFullDate(date: instlData.end_billing_date ?? Date()))", 14, .black)
 		
 		dueDate.attributedText = NSAttributedString.normal("Due in: \(dueIn) days", 14, .black)
 	}

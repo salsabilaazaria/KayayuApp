@@ -22,7 +22,8 @@ class ProfileViewModel {
     var recurringSubsData: BehaviorRelay<[RecurringTransactions]?> = BehaviorRelay<[RecurringTransactions]?>(value: nil)
     var recurringInstlData: BehaviorRelay<[RecurringTransactions]?> = BehaviorRelay<[RecurringTransactions]?>(value: nil)
     var detailTrans: BehaviorRelay<[TransactionDetail]?> = BehaviorRelay<[TransactionDetail]?>(value: nil)
-
+    var detailTransLatest: BehaviorRelay<[TransactionDetail]?> = BehaviorRelay<[TransactionDetail]?>(value: nil)
+    
     init() {
         self.getUserData()
         self.getRecurringSubsData()
@@ -146,6 +147,17 @@ class ProfileViewModel {
 
 //        print("next subs due: \(nextBillDate)")
         return nextBillDate
+    }
+    
+    func getRemainingAmount(recurringId: String) -> Float {
+        
+        guard let detailTrans = self.detailTrans.value,
+              let data = detailTrans.first(where: { $0.transaction_id != "a" && $0.recurring_id == recurringId }),
+              let remainingAmount = data.amount_havent_paid else {
+            return 0
+        }
+        
+        return remainingAmount
     }
     
     func getDueIn(recurringId: String) -> Int {
