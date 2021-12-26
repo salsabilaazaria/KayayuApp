@@ -243,7 +243,7 @@ class RegisterNode: ASDisplayNode {
 			return
 		}
 		
-		self.viewModel.addRegisterData(username: username, email: email, password: password, confirmPassword: confirmPassword)
+		self.viewModel.validateRegisterData(username: username, email: email, password: password, confirmPassword: confirmPassword)
 	
 	}
 	
