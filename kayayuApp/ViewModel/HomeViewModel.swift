@@ -80,7 +80,13 @@ class HomeViewModel {
 	}
     
     func getTransactionDataSpecMonth (diff: Int) {
-        database.collection("transactions").whereField("user_id", isEqualTo: getUserId()).whereField("transaction_date", isGreaterThan: calendarHelper.getSpecStartMonth(diff: diff)).whereField("transaction_date", isLessThan: calendarHelper.getSpecEndMonth(diff: diff)).order(by: "transaction_date", descending: true).getDocuments() { (documentSnapshot, errorMsg) in
+        database.collection("transactions")
+			.whereField("user_id", isEqualTo: getUserId())
+			.whereField("transaction_date", isGreaterThan: calendarHelper.getSpecStartMonth(diff: diff))
+			.whereField("transaction_date", isLessThan: calendarHelper.getSpecEndMonth(diff: diff))
+			.order(by: "transaction_date", descending: true)
+			.addSnapshotListener { (documentSnapshot, errorMsg) in
+				
             if let errorMsg = errorMsg {
                 print("Error get Transaction Data \(errorMsg)")
             }
