@@ -112,7 +112,7 @@ class StatsViewModel {
 			.whereField("transaction_date", isGreaterThan: calendarHelper.getSpecStartMonth(diff: diff))
 			.whereField("transaction_date", isLessThan: calendarHelper.getSpecEndMonth(diff: diff))
 			.whereField("category", isEqualTo: kayayuRatio.needs.rawValue.lowercased())
-			.order(by: "transaction_date", descending: true).getDocuments() { (documentSnapshot, errorMsg) in
+			.order(by: "transaction_date", descending: true).addSnapshotListener { (documentSnapshot, errorMsg) in
 			if let errorMsg = errorMsg {
 				print("Error Get Needs Transaction Data \(errorMsg)")
 			}
@@ -175,7 +175,7 @@ class StatsViewModel {
 			.whereField("transaction_date", isGreaterThan: calendarHelper.getSpecStartMonth(diff: diff))
 			.whereField("transaction_date", isLessThan: calendarHelper.getSpecEndMonth(diff: diff))
 			.whereField("category", isEqualTo: kayayuRatio.wants.rawValue.lowercased())
-			.order(by: "transaction_date", descending: true).getDocuments() { (documentSnapshot, errorMsg) in
+			.order(by: "transaction_date", descending: true).addSnapshotListener { (documentSnapshot, errorMsg) in
 			if let errorMsg = errorMsg {
 				print("Error Get Wants Transaction Data \(errorMsg)")
 			}
