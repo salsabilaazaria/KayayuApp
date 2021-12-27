@@ -72,14 +72,20 @@ class AuthenticationViewModel {
 			
 			guard error == nil else {
 				self.showAlert?()
-    func logout() {
-        
-        do {
-            try FirebaseAuth.Auth.auth().signOut()
-        }
-        catch { print("already logged out") }
-        
-        print("KAYAYU Logout Success")
-    }
-    
+				return
+			}
+		})
+		
+	}
+	
+	func logout() {
+		
+		do {
+			try FirebaseAuth.Auth.auth().signOut()
+		}
+		catch { print("already logged out") }
+		
+		print("KAYAYU Logout Success")
+	}
+	
 }
