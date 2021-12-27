@@ -48,6 +48,7 @@ class EditProfileController: ASDKViewController<ASDisplayNode> {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		title = "Edit Profile"
 		self.navigationItem.hidesBackButton = false
 		self.navigationController?.navigationBar.prefersLargeTitles = false
 	}
