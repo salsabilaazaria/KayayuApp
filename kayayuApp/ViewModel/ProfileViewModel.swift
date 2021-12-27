@@ -15,6 +15,8 @@ import RxSwift
 
 class ProfileViewModel {
 	var reloadUI: (() -> Void)?
+	var showAlert: ((String) -> Void)?
+	var goToEditProfilePage: (() -> Void)?
 	
 	let database = Firestore.firestore()
 	let calendarHelper = CalendarHelper()
@@ -37,6 +39,7 @@ class ProfileViewModel {
 		getTransactionDetailData()
 		getTransactionData()
 		configureObserver()
+		
 	}
 	
 	private func configureObserver() {
@@ -395,4 +398,77 @@ class ProfileViewModel {
 		return dueIn
 	}
 	
+	
+	//EDIT PROFILE
+	
+	//data updated in firestore database but not in authentication
+	private let wrongPasswordMsg = "Password is incorrect, please try again."
+	private let failedUpdateMsg = "Sorry but you data is failed to update, please try again later"
+	
+	private func validatePassword(validatePassword: String) -> Bool {
+		return self.user.value?.password == validatePassword
+	}
+	
+	func updateNewUsername(newUsername: String, password: String) {
+		let passIsValid = self.validatePassword(validatePassword: password)
+		if passIsValid == true {
+			let newUsernameData = [ "username": "\(newUsername)" ]
+
+			database.collection("users").document(getUserId()).updateData(newUsernameData) { err in
+				if let err = err {
+					self.showAlert?(self.failedUpdateMsg)
+					print("Kayayu error on updating document: \(err) ")
+				}
+				else {
+					self.goToEditProfilePage?()
+					print("Kayayu successfully update username")
+				}
+			}
+		} else {
+			self.showAlert?(wrongPasswordMsg)
+			return
+		}
+		
+	}
+	
+	func updateNewEmail(newEmail: String, password: String) {
+		let passIsValid = self.validatePassword(validatePassword: password)
+		if passIsValid == true {
+			let newEmailData = [ "email": "\(newEmail)" ]
+			database.collection("users").document(getUserId()).updateData(newEmailData) { err in
+				if let err = err {
+					self.showAlert?(self.failedUpdateMsg)
+					print("Kayayu error on updating document: \(err) ")
+				}
+				else {
+					self.goToEditProfilePage?()
+					print("Kayayu successfully update username")
+				}
+			}
+		} else {
+			self.showAlert?(wrongPasswordMsg)
+			return
+		}
+	}
+	
+	func updateNewPassword(oldPassword: String, newPassword: String, newConfirmationPassword: String) {
+		let passIsValid = self.validatePassword(validatePassword: oldPassword)
+		if passIsValid == true, newPassword == newConfirmationPassword {
+			let newPasswordData = [ "password": "\(newPassword)" ]
+			database.collection("users").document(getUserId()).updateData(newPasswordData) { err in
+				if let err = err {
+					self.showAlert?(self.failedUpdateMsg)
+					print("Kayayu error on updating document: \(err) ")
+				}
+				else {
+					self.goToEditProfilePage?()
+					print("Kayayu successfully update username")
+				}
+			}
+		} else {
+			self.showAlert?(wrongPasswordMsg)
+			return
+		}
+		
+	}
 }

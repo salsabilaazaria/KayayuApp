@@ -9,6 +9,7 @@ import Foundation
 import AsyncDisplayKit
 
 class ChangeUsernameController: ASDKViewController<ASDisplayNode> {
+	var onOpenEditProfilePage: (() -> Void)?
 	
 	private let changeUsernameNode: ChangeUsernameNode?
 	let viewModel: ProfileViewModel?
@@ -27,7 +28,9 @@ class ChangeUsernameController: ASDKViewController<ASDisplayNode> {
 	}
 	
 	private func configureNode() {
-
+		changeUsernameNode?.onOpenEditProfilePage = { [weak self] in
+			self?.onOpenEditProfilePage?()
+		}
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {

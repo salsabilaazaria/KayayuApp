@@ -226,16 +226,40 @@ final class KayayuScreen {
 	
 	func makeChangeUsernamePageViewController(viewModel: ProfileViewModel) -> UIViewController {
 		let controller = ChangeUsernameController(viewModel: viewModel)
+		
+		controller.onOpenEditProfilePage = { [weak self] in
+			guard let self = self else {
+				return
+			}
+			self.onNavigationEvent?(.onOpenEditProfile(viewModel: viewModel))
+		}
+		
 		return controller
 	}
 	
 	func makeChangeEmailPageViewController(viewModel: ProfileViewModel) -> UIViewController {
 		let controller = ChangeEmailController(viewModel: viewModel)
+		
+		controller.onOpenEditProfilePage = { [weak self] in
+			guard let self = self else {
+				return
+			}
+			self.onNavigationEvent?(.onOpenEditProfile(viewModel: viewModel))
+		}
+		
 		return controller
 	}
 	
 	func makeChangePasswordPageViewController(viewModel: ProfileViewModel) -> UIViewController {
 		let controller = ChangePasswordController(viewModel: viewModel)
+		
+		controller.onOpenEditProfilePage = { [weak self] in
+			guard let self = self else {
+				return
+			}
+			self.onNavigationEvent?(.onOpenEditProfile(viewModel: viewModel))
+		}
+		
 		return controller
 	}
 	

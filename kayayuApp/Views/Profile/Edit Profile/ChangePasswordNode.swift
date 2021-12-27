@@ -10,7 +10,7 @@ import AsyncDisplayKit
 
 class ChangePasswordNode: ASDisplayNode {
 	
-	var onOpenProfilePage: (() -> Void)?
+	var onOpenEditProfilePage: (() -> Void)?
 	
 	private let viewModel: ProfileViewModel
 	
@@ -79,8 +79,14 @@ class ChangePasswordNode: ASDisplayNode {
 	}
 	
 	private func configureViewModel() {
-
+		viewModel.goToEditProfilePage = {
+			self.onOpenEditProfilePage?()
+		}
 		
+		viewModel.showAlert = { message in
+			self.alertText.attributedText = NSAttributedString.semibold(message, 14, .systemRed)
+			self.alertText.isHidden = false
+		}
 	}
 	
 	private func configureToolBar() {
@@ -195,7 +201,7 @@ class ChangePasswordNode: ASDisplayNode {
 			return
 		}
 		
-		
+		self.viewModel.updateNewPassword(oldPassword: oldPassword, newPassword: newPassword, newConfirmationPassword: confirmPassword)
 	}
 
 	

@@ -9,6 +9,7 @@ import Foundation
 import AsyncDisplayKit
 
 class ChangeEmailController: ASDKViewController<ASDisplayNode> {
+	var onOpenEditProfilePage: (() -> Void)?
 	
 	private let changeEmailNode: ChangeEmailNode?
 	let viewModel: ProfileViewModel?
@@ -27,7 +28,9 @@ class ChangeEmailController: ASDKViewController<ASDisplayNode> {
 	}
 	
 	private func configureNode() {
-
+		changeEmailNode?.onOpenEditProfilePage = { [weak self] in
+			self?.onOpenEditProfilePage?()
+		}
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {

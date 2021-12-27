@@ -63,14 +63,18 @@ class ProfileNode: ASDisplayNode {
 		return mainSpec
 	}
 	
-	
-	
 	private func configureUsername() {
-		username.attributedText = NSAttributedString.bold("salsabilaazaria", 16, .black)
+		guard let username = self.viewModel.user.value?.username else {
+			return
+		}
+		username.attributedText = NSAttributedString.bold(username, 16, .black)
 	}
 	
 	private func configureEmail() {
-		email.attributedText = NSAttributedString.semibold("salsa@gmail.com", 16, .gray)
+		guard let email = self.viewModel.user.value?.email else {
+			return
+		}
+		email.attributedText = NSAttributedString.semibold(email, 16, .gray)
 	}
 	
 	private func configureScrollNode() {

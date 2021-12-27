@@ -10,7 +10,7 @@ import AsyncDisplayKit
 
 class ChangeEmailNode: ASDisplayNode {
 	
-	var onOpenProfilePage: (() -> Void)?
+	var onOpenEditProfilePage: (() -> Void)?
 	
 	private let viewModel: ProfileViewModel
 	
@@ -71,8 +71,14 @@ class ChangeEmailNode: ASDisplayNode {
 	}
 	
 	private func configureViewModel() {
-
+		viewModel.goToEditProfilePage = {
+			self.onOpenEditProfilePage?()
+		}
 		
+		viewModel.showAlert = { message in
+			self.alertText.attributedText = NSAttributedString.semibold(message, 14, .systemRed)
+			self.alertText.isHidden = false
+		}
 	}
 	
 	private func configureToolBar() {
@@ -86,7 +92,7 @@ class ChangeEmailNode: ASDisplayNode {
 	}
 	
 	private func configureAlertText() {
-		alertText.attributedText = NSAttributedString.semibold("Oops, Invalid email or password.", 14, .systemRed)
+		alertText.attributedText = NSAttributedString.semibold("", 14, .systemRed)
 		alertText.isHidden = true
 	}
 	
@@ -154,7 +160,7 @@ class ChangeEmailNode: ASDisplayNode {
 			return
 		}
 		
-	
+		self.viewModel.updateNewEmail(newEmail: email, password: password)
 		
 	}
 

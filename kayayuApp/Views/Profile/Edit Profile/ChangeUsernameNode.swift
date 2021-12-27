@@ -10,7 +10,7 @@ import AsyncDisplayKit
 
 class ChangeUsernameNode: ASDisplayNode {
 	
-	var onOpenProfilePage: (() -> Void)?
+	var onOpenEditProfilePage: (() -> Void)?
 	
 	private let viewModel: ProfileViewModel
 	
@@ -71,8 +71,14 @@ class ChangeUsernameNode: ASDisplayNode {
 	}
 	
 	private func configureViewModel() {
-
+		viewModel.goToEditProfilePage = {
+			self.onOpenEditProfilePage?()
+		}
 		
+		viewModel.showAlert = { message in
+			self.alertText.attributedText = NSAttributedString.semibold(message, 14, .systemRed)
+			self.alertText.isHidden = false
+		}
 	}
 	
 	private func configureToolBar() {
@@ -154,7 +160,7 @@ class ChangeUsernameNode: ASDisplayNode {
 			return
 		}
 		
-		
+		self.viewModel.updateNewUsername(newUsername: username, password: password)
 	}
 
 	
