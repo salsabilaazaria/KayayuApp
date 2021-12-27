@@ -12,7 +12,9 @@ class ProfileNode: ASDisplayNode {
 	var onOpenSubscriptionPage: (() -> Void)?
 	var onOpenInstallmentPage: (() -> Void)?
     var onLogout: (() -> Void)?
-	
+    
+//    private let viewModel: AuthenticationViewModel
+    
 	private let username: ASTextNode = ASTextNode()
 	private let email: ASTextNode = ASTextNode()
 	
@@ -23,13 +25,20 @@ class ProfileNode: ASDisplayNode {
 	
 	private let scrollNode: ASScrollNode = ASScrollNode()
 	
-	override init() {
-		
+    override init() {
 		super.init()
 
 		backgroundColor = .white
 		automaticallyManagesSubnodes = true
 	}
+    
+//    init(viewModel: AuthenticationViewModel) {
+//        self.viewModel = viewModel
+//        super.init()
+//
+//        backgroundColor = .white
+//        automaticallyManagesSubnodes = true
+//    }
 	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
 		configureUsername()
@@ -127,6 +136,7 @@ class ProfileNode: ASDisplayNode {
 	}
 	
 	@objc func logoutTapped(sender: ASButtonNode) {
+//        viewModel.logout()
         self.onLogout?()
 	}
 	

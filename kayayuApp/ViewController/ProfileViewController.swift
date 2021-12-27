@@ -14,6 +14,8 @@ class ProfileViewController: ASDKViewController<ASDisplayNode> {
 	var onOpenInstallmentPage: (() -> Void)?
     var onLogout: (() -> Void)?
 	
+//    private let authViewModel = AuthenticationViewModel
+//    private let profileNode: ProfileNode = ProfileNode(viewModel: authViewModel)
 	private let profileNode: ProfileNode = ProfileNode()
 	let viewModel: ProfileViewModel?
 	

@@ -103,4 +103,14 @@ class AuthenticationViewModel {
         })
     }
     
+    func logout() {
+        
+        do {
+            try FirebaseAuth.Auth.auth().signOut()
+        }
+        catch { print("already logged out") }
+        
+        print("KAYAYU Logout Success")
+    }
+    
 }
