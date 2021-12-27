@@ -60,5 +60,9 @@ class EditProfileController: ASDKViewController<ASDisplayNode> {
 		self.navigationController?.navigationBar.backgroundColor = .white
 
 	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		title = ""
+	}
 
 }
