@@ -136,21 +136,21 @@ class PlanStatsNode: ASDisplayNode {
 		guard let needsBalance = viewModel.user.value?.balance_needs else {
 			return
 		}
-		needsSummary = SummaryHeader(summary: .needs, subtitleText: "Rp\(numberHelper.idAmountFormat(beforeFormatted: needsBalance))")
+		needsSummary = SummaryHeader(summary: .needs, subtitleText: "Rp\(numberHelper.floatToIdFormat(beforeFormatted: needsBalance))")
 	}
 	
 	private func configureWantsSummary() {
 		guard let wantsBalance = viewModel.user.value?.balance_wants else {
 			return
 		}
-		wantsSummary = SummaryHeader(summary: .wants, subtitleText: "Rp\(numberHelper.idAmountFormat(beforeFormatted: wantsBalance))")
+		wantsSummary = SummaryHeader(summary: .wants, subtitleText: "Rp\(numberHelper.floatToIdFormat(beforeFormatted: wantsBalance))")
 	}
 	
 	private func configureSavingsSummary() {
 		guard let savingsBalance = viewModel.user.value?.balance_savings else {
 			return
 		}
-		savingsSummary = SummaryHeader(summary: .savings, subtitleText: "Rp\(numberHelper.idAmountFormat(beforeFormatted: savingsBalance))")
+		savingsSummary = SummaryHeader(summary: .savings, subtitleText: "Rp\(numberHelper.floatToIdFormat(beforeFormatted: savingsBalance))")
 	}
 	
 	

@@ -9,7 +9,7 @@ import Foundation
 
 class NumberHelper {
 	
-	func idAmountFormat(beforeFormatted: Float) -> String {
+	func floatToIdFormat(beforeFormatted: Float) -> String {
 		let numberFormatter = NumberFormatter()
 		
 		numberFormatter.locale = Locale(identifier: "id_ID")
@@ -21,5 +21,19 @@ class NumberHelper {
 		}
 		return finalNumber
 	}
+	
+	func intToIdFormat(beforeFormatted: Int) -> String {
+		print("intToIdFormat before\(beforeFormatted)")
+		let numberFormatter = NumberFormatter()
+		numberFormatter.locale = Locale(identifier: "id_ID")
+		numberFormatter.groupingSeparator = "."
+		numberFormatter.numberStyle = .decimal
+		
+		guard let finalNumber = numberFormatter.string(from: beforeFormatted as NSNumber) else {
+			return "\(beforeFormatted)"
+		}
+		return finalNumber
+	}
+	
 
 }

@@ -24,16 +24,17 @@ class AddIncomeRecordNode: ASDisplayNode {
 	private let ratioDescription: ASTextNode = ASTextNode()
 	
 	private var saveButton: BigButton = BigButton()
-	
 	private let toolBar: UIToolbar = UIToolbar()
+	private let datePicker = UIDatePicker()
 	
 	private let spacingTitle: CGFloat = 6
-	private let datePicker = UIDatePicker()
+
 	private let calendarHelper = CalendarHelper()
-	
-	private var ratio: String?
+	private let numberHelper = NumberHelper()
 	
 	private let viewModel: HomeViewModel
+	
+	private var ratio: String?
 	
 	init(viewModel: HomeViewModel) {
 		self.viewModel = viewModel
@@ -240,7 +241,7 @@ class AddIncomeRecordNode: ASDisplayNode {
 		amountInputTextField.style.preferredSize = kayayuSize.inputTextFieldSize
 		amountInputTextField.textView.inputAccessoryView = toolBar
 		amountInputTextField.textView.font = kayayuFont.inputTextFieldFont
-		amountInputTextField.delegate = self
+		amountInputTextField.textView.delegate = self
 		
 		amountInputTextField.textView.text = "0"
 	}
@@ -252,22 +253,39 @@ class AddIncomeRecordNode: ASDisplayNode {
 	
 }
 
-extension AddIncomeRecordNode: ASEditableTextNodeDelegate {
+extension AddIncomeRecordNode: UITextViewDelegate {
 	
-	public func editableTextNode(_ editableTextNode: ASEditableTextNode, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-		let invalidCharacters = CharacterSet(charactersIn: "0123456789").inverted
-		return (text.rangeOfCharacter(from: invalidCharacters) == nil)
+	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+		if textView == amountInputTextField.textView || textView == totalAmountInputTextField.textView,
+		   let currText = textView.text {
+			
+			let invalidCharacters = CharacterSet(charactersIn: "0123456789.").inverted
+			var nsCurrtext = (currText as NSString).replacingCharacters(in: range, with: text)
+
+			if nsCurrtext.contains(".") {
+				nsCurrtext = nsCurrtext.replacingOccurrences(of: ".", with: "")
+			}
+			
+			if nsCurrtext.count > 3,
+				let beforeFormatted = Int(nsCurrtext) {
+				let formattedInput = numberHelper.intToIdFormat(beforeFormatted: beforeFormatted)
+				nsCurrtext = formattedInput
+				textView.text = formattedInput
+				return false
+			}
+		
+			return (text.rangeOfCharacter(from: invalidCharacters) == nil)
+		}
+		
+		return false
 	}
 	
-	func editableTextNodeDidBeginEditing(_ editableTextNode: ASEditableTextNode) {
-		if editableTextNode == amountInputTextField {
-			if editableTextNode.textView.text == "0" {
-				editableTextNode.textView.text = ""
+	func textViewDidBeginEditing(_ textView: UITextView) {
+		if textView == amountInputTextField.textView {
+			if textView.text == "0" {
+				textView.text = ""
 			}
 		}
 	}
-
 	
 }
-
-

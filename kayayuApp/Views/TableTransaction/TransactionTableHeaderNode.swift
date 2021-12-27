@@ -154,7 +154,7 @@ class TransactionTableHeaderNode: ASCellNode {
 	
 	private func configureIncomeText() -> ASLayoutSpec {
 		let incomePerMonth = viewModel.calculateIncomePerMonth(date: selectedDate)
-		let formattedIncome = numberHelper.idAmountFormat(beforeFormatted: incomePerMonth)
+		let formattedIncome = numberHelper.floatToIdFormat(beforeFormatted: incomePerMonth)
 		
 		incomeTitle.attributedText = NSAttributedString.bold("Income", 14, .systemGreen)
 		incomeAmount.attributedText = NSAttributedString.semibold("Rp\(formattedIncome)", 14, .systemGreen)
@@ -170,7 +170,7 @@ class TransactionTableHeaderNode: ASCellNode {
 	
 	private func configureExpenseText() -> ASLayoutSpec {
 		let expensePerMonth = viewModel.calculateExpensePerMonth(date: selectedDate)
-		let formattedExpense = numberHelper.idAmountFormat(beforeFormatted: expensePerMonth)
+		let formattedExpense = numberHelper.floatToIdFormat(beforeFormatted: expensePerMonth)
 		
 		expenseTitle.attributedText = NSAttributedString.bold("Expense", 14, .systemRed)
 		expenseAmount.attributedText = NSAttributedString.semibold("Rp\(formattedExpense)", 14, .systemRed)
@@ -187,7 +187,7 @@ class TransactionTableHeaderNode: ASCellNode {
 	
 	private func configureTotalText() -> ASLayoutSpec {
 		let total = viewModel.calculateTotalPerMonth(date: selectedDate)
-		let formattedTotal = numberHelper.idAmountFormat(beforeFormatted: total)
+		let formattedTotal = numberHelper.floatToIdFormat(beforeFormatted: total)
 		
 		totalTitle.attributedText = NSAttributedString.bold("Total", 14, .black)
 		totalAmount.attributedText = NSAttributedString.semibold("Rp\(formattedTotal)", 14, .black)

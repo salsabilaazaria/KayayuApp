@@ -133,7 +133,7 @@ class TransactionCellNode: ASCellNode {
 			return
 		}
 		
-		let formattedAmount = numberHelper.idAmountFormat(beforeFormatted: amount)
+		let formattedAmount = numberHelper.floatToIdFormat(beforeFormatted: amount)
         
 		if isIncomeTransaction {
             transactionAmount.attributedText = NSAttributedString.normal("Rp\(formattedAmount)", 14, .systemGreen)

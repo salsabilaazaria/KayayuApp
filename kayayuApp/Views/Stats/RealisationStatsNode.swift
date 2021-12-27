@@ -171,7 +171,7 @@ class RealisationStatsNode: ASDisplayNode {
 		guard let totalBalance = viewModel.user.value?.balance_month else {
 			return
 		}
-		balanceSummary = SummaryHeader(summary: .balance, subtitleText: numberHelper.idAmountFormat(beforeFormatted: totalBalance))
+		balanceSummary = SummaryHeader(summary: .balance, subtitleText: numberHelper.floatToIdFormat(beforeFormatted: totalBalance))
 	}
 	
 	private func configureNeedsSummary() {
@@ -182,7 +182,7 @@ class RealisationStatsNode: ASDisplayNode {
 		}
 		
 		let needsRemaining = needsBalance - needsTransaction
-		needsSummary = SummaryHeader(summary: .needs, ratio: needsRatio, progressColor: kayayuColor.needsLight, baseColor: kayayuColor.needsDark, progressBarText: "Rp\(numberHelper.idAmountFormat(beforeFormatted: needsRemaining)) Remaining")
+		needsSummary = SummaryHeader(summary: .needs, ratio: needsRatio, progressColor: kayayuColor.needsLight, baseColor: kayayuColor.needsDark, progressBarText: "Rp\(numberHelper.floatToIdFormat(beforeFormatted: needsRemaining)) Remaining")
 	}
 	
 	private func configureWantsSummary() {
@@ -193,7 +193,7 @@ class RealisationStatsNode: ASDisplayNode {
 		}
 		
 		let remainingWants = wantsBalance - wantsTransaction
-		wantsSummary = SummaryHeader(summary: .wants, ratio: wantsRatio, progressColor: kayayuColor.wantsLight, baseColor: kayayuColor.wantsDark, progressBarText: "Rp\(numberHelper.idAmountFormat(beforeFormatted: remainingWants)) Remaining")
+		wantsSummary = SummaryHeader(summary: .wants, ratio: wantsRatio, progressColor: kayayuColor.wantsLight, baseColor: kayayuColor.wantsDark, progressBarText: "Rp\(numberHelper.floatToIdFormat(beforeFormatted: remainingWants)) Remaining")
 	}
 	
 	private func configureSavingsSummary() {
@@ -204,7 +204,7 @@ class RealisationStatsNode: ASDisplayNode {
 		}
 		
 		let remainingSavings = savingsBalance - savingsTransaction
-		savingsSummary = SummaryHeader(summary: .savings, ratio: savingsRatio, progressColor: kayayuColor.savingsLight, baseColor: kayayuColor.savingsDark, progressBarText: "Rp\(numberHelper.idAmountFormat(beforeFormatted: remainingSavings)) Remaining")
+		savingsSummary = SummaryHeader(summary: .savings, ratio: savingsRatio, progressColor: kayayuColor.savingsLight, baseColor: kayayuColor.savingsDark, progressBarText: "Rp\(numberHelper.floatToIdFormat(beforeFormatted: remainingSavings)) Remaining")
 	}
 	
 	

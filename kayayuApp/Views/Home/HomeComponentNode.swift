@@ -69,7 +69,7 @@ class HomeComponentNode: ASDisplayNode {
 	}
 	
 	private func configureSummaryBalance(balance: Float) {
-		summaryBalanceNode = SummaryHeader(summary: .balance, subtitleText: "Rp\(numberHelper.idAmountFormat(beforeFormatted: balance))")
+		summaryBalanceNode = SummaryHeader(summary: .balance, subtitleText: "Rp\(numberHelper.floatToIdFormat(beforeFormatted: balance))")
    
 	}
 	

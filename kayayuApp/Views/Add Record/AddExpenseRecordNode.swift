@@ -375,7 +375,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 		amountInputTextField.textView.inputAccessoryView = toolBar
 		amountInputTextField.textView.font = kayayuFont.inputTextFieldFont
 		amountInputTextField.textView.text = "0"
-		amountInputTextField.delegate = self
+		amountInputTextField.textView.delegate = self
 		
 	}
 	
@@ -409,7 +409,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 		totalAmountInputTextField.textView.inputAccessoryView = toolBar
 		totalAmountInputTextField.textView.font = kayayuFont.inputTextFieldFont
 		totalAmountInputTextField.textView.text = "0"
-		totalAmountInputTextField.delegate = self
+		totalAmountInputTextField.textView.delegate = self
 		
 	}
 	
@@ -562,26 +562,41 @@ class AddExpenseRecordNode: ASDisplayNode {
 }
 
 
-extension AddExpenseRecordNode: ASEditableTextNodeDelegate {
+
+extension AddExpenseRecordNode: UITextViewDelegate {
 	
-	 func editableTextNode(_ editableTextNode: ASEditableTextNode, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-		if editableTextNode == amountInputTextField || editableTextNode == totalAmountInputTextField {
-			let invalidCharacters = CharacterSet(charactersIn: "0123456789").inverted
+	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+		if textView == amountInputTextField.textView || textView == totalAmountInputTextField.textView,
+		   let currText = textView.text {
+			
+			let invalidCharacters = CharacterSet(charactersIn: "0123456789.").inverted
+			var nsCurrtext = (currText as NSString).replacingCharacters(in: range, with: text)
+
+			if nsCurrtext.contains(".") {
+				nsCurrtext = nsCurrtext.replacingOccurrences(of: ".", with: "")
+			}
+			
+			if nsCurrtext.count > 3,
+				let beforeFormatted = Int(nsCurrtext) {
+				let formattedInput = numberHelper.intToIdFormat(beforeFormatted: beforeFormatted)
+				nsCurrtext = formattedInput
+				textView.text = formattedInput
+				return false
+			}
+		
 			return (text.rangeOfCharacter(from: invalidCharacters) == nil)
-		} else {
-			return true
 		}
+		
+		return false
 	}
 	
-	func editableTextNodeDidBeginEditing(_ editableTextNode: ASEditableTextNode) {
-		if editableTextNode == amountInputTextField || editableTextNode == totalAmountInputTextField {
-			if editableTextNode.textView.text == "0" {
-				editableTextNode.textView.text = ""
+	func textViewDidBeginEditing(_ textView: UITextView) {
+		if textView == amountInputTextField.textView || textView == totalAmountInputTextField.textView {
+			if textView.text == "0" {
+				textView.text = ""
 			}
 		}
 	}
 	
-
-
-	
 }
+	
