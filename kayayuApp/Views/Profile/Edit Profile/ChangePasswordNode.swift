@@ -69,7 +69,7 @@ class ChangePasswordNode: ASDisplayNode {
 										 alignItems: .start,
 										 children: [questionText,inputTextfield, buttonSpec])
 		
-		let mainInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 16,
+		let mainInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 32,
 															   left: 16,
 															   bottom: 0,
 															   right: 16),
@@ -99,7 +99,7 @@ class ChangePasswordNode: ASDisplayNode {
 	}
 	
 	private func configureQuestionText() {
-		questionText.attributedText = NSAttributedString.bold("Would you like to change your password?", 14, .black)
+		questionText.attributedText = NSAttributedString.bold("Would you like to change your password?", 16, .black)
 	}
 	
 	private func createConfirmPasswordTextField() -> ASLayoutSpec {

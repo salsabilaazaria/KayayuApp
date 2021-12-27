@@ -61,7 +61,7 @@ class ChangeEmailNode: ASDisplayNode {
 										 alignItems: .start,
 										 children: [questionText,inputTextfield ,buttonSpec])
 		
-		let mainInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 16,
+		let mainInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 32,
 															   left: 16,
 															   bottom: 0,
 															   right: 16),
@@ -91,7 +91,7 @@ class ChangeEmailNode: ASDisplayNode {
 	}
 	
 	private func configureQuestionText() {
-		questionText.attributedText = NSAttributedString.bold("Would you like to change your email?", 14, .black)
+		questionText.attributedText = NSAttributedString.bold("Would you like to change your email?", 16, .black)
 	}
 	
 	private func createEmailTextField() -> ASLayoutSpec {

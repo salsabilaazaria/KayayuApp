@@ -256,7 +256,7 @@ class AddIncomeRecordNode: ASDisplayNode {
 extension AddIncomeRecordNode: UITextViewDelegate {
 	
 	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-		if textView == amountInputTextField.textView || textView == totalAmountInputTextField.textView,
+		if textView == amountInputTextField.textView,
 		   let currText = textView.text {
 			
 			let invalidCharacters = CharacterSet(charactersIn: "0123456789.").inverted
