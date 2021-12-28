@@ -8,14 +8,14 @@
 import Foundation
 import UIKit
 
-enum kayayuRatio: String, CaseIterable {
+enum kayayuRatioTitle: String, CaseIterable {
 	case all = "All"
 	case needs = "Needs"
 	case wants = "Wants"
 	case savings = "Savings"
 	
 	static var incomeValues: [String] {
-		return kayayuRatio.allCases.map { $0.rawValue }
+		return kayayuRatioTitle.allCases.map { $0.rawValue }
 	}
 	static let ratioCategory = [needs, wants, savings]
 	
@@ -23,6 +23,12 @@ enum kayayuRatio: String, CaseIterable {
 		return ratioCategory.map{$0.rawValue}
 	}
 	
+}
+
+enum kayayuRatioValue: Float {
+	case needs = 0.5
+	case wants = 0.3
+	case savings = 0.2
 }
 
 enum kayayuPaymentType: String, CaseIterable {

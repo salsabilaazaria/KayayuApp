@@ -14,7 +14,6 @@ class PlanStatsNode: ASDisplayNode {
 	
 	private let planPieChart: PieChartView = PieChartView()
 	private let planPieChartNode: ASDisplayNode = ASDisplayNode()
-	private let planTitle: ASTextNode = ASTextNode()
 	
 	private let ratioTitle: ASTextNode = ASTextNode()
 	private var needsSummary: SummaryHeader = SummaryHeader()
@@ -31,7 +30,6 @@ class PlanStatsNode: ASDisplayNode {
 		automaticallyManagesSubnodes = true
 		backgroundColor = .white
 		
-		configurePlanTitle()
 		configureRatioTitle()
 		configureViewModel()
 
@@ -58,7 +56,7 @@ class PlanStatsNode: ASDisplayNode {
 											  spacing: 10,
 												 justifyContent: .center,
 												 alignItems: .center,
-												 children: [planTitle, planPieChartNode])
+												 children: [planPieChartNode])
 		
 		
 		let mainStack = ASStackLayoutSpec(direction: .vertical,
@@ -69,10 +67,6 @@ class PlanStatsNode: ASDisplayNode {
 		
 		return mainStack
 		
-	}
-	
-	private func configurePlanTitle() {
-		planTitle.attributedText = NSAttributedString.bold("PLAN", 16, .black)
 	}
 	
 	private func configurePlanPieChartNode() {
@@ -89,15 +83,15 @@ class PlanStatsNode: ASDisplayNode {
 		
 		planPieChart.legend.enabled = false
 		
-		guard let needsBalance = viewModel.user.value?.balance_needs,
-			  let wantsBalance = viewModel.user.value?.balance_wants,
-			  let savingsBalance = viewModel.user.value?.balance_savings else {
+		guard let needsBalance = viewModel.needsTotalIncome.value,
+			  let wantsBalance = viewModel.wantsTotalIncome.value,
+			  let savingsBalance = viewModel.savingsTotalIncome.value else {
 			return
 		}
 
-		let entries: [PieChartDataEntry] = [PieChartDataEntry(value: Double(needsBalance), label: "\(kayayuRatio.needs.rawValue)"),
-											PieChartDataEntry(value: Double(wantsBalance), label: "\(kayayuRatio.wants.rawValue)"),
-											PieChartDataEntry(value: Double(savingsBalance), label: "\(kayayuRatio.savings.rawValue)")]
+		let entries: [PieChartDataEntry] = [PieChartDataEntry(value: Double(needsBalance), label: "\(kayayuRatioTitle.needs.rawValue)"),
+											PieChartDataEntry(value: Double(wantsBalance), label: "\(kayayuRatioTitle.wants.rawValue)"),
+											PieChartDataEntry(value: Double(savingsBalance), label: "\(kayayuRatioTitle.savings.rawValue)")]
 		
 		let dataSet = PieChartDataSet(entries: entries, label: "")
 		dataSet.colors = kayayuColor.pieCharArrColor
@@ -133,7 +127,7 @@ class PlanStatsNode: ASDisplayNode {
 	}
 	
 	private func configureNeedsSummary() {
-		guard let needsBalance = viewModel.user.value?.balance_needs else {
+		guard let needsBalance = viewModel.needsTotalIncome.value else {
 			needsSummary = SummaryHeader(summary: .needs, subtitleText: "You haven't input any data")
 			return
 		}
@@ -141,7 +135,7 @@ class PlanStatsNode: ASDisplayNode {
 	}
 	
 	private func configureWantsSummary() {
-		guard let wantsBalance = viewModel.user.value?.balance_wants else {
+		guard let wantsBalance = viewModel.wantsTotalIncome.value else {
 			wantsSummary  = SummaryHeader(summary: .wants, subtitleText: "You haven't input any data")
 			return
 		}
@@ -149,7 +143,7 @@ class PlanStatsNode: ASDisplayNode {
 	}
 	
 	private func configureSavingsSummary() {
-		guard let savingsBalance = viewModel.user.value?.balance_savings else {
+		guard let savingsBalance = viewModel.savingsTotalIncome.value else {
 			savingsSummary  = SummaryHeader(summary: .savings, subtitleText: "You haven't input any data")
 			return
 		}

@@ -1,5 +1,5 @@
 //
-//  RealisationStatsNode.swift
+//  ExpenseStatsNode.swift
 //  kayayuApp
 //
 //  Created by Salsabila Azaria on 11/23/21.
@@ -13,9 +13,8 @@ class RealisationStatsNode: ASDisplayNode {
 
 	private let statsDateHeader = StatsDateHeader()
 	
-	private let planPieChart: PieChartView = PieChartView()
-	private let planPieChartNode: ASDisplayNode = ASDisplayNode()
-	private let planTitle: ASTextNode = ASTextNode()
+	private let realisationPieChart: PieChartView = PieChartView()
+	private let realisationPieChartNode: ASDisplayNode = ASDisplayNode()
 	
 	private let ratioTitle: ASTextNode = ASTextNode()
 	private var balanceSummary: SummaryHeader = SummaryHeader()
@@ -34,8 +33,6 @@ class RealisationStatsNode: ASDisplayNode {
 		automaticallyManagesSubnodes = true
 		backgroundColor = .white
 		configureScrollNode()
-	
-		configurePlanTitle()
 		configureRatioTitle()
 		configureViewModel()
 		
@@ -64,7 +61,7 @@ class RealisationStatsNode: ASDisplayNode {
 											  spacing: 10,
 											  justifyContent: .center,
 											  alignItems: .center,
-											  children: [planTitle, planPieChartNode])
+											  children: [realisationPieChartNode])
 		
 		let summaryTitle = ASStackLayoutSpec(direction: .vertical,
 											 spacing: 10,
@@ -86,39 +83,36 @@ class RealisationStatsNode: ASDisplayNode {
 		
 	}
 	
-	private func configurePlanTitle() {
-		planTitle.attributedText = NSAttributedString.bold("REALISATION", 16, .black)
-	}
 	
 	private func configurePlanPieChartNode() {
-		planPieChart.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
-		planPieChartNode.view.addSubview(planPieChart)
-		planPieChartNode.style.preferredSize = CGSize(width: 200, height: 200)
+		realisationPieChart.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+		realisationPieChartNode.view.addSubview(realisationPieChart)
+		realisationPieChartNode.style.preferredSize = CGSize(width: 200, height: 200)
 	}
 	
 	private func configurePlanPieChart() {
-		planPieChart.chartDescription?.enabled = false
-		planPieChart.drawHoleEnabled = false
-		planPieChart.rotationAngle = 0
-		planPieChart.rotationEnabled = false
+		realisationPieChart.chartDescription?.enabled = false
+		realisationPieChart.drawHoleEnabled = false
+		realisationPieChart.rotationAngle = 0
+		realisationPieChart.rotationEnabled = false
 		
-		planPieChart.legend.enabled = false
+		realisationPieChart.legend.enabled = false
 		
-		guard let needsAmount = viewModel.needsTotalTransaction.value,
-			  let wantsAmount = viewModel.wantsTotalTransaction.value,
-			  let savingsAmount = viewModel.savingsTotalTransaction.value else {
+		guard let needsAmount = viewModel.needsTotalExpense.value,
+			  let wantsAmount = viewModel.wantsTotalExpense.value,
+			  let savingsAmount = viewModel.savingsTotalExpense.value else {
 			return
 		}
 		
-		let entries: [PieChartDataEntry] = [PieChartDataEntry(value: Double(needsAmount), label: "\(kayayuRatio.needs.rawValue)"),
-											PieChartDataEntry(value: Double(wantsAmount), label: "\(kayayuRatio.wants.rawValue)"),
-											PieChartDataEntry(value: Double(savingsAmount), label: "\(kayayuRatio.savings.rawValue)")]
+		let entries: [PieChartDataEntry] = [PieChartDataEntry(value: Double(needsAmount), label: "\(kayayuRatioTitle.needs.rawValue)"),
+											PieChartDataEntry(value: Double(wantsAmount), label: "\(kayayuRatioTitle.wants.rawValue)"),
+											PieChartDataEntry(value: Double(savingsAmount), label: "\(kayayuRatioTitle.savings.rawValue)")]
 
 		
 		let dataSet = PieChartDataSet(entries: entries, label: "label")
 		
 		dataSet.colors = kayayuColor.pieCharArrColor
-		planPieChart.data = PieChartData(dataSet: dataSet)
+		realisationPieChart.data = PieChartData(dataSet: dataSet)
 		
 	}
 	
@@ -176,8 +170,8 @@ class RealisationStatsNode: ASDisplayNode {
 	
 	private func configureNeedsSummary() {
 		let needsRatio = viewModel.calculateNeedsProgressBarRatio()
-		guard let needsTransaction = viewModel.needsTotalTransaction.value,
-			  let needsBalance = viewModel.user.value?.balance_needs else {
+		guard let needsTransaction = viewModel.needsTotalExpense.value,
+			  let needsBalance = viewModel.needsTotalIncome.value else {
 			return
 		}
 		
@@ -187,8 +181,8 @@ class RealisationStatsNode: ASDisplayNode {
 	
 	private func configureWantsSummary() {
 		let wantsRatio = viewModel.calculateWantsProgressBarRatio()
-		guard let wantsTransaction = viewModel.wantsTotalTransaction.value,
-			  let wantsBalance = viewModel.user.value?.balance_wants else {
+		guard let wantsTransaction = viewModel.wantsTotalExpense.value,
+			  let wantsBalance = viewModel.wantsTotalIncome.value else {
 			return
 		}
 		
@@ -198,13 +192,19 @@ class RealisationStatsNode: ASDisplayNode {
 	
 	private func configureSavingsSummary() {
 		let savingsRatio = viewModel.calculateSavingsProgressBarRatio()
-		guard let savingsTransaction = viewModel.savingsTotalTransaction.value,
-			  let savingsBalance = viewModel.user.value?.balance_savings else {
+		guard let savingsTransaction = viewModel.savingsTotalExpense.value,
+			  let savingsBalance = viewModel.savingsTotalIncome.value else {
 			return
 		}
 		
 		let remainingSavings = savingsBalance - savingsTransaction
-		savingsSummary = SummaryHeader(summary: .savings, ratio: savingsRatio, progressColor: kayayuColor.savingsLight, baseColor: kayayuColor.savingsDark, progressBarText: "Rp\(numberHelper.floatToIdFormat(beforeFormatted: remainingSavings)) Remaining")
+		
+		if savingsTransaction == 0 {
+			savingsSummary = SummaryHeader(summary: .savings, ratio: savingsRatio, progressColor: kayayuColor.savingsDark, baseColor: kayayuColor.savingsLight, progressBarText: "Rp\(numberHelper.floatToIdFormat(beforeFormatted: remainingSavings)) Saved")
+		} else {
+			savingsSummary = SummaryHeader(summary: .savings, ratio: savingsRatio, progressColor: kayayuColor.savingsDark, baseColor: kayayuColor.savingsLight, progressBarText: "Rp\(numberHelper.floatToIdFormat(beforeFormatted: remainingSavings)) Used")
+		}
+	
 	}
 	
 	

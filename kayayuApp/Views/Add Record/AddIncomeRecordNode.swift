@@ -131,7 +131,7 @@ class AddIncomeRecordNode: ASDisplayNode {
 		
 		var elementArray: [ASLayoutElement] = [ratioTitle, ratioCategoryWrap]
 		
-		if ratio == kayayuRatio.all.rawValue {
+		if ratio == kayayuRatioTitle.all.rawValue {
 			ratioDescription.attributedText = NSAttributedString.normal("Income amount will be automatically calculated based on The Balance Money Formula (50:30:20 Ratio)", 12, .black)
 			ratioDescription.style.preferredSize = CGSize(width: UIScreen.main.bounds.width - 16, height: 40)
 			elementArray.append(ratioDescription)
@@ -150,7 +150,7 @@ class AddIncomeRecordNode: ASDisplayNode {
 		ratioTitle.attributedText = NSAttributedString.bold("Ratio", 16, .black)
 		
 		ratioCategory = DropDown(frame: CGRect(x: 3, y: 1, width: UIScreen.main.bounds.width - 32, height: 30))
-		ratioCategory.optionArray = kayayuRatio.incomeValues
+		ratioCategory.optionArray = kayayuRatioTitle.incomeValues
 		ratioCategory.selectedRowColor = kayayuColor.softGrey
 		ratioCategory.checkMarkEnabled = false
 		ratioCategory.font = UIFont.systemFont(ofSize: 14)

@@ -281,7 +281,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 		ratioTitle.attributedText = NSAttributedString.bold("Ratio", 16, .black)
 		
 		ratioCategory = DropDown(frame: CGRect(x: 3, y: 1, width: UIScreen.main.bounds.width - 32, height: 30))
-		ratioCategory.optionArray = kayayuRatio.ratioCategoryString
+		ratioCategory.optionArray = kayayuRatioTitle.ratioCategoryString
 		ratioCategory.selectedRowColor = kayayuColor.softGrey
 		ratioCategory.checkMarkEnabled = false
 		ratioCategory.font = UIFont.systemFont(ofSize: 14)
