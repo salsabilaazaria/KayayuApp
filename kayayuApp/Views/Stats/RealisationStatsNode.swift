@@ -10,14 +10,12 @@ import AsyncDisplayKit
 import Charts
 
 class RealisationStatsNode: ASDisplayNode {
-
-	private let statsDateHeader = StatsDateHeader()
+	var changeMonthStats: ((Date) -> Void)?
 	
 	private let realisationPieChart: PieChartView = PieChartView()
 	private let realisationPieChartNode: ASDisplayNode = ASDisplayNode()
 	
 	private let ratioTitle: ASTextNode = ASTextNode()
-	private var balanceSummary: SummaryHeader = SummaryHeader()
 	private var needsSummary: SummaryHeader = SummaryHeader()
 	private var wantsSummary: SummaryHeader = SummaryHeader()
 	private var savingsSummary: SummaryHeader = SummaryHeader()
@@ -52,7 +50,6 @@ class RealisationStatsNode: ASDisplayNode {
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
 		configurePlanPieChart()
 		configurePlanPieChartNode()
-		configureBalanceSummary()
 		configureNeedsSummary()
 		configureWantsSummary()
 		configureSavingsSummary()
@@ -76,13 +73,12 @@ class RealisationStatsNode: ASDisplayNode {
 										  spacing: 10,
 										  justifyContent: .start,
 										  alignItems: .center,
-										  children: [statsDateHeader, pieChartStack, balanceSummary, summaryTitleInset, scrollNode])
+										  children: [pieChartStack, summaryTitleInset, scrollNode])
 		
 		
 		return mainStack
 		
 	}
-	
 	
 	private func configurePlanPieChartNode() {
 		realisationPieChart.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
@@ -163,22 +159,17 @@ class RealisationStatsNode: ASDisplayNode {
 		ratioTitle.attributedText = NSAttributedString.bold("Summary", 14, kayayuColor.yellow)
 	}
 	
-	private func configureBalanceSummary() {
-		guard let totalBalance = viewModel.user.value?.balance_month else {
-			return
-		}
-		balanceSummary = SummaryHeader(summary: .balance, subtitleText: numberHelper.floatToIdFormat(beforeFormatted: totalBalance))
-	}
-	
 	private func configureNeedsSummary() {
 		let needsRatio = viewModel.calculateNeedsProgressBarRatio()
 		guard let needsTransaction = viewModel.needsTotalExpense.value,
 			  let needsBalance = viewModel.needsTotalIncome.value else {
 			return
 		}
-		
 		let needsRemaining = needsBalance - needsTransaction
-		needsSummary = SummaryHeader(summary: .needs, ratio: needsRatio, progressColor: kayayuColor.needsLight, baseColor: kayayuColor.needsDark, progressBarText: "Rp\(numberHelper.floatToIdFormat(beforeFormatted: needsRemaining)) Remaining")
+		print("Category Needs \(needsRatio) \(needsTransaction) \(needsBalance) \(needsRemaining)")
+		self.needsSummary = SummaryHeader(summary: .needs, ratio: needsRatio, progressColor: kayayuColor.needsLight, baseColor: kayayuColor.needsDark, progressBarText: "Rp\(self.numberHelper.floatToIdFormat(beforeFormatted: needsRemaining)) Remaining")
+		
+		
 	}
 	
 	private func configureWantsSummary() {

@@ -84,7 +84,36 @@ class StatsViewModel {
 		})
 	}
 	
+	//PROGRESS BAR RATIO
+	func calculateNeedsProgressBarRatio() -> Float {
+		guard let needsBalance = self.needsTotalIncome.value,
+			  let needsTotalTrans = self.needsTotalExpense.value else {
+			return 0
+		}
+		
+		return needsTotalTrans/needsBalance
+	}
 	
+	func calculateWantsProgressBarRatio() -> Float {
+		guard let wantsBalance = self.wantsTotalIncome.value,
+			  let wantsTotalTrans = self.wantsTotalExpense.value else {
+			return 0
+		}
+		
+		return wantsTotalTrans/wantsBalance
+	}
+	
+	func calculateSavingsProgressBarRatio() -> Float {
+		guard let savingsBalance = self.savingsTotalIncome.value,
+			  let savingsTotalTrans = self.savingsTotalExpense.value else {
+			return 0
+		}
+		
+		return savingsTotalTrans/savingsBalance
+	}
+	
+	
+	//INCOME
 	func getAllIncomeData (diff: Int) {
 		database.collection("transactions")
 			.whereField("user_id", isEqualTo: getUserId())
@@ -95,7 +124,7 @@ class StatsViewModel {
 			.addSnapshotListener { (documentSnapshot, errorMsg) in
 				
 				if let errorMsg = errorMsg {
-					print("Error get Transaction Data \(errorMsg)")
+					print("Error get Income Transaction Data \(errorMsg)")
 				}
 				else {
 					var incomeAllCategoryTotal: Float = 0
@@ -127,7 +156,7 @@ class StatsViewModel {
 			}
 	}
 	
-	func calculateNeedsTotalIncome() {
+	private func calculateNeedsTotalIncome() {
 		var totalNeeds:Float = 0
 		
 		if let allIncome = self.allTotalIncome.value  {
@@ -138,7 +167,7 @@ class StatsViewModel {
 		self.needsTotalIncome.accept(totalNeeds)
 	}
 	
-	func calculateWantsTotalIncome() {
+	private func calculateWantsTotalIncome() {
 		var totalWants:Float = 0
 		
 		if let allIncome = self.allTotalIncome.value  {
@@ -149,7 +178,7 @@ class StatsViewModel {
 		self.wantsTotalIncome.accept(totalWants)
 	}
 	
-	func calculateSavingsTotalIncome() {
+	private func calculateSavingsTotalIncome() {
 		var totalSavings:Float = 0
 		
 		if let allIncome = self.allTotalIncome.value  {
@@ -161,34 +190,70 @@ class StatsViewModel {
 		
 	}
 	
-	func calculateNeedsProgressBarRatio() -> Float{
-		guard let needsBalance = self.needsTotalIncome.value,
-			  let needsTotalTrans = self.needsTotalExpense.value else {
-			return 0
-		}
-		
-		return needsTotalTrans/needsBalance
-	}
-	
-	
-	func calculateNeedsTotalExpense() {
-		guard let needsData = self.needsTransactionData.value else {
-			return
-		}
+	//EXPENSE
+
+	private func calculateNeedsTotalExpense() {
 		var totalNeeds:Float = 0
 		
-		for data in needsData {
-			if let amount = data.amount,
-			   let isIncome = data.income_flag,
-			   !isIncome  {
-				totalNeeds += amount
+		if let needsData = self.needsTransactionData.value  {
+			for data in needsData {
+				if let amount = data.amount,
+				   let isIncome = data.income_flag,
+				   !isIncome  {
+					totalNeeds += amount
+				}
 			}
 		}
 		
 		self.needsTotalExpense.accept(totalNeeds)
 	}
 	
-	func getNeedsTransDataSpecMonth (diff: Int) {
+	private func calculateWantsTotalExpense() {
+		var totalWants:Float = 0
+		
+		if let wantsData = self.wantsTransactionData.value  {
+			for data in wantsData {
+				
+				if let amount = data.amount,
+				   let isIncome = data.income_flag,
+				   !isIncome  {
+					totalWants += amount
+					
+				}
+			}
+		}
+		
+		self.wantsTotalExpense.accept(totalWants)
+	}
+	
+	private func calculateSavingsTotalExpense() {
+		
+		var totalSavings:Float = 0
+		
+		if let savingsData = self.savingsTransactionData.value  {
+			for data in savingsData {
+				if let amount = data.amount,
+				   let isIncome = data.income_flag,
+				   !isIncome  {
+					totalSavings += amount
+				}
+			}
+		}
+		
+		self.savingsTotalExpense.accept(totalSavings)
+		
+	}
+	
+	
+	//GET DATA TRANSACTION
+	
+	func getPerCategoryTransDataSpecMont(diff: Int) {
+		self.getNeedsTransDataSpecMonth(diff: diff)
+		self.getWantsTransDataSpecMonth(diff: diff)
+		self.getSavingsTransDataSpecMonth(diff: diff)
+	}
+	
+	private func getNeedsTransDataSpecMonth (diff: Int) {
 		database.collection("transactions")
 			.whereField("user_id", isEqualTo: getUserId())
 			.whereField("transaction_date", isGreaterThan: calendarHelper.getSpecStartMonth(diff: diff))
@@ -214,44 +279,13 @@ class StatsViewModel {
 						}
 						
 					}
-					print("stats NEEDS DATA \(documentArray)")
 					self.needsTransactionData.accept(documentArray)
 					self.calculateNeedsTotalExpense()
 				}
 			}
 	}
 	
-	
-	func calculateWantsProgressBarRatio() -> Float {
-		guard let wantsBalance = self.wantsTotalIncome.value,
-			  let wantsTotalTrans = self.wantsTotalExpense.value else {
-			return 0
-		}
-		
-		return wantsTotalTrans/wantsBalance
-	}
-	
-	func calculateWantsTotalExpense() {
-		guard let wantsData = self.wantsTransactionData.value else {
-			return
-		}
-		var totalWants:Float = 0
-		
-		for data in wantsData {
-			
-			if let amount = data.amount,
-			   let isIncome = data.income_flag,
-			   !isIncome  {
-				totalWants += amount
-				
-			}
-		}
-		
-		self.wantsTotalExpense.accept(totalWants)
-	}
-	
-	
-	func getWantsTransDataSpecMonth (diff: Int) {
+	private func getWantsTransDataSpecMonth (diff: Int) {
 		database.collection("transactions")
 			.whereField("user_id", isEqualTo: getUserId())
 			.whereField("transaction_date", isGreaterThan: calendarHelper.getSpecStartMonth(diff: diff))
@@ -283,33 +317,7 @@ class StatsViewModel {
 			}
 	}
 	
-	func calculateSavingsProgressBarRatio() -> Float {
-		guard let savingsBalance = self.savingsTotalIncome.value,
-			  let savingsTotalTrans = self.savingsTotalExpense.value else {
-			return 0
-		}
-		
-		return savingsTotalTrans/savingsBalance
-	}
-	
-	func calculateSavingsTotalExpense() {
-		guard let savingsData = self.savingsTransactionData.value else {
-			return
-		}
-		var totalSavings:Float = 0
-		
-		for data in savingsData {
-			if let amount = data.amount,
-			   let isIncome = data.income_flag,
-			   !isIncome  {
-				totalSavings += amount
-			}
-		}
-		self.savingsTotalExpense.accept(totalSavings)
-		
-	}
-	
-	func getSavingsTransDataSpecMonth (diff: Int) {
+	private func getSavingsTransDataSpecMonth (diff: Int) {
 		database.collection("transactions")
 			.whereField("user_id", isEqualTo: getUserId())
 			.whereField("transaction_date", isGreaterThan: calendarHelper.getSpecStartMonth(diff: diff))
@@ -335,7 +343,6 @@ class StatsViewModel {
 						}
 						
 					}
-					print("stats SAVINGS DATA \(documentArray)")
 					self.savingsTransactionData.accept(documentArray)
 					self.calculateSavingsTotalExpense()
 				}

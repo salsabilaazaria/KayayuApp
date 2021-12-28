@@ -10,7 +10,7 @@ import AsyncDisplayKit
 import Charts
 
 class PlanStatsNode: ASDisplayNode {
-	private let statsDateHeader = StatsDateHeader()
+	var changeMonthStats: ((Date) -> Void)?
 	
 	private let planPieChart: PieChartView = PieChartView()
 	private let planPieChartNode: ASDisplayNode = ASDisplayNode()
@@ -42,6 +42,7 @@ class PlanStatsNode: ASDisplayNode {
 	}
 	
 	private func reloadUI(){
+		print("Plan Reload UI")
 		self.setNeedsLayout()
 		self.layoutIfNeeded()
 	}
@@ -63,7 +64,7 @@ class PlanStatsNode: ASDisplayNode {
 										  spacing: 10,
 												justifyContent: .start,
 												alignItems: .center,
-												children: [statsDateHeader, pieChartStack, summaryStack])
+												children: [pieChartStack, summaryStack])
 		
 		return mainStack
 		

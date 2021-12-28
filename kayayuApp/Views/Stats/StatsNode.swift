@@ -13,33 +13,63 @@ class StatsNode: ASDisplayNode {
 	private let realisationButton: ASButtonNode = ASButtonNode()
 	private let planNode: PlanStatsNode
 	private let realisationNode: RealisationStatsNode
+	private let statsDateHeader = StatsDateHeader()
 	
 	private let buttonSize = CGSize(width: UIScreen.main.bounds.width/2, height: kayayuSize.kayayuBarHeight)
 	private var goToPlanNode: Bool = false
 	
 	private let viewModel: StatsViewModel
+	
+	private let calendarHelper: CalendarHelper = CalendarHelper()
 
 	init(viewModel: StatsViewModel) {
 		self.viewModel = viewModel
 		self.planNode = PlanStatsNode(viewModel: viewModel)
 		self.realisationNode = RealisationStatsNode(viewModel: viewModel)
 		super.init()
+		
 		let nodeSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - TabBar().style.preferredSize.height - 200)
 		planNode.style.preferredSize = nodeSize
 		realisationNode.style.preferredSize = nodeSize
+		statsDateHeader.style.preferredSize = CGSize(width: UIScreen.main.bounds.width, height: kayayuSize.kayayuBarHeight)
 		
 		configurePlanButton()
 		configureRealisationButton()
-		configureViewModel()
+		configureNode()
 
 		automaticallyManagesSubnodes = true
 		
 	}
 	
-	private func configureViewModel() {
-		viewModel.reloadUI = {
-//			self.reloadUI()
+	private func configureNode() {
+		self.statsDateHeader.changeMonthStats = { [weak self] date in
+			print("selectedMonth")
+			guard let self = self else {
+				return
+			}
+			let monthInt = self.calendarHelper.monthInt(date: date)
+			self.viewModel.getAllIncomeData(diff: monthInt)
+			self.viewModel.getPerCategoryTransDataSpecMont(diff: monthInt)
 		}
+//		self.planNode.changeMonthStats = { [weak self] date in
+//			print("selectedMonth")
+//			guard let self = self else {
+//				return
+//			}
+//			let monthInt = self.calendarHelper.monthInt(date: date)
+//			self.viewModel.getAllIncomeData(diff: monthInt)
+//			self.viewModel.getPerCategoryTransDataSpecMont(diff: monthInt)
+//		}
+//		
+//		self.realisationNode.changeMonthStats = { [weak self] date in
+//			print("selectedMonth")
+//			guard let self = self else {
+//				return
+//			}
+//			let monthInt = self.calendarHelper.monthInt(date: date)
+//			self.viewModel.getAllIncomeData(diff: monthInt)
+//			self.viewModel.getPerCategoryTransDataSpecMont(diff: monthInt)
+//		}
 	}
 	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
@@ -52,13 +82,14 @@ class StatsNode: ASDisplayNode {
 		
 		buttonStack.style.preferredSize = buttonSize
 		
-		var statsElementArray: [ASLayoutElement] = [buttonStack]
+		var statsElementArray: [ASLayoutElement] = [buttonStack, statsDateHeader]
 		
 		if goToPlanNode {
 			statsElementArray.append(planNode)
 		} else {
 			statsElementArray.append(realisationNode)
 		}
+
 		
 		let mainStack = ASStackLayoutSpec(direction: .vertical,
 										  spacing: 0,
