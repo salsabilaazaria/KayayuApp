@@ -100,10 +100,12 @@ class RealisationStatsNode: ASDisplayNode {
 		
 		guard let needsAmount = viewModel.needsTotalExpense.value,
 			  let wantsAmount = viewModel.wantsTotalExpense.value,
-			  let savingsAmount = viewModel.savingsTotalExpense.value else {
+			  let savingsIncome = viewModel.savingsTotalIncome.value,
+			  let savingsExpense = viewModel.savingsTotalExpense.value else {
 			return
 		}
 		
+		let savingsAmount = savingsIncome - savingsExpense
 		let entries: [PieChartDataEntry] = [PieChartDataEntry(value: Double(needsAmount), label: "\(kayayuRatioTitle.needs.rawValue)"),
 											PieChartDataEntry(value: Double(wantsAmount), label: "\(kayayuRatioTitle.wants.rawValue)"),
 											PieChartDataEntry(value: Double(savingsAmount), label: "\(kayayuRatioTitle.savings.rawValue)")]
