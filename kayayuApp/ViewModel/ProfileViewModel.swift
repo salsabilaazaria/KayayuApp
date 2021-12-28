@@ -403,7 +403,7 @@ class ProfileViewModel {
 	
 	//data updated in firestore database but not in authentication
 	private let wrongPasswordMsg = "Password is incorrect, please try again."
-	private let failedUpdateMsg = "Sorry but you data is failed to update, please try again later"
+	private let failedUpdateMsg = "Sorry, your data can't be updated"
 	
 	private func validatePassword(validatePassword: String) -> Bool {
 		return self.user.value?.password == validatePassword
@@ -411,7 +411,9 @@ class ProfileViewModel {
 	
 	func updateNewUsername(newUsername: String, password: String) {
 		let passIsValid = self.validatePassword(validatePassword: password)
-		if passIsValid == true {
+		let oldUsername = self.user.value?.username
+		
+		if passIsValid == true, oldUsername != newUsername {
 			let newUsernameData = [ "username": "\(newUsername)" ]
 
 			database.collection("users").document(getUserId()).updateData(newUsernameData) { err in
@@ -433,8 +435,12 @@ class ProfileViewModel {
 	
 	func updateNewEmail(newEmail: String, password: String) {
 		let passIsValid = self.validatePassword(validatePassword: password)
-		if passIsValid == true {
+		let oldEmail = self.user.value?.email
+		
+		if passIsValid == true, newEmail != oldEmail {
 			let newEmailData = [ "email": "\(newEmail)" ]
+			
+			//Ganti di firestore
 			database.collection("users").document(getUserId()).updateData(newEmailData) { err in
 				if let err = err {
 					self.showAlert?(self.failedUpdateMsg)
@@ -446,6 +452,7 @@ class ProfileViewModel {
 				}
 			}
 			
+			//Ganti di authentication
 			FirebaseAuth.Auth.auth().currentUser?.updateEmail(to: newEmail, completion: { errorMsg in
 				guard let errorMsg = errorMsg else {
 					return
@@ -461,8 +468,13 @@ class ProfileViewModel {
 	
 	func updateNewPassword(oldPassword: String, newPassword: String, newConfirmationPassword: String) {
 		let passIsValid = self.validatePassword(validatePassword: oldPassword)
-		if passIsValid == true, newPassword == newConfirmationPassword {
+		if passIsValid == true,
+		   newPassword == newConfirmationPassword,
+		   oldPassword != newPassword {
+			
 			let newPasswordData = [ "password": "\(newPassword)" ]
+			
+			//Ganti di firestore
 			database.collection("users").document(getUserId()).updateData(newPasswordData) { err in
 				if let err = err {
 					self.showAlert?(self.failedUpdateMsg)
@@ -474,6 +486,7 @@ class ProfileViewModel {
 				}
 			}
 			
+			//Ganti di authentication
 			FirebaseAuth.Auth.auth().currentUser?.updatePassword(to: newPassword, completion: { errorMsg in
 				guard let errorMsg = errorMsg else {
 					return

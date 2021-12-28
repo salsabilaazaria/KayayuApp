@@ -134,6 +134,7 @@ class PlanStatsNode: ASDisplayNode {
 	
 	private func configureNeedsSummary() {
 		guard let needsBalance = viewModel.user.value?.balance_needs else {
+			needsSummary = SummaryHeader(summary: .needs, subtitleText: "You haven't input any data")
 			return
 		}
 		needsSummary = SummaryHeader(summary: .needs, subtitleText: "Rp\(numberHelper.floatToIdFormat(beforeFormatted: needsBalance))")
@@ -141,6 +142,7 @@ class PlanStatsNode: ASDisplayNode {
 	
 	private func configureWantsSummary() {
 		guard let wantsBalance = viewModel.user.value?.balance_wants else {
+			wantsSummary  = SummaryHeader(summary: .wants, subtitleText: "You haven't input any data")
 			return
 		}
 		wantsSummary = SummaryHeader(summary: .wants, subtitleText: "Rp\(numberHelper.floatToIdFormat(beforeFormatted: wantsBalance))")
@@ -148,6 +150,7 @@ class PlanStatsNode: ASDisplayNode {
 	
 	private func configureSavingsSummary() {
 		guard let savingsBalance = viewModel.user.value?.balance_savings else {
+			savingsSummary  = SummaryHeader(summary: .savings, subtitleText: "You haven't input any data")
 			return
 		}
 		savingsSummary = SummaryHeader(summary: .savings, subtitleText: "Rp\(numberHelper.floatToIdFormat(beforeFormatted: savingsBalance))")
