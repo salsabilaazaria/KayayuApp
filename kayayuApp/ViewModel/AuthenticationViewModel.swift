@@ -79,7 +79,6 @@ class AuthenticationViewModel {
 	}
 	
 	func logout() {
-		
 		do {
 			try FirebaseAuth.Auth.auth().signOut()
 		}

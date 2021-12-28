@@ -445,6 +445,14 @@ class ProfileViewModel {
 					print("Kayayu successfully update username")
 				}
 			}
+			
+			FirebaseAuth.Auth.auth().currentUser?.updateEmail(to: newEmail, completion: { errorMsg in
+				guard let errorMsg = errorMsg else {
+					return
+				}
+				print("Kayayu Firebase failed to change email in authentication with errorMsg \(errorMsg)")
+			})
+			
 		} else {
 			self.showAlert?(wrongPasswordMsg)
 			return
@@ -465,10 +473,17 @@ class ProfileViewModel {
 					print("Kayayu successfully update username")
 				}
 			}
+			
+			FirebaseAuth.Auth.auth().currentUser?.updatePassword(to: newPassword, completion: { errorMsg in
+				guard let errorMsg = errorMsg else {
+					return
+				}
+				print("Kayayu Firebase failed to change email in authentication with errorMsg \(errorMsg)")
+			})
+			
 		} else {
 			self.showAlert?(wrongPasswordMsg)
 			return
 		}
-		
 	}
 }

@@ -15,37 +15,37 @@ class ProfileViewController: ASDKViewController<ASDisplayNode> {
 	var onOpenEditProfile: (() -> Void)?
     var onLogout: (() -> Void)?
 	
-//    private let authViewModel = AuthenticationViewModel
-//    private let profileNode: ProfileNode = ProfileNode(viewModel: authViewModel)
-	private let profileNode: ProfileNode = ProfileNode()
+	private let profileNode: ProfileNode?
 	let viewModel: ProfileViewModel?
 	
 	init(viewModel: ProfileViewModel) {
 		self.viewModel = viewModel
-		super.init(node: profileNode)
+		self.profileNode = ProfileNode(viewModel: viewModel)
+		super.init(node: profileNode ?? ASDisplayNode())
 		configureNode()
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
 		self.viewModel = nil
+		self.profileNode = nil
 		super.init(coder: aDecoder)
 	}
 	
 	private func configureNode() {
 		
-		profileNode.onOpenSubscriptionPage = { [weak self] in
+		profileNode?.onOpenSubscriptionPage = { [weak self] in
 			self?.onOpenSubscriptionPage?()
 		}
 		
-		profileNode.onOpenInstallmentPage = { [weak self] in
+		profileNode?.onOpenInstallmentPage = { [weak self] in
 			self?.onOpenInstallmentPage?()
 		}
 		
-		profileNode.onLogout = { [weak self] in
+		profileNode?.onLogout = { [weak self] in
 			self?.onLogout?()
 		}
 		
-		profileNode.onOpenEditProfile = { [weak self] in
+		profileNode?.onOpenEditProfile = { [weak self] in
 			self?.onOpenEditProfile?()
 		}
 		

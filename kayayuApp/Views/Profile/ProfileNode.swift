@@ -26,7 +26,10 @@ class ProfileNode: ASDisplayNode {
 	
 	private let scrollNode: ASScrollNode = ASScrollNode()
 	
-    override init() {
+	private let viewModel: ProfileViewModel
+	
+	init(viewModel: ProfileViewModel) {
+		self.viewModel = viewModel
 		super.init()
 
 		backgroundColor = .white
@@ -64,17 +67,17 @@ class ProfileNode: ASDisplayNode {
 	}
 	
 	private func configureUsername() {
-		guard let username = self.viewModel.user.value?.username else {
+		guard let usernameString = self.viewModel.user.value?.username else {
 			return
 		}
-		username.attributedText = NSAttributedString.bold(username, 16, .black)
+		username.attributedText = NSAttributedString.bold(usernameString, 16, .black)
 	}
 	
 	private func configureEmail() {
-		guard let email = self.viewModel.user.value?.email else {
+		guard let emailString = self.viewModel.user.value?.email else {
 			return
 		}
-		email.attributedText = NSAttributedString.semibold(email, 16, .gray)
+		email.attributedText = NSAttributedString.semibold(emailString, 16, .gray)
 	}
 	
 	private func configureScrollNode() {
