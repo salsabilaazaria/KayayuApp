@@ -47,13 +47,10 @@ class StatsViewModel {
 	}
 	
 	private func configureObserver() {
-		Observable.combineLatest(needsTotalExpense.asObservable(),
-								 needsTotalIncome.asObservable(),
-								 wantsTotalExpense.asObservable(),
-								 wantsTotalIncome.asObservable(),
+		Observable.combineLatest(
 								 savingsTotalExpense.asObservable(),
 								 savingsTotalIncome.asObservable()).subscribe {
-									(needsExpense, needsIncome, wantsExpense, wantsIncome, savingsExpense, savingsIncome) in
+									(savingsExpense, savingsIncome) in
 									self.reloadUI?()
 								}.disposed(by: disposeBag)
 		

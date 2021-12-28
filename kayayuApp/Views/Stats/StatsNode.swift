@@ -36,6 +36,11 @@ class StatsNode: ASDisplayNode {
 		configurePlanButton()
 		configureRealisationButton()
 		configureNode()
+		
+		viewModel.reloadUI = {
+			self.planNode.reloadUI()
+			self.realisationNode.reloadUI()
+		}
 
 		automaticallyManagesSubnodes = true
 		
@@ -51,25 +56,7 @@ class StatsNode: ASDisplayNode {
 			self.viewModel.getAllIncomeData(diff: monthInt)
 			self.viewModel.getPerCategoryTransDataSpecMont(diff: monthInt)
 		}
-//		self.planNode.changeMonthStats = { [weak self] date in
-//			print("selectedMonth")
-//			guard let self = self else {
-//				return
-//			}
-//			let monthInt = self.calendarHelper.monthInt(date: date)
-//			self.viewModel.getAllIncomeData(diff: monthInt)
-//			self.viewModel.getPerCategoryTransDataSpecMont(diff: monthInt)
-//		}
-//		
-//		self.realisationNode.changeMonthStats = { [weak self] date in
-//			print("selectedMonth")
-//			guard let self = self else {
-//				return
-//			}
-//			let monthInt = self.calendarHelper.monthInt(date: date)
-//			self.viewModel.getAllIncomeData(diff: monthInt)
-//			self.viewModel.getPerCategoryTransDataSpecMont(diff: monthInt)
-//		}
+
 	}
 	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {

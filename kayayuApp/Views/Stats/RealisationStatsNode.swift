@@ -32,17 +32,10 @@ class RealisationStatsNode: ASDisplayNode {
 		backgroundColor = .white
 	
 		configureRatioTitle()
-		configureViewModel()
 		
 	}
 	
-	private func configureViewModel() {
-		viewModel.reloadUI = {
-			self.reloadUI()
-		}
-	}
-	
-	private func reloadUI(){
+	 func reloadUI(){
 		self.setNeedsLayout()
 		self.layoutIfNeeded()
 	}
