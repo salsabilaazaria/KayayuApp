@@ -16,11 +16,11 @@ class RealisationStatsNode: ASDisplayNode {
 	private let realisationPieChartNode: ASDisplayNode = ASDisplayNode()
 	
 	private let ratioTitle: ASTextNode = ASTextNode()
-	private var needsSummary: SummaryHeader = SummaryHeader()
-	private var wantsSummary: SummaryHeader = SummaryHeader()
-	private var savingsSummary: SummaryHeader = SummaryHeader()
+	private var needsSummary: ASLayoutSpec = ASLayoutSpec()
+	private var wantsSummary: ASLayoutSpec = ASLayoutSpec()
+	private var savingsSummary: ASLayoutSpec = ASLayoutSpec()
 	
-	private var scrollNode: ASScrollNode = ASScrollNode()
+//	private var scrollNode: ASScrollNode = ASScrollNode()
 	
 	private let numberHelper: NumberHelper = NumberHelper()
 	private let viewModel: StatsViewModel
@@ -30,7 +30,7 @@ class RealisationStatsNode: ASDisplayNode {
 		super.init()
 		automaticallyManagesSubnodes = true
 		backgroundColor = .white
-		configureScrollNode()
+	
 		configureRatioTitle()
 		configureViewModel()
 		
@@ -73,7 +73,7 @@ class RealisationStatsNode: ASDisplayNode {
 										  spacing: 10,
 										  justifyContent: .start,
 										  alignItems: .center,
-										  children: [pieChartStack, summaryTitleInset, scrollNode])
+										  children: [pieChartStack, summaryTitleInset, createAllRatioSummarySpec()])
 		
 		
 		return mainStack
@@ -114,47 +114,6 @@ class RealisationStatsNode: ASDisplayNode {
 		
 	}
 	
-	
-	private func configureScrollNode() {
-		scrollNode.automaticallyManagesSubnodes = true
-		scrollNode.automaticallyManagesContentSize = true
-		scrollNode.scrollableDirections = [.up, .down]
-		scrollNode.style.flexGrow = 1.0
-		scrollNode.style.flexShrink = 1.0
-		scrollNode.view.bounces = true
-		scrollNode.view.showsVerticalScrollIndicator = false
-		scrollNode.view.isScrollEnabled = true
-		scrollNode.layoutSpecBlock = { [weak self] _, constrainedSize in
-			print("scrollnode")
-			return(self?.createScrollNode(constrainedSize) ?? ASLayoutSpec())
-			
-		}
-	}
-	
-	private func createScrollNode(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-		let ratioSummary = createRatioSummarySpec()
-		let mainStack = ASStackLayoutSpec(direction: .vertical,
-										  spacing: 0,
-										  justifyContent: .center,
-										  alignItems: .stretch,
-										  children: [ratioSummary])
-		
-		let inset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0), child: mainStack)
-		return inset
-	}
-	
-	private func createRatioSummarySpec() -> ASLayoutSpec {
-		
-		let summaryRatioSpec = ASStackLayoutSpec(direction: .vertical,
-												  spacing: 10,
-												  justifyContent: .start,
-												  alignItems: .start,
-												  children: [needsSummary, wantsSummary, savingsSummary])
-		
-		
-		return summaryRatioSpec
-	}
-	
 	private func configureRatioTitle() {
 		ratioTitle.attributedText = NSAttributedString.bold("Summary", 14, kayayuColor.yellow)
 	}
@@ -166,41 +125,138 @@ class RealisationStatsNode: ASDisplayNode {
 			return
 		}
 		let needsRemaining = needsBalance - needsTransaction
-		print("Category Needs \(needsRatio) \(needsTransaction) \(needsBalance) \(needsRemaining)")
-		self.needsSummary = SummaryHeader(summary: .needs, ratio: needsRatio, progressColor: kayayuColor.needsLight, baseColor: kayayuColor.needsDark, progressBarText: "Rp\(self.numberHelper.floatToIdFormat(beforeFormatted: needsRemaining)) Remaining")
+		let needsText = "Rp\(self.numberHelper.floatToIdFormat(beforeFormatted: needsRemaining)) Remaining"
 		
-		
+		needsSummary =  createRatioSummarySpec(category: kayayuRatioTitle.needs.rawValue, text: needsText, ratio: needsRatio, progressColor: kayayuColor.needsLight, baseColor: kayayuColor.needsDark)
+
 	}
 	
 	private func configureWantsSummary() {
-		let wantsRatio = viewModel.calculateWantsProgressBarRatio()
+		
 		guard let wantsTransaction = viewModel.wantsTotalExpense.value,
 			  let wantsBalance = viewModel.wantsTotalIncome.value else {
 			return
 		}
 		
+		let wantsRatio = wantsTransaction/wantsBalance
 		let remainingWants = wantsBalance - wantsTransaction
-		wantsSummary = SummaryHeader(summary: .wants, ratio: wantsRatio, progressColor: kayayuColor.wantsLight, baseColor: kayayuColor.wantsDark, progressBarText: "Rp\(numberHelper.floatToIdFormat(beforeFormatted: remainingWants)) Remaining")
+		let wantsText = "Rp\(numberHelper.floatToIdFormat(beforeFormatted: remainingWants)) Remaining"
+
+		wantsSummary =  createRatioSummarySpec(category: kayayuRatioTitle.wants.rawValue, text: wantsText, ratio: wantsRatio, progressColor: kayayuColor.wantsLight, baseColor: kayayuColor.wantsDark)
 	}
 	
 	private func configureSavingsSummary() {
-		let savingsRatio = viewModel.calculateSavingsProgressBarRatio()
+	
 		guard let savingsTransaction = viewModel.savingsTotalExpense.value,
 			  let savingsBalance = viewModel.savingsTotalIncome.value else {
 			return
 		}
 		
-		let remainingSavings = savingsBalance - savingsTransaction
+		let savingsRatio = savingsTransaction/savingsBalance
 		
+		var savingsText: String
 		if savingsTransaction == 0 {
-			savingsSummary = SummaryHeader(summary: .savings, ratio: savingsRatio, progressColor: kayayuColor.savingsDark, baseColor: kayayuColor.savingsLight, progressBarText: "Rp\(numberHelper.floatToIdFormat(beforeFormatted: remainingSavings)) Saved")
+			savingsText = "Rp\(numberHelper.floatToIdFormat(beforeFormatted: savingsBalance)) Saved"
 		} else {
-			savingsSummary = SummaryHeader(summary: .savings, ratio: savingsRatio, progressColor: kayayuColor.savingsDark, baseColor: kayayuColor.savingsLight, progressBarText: "Rp\(numberHelper.floatToIdFormat(beforeFormatted: remainingSavings)) Used")
+			savingsText = "Rp\(numberHelper.floatToIdFormat(beforeFormatted: savingsTransaction)) Used"
 		}
+		
+		savingsSummary = createRatioSummarySpec(category: kayayuRatioTitle.savings.rawValue, text: savingsText, ratio: savingsRatio, progressColor: kayayuColor.savingsDark, baseColor: kayayuColor.savingsLight)
+	
 	
 	}
 	
+	private func createAllRatioSummarySpec() -> ASLayoutSpec {
+		let summaryRatioSpec = ASStackLayoutSpec(direction: .vertical,
+												  spacing: 10,
+												  justifyContent: .start,
+												  alignItems: .start,
+												  children: [needsSummary,wantsSummary,savingsSummary])
+		
+		summaryRatioSpec.style.flexGrow = 1.0
+		summaryRatioSpec.style.flexShrink = 1.0
+
+
+		return summaryRatioSpec
 	
+	}
+	
+	private func createRatioSummarySpec(category: String, text: String, ratio: Float, progressColor: UIColor, baseColor: UIColor) -> ASLayoutSpec {
+		let progressBarText = ASTextNode()
+		progressBarText.attributedText = NSAttributedString.normal(text, 9, .black)
+		
+		let progressBarNode = configureProgressBar(ratio: ratio, progressColor: progressColor, baseColor: baseColor)
+		let text = ASCenterLayoutSpec(centeringOptions: .X, sizingOptions: .minimumXY, child: progressBarText)
+		let progressBarOverlayText = ASOverlayLayoutSpec(child: progressBarNode, overlay: text)
+		
+		let icon: ASImageNode = ASImageNode()
+		icon.image = UIImage(named: "\(category.lowercased())Icon.png")
+		icon.style.preferredSize = CGSize(width: 40, height: 40)
+		
+		let title: ASTextNode = ASTextNode()
+		title.attributedText = NSAttributedString.bold("\(category.uppercased())", 16, .black)
+		
+		let elementArray: [ASLayoutElement] = [title,progressBarOverlayText]
+		
+		
+		let elementSpec = ASStackLayoutSpec(direction: .vertical,
+											spacing: 6,
+											justifyContent: .center,
+											alignItems: .start,
+											children: elementArray)
+		
+		
+		let elementSpecCenter = ASCenterLayoutSpec(centeringOptions: .Y,
+												  sizingOptions: .minimumXY,
+												  child: elementSpec)
+		
+		let horizontalSpec = ASStackLayoutSpec(direction: .horizontal,
+											   spacing: 8,
+											   justifyContent: .start,
+											   alignItems: .center,
+											   children: [icon, elementSpecCenter])
+		let horizontalSpecInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10), child: horizontalSpec)
+		
+		
+		
+		let backgroundNode = ASDisplayNode()
+		backgroundNode.backgroundColor = .white
+		backgroundNode.layer.borderWidth = 0.5
+		backgroundNode.borderColor = UIColor.gray.cgColor
+		backgroundNode.cornerRadius = 12.0
+		backgroundNode.style.preferredSize =  CGSize(width: UIScreen.main.bounds.width, height: 80)
+		
+		let ratioSummarySpec = ASOverlayLayoutSpec(child: backgroundNode, overlay: horizontalSpecInset)
+		ratioSummarySpec.style.preferredSize =  CGSize(width: UIScreen.main.bounds.width, height: 80)
+		
+		let ratioSummaryInsetSpec = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16), child: ratioSummarySpec)
+	
+		return ratioSummaryInsetSpec
+		
+	}
+	
+
+	private func configureProgressBar(ratio: Float, progressColor: UIColor, baseColor: UIColor) -> ASDisplayNode {
+		
+		 let progressBarHeight: CGFloat = 20
+	  let progressBarWidth: CGFloat = UIScreen.main.bounds.width - 110
+		
+		let progressBarNode: ASDisplayNode = ASDisplayNode()
+		let progressBar: UIProgressView = UIProgressView()
+		progressBar.frame = CGRect(x: 0, y: 3, width:progressBarWidth, height: progressBarHeight)
+		progressBar.layer.cornerRadius = 20.0
+		progressBar.progressTintColor = progressColor
+		progressBar.trackTintColor = baseColor
+		progressBar.progress = ratio
+		progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 3)
+		
+		progressBarNode.view.addSubview(progressBar)
+		progressBarNode.style.preferredSize = CGSize(width: progressBarWidth, height: progressBarHeight)
+		
+		return progressBarNode
+	
+		
+	}
 	
 }
 

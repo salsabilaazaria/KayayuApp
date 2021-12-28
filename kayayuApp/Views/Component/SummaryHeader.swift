@@ -30,7 +30,7 @@ class SummaryHeader: ASCellNode {
 	private let createProgressBar: Bool
 	private let progressBarHeight: CGFloat = 20
 	private let progressBarWidth: CGFloat = UIScreen.main.bounds.width - 110
-	private let nodeSize = CGSize(width: UIScreen.main.bounds.width - 40, height: 80)
+	private let nodeSize = CGSize(width: UIScreen.main.bounds.width - 32, height: 80)
 	
 	init(summary: summary = .balance, subtitleText: String = "") {
 		self.summary = summary
