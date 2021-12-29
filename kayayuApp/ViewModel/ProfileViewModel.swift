@@ -401,9 +401,7 @@ class ProfileViewModel {
 	
 	//EDIT PROFILE
 	
-	//data updated in firestore database but not in authentication
 	private let wrongPasswordMsg = "Password is incorrect, please try again."
-	private let failedUpdateMsg = "Sorry, your data can't be updated"
 	
 	private func validatePassword(validatePassword: String) -> Bool {
 		return self.user.value?.password == validatePassword
@@ -418,8 +416,9 @@ class ProfileViewModel {
 
 			database.collection("users").document(getUserId()).updateData(newUsernameData) { err in
 				if let err = err {
-					self.showAlert?(self.failedUpdateMsg)
+					self.showAlert?(err.localizedDescription)
 					print("Kayayu error on updating document: \(err) ")
+					return
 				}
 				else {
 					self.goToEditProfilePage?()
@@ -443,8 +442,9 @@ class ProfileViewModel {
 			//Ganti di firestore
 			database.collection("users").document(getUserId()).updateData(newEmailData) { err in
 				if let err = err {
-					self.showAlert?(self.failedUpdateMsg)
+					self.showAlert?(err.localizedDescription)
 					print("Kayayu error on updating document: \(err) ")
+					return
 				}
 				else {
 					self.goToEditProfilePage?()
@@ -477,8 +477,9 @@ class ProfileViewModel {
 			//Ganti di firestore
 			database.collection("users").document(getUserId()).updateData(newPasswordData) { err in
 				if let err = err {
-					self.showAlert?(self.failedUpdateMsg)
+					self.showAlert?(err.localizedDescription)
 					print("Kayayu error on updating document: \(err) ")
+					return
 				}
 				else {
 					self.goToEditProfilePage?()
