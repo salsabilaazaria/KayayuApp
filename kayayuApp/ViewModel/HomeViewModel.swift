@@ -46,6 +46,7 @@ class HomeViewModel {
         
 //        self.addTransactionData(category: "needs", income_flag: false, transaction_date: Date(), description: "makan ketoprak", recurring_flag: false, amount: 28300)
 //        self.addRecurringSubsData(total_amount: 400000, billing_type: "Months", start_billing_date: Date(), tenor: 1, category: "wants", description: "hadiah box random")
+//        self.addRecurringInstData(total_amount: 100000, billing_type: "Weeks", start_billing_date: Date(), tenor: 10, category: "wants", description: "cicilan kipas angin", interest: 1)
         
 	}
     
@@ -326,19 +327,163 @@ class HomeViewModel {
 		self.onOpenHomePage?()
     }
 	
-    func addRecurringInstData(total_amount: Float, billing_type: String, start_billing_date: Date, tenor: Int, category: String, description: String, interest: Int) {
-		//feli pls helpz
-		
+    func addRecurringInstData(total_amount: Float, billing_type: String, start_billing_date: Date, tenor: Int, category: String, description: String, interest: Float) {
+        
+        var final_billing_type: String?
+        var next_billing_date: Date?
+        var end_billing_date: Date?
+        var total_amount_interest: Float?
+        var amount_per_billing: Float?
+        var interest_percentage: Float?
+        
+        var dateComponent = DateComponents()
+        var dateComponentEnd = DateComponents()
+        
+        var refRecInstl: DocumentReference? = nil
+        refRecInstl = database.collection("recurringTransactions").addDocument(data: ["temp":"temp"]){
+            err in
+            if let err = err {
+                print("Error adding recurring installment transaction data \(err)")
+            } else {
+                print("Document added with ID to recurringTransactions: \(refRecInstl!.documentID)")
+            }
+        }
+        
+        var refTransRecInstl: DocumentReference? = nil
+        refTransRecInstl = database.collection("transactions").addDocument(data: ["temp":"temp"]){
+            err in
+            if let err = err {
+                print("Error adding transaction data \(err)")
+            } else {
+                print("Document added with ID to transactions: \(refTransRecInstl!.documentID)")
+            }
+        }
+        
+        var refDetailRecInstlCurr: DocumentReference? = nil
+        refDetailRecInstlCurr = database.collection("transacionDetails").addDocument(data: ["temp":"temp"]){
+            err in
+            if let err = err {
+                print("Error adding curr detail transaction data \(err)")
+            } else {
+                print("Document added with ID to transactionDetails: \(refDetailRecInstlCurr!.documentID)")
+            }
+        }
+        
+        if(billing_type == "Weeks"){
+            final_billing_type = "weekly"
+            dateComponent.weekOfYear = 1
+            dateComponentEnd.weekOfYear = tenor-1
+            
+        } else if(billing_type == "Months"){
+            final_billing_type = "monthly"
+            dateComponent.month = 1
+            dateComponentEnd.month = tenor-1
+            
+        } else if(billing_type == "Years"){
+            final_billing_type = "yearly"
+            dateComponent.year = 1
+            dateComponentEnd.year = tenor-1
+        }
+        
+        if(tenor == 1){
+            end_billing_date = start_billing_date
+        }
+        else {
+            next_billing_date = Calendar.current.date(byAdding: dateComponent, to: start_billing_date)
+            end_billing_date = Calendar.current.date(byAdding: dateComponentEnd, to: start_billing_date)
+        }
+        
+        interest_percentage = interest / 100
+        total_amount_interest = total_amount + (total_amount * interest_percentage!)
+        amount_per_billing = total_amount_interest! / Float(tenor)
+        
+        print("interest: \(interest_percentage), total: \(total_amount_interest), per billing: \(amount_per_billing)")
+        
+        let recInstlData = RecurringTransactions(
+            recurring_id: refRecInstl!.documentID,
+            user_id: self.getUserId(),
+            description: description,
+            recurring_type: "installment",
+            total_amount: total_amount_interest,
+            billing_type: final_billing_type,
+            start_billing_date: start_billing_date,
+            end_billing_date: end_billing_date,
+            tenor: tenor,
+            interest: interest
+        )
+        
+        let transRecInstlData = Transactions(
+            transaction_id: refTransRecInstl!.documentID,
+            user_id: self.getUserId(),
+            category: category,
+            income_flag: false,
+            transaction_date: start_billing_date,
+            description: description,
+            recurring_flag: true,
+            amount: amount_per_billing
+        )
+        
+        let detailRecInstlCurrData = TransactionDetail(
+            transaction_detail_id: refDetailRecInstlCurr!.documentID,
+            transaction_id: refTransRecInstl!.documentID,
+            user_id: self.getUserId(),
+            recurring_id: refRecInstl!.documentID,
+            billing_date: start_billing_date,
+            number_of_recurring: 1,
+            amount: amount_per_billing,
+            amount_paid: amount_per_billing,
+            amount_havent_paid: total_amount_interest! - amount_per_billing!
+        )
+        
+        do {
+            try database.collection("recurringTransactions").document(refRecInstl!.documentID).setData(from: recInstlData)
+        } catch {
+            print("Error setting installment data to recurringTransactions firestore \(error)")
+        }
+        
+        do {
+            try database.collection("transactions").document(refTransRecInstl!.documentID).setData(from: transRecInstlData)
+        } catch {
+            print("Error setting transaction data to transactions firestore \(error)")
+        }
+        
+        do {
+            try database.collection("transactionDetails").document(refDetailRecInstlCurr!.documentID).setData(from: detailRecInstlCurrData)
+        } catch {
+            print("Error setting curr transaction data to transactionDetail firestore \(error)")
+        }
+        
+        if(tenor > 1){
+            var refDetailRecInstlNext: DocumentReference? = nil
+            refDetailRecInstlNext = database.collection("transactionDetails").addDocument(data: ["temp":"temp"]){
+                err in
+                if let err = err {
+                    print("Error adding next detail transaction data \(err)")
+                } else {
+                    print("Document added with ID to transactionDetails: \(refDetailRecInstlNext!.documentID)")
+                }
+            }
+            
+            let detailRecInstlNextData = TransactionDetail(
+                transaction_detail_id: refDetailRecInstlNext!.documentID,
+                transaction_id: "a",
+                user_id: self.getUserId(),
+                recurring_id: refRecInstl!.documentID,
+                billing_date: next_billing_date,
+                number_of_recurring: 2,
+                amount: amount_per_billing,
+                amount_paid: amount_per_billing! + amount_per_billing!,
+                amount_havent_paid: total_amount_interest! - (amount_per_billing! + amount_per_billing!)
+            )
+            
+            do {
+                try database.collection("transactionDetails").document(refDetailRecInstlNext!.documentID).setData(from: detailRecInstlNextData)
+            } catch {
+                print("Error setting next transaction data to transactionDetail firestore \(error)")
+            }
+        }
 	}
     
-    
-//    if(billing_type == "Weekly" || billing_type == "Weeks"){
-//        final_billing_type = "weekly"
-//    } else if(billing_type == "Monthly" || billing_type == "Months"){
-//        final_billing_type = "monthly"
-//    } else if(billing_type == "Yearly" || billing_type == "Years"){
-//        final_billing_type = "yearly"
-//    }
     
 	//DELETE
 	

@@ -81,10 +81,7 @@ class ProfileViewModel {
 	
 	func getTransactionData () {
 		database.collection("transactions")
-			.whereField("user_id", isEqualTo: getUserId())
-			.whereField("transaction_date", isGreaterThan: calendarHelper.getCurrStartMonth())
-			.whereField("transaction_date", isLessThan: calendarHelper.getCurrEndMonth())
-			.order(by: "transaction_date", descending: true)
+			.whereField("user_id", isEqualTo: getUserId()).order(by: "transaction_date", descending: true)
 			.addSnapshotListener { (documentSnapshot, errorMsg) in
 				
 				if let errorMsg = errorMsg {
@@ -291,7 +288,7 @@ class ProfileViewModel {
 			else {
 				return -1
 			}
-			
+            
 			let newTransData = Transactions(
 				transaction_id: refTrans!.documentID,
 				user_id: self.getUserId(),
@@ -303,6 +300,8 @@ class ProfileViewModel {
 				amount: data.amount
 			)
 			
+            print("document data: \(newTransData)")
+            
 			do {
 				try database.collection("transactions").document(refTrans!.documentID).setData(from: newTransData)
 			} catch {
