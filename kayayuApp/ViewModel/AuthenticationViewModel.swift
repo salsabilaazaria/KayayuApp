@@ -18,6 +18,14 @@ class AuthenticationViewModel {
 	var email: String = ""
 	let database = Firestore.firestore()
 	
+	func getUserData() -> User? {
+		guard let userData = FirebaseAuth.Auth.auth().currentUser else {
+			return nil
+		}
+	
+		return userData
+	}
+	
 	func validateLoginData(email: String, password: String) {
 		//put logic to data validation, if data correct return true
 		print("Auth Validate Login Data Username '\(email)' Password '\(password)'")
@@ -62,7 +70,7 @@ class AuthenticationViewModel {
 	
 	private func addRegisterData(username: String, email: String, password: String, confirmPassword: String) {
 		
-		print("Auth Add Register Data \(username), \(email), \(password), \(confirmPassword)")
+		print("Auth Processing Add Register Data \(username), \(email), \(password), \(confirmPassword)")
 		
 		FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password, completion: { [weak self] result, error in
 			
@@ -71,10 +79,14 @@ class AuthenticationViewModel {
 			}
 			
 			guard error == nil else {
+				print("KAYAYU Failed to register \(error)")
 				self.showAlert?()
 				return
 			}
+			
+			self.onOpenHomePage?()
 		})
+		
 		
 	}
 	

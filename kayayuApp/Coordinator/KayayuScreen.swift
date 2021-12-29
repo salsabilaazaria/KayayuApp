@@ -21,7 +21,7 @@ final class KayayuScreen {
 		case onOpenRegisterPage
 		case onOpenStatsPage(viewModel: StatsViewModel)
 		case onOpenAddRecordPage
-		case onOpenProfilePage(viewModel: ProfileViewModel)
+		case onOpenProfilePage(viewModel: AuthenticationViewModel)
 		case onOpenSubscriptionPage(viewModel: ProfileViewModel)
         case onOpenInstallmentPage(viewModel: ProfileViewModel)
 		case onOpenEditProfile(viewModel: ProfileViewModel)
@@ -40,7 +40,7 @@ final class KayayuScreen {
 		return controller
 	}
 	
-	func makeTabBarViewController(homeViewModel: HomeViewModel, statsViewModel: StatsViewModel, profileViewModel: ProfileViewModel) -> UITabBarController {
+	func makeTabBarViewController(homeViewModel: HomeViewModel, statsViewModel: StatsViewModel, profileViewModel: AuthenticationViewModel) -> UITabBarController {
 		tabBarController.edgesForExtendedLayout = []
 
 		let home = makeHomePageViewController(viewModel: homeViewModel)
@@ -151,21 +151,22 @@ final class KayayuScreen {
 		return controller
 	}
 	
-	func makeProfileViewController(viewModel: ProfileViewModel) -> UIViewController {
+	func makeProfileViewController(viewModel: AuthenticationViewModel) -> UIViewController {
 		let controller = ProfileViewController(viewModel: viewModel)
+		let profileViewModel = ProfileViewModel()
 		controller.title = "Profile"
 		controller.onOpenSubscriptionPage = { [weak self] in
 			guard let self = self else {
 				return
 			}
-			self.onNavigationEvent?(.onOpenSubscriptionPage(viewModel: viewModel))
+			self.onNavigationEvent?(.onOpenSubscriptionPage(viewModel: profileViewModel))
 		}
 		
 		controller.onOpenInstallmentPage = { [weak self] in
 			guard let self = self else {
 				return
 			}
-            self.onNavigationEvent?(.onOpenInstallmentPage(viewModel: viewModel))
+            self.onNavigationEvent?(.onOpenInstallmentPage(viewModel: profileViewModel))
 		}
 		
 		controller.onOpenEditProfile = { [weak self] in
@@ -173,7 +174,7 @@ final class KayayuScreen {
 				return
 			}
 			
-			self.onNavigationEvent?(.onOpenEditProfile(viewModel: viewModel))
+			self.onNavigationEvent?(.onOpenEditProfile(viewModel: profileViewModel))
 			
 		}
         
@@ -181,7 +182,7 @@ final class KayayuScreen {
             guard let self = self else {
                 return
             }
-            self.onNavigationEvent?(.onOpenLandingPage)
+			self.navigationController?.popToRootViewController(animated: true)
         }
         
 		return controller

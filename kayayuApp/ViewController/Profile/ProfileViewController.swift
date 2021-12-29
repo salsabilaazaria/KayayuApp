@@ -16,9 +16,9 @@ class ProfileViewController: ASDKViewController<ASDisplayNode> {
     var onLogout: (() -> Void)?
 	
 	private let profileNode: ProfileNode?
-	let viewModel: ProfileViewModel?
+	let viewModel: AuthenticationViewModel?
 	
-	init(viewModel: ProfileViewModel) {
+	init(viewModel: AuthenticationViewModel) {
 		self.viewModel = viewModel
 		self.profileNode = ProfileNode(viewModel: viewModel)
 		super.init(node: profileNode ?? ASDisplayNode())
@@ -42,6 +42,7 @@ class ProfileViewController: ASDKViewController<ASDisplayNode> {
 		}
 		
 		profileNode?.onLogout = { [weak self] in
+			self?.viewModel?.logout()
 			self?.onLogout?()
 		}
 		

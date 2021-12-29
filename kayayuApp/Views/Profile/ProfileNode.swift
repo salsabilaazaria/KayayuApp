@@ -26,9 +26,9 @@ class ProfileNode: ASDisplayNode {
 	
 	private let scrollNode: ASScrollNode = ASScrollNode()
 	
-	private let viewModel: ProfileViewModel
+	private let viewModel: AuthenticationViewModel
 	
-	init(viewModel: ProfileViewModel) {
+	init(viewModel: AuthenticationViewModel) {
 		self.viewModel = viewModel
 		super.init()
 
@@ -67,14 +67,14 @@ class ProfileNode: ASDisplayNode {
 	}
 	
 	private func configureUsername() {
-		guard let usernameString = self.viewModel.user.value?.username else {
+		guard let usernameString = self.viewModel.getUserData()?.displayName else {
 			return
 		}
 		username.attributedText = NSAttributedString.bold(usernameString, 16, .black)
 	}
 	
 	private func configureEmail() {
-		guard let emailString = self.viewModel.user.value?.email else {
+		guard let emailString = self.viewModel.getUserData()?.email else {
 			return
 		}
 		email.attributedText = NSAttributedString.semibold(emailString, 16, .gray)
@@ -149,7 +149,6 @@ class ProfileNode: ASDisplayNode {
 	}
 	
 	@objc func logoutTapped(sender: ASButtonNode) {
-//        viewModel.logout()
         self.onLogout?()
 	}
 	
