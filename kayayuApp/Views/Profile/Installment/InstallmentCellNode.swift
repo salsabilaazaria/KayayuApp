@@ -103,10 +103,10 @@ class InstallmentCellNode: ASCellNode {
         typeInstallment.attributedText = NSAttributedString.normal("Billed: \(instlData.billing_type ?? " ")", 14, .black)
 		
         let formattedRemaingingAmount = numberHelper.floatToIdFormat(beforeFormatted: remainingAmountValue)
-        remainingAmount.attributedText = NSAttributedString.normal("Remaining Amount: Rp\(formattedRemaingingAmount)", 14, .black)
+        remainingAmount.attributedText = NSAttributedString.normal("Remaining Amount: \(formattedRemaingingAmount)", 14, .black)
         
 		let formattedInstallmentAmount = numberHelper.floatToIdFormat(beforeFormatted: instlData.total_amount ?? 0)
-        totalAmount.attributedText = NSAttributedString.normal("Total Amount: Rp\(formattedInstallmentAmount)", 14, .black)
+        totalAmount.attributedText = NSAttributedString.normal("Total Amount: \(formattedInstallmentAmount)", 14, .black)
 		
 		endDateInstallment.attributedText = NSAttributedString.normal("End of Installment Date: \(calendarHelper.formatFullDate(date: instlData.end_billing_date ?? Date()))", 14, .black)
 		

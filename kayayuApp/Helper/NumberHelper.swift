@@ -14,7 +14,7 @@ class NumberHelper {
 		
 		numberFormatter.locale = Locale(identifier: "id_ID")
 		numberFormatter.groupingSeparator = "."
-		numberFormatter.numberStyle = .decimal
+		numberFormatter.numberStyle = .currency
 		
 		guard let finalNumber = numberFormatter.string(from: beforeFormatted as NSNumber) else {
 			return "\(beforeFormatted)"

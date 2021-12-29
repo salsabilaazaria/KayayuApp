@@ -43,7 +43,7 @@ class SummaryHeader: ASCellNode {
 	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
 		
-		var elementArray: [ASLayoutElement] = [title]
+		let elementArray: [ASLayoutElement] = [title,subtitle]
 		
 		let elementSpec = ASStackLayoutSpec(direction: .vertical,
 											spacing: 6,

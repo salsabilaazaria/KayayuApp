@@ -118,7 +118,7 @@ class RealisationStatsNode: ASDisplayNode {
 			return
 		}
 		let needsRemaining = needsBalance - needsTransaction
-		let needsText = "Rp\(self.numberHelper.floatToIdFormat(beforeFormatted: needsRemaining)) Remaining"
+		let needsText = "\(self.numberHelper.floatToIdFormat(beforeFormatted: needsRemaining)) Remaining"
 		
 		needsSummary =  createRatioSummarySpec(category: kayayuRatioTitle.needs.rawValue, text: needsText, ratio: needsRatio, progressColor: kayayuColor.needsLight, baseColor: kayayuColor.needsDark)
 
@@ -133,7 +133,7 @@ class RealisationStatsNode: ASDisplayNode {
 		
 		let wantsRatio = wantsTransaction/wantsBalance
 		let remainingWants = wantsBalance - wantsTransaction
-		let wantsText = "Rp\(numberHelper.floatToIdFormat(beforeFormatted: remainingWants)) Remaining"
+		let wantsText = "\(numberHelper.floatToIdFormat(beforeFormatted: remainingWants)) Remaining"
 
 		wantsSummary =  createRatioSummarySpec(category: kayayuRatioTitle.wants.rawValue, text: wantsText, ratio: wantsRatio, progressColor: kayayuColor.wantsLight, baseColor: kayayuColor.wantsDark)
 	}
@@ -149,9 +149,9 @@ class RealisationStatsNode: ASDisplayNode {
 		
 		var savingsText: String
 		if savingsTransaction == 0 {
-			savingsText = "Rp\(numberHelper.floatToIdFormat(beforeFormatted: savingsBalance)) Saved"
+			savingsText = "\(numberHelper.floatToIdFormat(beforeFormatted: savingsBalance)) Saved"
 		} else {
-			savingsText = "Rp\(numberHelper.floatToIdFormat(beforeFormatted: savingsTransaction)) Used"
+			savingsText = "\(numberHelper.floatToIdFormat(beforeFormatted: savingsTransaction)) Used"
 		}
 		
 		savingsSummary = createRatioSummarySpec(category: kayayuRatioTitle.savings.rawValue, text: savingsText, ratio: savingsRatio, progressColor: kayayuColor.savingsDark, baseColor: kayayuColor.savingsLight)

@@ -170,7 +170,7 @@ class TransactionTableHeaderNode: ASCellNode {
 		let formattedIncome = numberHelper.floatToIdFormat(beforeFormatted: incomePerMonth)
 		
 		incomeTitle.attributedText = NSAttributedString.normal("Income", 14, .black)
-		incomeAmount.attributedText = NSAttributedString.normal("Rp\(formattedIncome)", 14, .systemGreen)
+		incomeAmount.attributedText = NSAttributedString.normal("\(formattedIncome)", 14, .systemGreen)
 		
 		let incomeAmountSpec = ASStackLayoutSpec(direction: .horizontal, spacing: 0, justifyContent: .end, alignItems: .end, children: [incomeAmount])
 		incomeAmountSpec.style.flexGrow = 1
@@ -189,7 +189,7 @@ class TransactionTableHeaderNode: ASCellNode {
 		let formattedExpense = numberHelper.floatToIdFormat(beforeFormatted: expensePerMonth)
 		
 		expenseTitle.attributedText = NSAttributedString.normal("Expense", 14, .black)
-		expenseAmount.attributedText = NSAttributedString.normal("Rp\(formattedExpense)", 14, .systemRed)
+		expenseAmount.attributedText = NSAttributedString.normal("\(formattedExpense)", 14, .systemRed)
 		
 		let expenseAmountSpec = ASStackLayoutSpec(direction: .horizontal, spacing: 0, justifyContent: .end, alignItems: .end, children: [expenseAmount])
 		expenseAmountSpec.style.flexGrow = 1
@@ -209,7 +209,7 @@ class TransactionTableHeaderNode: ASCellNode {
 		let formattedTotal = numberHelper.floatToIdFormat(beforeFormatted: total)
 		
 		totalTitle.attributedText = NSAttributedString.semibold("Total", 14, .black)
-		totalAmount.attributedText = NSAttributedString.semibold("Rp\(formattedTotal)", 14, .black)
+		totalAmount.attributedText = NSAttributedString.semibold("\(formattedTotal)", 14, .black)
 		
 		let totalAmountSpec = ASStackLayoutSpec(direction: .horizontal, spacing: 0, justifyContent: .end, alignItems: .end, children: [totalAmount])
 		totalAmountSpec.style.flexGrow = 1

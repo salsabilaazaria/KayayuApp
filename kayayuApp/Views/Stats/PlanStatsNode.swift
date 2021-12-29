@@ -125,7 +125,7 @@ class PlanStatsNode: ASDisplayNode {
 			needsSummary = SummaryHeader(summary: .needs, subtitleText: "You haven't input any data")
 			return
 		}
-		needsSummary = SummaryHeader(summary: .needs, subtitleText: "Rp\(numberHelper.floatToIdFormat(beforeFormatted: needsBalance))")
+		needsSummary = SummaryHeader(summary: .needs, subtitleText: "\(numberHelper.floatToIdFormat(beforeFormatted: needsBalance))")
 	}
 	
 	private func configureWantsSummary() {
@@ -133,7 +133,7 @@ class PlanStatsNode: ASDisplayNode {
 			wantsSummary  = SummaryHeader(summary: .wants, subtitleText: "You haven't input any data")
 			return
 		}
-		wantsSummary = SummaryHeader(summary: .wants, subtitleText: "Rp\(numberHelper.floatToIdFormat(beforeFormatted: wantsBalance))")
+		wantsSummary = SummaryHeader(summary: .wants, subtitleText: "\(numberHelper.floatToIdFormat(beforeFormatted: wantsBalance))")
 	}
 	
 	private func configureSavingsSummary() {
@@ -141,7 +141,7 @@ class PlanStatsNode: ASDisplayNode {
 			savingsSummary  = SummaryHeader(summary: .savings, subtitleText: "You haven't input any data")
 			return
 		}
-		savingsSummary = SummaryHeader(summary: .savings, subtitleText: "Rp\(numberHelper.floatToIdFormat(beforeFormatted: savingsBalance))")
+		savingsSummary = SummaryHeader(summary: .savings, subtitleText: "\(numberHelper.floatToIdFormat(beforeFormatted: savingsBalance))")
 	}
 	
 	
