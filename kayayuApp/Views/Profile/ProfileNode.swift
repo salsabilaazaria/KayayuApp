@@ -36,14 +36,6 @@ class ProfileNode: ASDisplayNode {
 		automaticallyManagesSubnodes = true
 	}
     
-//    init(viewModel: AuthenticationViewModel) {
-//        self.viewModel = viewModel
-//        super.init()
-//
-//        backgroundColor = .white
-//        automaticallyManagesSubnodes = true
-//    }
-	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
 		configureUsername()
 		configureEmail()

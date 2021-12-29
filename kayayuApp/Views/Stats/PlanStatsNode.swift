@@ -35,7 +35,6 @@ class PlanStatsNode: ASDisplayNode {
 	}
 	
 	 func reloadUI(){
-		print("Plan Reload UI")
 		self.setNeedsLayout()
 		self.layoutIfNeeded()
 	}

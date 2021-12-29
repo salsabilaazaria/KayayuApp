@@ -12,7 +12,6 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 class AuthenticationViewModel {
-	//AuthenticationViewModel variable
 	var onOpenHomePage: (() -> Void)?
 	var showAlert: ((String) -> Void)?
 	var email: String = ""
@@ -22,7 +21,6 @@ class AuthenticationViewModel {
 		guard let userData = FirebaseAuth.Auth.auth().currentUser else {
 			return nil
 		}
-	
 		return userData
 	}
 	
@@ -78,11 +76,21 @@ class AuthenticationViewModel {
 				return
 			}
 			
+			let changeRequest = result?.user.createProfileChangeRequest()
+			changeRequest?.displayName = username
+			changeRequest?.commitChanges { error in
+			  print("Change request failed \(error)")
+				self.showAlert?(error?.localizedDescription ?? "Register failed, please try again later.")
+				return
+			}
+			
 			guard error == nil else {
 				print("KAYAYU Failed to register \(error)")
 				self.showAlert?(error?.localizedDescription ?? "Register failed, please try again later.")
 				return
 			}
+			
+			
 			
 			guard let uid = result?.user.uid else {
 				return
