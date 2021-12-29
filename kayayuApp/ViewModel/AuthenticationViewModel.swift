@@ -14,7 +14,7 @@ import FirebaseFirestoreSwift
 class AuthenticationViewModel {
 	//AuthenticationViewModel variable
 	var onOpenHomePage: (() -> Void)?
-	var showAlert: (() -> Void)?
+	var showAlert: ((String) -> Void)?
 	var email: String = ""
 	let database = Firestore.firestore()
 	
@@ -39,7 +39,7 @@ class AuthenticationViewModel {
 				return
 			}
 			guard error == nil else {
-				self.showAlert?()
+				self.showAlert?(error?.localizedDescription ?? "Login failed, please try again later")
 				print("KAYAYU Login Failed")
 				return
 			}
@@ -61,7 +61,7 @@ class AuthenticationViewModel {
 			  !confirmPassword.isEmpty,
 			  password == confirmPassword else {
 			print("KAYAYU Register Data is not valid")
-			self.showAlert?()
+			self.showAlert?("There is invalid data, please try again.")
 			return
 		}
 		
@@ -80,13 +80,43 @@ class AuthenticationViewModel {
 			
 			guard error == nil else {
 				print("KAYAYU Failed to register \(error)")
-				self.showAlert?()
+				self.showAlert?(error?.localizedDescription ?? "Register failed, please try again later.")
 				return
 			}
 			
-			self.onOpenHomePage?()
+			guard let uid = result?.user.uid else {
+				return
+			}
+			
+			var ref: DocumentReference? = nil
+			
+			ref = self.database.collection("users").addDocument(data: ["temp": "temp"]){
+				err in
+				if let err = err {
+					print("Error adding user data \(err)")
+				} else {
+					print("Document added with ID: \(ref!.documentID)")
+				}
+			}
+			
+			let data = Users(user_id: uid,
+							 username: username,
+							 email: email,
+							 password: password,
+							 balance_total: 0,
+							 balance_month: 0,
+							 balance_needs: 0,
+							 balance_wants: 0,
+							 balance_savings: 0)
+			
+			do {
+				try self.database.collection("users").document(uid).setData(from: data)
+				self.onOpenHomePage?()
+			} catch {
+				print("Error setting data to data firestore \(error)")
+			}
+			
 		})
-		
 		
 	}
 	

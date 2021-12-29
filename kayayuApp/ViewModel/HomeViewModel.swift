@@ -145,6 +145,7 @@ class HomeViewModel {
     
     func addTransactionData(category: String, income_flag: Bool, transaction_date: Date, description: String, recurring_flag: Bool, amount: Float) {
         var ref: DocumentReference? = nil
+		
         ref = database.collection("transactions").addDocument(data: ["temp": "temp"]){
             err in
             if let err = err {

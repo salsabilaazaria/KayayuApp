@@ -96,8 +96,9 @@ class RegisterNode: ASDisplayNode {
 			self.onOpenHomePage?()
 		}
 		
-		viewModel.showAlert = {
+		viewModel.showAlert = { errorMsg in
 			print("SHOW ALERT")
+			self.alertText.attributedText = NSAttributedString.semibold(errorMsg, 14, .systemRed)
 			self.alertText.isHidden = false
 		}
 	}

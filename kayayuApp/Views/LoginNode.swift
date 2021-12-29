@@ -87,8 +87,8 @@ class LoginNode: ASDisplayNode {
             self.onOpenHomePage?()
         }
 		
-		viewModel.showAlert = {
-			print("SHOW ALERT")
+		viewModel.showAlert = { errorMsg in
+			self.alertText.attributedText = NSAttributedString.semibold(errorMsg, 14, .systemRed)
 			self.alertText.isHidden = false
 		}
     }
