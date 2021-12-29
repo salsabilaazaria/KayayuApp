@@ -21,6 +21,7 @@ class TransactionTableHeaderNode: ASCellNode {
 	private let expenseAmount: ASTextNode = ASTextNode()
 	private let totalTitle: ASTextNode = ASTextNode()
 	private let totalAmount: ASTextNode = ASTextNode()
+	private let transactionIcon: ASImageNode = ASImageNode()
 	private let backgroundSummary: ASDisplayNode = ASDisplayNode()
 	
 	private let viewModel: HomeViewModel
@@ -42,7 +43,7 @@ class TransactionTableHeaderNode: ASCellNode {
 		configureViewModel()
 		
 		backgroundColor = kayayuColor.softGrey
-		style.preferredSize = CGSize(width: UIScreen.main.bounds.width, height: 100)
+//		style.preferredSize = CGSize(width: UIScreen.main.bounds.width, height: 100)
 		automaticallyManagesSubnodes = true
 	}
 	
@@ -53,11 +54,11 @@ class TransactionTableHeaderNode: ASCellNode {
 		
 		let mainSpec = ASStackLayoutSpec(direction: .vertical,
 										 spacing: 10,
-										 justifyContent: .center,
+										 justifyContent: .start,
 										 alignItems: .start,
 										 children: [headerSpec, summarySpec])
 		
-		let mainInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0,
+		let mainInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 16,
 															   left: 16,
 															   bottom: 0,
 															   right: 16),
@@ -99,9 +100,7 @@ class TransactionTableHeaderNode: ASCellNode {
 	
 	private func configureDateText() {
 		let monthYear = "\(calendarHelper.monthString(date: selectedDate)) \(calendarHelper.yearString(date: selectedDate))"
-		
-		let monthString = calendarHelper.monthString(date: Date())
-		let yearString = calendarHelper.yearString(date: Date())
+	
 		dateText.attributedText = NSAttributedString.bold("\(monthYear)", 17, .black)
 	}
 	
@@ -133,20 +132,34 @@ class TransactionTableHeaderNode: ASCellNode {
 	}
 	
 	private func makeSummarySpec() -> ASLayoutSpec {
+		transactionIcon.image = UIImage(named: "transactionIcon.png")
+		transactionIcon.style.preferredSize = CGSize(width: 80, height: 80)
+		
 		backgroundSummary.backgroundColor = .white
-		backgroundSummary.style.preferredSize = CGSize(width: UIScreen.main.bounds.width, height: 50)
+		backgroundSummary.style.preferredSize = CGSize(width: UIScreen.main.bounds.width, height: 110)
 		
 		let incomeSpec = configureIncomeText()
 		let expenseSpec = configureExpenseText()
 		let totalSpec = configureTotalText()
 		
-		let summarySpec = ASStackLayoutSpec(direction: .horizontal,
-											spacing: 30,
-											justifyContent: .center,
-											alignItems: .center,
+		let summaryInfoSpec = ASStackLayoutSpec(direction: .vertical,
+											spacing: 8,
+											justifyContent: .start,
+											alignItems: .stretch,
 											children: [incomeSpec,expenseSpec,totalSpec])
 		
-		let summaryOverlay = ASOverlayLayoutSpec(child: backgroundSummary, overlay: summarySpec)
+		summaryInfoSpec.style.flexGrow = 1
+		let summarySpec = ASStackLayoutSpec(direction: .horizontal,
+											spacing: 8,
+											justifyContent: .center,
+											alignItems: .center,
+											children: [transactionIcon, summaryInfoSpec])
+		
+		summarySpec.style.preferredSize = CGSize(width: UIScreen.main.bounds.width, height: 100)
+		
+		let summaryInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8), child: summarySpec)
+		
+		let summaryOverlay = ASOverlayLayoutSpec(child: backgroundSummary, overlay: summaryInset)
 		
 		return summaryOverlay
 		
@@ -156,14 +169,17 @@ class TransactionTableHeaderNode: ASCellNode {
 		let incomePerMonth = viewModel.calculateIncomePerMonth(date: selectedDate)
 		let formattedIncome = numberHelper.floatToIdFormat(beforeFormatted: incomePerMonth)
 		
-		incomeTitle.attributedText = NSAttributedString.bold("Income", 14, .systemGreen)
-		incomeAmount.attributedText = NSAttributedString.semibold("Rp\(formattedIncome)", 14, .systemGreen)
+		incomeTitle.attributedText = NSAttributedString.normal("Income", 14, .black)
+		incomeAmount.attributedText = NSAttributedString.normal("Rp\(formattedIncome)", 14, .systemGreen)
 		
-		let incomeSpec = ASStackLayoutSpec(direction: .vertical,
+		let incomeAmountSpec = ASStackLayoutSpec(direction: .horizontal, spacing: 0, justifyContent: .end, alignItems: .end, children: [incomeAmount])
+		incomeAmountSpec.style.flexGrow = 1
+		
+		let incomeSpec = ASStackLayoutSpec(direction: .horizontal,
 										   spacing: 5,
-										   justifyContent: .center,
-										   alignItems: .center,
-										   children: [incomeTitle, incomeAmount])
+										   justifyContent: .start,
+										   alignItems: .start,
+										   children: [incomeTitle, incomeAmountSpec])
 		
 		return incomeSpec
 	}
@@ -172,14 +188,17 @@ class TransactionTableHeaderNode: ASCellNode {
 		let expensePerMonth = viewModel.calculateExpensePerMonth(date: selectedDate)
 		let formattedExpense = numberHelper.floatToIdFormat(beforeFormatted: expensePerMonth)
 		
-		expenseTitle.attributedText = NSAttributedString.bold("Expense", 14, .systemRed)
-		expenseAmount.attributedText = NSAttributedString.semibold("Rp\(formattedExpense)", 14, .systemRed)
+		expenseTitle.attributedText = NSAttributedString.normal("Expense", 14, .black)
+		expenseAmount.attributedText = NSAttributedString.normal("Rp\(formattedExpense)", 14, .systemRed)
 		
-		let expenseSpec = ASStackLayoutSpec(direction: .vertical,
+		let expenseAmountSpec = ASStackLayoutSpec(direction: .horizontal, spacing: 0, justifyContent: .end, alignItems: .end, children: [expenseAmount])
+		expenseAmountSpec.style.flexGrow = 1
+		
+		let expenseSpec = ASStackLayoutSpec(direction: .horizontal,
 										   spacing: 5,
 										   justifyContent: .center,
 										   alignItems: .center,
-										   children: [expenseTitle, expenseAmount])
+										   children: [expenseTitle, expenseAmountSpec])
 		
 		return expenseSpec
 		
@@ -189,14 +208,17 @@ class TransactionTableHeaderNode: ASCellNode {
 		let total = viewModel.calculateTotalPerMonth(date: selectedDate)
 		let formattedTotal = numberHelper.floatToIdFormat(beforeFormatted: total)
 		
-		totalTitle.attributedText = NSAttributedString.bold("Total", 14, .black)
+		totalTitle.attributedText = NSAttributedString.semibold("Total", 14, .black)
 		totalAmount.attributedText = NSAttributedString.semibold("Rp\(formattedTotal)", 14, .black)
 		
-		let totalSpec = ASStackLayoutSpec(direction: .vertical,
+		let totalAmountSpec = ASStackLayoutSpec(direction: .horizontal, spacing: 0, justifyContent: .end, alignItems: .end, children: [totalAmount])
+		totalAmountSpec.style.flexGrow = 1
+		
+		let totalSpec = ASStackLayoutSpec(direction: .horizontal,
 										   spacing: 5,
 										   justifyContent: .center,
 										   alignItems: .center,
-										   children: [totalTitle, totalAmount])
+										   children: [totalTitle, totalAmountSpec])
 		
 		return totalSpec
 	}

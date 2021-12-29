@@ -13,13 +13,13 @@ class HomeNode: ASDisplayNode {
 	var onOpenStatsPage: (() -> Void)?
 	var onOpenProfilePage: (() -> Void)?
 	
-	private let homeNode: HomeComponentNode
+	private let homeTableTransaction: HomeTableTransaction
 	private let addRecordBtn: ASButtonNode = ASButtonNode()
     private let viewModel: HomeViewModel
     
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
-        self.homeNode = HomeComponentNode(viewModel: viewModel)
+		self.homeTableTransaction = HomeTableTransaction(viewModel: viewModel)
 		super.init()
      
 		configureAddRecordBtn()
@@ -42,7 +42,7 @@ class HomeNode: ASDisplayNode {
 	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
 		
-		let homeStack = ASStackLayoutSpec(direction: .vertical, spacing: 0, justifyContent: .start, alignItems: .start, children: [homeNode])
+		let homeStack = ASStackLayoutSpec(direction: .vertical, spacing: 32, justifyContent: .spaceAround, alignItems: .stretch, children: [homeTableTransaction])
 	
 		let addRecordBtnSpec = ASStackLayoutSpec(direction: .vertical,
 									   spacing: 20,

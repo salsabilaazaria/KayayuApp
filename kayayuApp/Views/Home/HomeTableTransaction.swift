@@ -24,7 +24,6 @@ class HomeTableTransaction: ASDisplayNode {
 		super.init()
 		
 		configureNode()
-	
 		backgroundColor = kayayuColor.softGrey
 		automaticallyManagesSubnodes = true
 	}
@@ -40,15 +39,15 @@ class HomeTableTransaction: ASDisplayNode {
 		let tableSpec = ASStackLayoutSpec(direction: .vertical,
 										 spacing: 10,
 										 justifyContent: .start,
-										 alignItems: .start,
+										 alignItems: .stretch,
 										 children: [transactionTableHeader, tableTransactionInset])
 		
 		return tableSpec
 	}
 	
 	private func configureNode() {
-		transactionTableNode.style.preferredSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.5)
-		
+		transactionTableNode.style.preferredSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.55)
+
 		transactionTableHeader.changeMonthData = { [weak self] date in
 			let monthInt = self?.calendarHelper.monthInt(date: date)
 			self?.viewModel.getTransactionDataSpecMonth(diff: monthInt ?? 0)
