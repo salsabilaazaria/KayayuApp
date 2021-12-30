@@ -40,7 +40,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 	
 	private let toolBar: UIToolbar = UIToolbar()
 	
-	private let spacingTitle: CGFloat = 6
+	private let spacingTitle: CGFloat = 8
 	private let datePicker = UIDatePicker()
 	private let calendarHelper = CalendarHelper()
 	private var paymenTypeValue: BehaviorRelay<kayayuPaymentType> = BehaviorRelay<kayayuPaymentType>(value: .oneTime)

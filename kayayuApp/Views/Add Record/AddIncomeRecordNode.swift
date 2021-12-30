@@ -27,7 +27,7 @@ class AddIncomeRecordNode: ASDisplayNode {
 	private let toolBar: UIToolbar = UIToolbar()
 	private let datePicker = UIDatePicker()
 	
-	private let spacingTitle: CGFloat = 6
+	private let spacingTitle: CGFloat = 8
 
 	private let calendarHelper = CalendarHelper()
 	private let numberHelper = NumberHelper()
@@ -53,18 +53,24 @@ class AddIncomeRecordNode: ASDisplayNode {
 		let amount = createAmountInputSpec()
 		let ratio = createRatioCategorySpec()
 		
-		let inputSpec = ASStackLayoutSpec(direction: .vertical,
+		let inputDataSpec = ASStackLayoutSpec(direction: .vertical,
 										 spacing: 10,
 										 justifyContent: .start,
 										 alignItems: .start,
 										 children: [date, ratio, desc, amount])
 		
+		let inputSpec = ASStackLayoutSpec(direction: .vertical,
+										  spacing: 20,
+										  justifyContent: .start,
+										  alignItems: .start,
+										  children: [inputDataSpec, createIncomeDesc()])
+		
 		inputSpec.style.flexGrow = 1
 		
 		let saveButtonSpec = ASStackLayoutSpec(direction: .vertical,
-											   spacing: spacingTitle,
+											   spacing: 8,
 											   justifyContent: .end,
-											   alignItems: .end,
+											   alignItems: .center,
 											   children: [saveButton])
 		
 		let mainSpec = ASStackLayoutSpec(direction: .vertical,
@@ -245,6 +251,26 @@ class AddIncomeRecordNode: ASDisplayNode {
 		
 		amountInputTextField.textView.text = "0"
 	}
+	
+	private func createIncomeDesc() -> ASLayoutSpec {
+		let incomeDescription: ASTextNode = ASTextNode()
+		let infoIcon: ASImageNode = ASImageNode()
+		let backgroundNode: ASDisplayNode = ASDisplayNode()
+		
+		incomeDescription.attributedText = NSAttributedString.normal("Your income will be allocated for the inputted month budget", 12, .black)
+		infoIcon.image = UIImage(named: "infoIconBlack.png")
+		infoIcon.style.preferredSize =  CGSize(width: 20, height: 20)
+		
+		let contentSpec = ASStackLayoutSpec(direction: .horizontal, spacing: 4, justifyContent: .center, alignItems: .center, children: [infoIcon,incomeDescription])
+		
+		backgroundNode.style.preferredSize = CGSize(width: UIScreen.main.bounds.width-32, height: 40)
+		
+		let incomeDescSpec = ASOverlayLayoutSpec(child: backgroundNode, overlay: contentSpec)
+		
+		return incomeDescSpec
+	}
+	
+
 	
 	private func reloadUI() {
 		self.setNeedsLayout()
