@@ -180,7 +180,7 @@ class LoginNode: ASDisplayNode {
 			return
 		}
 		
-		self.viewModel.validateLoginData(email: "test@gmail.com", password: "Password")
+		self.viewModel.validateLoginData(email: "Angie@gmail.com", password: "Password")
 		
 	}
 	
