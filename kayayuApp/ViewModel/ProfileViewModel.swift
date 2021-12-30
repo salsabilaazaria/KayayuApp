@@ -404,6 +404,7 @@ class ProfileViewModel {
 	private let wrongPasswordMsg = "Password is incorrect, please try again."
 	
 	private func validatePassword(validatePassword: String) -> Bool {
+		print("ValidatePassword \(self.user.value?.password) \(validatePassword)")
 		return self.user.value?.password == validatePassword
 	}
 	

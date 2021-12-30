@@ -105,22 +105,14 @@ class AuthenticationViewModel {
 								 balance_wants: 0,
 								 balance_savings: 0)
 				
-				var ref: DocumentReference? = nil
-				
 				do {
 					try
-						ref = self.database.collection("users").addDocument(from: data){
-							err in
-							if let err = err {
-								print("Error adding user data \(err)")
-							} else {
-								print("Document added with ID: \(ref!.documentID)")
-							}
-						}
+						self.database.collection("users").document(result.user.uid).setData(from: data)
 					self.onOpenHomePage?()
 				} catch {
 					print("Error setting data to data firestore \(error)")
 				}
+				
 			}
 			
 		})
