@@ -36,6 +36,8 @@ class AddExpenseRecordNode: ASDisplayNode {
 	private let recurringTypeTitle: ASTextNode = ASTextNode()
 	private var recurringType: DropDown = DropDown()
 	
+	private let dateDescription: ASTextNode = ASTextNode()
+	
 	private var saveButton: BigButton = BigButton()
 	
 	private let toolBar: UIToolbar = UIToolbar()
@@ -61,6 +63,10 @@ class AddExpenseRecordNode: ASDisplayNode {
 		configureObserver()
 		configureViewModel()
 		configureDateInputTextField()
+		configureRatioCategory()
+		configureAmountInputTextField()
+		configureTenor()
+		configureInterestInputTextField()
 		
 		backgroundColor = .white
 		automaticallyManagesSubnodes = true
@@ -68,7 +74,6 @@ class AddExpenseRecordNode: ASDisplayNode {
 	}
 	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-		
 		let paymentType = createPaymentTypeSpec()
 		let date = createDateInputSpec()
 		let desc = createDescInputSpec()
@@ -258,7 +263,6 @@ class AddExpenseRecordNode: ASDisplayNode {
 	}
 	
 	private func createRatioCategorySpec() -> ASLayoutSpec{
-		configureRatioCategory()
 		let ratioCategoryNode = ASDisplayNode()
 		ratioCategoryNode.view.addSubview(ratioCategory)
 		ratioCategoryNode.style.preferredSize = CGSize(width: UIScreen.main.bounds.width - 32, height: 30)
@@ -291,11 +295,35 @@ class AddExpenseRecordNode: ASDisplayNode {
 	}
 	
 	private func createDateInputSpec() -> ASLayoutSpec {
+		let paymentType = self.paymenTypeValue.value
+		var dateElement: [ASLayoutElement] = []
+		switch paymentType {
+		case .subscription:
+			dateDescription.attributedText = NSAttributedString.normal("Subscription billing date", 12, .black)
+			let dateTitleSpec = ASStackLayoutSpec(direction: .vertical,
+												  spacing: spacingTitle/2,
+												  justifyContent: .start,
+												  alignItems: .start,
+												  children: [dateTitle, dateDescription])
+			dateElement.append(dateTitleSpec)
+
+		case .installment:
+			dateDescription.attributedText = NSAttributedString.normal("Installment billing date", 12, .black)
+			let dateTitleSpec = ASStackLayoutSpec(direction: .vertical,
+												  spacing: spacingTitle/2,
+												  justifyContent: .start,
+												  alignItems: .start,
+												  children: [dateTitle, dateDescription])
+			dateElement.append(dateTitleSpec)
+		default:
+			dateElement.append(dateTitle)
+		}
+		dateElement.append(dateInputTextField)
 		let dateSpec = ASStackLayoutSpec(direction: .vertical,
 										 spacing: spacingTitle,
 										 justifyContent: .start,
 										 alignItems: .start,
-										 children: [dateTitle, dateInputTextField])
+										 children: dateElement)
 		return dateSpec
 	}
 	
@@ -346,7 +374,6 @@ class AddExpenseRecordNode: ASDisplayNode {
 	//OPTIONAL CONFIGURATION
 	
 	private func createAmountInputSpec() -> ASLayoutSpec {
-		configureAmountInputTextField()
 		
 		let currceny = ASTextNode()
 		currceny.attributedText = NSAttributedString.semibold("Rp", 14, .black)
@@ -414,8 +441,6 @@ class AddExpenseRecordNode: ASDisplayNode {
 	}
 	
 	private func createInterestInputSpec() -> ASLayoutSpec {
-		configureInterestInputTextField()
-		
 		let percentage = ASTextNode()
 		percentage.attributedText = NSAttributedString.semibold("%", 14, .black)
 		
@@ -446,8 +471,6 @@ class AddExpenseRecordNode: ASDisplayNode {
 	
 	
 	private func createTenorTypeSpec() -> ASLayoutSpec{
-		configureTenor()
-		
 		let tenorTypeSpec = ASStackLayoutSpec(direction: .vertical,
 										  spacing: spacingTitle,
 										  justifyContent: .start,
