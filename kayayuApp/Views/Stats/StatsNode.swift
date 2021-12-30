@@ -72,12 +72,15 @@ class StatsNode: ASDisplayNode {
 		var statsElementArray: [ASLayoutElement] = [buttonStack, statsDateHeader]
 		
 		if goToPlanNode {
+			planButton.setAttributedTitle(NSAttributedString.semibold("PLAN", 16, .black), for: .normal)
+			realisationButton.setAttributedTitle(NSAttributedString.semibold("REALISATION", 16, .gray), for: .normal)
 			statsElementArray.append(planNode)
 		} else {
+			planButton.setAttributedTitle(NSAttributedString.semibold("PLAN", 16, .gray), for: .normal)
+			realisationButton.setAttributedTitle(NSAttributedString.semibold("REALISATION", 16, .black), for: .normal)
 			statsElementArray.append(realisationNode)
 		}
 
-		
 		let mainStack = ASStackLayoutSpec(direction: .vertical,
 										  spacing: 0,
 										  justifyContent: .start,
