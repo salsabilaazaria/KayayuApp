@@ -79,10 +79,12 @@ class AuthenticationViewModel {
 			let changeRequest = result?.user.createProfileChangeRequest()
 			changeRequest?.displayName = username
 			changeRequest?.commitChanges { error in
-			  print("Change request failed \(error)")
+				print("Change request failed \(error?.localizedDescription)")
 				self.showAlert?(error?.localizedDescription ?? "Register failed, please try again later.")
 				return
 			}
+			
+			print("Change Request \(changeRequest)")
 			
 			guard error == nil else {
 				print("KAYAYU Failed to register \(error)")
@@ -91,37 +93,34 @@ class AuthenticationViewModel {
 			}
 			
 			
-			
-			guard let uid = result?.user.uid else {
-				return
-			}
-			
-			var ref: DocumentReference? = nil
-			
-			ref = self.database.collection("users").addDocument(data: ["temp": "temp"]){
-				err in
-				if let err = err {
-					print("Error adding user data \(err)")
-				} else {
-					print("Document added with ID: \(ref!.documentID)")
+			if let result = result {
+				
+				let data = Users(user_id: result.user.uid,
+								 username: username,
+								 email: email,
+								 password: password,
+								 balance_total: 0,
+								 balance_month: 0,
+								 balance_needs: 0,
+								 balance_wants: 0,
+								 balance_savings: 0)
+				
+				var ref: DocumentReference? = nil
+				
+				do {
+					try
+						ref = self.database.collection("users").addDocument(from: data){
+							err in
+							if let err = err {
+								print("Error adding user data \(err)")
+							} else {
+								print("Document added with ID: \(ref!.documentID)")
+							}
+						}
+					self.onOpenHomePage?()
+				} catch {
+					print("Error setting data to data firestore \(error)")
 				}
-			}
-			
-			let data = Users(user_id: uid,
-							 username: username,
-							 email: email,
-							 password: password,
-							 balance_total: 0,
-							 balance_month: 0,
-							 balance_needs: 0,
-							 balance_wants: 0,
-							 balance_savings: 0)
-			
-			do {
-				try self.database.collection("users").document(uid).setData(from: data)
-				self.onOpenHomePage?()
-			} catch {
-				print("Error setting data to data firestore \(error)")
 			}
 			
 		})

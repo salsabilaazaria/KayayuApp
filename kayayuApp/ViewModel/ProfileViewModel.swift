@@ -412,6 +412,16 @@ class ProfileViewModel {
 		let oldUsername = self.user.value?.username
 		
 		if passIsValid == true, oldUsername != newUsername {
+			
+			let changeRequest = Firebase.Auth.auth().currentUser?.createProfileChangeRequest()
+			changeRequest?.displayName = newUsername
+			changeRequest?.commitChanges { error in
+			  print("Change username request failed \(error)")
+				self.showAlert?(error?.localizedDescription ?? "Failed to update your username, please try again later.")
+				return
+			}
+			
+			
 			let newUsernameData = [ "username": "\(newUsername)" ]
 
 			database.collection("users").document(getUserId()).updateData(newUsernameData) { err in
@@ -421,6 +431,7 @@ class ProfileViewModel {
 					return
 				}
 				else {
+					
 					self.goToEditProfilePage?()
 					print("Kayayu successfully update username")
 				}
@@ -437,24 +448,27 @@ class ProfileViewModel {
 		let oldEmail = self.user.value?.email
 		
 		if passIsValid == true, newEmail != oldEmail {
-			let newEmailData = [ "email": "\(newEmail)" ]
-			
-			//Ganti di firestore
-			database.collection("users").document(getUserId()).updateData(newEmailData) { err in
-				if let err = err {
-					self.showAlert?(err.localizedDescription)
-					print("Kayayu error on updating document: \(err) ")
-					return
-				}
-				else {
-					self.goToEditProfilePage?()
-					print("Kayayu successfully update username")
-				}
-			}
 			
 			//Ganti di authentication
 			FirebaseAuth.Auth.auth().currentUser?.updateEmail(to: newEmail, completion: { errorMsg in
+				
 				guard let errorMsg = errorMsg else {
+					//Ganti di firestore
+					
+					let newEmailData = [ "email": "\(newEmail)" ]
+					
+					self.database.collection("users").document(self.getUserId()).updateData(newEmailData) { err in
+						if let err = err {
+							self.showAlert?(err.localizedDescription)
+							print("Kayayu error on updating document: \(err) ")
+							return
+						}
+						else {
+							self.goToEditProfilePage?()
+							print("Kayayu successfully update username")
+						}
+					}
+					
 					return
 				}
 				print("Kayayu Firebase failed to change email in authentication with errorMsg \(errorMsg)")
@@ -471,25 +485,26 @@ class ProfileViewModel {
 		if passIsValid == true,
 		   newPassword == newConfirmationPassword,
 		   oldPassword != newPassword {
-			
-			let newPasswordData = [ "password": "\(newPassword)" ]
-			
-			//Ganti di firestore
-			database.collection("users").document(getUserId()).updateData(newPasswordData) { err in
-				if let err = err {
-					self.showAlert?(err.localizedDescription)
-					print("Kayayu error on updating document: \(err) ")
-					return
-				}
-				else {
-					self.goToEditProfilePage?()
-					print("Kayayu successfully update username")
-				}
-			}
-			
+	
 			//Ganti di authentication
 			FirebaseAuth.Auth.auth().currentUser?.updatePassword(to: newPassword, completion: { errorMsg in
 				guard let errorMsg = errorMsg else {
+					
+					//Ganti di firestore
+					let newPasswordData = [ "password": "\(newPassword)" ]
+					
+					self.database.collection("users").document(self.getUserId()).updateData(newPasswordData) { err in
+						if let err = err {
+							self.showAlert?(err.localizedDescription)
+							print("Kayayu error on updating document: \(err) ")
+							return
+						}
+						else {
+							self.goToEditProfilePage?()
+							print("Kayayu successfully update username")
+						}
+					}
+					
 					return
 				}
 				print("Kayayu Firebase failed to change email in authentication with errorMsg \(errorMsg)")
