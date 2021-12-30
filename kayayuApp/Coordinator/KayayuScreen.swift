@@ -14,7 +14,7 @@ final class KayayuScreen {
 	var onNavigationEvent: ((NavigationEvent) -> Void)?
 	
 	enum NavigationEvent {
-		case onCreateTabBar
+		case onCreateTabBar(viewModel: AuthenticationViewModel)
 		case onOpenHomePage
 		case onOpenLandingPage
 		case onOpenLoginPage
@@ -88,7 +88,7 @@ final class KayayuScreen {
 				return
 			}
 			
-			self.onNavigationEvent?(.onCreateTabBar)
+			self.onNavigationEvent?(.onCreateTabBar(viewModel: viewModel))
 		}
 		controller.onOpenRegisterPage = { [weak self] in
 			guard let self = self else {
@@ -108,7 +108,7 @@ final class KayayuScreen {
 				return
 			}
 			
-			self.onNavigationEvent?(.onCreateTabBar)
+			self.onNavigationEvent?(.onCreateTabBar(viewModel: viewModel))
 		}
 		controller.onOpenLoginPage = { [weak self] in
 				guard let self = self else {

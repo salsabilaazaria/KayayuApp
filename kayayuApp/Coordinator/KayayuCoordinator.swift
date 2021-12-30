@@ -44,10 +44,9 @@ public final class KayayuCoordinator {
 			}
 			
 			switch navigationEvent {
-			case .onCreateTabBar:
+			case .onCreateTabBar(let authenticationViewModel):
 				DispatchQueue.main.async {
 					let homeViewModel = HomeViewModel()
-					let authenticationViewModel = AuthenticationViewModel()
 					let statsViewModel = StatsViewModel()
 					let controller = screen.makeTabBarViewController(homeViewModel: homeViewModel, statsViewModel: statsViewModel, profileViewModel: authenticationViewModel)
 					self.navigationController.pushViewController(controller, animated: true)
