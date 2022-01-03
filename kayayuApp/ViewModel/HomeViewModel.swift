@@ -91,10 +91,8 @@ class HomeViewModel {
                 print("Error get Transaction Data \(errorMsg)")
             }
             else {
-                var count = 0
                 var documentArray: [Transactions] = []
                 for document in documentSnapshot!.documents {
-                    count += 1
                     
                     do {
                         guard let trans = try document.data(as: Transactions.self) else {
@@ -106,7 +104,7 @@ class HomeViewModel {
                     } catch {
                         print(error)
                     }
-                    
+                    print("Transaction Data Specific Month \(documentArray)")
                 }
                 self.transactionsData.accept(documentArray)
             }

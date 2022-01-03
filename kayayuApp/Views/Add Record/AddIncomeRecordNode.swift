@@ -108,10 +108,12 @@ class AddIncomeRecordNode: ASDisplayNode {
 	}
 	
 	@objc func saveButtonTapped() {
+	
 		guard let category = ratio,
 			  let date = self.dateInputTextField.textView.text,
 			  let desc = self.descriptionInputTextField.textView.text,
-			  let amount = Float(self.amountInputTextField.textView.text) else {
+			  let amountString = self.amountInputTextField.textView.text,
+			  let amount = Float(amountString.replacingOccurrences(of: ".", with: "")) else {
 			return
 		}
 
