@@ -10,7 +10,7 @@ import AsyncDisplayKit
 
 class RegisterNode: ASDisplayNode {
 	
-	var onOpenHomePage: (() -> Void)?
+	var onCreateTabBar: (() -> Void)?
 	var onOpenLoginPage: (() -> Void)?
 	
 	private let viewModel: AuthenticationViewModel
@@ -92,8 +92,8 @@ class RegisterNode: ASDisplayNode {
 	}
 	
 	private func configureViewModel() {
-		viewModel.onOpenHomePage = {
-			self.onOpenHomePage?()
+		viewModel.onCreateTabBar = {
+			self.onCreateTabBar?()
 		}
 		
 		viewModel.showAlert = { errorMsg in

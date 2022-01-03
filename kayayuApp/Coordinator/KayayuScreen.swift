@@ -83,7 +83,7 @@ final class KayayuScreen {
 	
 	func makeLoginPageViewController(viewModel: AuthenticationViewModel) -> UIViewController {
 		let controller = LoginViewController(authenticationViewModel: viewModel)
-		controller.onOpenHomePage = { [weak self] in
+		controller.onCreateTabBar = { [weak self] in
 			guard let self = self else {
 				return
 			}
@@ -103,7 +103,7 @@ final class KayayuScreen {
 	
 	func makeRegisterPageViewController(viewModel: AuthenticationViewModel) -> UIViewController {
 		let controller = RegisterViewController(authenticationViewModel: viewModel)
-		controller.onOpenHomePage = { [weak self] in
+		controller.onCreateTabBar = { [weak self] in
 			guard let self = self else {
 				return
 			}

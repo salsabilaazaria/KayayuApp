@@ -12,7 +12,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 class AuthenticationViewModel {
-	var onOpenHomePage: (() -> Void)?
+	var onCreateTabBar: (() -> Void)?
 	var showAlert: ((String) -> Void)?
 	var email: String = ""
 	let database = Firestore.firestore()
@@ -42,7 +42,7 @@ class AuthenticationViewModel {
 				return
 			}
 			
-			self.onOpenHomePage?()
+			self.onCreateTabBar?()
 			print("KAYAYU Login Success")
 			
 			
@@ -108,7 +108,7 @@ class AuthenticationViewModel {
 				do {
 					try
 						self.database.collection("users").document(result.user.uid).setData(from: data)
-					self.onOpenHomePage?()
+					self.onCreateTabBar?()
 				} catch {
 					print("Error setting data to data firestore \(error)")
 				}

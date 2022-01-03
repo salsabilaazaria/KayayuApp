@@ -10,7 +10,7 @@ import AsyncDisplayKit
 
 class RegisterViewController: ASDKViewController<ASDisplayNode> {
 	
-	var onOpenHomePage: (() -> Void)?
+	var onCreateTabBar: (() -> Void)?
 	var onOpenLoginPage: (() -> Void)?
 	
 	let mainNode: RegisterNode?
@@ -24,8 +24,8 @@ class RegisterViewController: ASDKViewController<ASDisplayNode> {
 	}
 	
 	private func configureNode() {
-		mainNode?.onOpenHomePage = { [weak self] in
-			self?.onOpenHomePage?()
+		mainNode?.onCreateTabBar = { [weak self] in
+			self?.onCreateTabBar?()
 		}
 		mainNode?.onOpenLoginPage  = { [weak self] in
 			self?.onOpenLoginPage?()
