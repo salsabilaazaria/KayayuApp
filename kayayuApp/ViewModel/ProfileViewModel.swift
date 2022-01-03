@@ -142,7 +142,7 @@ class ProfileViewModel {
 	private func getRecurringSubsData () {
 		database.collection("recurringTransactions")
 			.whereField("user_id", isEqualTo: getUserId()).whereField("recurring_type", isEqualTo: "subscription")
-			.order(by: "end_billing_date", descending: true)
+			.order(by: "end_billing_date", descending: false)
 			.whereField("end_billing_date", isGreaterThan: self.calendarHelper.getEndDay())
 			.addSnapshotListener { (documentSnapshot, errorMsg) in
 				if let errorMsg = errorMsg {
@@ -171,7 +171,7 @@ class ProfileViewModel {
 	private func getRecurringInstlData () {
 		database.collection("recurringTransactions").whereField("user_id", isEqualTo: getUserId())
 			.whereField("recurring_type", isEqualTo: "installment")
-			.order(by: "end_billing_date", descending: true)
+			.order(by: "end_billing_date", descending: false)
 			.whereField("end_billing_date", isGreaterThan: self.calendarHelper.getEndDay())
 			.addSnapshotListener { (documentSnapshot, errorMsg) in
 				if let errorMsg = errorMsg {
