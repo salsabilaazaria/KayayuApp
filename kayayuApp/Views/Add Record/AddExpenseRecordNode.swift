@@ -43,6 +43,9 @@ class AddExpenseRecordNode: ASDisplayNode {
 	private let toolBar: UIToolbar = UIToolbar()
 	
 	private let spacingTitle: CGFloat = 8
+	private let horizontalSpace: CGFloat = 12
+	private let textContainerInset = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
+	
 	private let datePicker = UIDatePicker()
 	private let calendarHelper = CalendarHelper()
 	private var paymenTypeValue: BehaviorRelay<kayayuPaymentType> = BehaviorRelay<kayayuPaymentType>(value: .oneTime)
@@ -90,23 +93,24 @@ class AddExpenseRecordNode: ASDisplayNode {
 			case .oneTime:
 				elementArray.append(amount)
 			case .subscription:
-				elementArray.append(amount)
 				elementArray.append(createDurationSpec())
+				elementArray.append(amount)
 			case .installment:
 				let amountInterestSpec = ASStackLayoutSpec(direction: .horizontal,
-														   spacing: 12,
+														   spacing: horizontalSpace,
 														   justifyContent: .start,
 														   alignItems: .start,
 														   children: [totalAmount, interest])
-				elementArray.append(amountInterestSpec)
+		
 				let tenorRecurringTypeSpec = ASStackLayoutSpec(direction: .horizontal,
-														   spacing: 12,
+														   spacing: horizontalSpace,
 														   justifyContent: .start,
 														   alignItems: .center,
 														   children: [tenorSpec, recurringType])
 
 				tenorSpec.style.flexGrow = 1
 				elementArray.append(tenorRecurringTypeSpec)
+				elementArray.append(amountInterestSpec)
 			default:
 				break;
 		}
@@ -120,7 +124,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 		inputSpec.style.flexGrow = 1
 		
 		let saveButtonSpec = ASStackLayoutSpec(direction: .vertical,
-											   spacing: spacingTitle,
+											   spacing: spacingTitle*2,
 											   justifyContent: .end,
 											   alignItems: .end,
 											   children: [saveButton])
@@ -133,7 +137,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 		
 		mainSpec.style.preferredSize = CGSize(width: UIScreen.main.bounds.width, height:  UIScreen.main.bounds.height)
 		
-		let insetMainSpec = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 16, left: 16, bottom: 48, right: 16), child: mainSpec)
+		let insetMainSpec = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 16, left: 16, bottom: 32, right: 16), child: mainSpec)
 		
 		return insetMainSpec
 	}
@@ -370,7 +374,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 		descriptionInputTextField.layer.cornerRadius = kayayuSize.inputTextFieldCornerRadius
 		descriptionInputTextField.textView.inputAccessoryView = toolBar
 		descriptionInputTextField.textView.font = kayayuFont.inputTextFieldFont
-		descriptionInputTextField.textContainerInset = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
+		descriptionInputTextField.textContainerInset = textContainerInset
 	
 	}
 	
@@ -401,10 +405,14 @@ class AddExpenseRecordNode: ASDisplayNode {
 		
 		amountInputTextField.keyboardType = .numberPad
 		amountInputTextField.maximumLinesToDisplay = 1
-		amountInputTextField.style.preferredSize = kayayuSize.inputTextFieldSize
 		amountInputTextField.textView.inputAccessoryView = toolBar
 		amountInputTextField.textView.font = kayayuFont.inputTextFieldFont
 		amountInputTextField.textView.text = "0"
+		amountInputTextField.style.preferredSize = CGSize(width: UIScreen.main.bounds.width - 28 - 32, height: 30)
+		amountInputTextField.borderColor = kayayuColor.borderInputTextField.cgColor
+		amountInputTextField.layer.cornerRadius = kayayuSize.inputTextFieldCornerRadius
+		amountInputTextField.borderWidth = kayayuSize.kayayuInputTextFieldBorderWidth
+		amountInputTextField.textContainerInset = textContainerInset
 		amountInputTextField.textView.delegate = self
 		
 	}
@@ -414,6 +422,14 @@ class AddExpenseRecordNode: ASDisplayNode {
 		
 		let currceny = ASTextNode()
 		currceny.attributedText = NSAttributedString.semibold("Rp", 14, .black)
+		let description = ASTextNode()
+		description.attributedText = NSAttributedString.normal("Total amount before interest", 12, .black)
+		
+		let totalAmountTitleSpec = ASStackLayoutSpec(direction: .vertical,
+												spacing: spacingTitle/2,
+												justifyContent: .start,
+												alignItems: .start,
+												children: [totalAmountTitle, description])
 		
 		let totalAmountTextField = ASStackLayoutSpec(direction: .horizontal,
 												spacing: spacingTitle,
@@ -425,7 +441,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 										   spacing: spacingTitle,
 										   justifyContent: .start,
 										   alignItems: .start,
-										   children: [totalAmountTitle, totalAmountTextField])
+										   children: [totalAmountTitleSpec, totalAmountTextField])
 		
 		return totalAmountSpec
 	}
@@ -435,10 +451,14 @@ class AddExpenseRecordNode: ASDisplayNode {
 		
 		totalAmountInputTextField.keyboardType = .numberPad
 		totalAmountInputTextField.maximumLinesToDisplay = 1
-		totalAmountInputTextField.style.preferredSize = CGSize(width: UIScreen.main.bounds.width/2 - 60 - totalAmountTitle.style.preferredSize.width, height: kayayuSize.inputTextFieldSize.height)
+		totalAmountInputTextField.style.preferredSize = CGSize(width: UIScreen.main.bounds.width/2 - 60 - totalAmountTitle.style.preferredSize.width, height: 30)
 		totalAmountInputTextField.textView.inputAccessoryView = toolBar
 		totalAmountInputTextField.textView.font = kayayuFont.inputTextFieldFont
 		totalAmountInputTextField.textView.text = "0"
+		totalAmountInputTextField.borderColor = kayayuColor.borderInputTextField.cgColor
+		totalAmountInputTextField.layer.cornerRadius = kayayuSize.inputTextFieldCornerRadius
+		totalAmountInputTextField.borderWidth = kayayuSize.kayayuInputTextFieldBorderWidth
+		totalAmountInputTextField.textContainerInset = textContainerInset
 		totalAmountInputTextField.textView.delegate = self
 		
 	}
@@ -446,6 +466,15 @@ class AddExpenseRecordNode: ASDisplayNode {
 	private func createInterestInputSpec() -> ASLayoutSpec {
 		let percentage = ASTextNode()
 		percentage.attributedText = NSAttributedString.semibold("%", 14, .black)
+		
+		let description = ASTextNode()
+		description.attributedText = NSAttributedString.normal("Fixed-Interest Payment", 12, .black)
+		
+		let interestTitleSpec = ASStackLayoutSpec(direction: .vertical,
+												  spacing: spacingTitle/2,
+												  justifyContent: .start,
+												  alignItems: .start,
+												  children: [interestTitle, description])
 		
 		let interestTextField = ASStackLayoutSpec(direction: .horizontal,
 												spacing: spacingTitle,
@@ -457,7 +486,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 										   spacing: spacingTitle,
 										   justifyContent: .start,
 										   alignItems: .start,
-										   children: [interestTitle, interestTextField])
+										   children: [interestTitleSpec, interestTextField])
 		
 		return interestSpec
 	}
@@ -467,9 +496,13 @@ class AddExpenseRecordNode: ASDisplayNode {
 		
 		interestInputTextField.keyboardType = .numberPad
 		interestInputTextField.maximumLinesToDisplay = 1
-		interestInputTextField.style.preferredSize = CGSize(width: UIScreen.main.bounds.width/2 - 80 - interestTitle.calculatedSize.width, height: kayayuSize.inputTextFieldSize.height)
+		interestInputTextField.style.preferredSize = CGSize(width: UIScreen.main.bounds.width/2 - 80 - interestTitle.calculatedSize.width, height: 30)
 		interestInputTextField.textView.inputAccessoryView = toolBar
 		interestInputTextField.textView.font = kayayuFont.inputTextFieldFont
+		interestInputTextField.borderColor = kayayuColor.borderInputTextField.cgColor
+		interestInputTextField.layer.cornerRadius = kayayuSize.inputTextFieldCornerRadius
+		interestInputTextField.borderWidth = kayayuSize.kayayuInputTextFieldBorderWidth
+		interestInputTextField.textContainerInset = textContainerInset
 	}
 	
 	
@@ -490,12 +523,13 @@ class AddExpenseRecordNode: ASDisplayNode {
 		
 		tenorInputTextField.keyboardType = .numberPad
 		tenorInputTextField.maximumLinesToDisplay = 1
-		tenorInputTextField.style.preferredSize = CGSize(width: UIScreen.main.bounds.width/2 - 60 - tenorInputTextField.style.preferredSize.width, height: 30)
+		tenorInputTextField.style.preferredSize = CGSize(width: UIScreen.main.bounds.width/2 - 32, height: 30)
 		tenorInputTextField.textView.inputAccessoryView = toolBar
 		tenorInputTextField.textView.font = kayayuFont.inputTextFieldFont
 		tenorInputTextField.borderColor = kayayuColor.borderInputTextField.cgColor
 		tenorInputTextField.layer.cornerRadius = kayayuSize.inputTextFieldCornerRadius
 		tenorInputTextField.borderWidth = kayayuSize.kayayuInputTextFieldBorderWidth
+		tenorInputTextField.textContainerInset = textContainerInset
 	}
 	
 	private func createRecurringTypeSpec() -> ASLayoutSpec{

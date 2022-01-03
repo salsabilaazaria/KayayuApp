@@ -28,6 +28,7 @@ class AddIncomeRecordNode: ASDisplayNode {
 	private let datePicker = UIDatePicker()
 	
 	private let spacingTitle: CGFloat = 8
+	private let textContainerInset = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
 
 	private let calendarHelper = CalendarHelper()
 	private let numberHelper = NumberHelper()
@@ -217,7 +218,7 @@ class AddIncomeRecordNode: ASDisplayNode {
 		descriptionInputTextField.layer.cornerRadius = kayayuSize.inputTextFieldCornerRadius
 		descriptionInputTextField.textView.inputAccessoryView = toolBar
 		descriptionInputTextField.textView.font = kayayuFont.inputTextFieldFont
-		descriptionInputTextField.textContainerInset = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
+		descriptionInputTextField.textContainerInset = textContainerInset
 	}
 	
 	private func createAmountInputSpec() -> ASLayoutSpec {
@@ -250,6 +251,11 @@ class AddIncomeRecordNode: ASDisplayNode {
 		amountInputTextField.textView.inputAccessoryView = toolBar
 		amountInputTextField.textView.font = kayayuFont.inputTextFieldFont
 		amountInputTextField.textView.delegate = self
+		amountInputTextField.style.preferredSize = CGSize(width: UIScreen.main.bounds.width - 28 - 32, height: 30)
+		amountInputTextField.borderColor = kayayuColor.borderInputTextField.cgColor
+		amountInputTextField.layer.cornerRadius = kayayuSize.inputTextFieldCornerRadius
+		amountInputTextField.borderWidth = kayayuSize.kayayuInputTextFieldBorderWidth
+		amountInputTextField.textContainerInset = textContainerInset
 		
 		amountInputTextField.textView.text = "0"
 	}

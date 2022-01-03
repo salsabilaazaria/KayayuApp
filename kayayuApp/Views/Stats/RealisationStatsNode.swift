@@ -145,7 +145,7 @@ class RealisationStatsNode: ASDisplayNode {
 			return
 		}
 		
-		let savingsRatio = savingsTransaction/savingsBalance
+		let savingsRatio = 1 - savingsTransaction/savingsBalance
 		
 		var savingsText: String
 		if savingsTransaction == 0 {
@@ -154,7 +154,7 @@ class RealisationStatsNode: ASDisplayNode {
 			savingsText = "\(numberHelper.floatToIdFormat(beforeFormatted: savingsTransaction)) Used"
 		}
 		
-		savingsSummary = createRatioSummarySpec(category: kayayuRatioTitle.savings.rawValue, text: savingsText, ratio: savingsRatio, progressColor: kayayuColor.savingsDark, baseColor: kayayuColor.savingsLight)
+		savingsSummary = createRatioSummarySpec(category: kayayuRatioTitle.savings.rawValue, text: savingsText, ratio: savingsRatio, progressColor: kayayuColor.savingsLight, baseColor: kayayuColor.savingsDark)
 	
 	
 	}
@@ -231,8 +231,8 @@ class RealisationStatsNode: ASDisplayNode {
 
 	private func configureProgressBar(ratio: Float, progressColor: UIColor, baseColor: UIColor) -> ASDisplayNode {
 		
-		 let progressBarHeight: CGFloat = 20
-	  let progressBarWidth: CGFloat = UIScreen.main.bounds.width - 110
+		let progressBarHeight: CGFloat = 20
+		let progressBarWidth: CGFloat = UIScreen.main.bounds.width - 110
 		
 		let progressBarNode: ASDisplayNode = ASDisplayNode()
 		let progressBar: UIProgressView = UIProgressView()
@@ -247,7 +247,7 @@ class RealisationStatsNode: ASDisplayNode {
 		progressBarNode.style.preferredSize = CGSize(width: progressBarWidth, height: progressBarHeight)
 		
 		return progressBarNode
-	
+		
 		
 	}
 	
