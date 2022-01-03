@@ -112,7 +112,7 @@ class TransactionCellNode: ASCellNode {
 	}
 	
 	private func configureRatio() {
-		guard let ratioString = transactionData.category else {
+		guard let ratioString = transactionData.category?.capitalized else {
 			return
 		}
 		ratio.attributedText = NSAttributedString.normal(ratioString, 14, .black)
