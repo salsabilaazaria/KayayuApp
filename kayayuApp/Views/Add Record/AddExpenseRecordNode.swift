@@ -189,7 +189,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 		case .installment:
 			guard let totalAmountString = self.totalAmountInputTextField.textView.text,
 				  let totalAmount = Float(totalAmountString.replacingOccurrences(of: ".", with: "")),
-				  let interest = Int(self.interestInputTextField.textView.text),
+				  let interest = Float(self.interestInputTextField.textView.text),
 				  let tenor = Int(self.tenorInputTextField.textView.text),
 				  let recurringType = self.recurringTypeString else {
 				return
@@ -201,7 +201,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 												tenor: tenor,
 												category: category,
 												description: desc,
-												interest: interest)
+                                                interest: interest)
 		default:
 			break
 			
