@@ -9,15 +9,21 @@ import Foundation
 import AsyncDisplayKit
 
 class AddRecordeNode: ASDisplayNode {
+	var onOpenHomePage: (() -> Void)?
+	
 	private let incomeButton: ASButtonNode = ASButtonNode()
 	private let expenseButton: ASButtonNode = ASButtonNode()
-	private let incomeNode: AddIncomeRecordNode = AddIncomeRecordNode()
-	private let expenseNode: AddExpenseRecordNode = AddExpenseRecordNode()
+	private let incomeNode: AddIncomeRecordNode
+	private let expenseNode: AddExpenseRecordNode
 	
 	private let buttonSize = CGSize(width: UIScreen.main.bounds.width/2, height: kayayuSize.kayayuBarHeight)
 	private var goToIncomePage: Bool = false
+	private let viewModel: HomeViewModel
 
-	override init() {
+	init(viewModel: HomeViewModel) {
+		self.viewModel = viewModel
+		self.incomeNode = AddIncomeRecordNode(viewModel: viewModel)
+		self.expenseNode = AddExpenseRecordNode(viewModel: viewModel)
 		super.init()
 		let nodeSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 200)
 		incomeNode.style.preferredSize = nodeSize
@@ -25,6 +31,7 @@ class AddRecordeNode: ASDisplayNode {
 		
 		configureIncomeButton()
 		configureExpenseButton()
+		configureNode()
 
 		automaticallyManagesSubnodes = true
 		
@@ -43,8 +50,12 @@ class AddRecordeNode: ASDisplayNode {
 		var statsElementArray: [ASLayoutElement] = [buttonStack]
 		
 		if goToIncomePage {
+			incomeButton.setAttributedTitle(NSAttributedString.semibold("INCOME", 16, .systemGreen), for: .normal)
+			expenseButton.setAttributedTitle(NSAttributedString.semibold("EXPENSE", 16, .black), for: .normal)
 			statsElementArray.append(incomeNode)
 		} else {
+			incomeButton.setAttributedTitle(NSAttributedString.semibold("INCOME", 16, .black), for: .normal)
+			expenseButton.setAttributedTitle(NSAttributedString.semibold("EXPENSE", 16, .systemRed), for: .normal)
 			statsElementArray.append(expenseNode)
 		}
 		
@@ -61,18 +72,27 @@ class AddRecordeNode: ASDisplayNode {
 		self.setNeedsLayout()
 		self.layoutIfNeeded()
 	}
+	
+	private func configureNode() {
+		incomeNode.onOpenHomePage = { [weak self] in
+			self?.onOpenHomePage?()
+		}
+		
+		expenseNode.onOpenHomePage = { [weak self] in
+			self?.onOpenHomePage?()
+		}
+	}
 
 	private func configureIncomeButton() {
 		incomeButton.style.preferredSize = buttonSize
 		incomeButton.backgroundColor = .white
 		incomeButton.cornerRadius = 5
-		incomeButton.borderWidth = kayayuSize.kayayuBorderWidth
+		incomeButton.borderWidth = kayayuSize.kayayuBigButtonBorderWidth
 		incomeButton.borderColor = UIColor.black.cgColor
-		incomeButton.setAttributedTitle(NSAttributedString.semibold("INCOME", 16, .black), for: .normal)
-		incomeButton.addTarget(self, action: #selector(planButtonTapped), forControlEvents: .touchUpInside)
+		incomeButton.addTarget(self, action: #selector(incomeButtonTapped), forControlEvents: .touchUpInside)
 	}
 	
-	@objc func planButtonTapped(sender: ASButtonNode) {
+	@objc func incomeButtonTapped(sender: ASButtonNode) {
 		goToIncomePage = true
 		self.reloadUI()
 		print("Plan")
@@ -82,7 +102,7 @@ class AddRecordeNode: ASDisplayNode {
 		expenseButton.style.preferredSize = buttonSize
 		expenseButton.backgroundColor = .white
 		expenseButton.cornerRadius = 5
-		expenseButton.borderWidth = kayayuSize.kayayuBorderWidth
+		expenseButton.borderWidth = kayayuSize.kayayuBigButtonBorderWidth
 		expenseButton.borderColor = UIColor.black.cgColor
 		expenseButton.setAttributedTitle(NSAttributedString.semibold("EXPENSE", 16, .black), for: .normal)
 		expenseButton.addTarget(self, action: #selector(realisationButtonTapped), forControlEvents: .touchUpInside)

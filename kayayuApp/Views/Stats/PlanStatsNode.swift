@@ -10,54 +10,56 @@ import AsyncDisplayKit
 import Charts
 
 class PlanStatsNode: ASDisplayNode {
-	private let statsDateHeader = StatsDateHeader()
+	var changeMonthStats: ((Date) -> Void)?
 	
 	private let planPieChart: PieChartView = PieChartView()
 	private let planPieChartNode: ASDisplayNode = ASDisplayNode()
-	private let planTitle: ASTextNode = ASTextNode()
 	
 	private let ratioTitle: ASTextNode = ASTextNode()
 	private var needsSummary: SummaryHeader = SummaryHeader()
 	private var wantsSummary: SummaryHeader = SummaryHeader()
 	private var savingsSummary: SummaryHeader = SummaryHeader()
 	
-	override init() {
-		
+	private let numberHelper: NumberHelper = NumberHelper()
+	
+	private let viewModel: StatsViewModel
+	
+	init(viewModel: StatsViewModel) {
+		self.viewModel = viewModel
 		super.init()
 		automaticallyManagesSubnodes = true
 		backgroundColor = .white
 		
-		configurePlanPieChartNode()
-		configurePlanPieChart()
-		configurePlanTitle()
 		configureRatioTitle()
-		configureNeedsSummary()
-		configureWantsSummary()
-		configureSavingsSummary()
+
 	}
 	
+	 func reloadUI(){
+		self.setNeedsLayout()
+		self.layoutIfNeeded()
+	}
+	
+	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
+		configurePlanPieChartNode()
+		configurePlanPieChart()
 		let summaryStack = createRatioSummarySpec()
 
 		let pieChartStack = ASStackLayoutSpec(direction: .vertical,
 											  spacing: 10,
 												 justifyContent: .center,
 												 alignItems: .center,
-												 children: [planTitle, planPieChartNode])
+												 children: [planPieChartNode])
 		
 		
 		let mainStack = ASStackLayoutSpec(direction: .vertical,
 										  spacing: 10,
 												justifyContent: .start,
 												alignItems: .center,
-												children: [statsDateHeader, pieChartStack, summaryStack])
+												children: [pieChartStack, summaryStack])
 		
 		return mainStack
 		
-	}
-	
-	private func configurePlanTitle() {
-		planTitle.attributedText = NSAttributedString.bold("PLAN", 16, .black)
 	}
 	
 	private func configurePlanPieChartNode() {
@@ -74,20 +76,31 @@ class PlanStatsNode: ASDisplayNode {
 		
 		planPieChart.legend.enabled = false
 		
-		//data dummy
-		let entries: [PieChartDataEntry] = [PieChartDataEntry(value: 10000, label: "First"),
-											PieChartDataEntry(value: 2000, label: "second"),
-											PieChartDataEntry(value: 30000, label: "third")]
+		guard let needsBalance = viewModel.needsTotalIncome.value,
+			  let wantsBalance = viewModel.wantsTotalIncome.value,
+			  let savingsBalance = viewModel.savingsTotalIncome.value else {
+			return
+		}
+
+		let entries: [PieChartDataEntry] = [PieChartDataEntry(value: Double(needsBalance), label: "\(kayayuRatioTitle.needs.rawValue)"),
+											PieChartDataEntry(value: Double(wantsBalance), label: "\(kayayuRatioTitle.wants.rawValue)"),
+											PieChartDataEntry(value: Double(savingsBalance), label: "\(kayayuRatioTitle.savings.rawValue)")]
 		
-		
-		let dataSet = PieChartDataSet(entries: entries, label: "label")
+		let dataSet = PieChartDataSet(entries: entries, label: "")
 		dataSet.colors = kayayuColor.pieCharArrColor
 		planPieChart.data = PieChartData(dataSet: dataSet)
+
+
 		
 	}
 	
 	
 	private func createRatioSummarySpec() -> ASLayoutSpec {
+		
+		configureNeedsSummary()
+		configureWantsSummary()
+		configureSavingsSummary()
+		
 		let summaryStack = ASStackLayoutSpec(direction: .vertical,
 											 spacing: 10,
 											 justifyContent: .center,
@@ -107,15 +120,27 @@ class PlanStatsNode: ASDisplayNode {
 	}
 	
 	private func configureNeedsSummary() {
-		needsSummary = SummaryHeader(summary: .needs, subtitleText: "RpNEEDS")
+		guard let needsBalance = viewModel.needsTotalIncome.value else {
+			needsSummary = SummaryHeader(summary: .needs, subtitleText: "You haven't input any data")
+			return
+		}
+		needsSummary = SummaryHeader(summary: .needs, subtitleText: "\(numberHelper.floatToIdFormat(beforeFormatted: needsBalance))")
 	}
 	
 	private func configureWantsSummary() {
-		wantsSummary = SummaryHeader(summary: .wants, subtitleText: "RpWANTS")
+		guard let wantsBalance = viewModel.wantsTotalIncome.value else {
+			wantsSummary  = SummaryHeader(summary: .wants, subtitleText: "You haven't input any data")
+			return
+		}
+		wantsSummary = SummaryHeader(summary: .wants, subtitleText: "\(numberHelper.floatToIdFormat(beforeFormatted: wantsBalance))")
 	}
 	
 	private func configureSavingsSummary() {
-		savingsSummary = SummaryHeader(summary: .savings, subtitleText: "RpSAVINGS")
+		guard let savingsBalance = viewModel.savingsTotalIncome.value else {
+			savingsSummary  = SummaryHeader(summary: .savings, subtitleText: "You haven't input any data")
+			return
+		}
+		savingsSummary = SummaryHeader(summary: .savings, subtitleText: "\(numberHelper.floatToIdFormat(beforeFormatted: savingsBalance))")
 	}
 	
 	

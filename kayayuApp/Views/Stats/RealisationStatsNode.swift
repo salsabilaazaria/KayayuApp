@@ -1,5 +1,5 @@
 //
-//  RealisationStatsNode.swift
+//  ExpenseStatsNode.swift
 //  kayayuApp
 //
 //  Created by Salsabila Azaria on 11/23/21.
@@ -10,45 +10,48 @@ import AsyncDisplayKit
 import Charts
 
 class RealisationStatsNode: ASDisplayNode {
-
-	private let statsDateHeader = StatsDateHeader()
+	var changeMonthStats: ((Date) -> Void)?
 	
-	private let planPieChart: PieChartView = PieChartView()
-	private let planPieChartNode: ASDisplayNode = ASDisplayNode()
-	private let planTitle: ASTextNode = ASTextNode()
+	private let realisationPieChart: PieChartView = PieChartView()
+	private let realisationPieChartNode: ASDisplayNode = ASDisplayNode()
 	
 	private let ratioTitle: ASTextNode = ASTextNode()
-	private var balanceSummary: SummaryHeader = SummaryHeader()
-	private var needsSummary: SummaryHeader = SummaryHeader()
-	private var wantsSummary: SummaryHeader = SummaryHeader()
-	private var savingsSummary: SummaryHeader = SummaryHeader()
+	private var needsSummary: ASLayoutSpec = ASLayoutSpec()
+	private var wantsSummary: ASLayoutSpec = ASLayoutSpec()
+	private var savingsSummary: ASLayoutSpec = ASLayoutSpec()
 	
-	private var scrollNode: ASScrollNode = ASScrollNode()
+//	private var scrollNode: ASScrollNode = ASScrollNode()
 	
-	override init() {
-		
+	private let numberHelper: NumberHelper = NumberHelper()
+	private let viewModel: StatsViewModel
+	
+	init(viewModel: StatsViewModel) {
+		self.viewModel = viewModel
 		super.init()
 		automaticallyManagesSubnodes = true
 		backgroundColor = .white
-		configureScrollNode()
-		configurePlanPieChartNode()
-		configurePlanPieChart()
-		configurePlanTitle()
+	
 		configureRatioTitle()
-		configureBalanceSummary()
-		configureNeedsSummary()
-		configureWantsSummary()
-		configureSavingsSummary()
 		
 	}
 	
+	 func reloadUI(){
+		self.setNeedsLayout()
+		self.layoutIfNeeded()
+	}
+	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
+		configurePlanPieChart()
+		configurePlanPieChartNode()
+		configureNeedsSummary()
+		configureWantsSummary()
+		configureSavingsSummary()
 		
 		let pieChartStack = ASStackLayoutSpec(direction: .vertical,
 											  spacing: 10,
 											  justifyContent: .center,
 											  alignItems: .center,
-											  children: [planTitle, planPieChartNode])
+											  children: [realisationPieChartNode])
 		
 		let summaryTitle = ASStackLayoutSpec(direction: .vertical,
 											 spacing: 10,
@@ -63,105 +66,190 @@ class RealisationStatsNode: ASDisplayNode {
 										  spacing: 10,
 										  justifyContent: .start,
 										  alignItems: .center,
-										  children: [statsDateHeader, pieChartStack, balanceSummary, summaryTitleInset, scrollNode])
+										  children: [pieChartStack, summaryTitleInset, createAllRatioSummarySpec()])
 		
 		
 		return mainStack
 		
 	}
 	
-	private func configurePlanTitle() {
-		planTitle.attributedText = NSAttributedString.bold("REALISATION", 16, .black)
-	}
-	
 	private func configurePlanPieChartNode() {
-		planPieChart.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
-		planPieChartNode.view.addSubview(planPieChart)
-		planPieChartNode.style.preferredSize = CGSize(width: 200, height: 200)
+		realisationPieChart.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+		realisationPieChartNode.view.addSubview(realisationPieChart)
+		realisationPieChartNode.style.preferredSize = CGSize(width: 200, height: 200)
 	}
 	
 	private func configurePlanPieChart() {
-		planPieChart.chartDescription?.enabled = false
-		planPieChart.drawHoleEnabled = false
-		planPieChart.rotationAngle = 0
-		planPieChart.rotationEnabled = false
+		realisationPieChart.chartDescription?.enabled = false
+		realisationPieChart.drawHoleEnabled = false
+		realisationPieChart.rotationAngle = 0
+		realisationPieChart.rotationEnabled = false
 		
-		planPieChart.legend.enabled = false
+		realisationPieChart.legend.enabled = false
 		
-		//data dummy
-		let entries: [PieChartDataEntry] = [PieChartDataEntry(value: 10000, label: "First"),
-											PieChartDataEntry(value: 2000, label: "second"),
-											PieChartDataEntry(value: 30000, label: "third")]
+		guard let needsAmount = viewModel.needsTotalExpense.value,
+			  let wantsAmount = viewModel.wantsTotalExpense.value,
+			  let savingsIncome = viewModel.savingsTotalIncome.value,
+			  let savingsExpense = viewModel.savingsTotalExpense.value else {
+			return
+		}
 		
+		let savingsAmount = savingsIncome - savingsExpense
+		let entries: [PieChartDataEntry] = [PieChartDataEntry(value: Double(needsAmount), label: "\(kayayuRatioTitle.needs.rawValue)"),
+											PieChartDataEntry(value: Double(wantsAmount), label: "\(kayayuRatioTitle.wants.rawValue)"),
+											PieChartDataEntry(value: Double(savingsAmount), label: "\(kayayuRatioTitle.savings.rawValue)")]
+
 		
 		let dataSet = PieChartDataSet(entries: entries, label: "label")
+		
 		dataSet.colors = kayayuColor.pieCharArrColor
-		planPieChart.data = PieChartData(dataSet: dataSet)
+		realisationPieChart.data = PieChartData(dataSet: dataSet)
 		
-	}
-	
-	
-	private func configureScrollNode() {
-		scrollNode.automaticallyManagesSubnodes = true
-		scrollNode.automaticallyManagesContentSize = true
-		scrollNode.scrollableDirections = [.up, .down]
-		scrollNode.style.flexGrow = 1.0
-		scrollNode.style.flexShrink = 1.0
-		scrollNode.view.bounces = true
-		scrollNode.view.showsVerticalScrollIndicator = false
-		scrollNode.view.isScrollEnabled = true
-		scrollNode.layoutSpecBlock = { [weak self] _, constrainedSize in
-			print("scrollnode")
-			return(self?.createScrollNode(constrainedSize) ?? ASLayoutSpec())
-			
-		}
-	}
-	
-	private func createScrollNode(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-		let ratioSummary = createRatioSummarySpec()
-		let mainStack = ASStackLayoutSpec(direction: .vertical,
-										  spacing: 0,
-										  justifyContent: .center,
-										  alignItems: .stretch,
-										  children: [ratioSummary])
-		
-		let inset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0), child: mainStack)
-		return inset
-	}
-	
-	private func createRatioSummarySpec() -> ASLayoutSpec {
-		
-		let summaryRatioSpec = ASStackLayoutSpec(direction: .vertical,
-												  spacing: 10,
-												  justifyContent: .start,
-												  alignItems: .start,
-												  children: [needsSummary, wantsSummary, savingsSummary])
-		
-		
-		return summaryRatioSpec
 	}
 	
 	private func configureRatioTitle() {
 		ratioTitle.attributedText = NSAttributedString.bold("Summary", 14, kayayuColor.yellow)
 	}
 	
-	private func configureBalanceSummary() {
-		balanceSummary = SummaryHeader(summary: .balance, subtitleText: "Rp1.000.000")
-	}
-	
 	private func configureNeedsSummary() {
-		needsSummary = SummaryHeader(summary: .needs, ratio: 0.3, progressColor: kayayuColor.needsLight, baseColor: kayayuColor.needsDark, progressBarText: "RpXX.XXX.XXX Remaining")
+		let needsRatio = viewModel.calculateNeedsProgressBarRatio()
+		guard let needsTransaction = viewModel.needsTotalExpense.value,
+			  let needsBalance = viewModel.needsTotalIncome.value else {
+			return
+		}
+		let needsRemaining = needsBalance - needsTransaction
+		let needsText = "\(self.numberHelper.floatToIdFormat(beforeFormatted: needsRemaining)) Remaining"
+		
+		needsSummary =  createRatioSummarySpec(category: kayayuRatioTitle.needs.rawValue, text: needsText, ratio: needsRatio, progressColor: kayayuColor.needsLight, baseColor: kayayuColor.needsDark)
+
 	}
 	
 	private func configureWantsSummary() {
-		wantsSummary = SummaryHeader(summary: .wants, ratio: 0.3, progressColor: kayayuColor.wantsLight, baseColor: kayayuColor.wantsDark, progressBarText: "RpXX.XXX.XXX Remaining")
+		
+		guard let wantsTransaction = viewModel.wantsTotalExpense.value,
+			  let wantsBalance = viewModel.wantsTotalIncome.value else {
+			return
+		}
+		
+		let wantsRatio = wantsTransaction/wantsBalance
+		let remainingWants = wantsBalance - wantsTransaction
+		let wantsText = "\(numberHelper.floatToIdFormat(beforeFormatted: remainingWants)) Remaining"
+
+		wantsSummary =  createRatioSummarySpec(category: kayayuRatioTitle.wants.rawValue, text: wantsText, ratio: wantsRatio, progressColor: kayayuColor.wantsLight, baseColor: kayayuColor.wantsDark)
 	}
 	
 	private func configureSavingsSummary() {
-		savingsSummary = SummaryHeader(summary: .savings, ratio: 0.3, progressColor: kayayuColor.savingsLight, baseColor: kayayuColor.savingsDark, progressBarText: "RpXX.XXX.XXX Remaining")
+	
+		guard let savingsTransaction = viewModel.savingsTotalExpense.value,
+			  let savingsBalance = viewModel.savingsTotalIncome.value else {
+			return
+		}
+		
+		let savingsRatio = 1 - savingsTransaction/savingsBalance
+		
+		var savingsText: String
+		if savingsTransaction == 0 {
+			savingsText = "\(numberHelper.floatToIdFormat(beforeFormatted: savingsBalance)) Saved"
+		} else {
+			savingsText = "\(numberHelper.floatToIdFormat(beforeFormatted: savingsTransaction)) Used"
+		}
+		
+		savingsSummary = createRatioSummarySpec(category: kayayuRatioTitle.savings.rawValue, text: savingsText, ratio: savingsRatio, progressColor: kayayuColor.savingsLight, baseColor: kayayuColor.savingsDark)
+	
+	
 	}
 	
+	private func createAllRatioSummarySpec() -> ASLayoutSpec {
+		let summaryRatioSpec = ASStackLayoutSpec(direction: .vertical,
+												  spacing: 10,
+												  justifyContent: .start,
+												  alignItems: .start,
+												  children: [needsSummary,wantsSummary,savingsSummary])
+		
+		summaryRatioSpec.style.flexGrow = 1.0
+		summaryRatioSpec.style.flexShrink = 1.0
+
+
+		return summaryRatioSpec
 	
+	}
+	
+	private func createRatioSummarySpec(category: String, text: String, ratio: Float, progressColor: UIColor, baseColor: UIColor) -> ASLayoutSpec {
+		let progressBarText = ASTextNode()
+		progressBarText.attributedText = NSAttributedString.normal(text, 9, .black)
+		
+		let progressBarNode = configureProgressBar(ratio: ratio, progressColor: progressColor, baseColor: baseColor)
+		let text = ASCenterLayoutSpec(centeringOptions: .X, sizingOptions: .minimumXY, child: progressBarText)
+		let progressBarOverlayText = ASOverlayLayoutSpec(child: progressBarNode, overlay: text)
+		
+		let icon: ASImageNode = ASImageNode()
+		icon.image = UIImage(named: "\(category.lowercased())Icon.png")
+		icon.style.preferredSize = CGSize(width: 40, height: 40)
+		
+		let title: ASTextNode = ASTextNode()
+		title.attributedText = NSAttributedString.bold("\(category.uppercased())", 16, .black)
+		
+		let elementArray: [ASLayoutElement] = [title,progressBarOverlayText]
+		
+		
+		let elementSpec = ASStackLayoutSpec(direction: .vertical,
+											spacing: 6,
+											justifyContent: .center,
+											alignItems: .start,
+											children: elementArray)
+		
+		
+		let elementSpecCenter = ASCenterLayoutSpec(centeringOptions: .Y,
+												  sizingOptions: .minimumXY,
+												  child: elementSpec)
+		
+		let horizontalSpec = ASStackLayoutSpec(direction: .horizontal,
+											   spacing: 8,
+											   justifyContent: .start,
+											   alignItems: .center,
+											   children: [icon, elementSpecCenter])
+		let horizontalSpecInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10), child: horizontalSpec)
+		
+		
+		
+		let backgroundNode = ASDisplayNode()
+		backgroundNode.backgroundColor = .white
+		backgroundNode.layer.borderWidth = 0.5
+		backgroundNode.borderColor = UIColor.gray.cgColor
+		backgroundNode.cornerRadius = 12.0
+		backgroundNode.style.preferredSize =  CGSize(width: UIScreen.main.bounds.width, height: 80)
+		
+		let ratioSummarySpec = ASOverlayLayoutSpec(child: backgroundNode, overlay: horizontalSpecInset)
+		ratioSummarySpec.style.preferredSize =  CGSize(width: UIScreen.main.bounds.width, height: 80)
+		
+		let ratioSummaryInsetSpec = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16), child: ratioSummarySpec)
+	
+		return ratioSummaryInsetSpec
+		
+	}
+	
+
+	private func configureProgressBar(ratio: Float, progressColor: UIColor, baseColor: UIColor) -> ASDisplayNode {
+		
+		let progressBarHeight: CGFloat = 20
+		let progressBarWidth: CGFloat = UIScreen.main.bounds.width - 110
+		
+		let progressBarNode: ASDisplayNode = ASDisplayNode()
+		let progressBar: UIProgressView = UIProgressView()
+		progressBar.frame = CGRect(x: 0, y: 3, width:progressBarWidth, height: progressBarHeight)
+		progressBar.layer.cornerRadius = 20.0
+		progressBar.progressTintColor = progressColor
+		progressBar.trackTintColor = baseColor
+		progressBar.progress = ratio
+		progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 3)
+		
+		progressBarNode.view.addSubview(progressBar)
+		progressBarNode.style.preferredSize = CGSize(width: progressBarWidth, height: progressBarHeight)
+		
+		return progressBarNode
+		
+		
+	}
 	
 }
 

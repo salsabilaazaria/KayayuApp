@@ -22,20 +22,15 @@ class SummaryHeader: ASCellNode {
 	private let icon: ASImageNode = ASImageNode()
 	private let title: ASTextNode = ASTextNode()
 	private let subtitle: ASTextNode = ASTextNode()
-	private let progressBarText: ASTextNode = ASTextNode()
-	private let progressBarNode: ASDisplayNode = ASDisplayNode()
+
 	private var subtitleText: String
 	private var summary: summary
 	
-	private let createProgressBar: Bool
-	private let progressBarHeight: CGFloat = 20
-	private let progressBarWidth: CGFloat = UIScreen.main.bounds.width - 110
-	private let nodeSize = CGSize(width: UIScreen.main.bounds.width - 40, height: 80)
+	private let nodeSize = CGSize(width: UIScreen.main.bounds.width - 32, height: 80)
 	
 	init(summary: summary = .balance, subtitleText: String = "") {
 		self.summary = summary
 		self.subtitleText = subtitleText
-		self.createProgressBar = false
 		
 		super.init()
 		configureNodeBorder()
@@ -46,36 +41,9 @@ class SummaryHeader: ASCellNode {
 		automaticallyManagesSubnodes = true
 	}
 	
-	init(summary: summary, ratio: Float, progressColor: UIColor, baseColor: UIColor, progressBarText: String) {
-		
-		self.summary = summary
-		self.subtitleText = ""
-		self.createProgressBar = true
-		super.init()
-		
-		configureNodeBorder()
-		configureIcon()
-		configureTitle()
-		configureProgressBarText(text: progressBarText)
-		configureProgressBar(ratio: ratio, progressColor: progressColor, baseColor: baseColor)
-		
-		automaticallyManagesSubnodes = true
-	}
-	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
 		
-		var elementArray: [ASLayoutElement] = [title]
-		
-		if !createProgressBar {
-			elementArray.append(subtitle)
-			
-		} else {
-			let text = ASCenterLayoutSpec(centeringOptions: .X, sizingOptions: .minimumXY, child: progressBarText)
-			let progressBarOverlayText = ASOverlayLayoutSpec(child: progressBarNode, overlay: text)
-			elementArray.append(progressBarOverlayText)
-			
-		}
-		
+		let elementArray: [ASLayoutElement] = [title,subtitle]
 		
 		let elementSpec = ASStackLayoutSpec(direction: .vertical,
 											spacing: 6,
@@ -119,23 +87,6 @@ class SummaryHeader: ASCellNode {
 	
 	private func configureSubtitle() {
 		subtitle.attributedText = NSAttributedString.normal(subtitleText, 14, .black)
-	}
-	
-	private func configureProgressBarText(text: String) {
-		progressBarText.attributedText = NSAttributedString.normal(text, 9, .black)
-	}
-	
-	private func configureProgressBar(ratio: Float, progressColor: UIColor, baseColor: UIColor) {
-		let progressBar: UIProgressView = UIProgressView()
-		progressBar.frame = CGRect(x: 0, y: 3, width:progressBarWidth, height: progressBarHeight)
-		progressBar.layer.cornerRadius = 20.0
-		progressBar.progressTintColor = progressColor
-		progressBar.trackTintColor = baseColor
-		progressBar.progress = ratio
-		progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 3)
-		
-		progressBarNode.view.addSubview(progressBar)
-		progressBarNode.style.preferredSize = CGSize(width: progressBarWidth, height: progressBarHeight)
 	}
 	
 }

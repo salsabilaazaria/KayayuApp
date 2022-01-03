@@ -26,16 +26,24 @@ struct Transactions: Codable {
     var income_flag: Bool?
     var transaction_date: Date?
     var description: String?
-    var reccuring_flag: Bool?
+    var recurring_flag: Bool?
     var amount: Float?
+}
+
+struct TransactionDateDictionary {
+	var date: DateComponents?
+	var transaction: [Transactions]?
 }
 
 struct RecurringTransactions: Codable {
     var recurring_id:String = UUID().uuidString
+    var user_id:String?
+    var description: String?
     var recurring_type:String?
     var total_amount: Float?
     var billing_type: String?
-    var start_billing_date: String?
+    var start_billing_date: Date?
+    var end_billing_date: Date?
     var tenor: Int?
     var interest: Float?
 }
@@ -45,7 +53,8 @@ struct TransactionDetail: Codable {
     var transaction_id:String?
     var user_id:String?
     var recurring_id: String?
-    var number_of_installment: String?
+    var billing_date: Date?
+    var number_of_recurring: Int?
     var amount: Float?
     var amount_paid: Float?
     var amount_havent_paid: Float?

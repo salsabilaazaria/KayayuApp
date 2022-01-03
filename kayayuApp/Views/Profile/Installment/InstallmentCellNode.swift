@@ -18,8 +18,20 @@ class InstallmentCellNode: ASCellNode {
 	private let remainingAmount: ASTextNode = ASTextNode()
 	private let endDateInstallment: ASTextNode = ASTextNode()
 	private let dueDate: ASTextNode = ASTextNode()
-	
-	override init() {
+    
+    private let instlData: RecurringTransactions
+    private let nextBillDate: Date
+    private let remainingAmountValue: Float
+    private let dueIn: Int
+    
+    private let calendarHelper = CalendarHelper()
+	private let numberHelper = NumberHelper()
+    
+    init(data: RecurringTransactions, nextBillDate: Date, remainingAmount: Float, dueIn: Int) {
+        self.instlData = data
+        self.nextBillDate = nextBillDate
+        self.remainingAmountValue = remainingAmount
+        self.dueIn = dueIn
 		super.init()
 		
 		configureInformation()
@@ -82,15 +94,23 @@ class InstallmentCellNode: ASCellNode {
 	}
 	
 	private func configureInformation() {
-		installmentName.attributedText = NSAttributedString.bold("Subscription", 14, .black)
-		interest.attributedText = NSAttributedString.normal("Interest: %", 14, .black)
-		billingDateInstallment.attributedText = NSAttributedString.normal("Billing Date:", 14, .black)
-		typeInstallment.attributedText = NSAttributedString.normal("Billed ", 14, .black)
-		remainingAmount.attributedText = NSAttributedString.normal("Remaining Amount: Rp", 14, .black)
-		totalAmount.attributedText = NSAttributedString.normal("Total Amount: Rp", 14, .black)
-		endDateInstallment.attributedText = NSAttributedString.normal("End of Installment Date: ", 14, .black)
+        installmentName.attributedText = NSAttributedString.bold("\(instlData.description ?? " ")", 14, .black)
 		
-		dueDate.attributedText = NSAttributedString.normal("Due in", 14, .black)
+        interest.attributedText = NSAttributedString.normal("Interest: \(instlData.interest ?? 0)%", 14, .black)
+		
+        billingDateInstallment.attributedText = NSAttributedString.normal("Billing Date: \(calendarHelper.formatFullDate(date: nextBillDate))", 14, .black)
+		
+        typeInstallment.attributedText = NSAttributedString.normal("Billed: \(instlData.billing_type ?? " ")", 14, .black)
+		
+        let formattedRemaingingAmount = numberHelper.floatToIdFormat(beforeFormatted: remainingAmountValue)
+        remainingAmount.attributedText = NSAttributedString.normal("Remaining Amount: \(formattedRemaingingAmount)", 14, .black)
+        
+		let formattedInstallmentAmount = numberHelper.floatToIdFormat(beforeFormatted: instlData.total_amount ?? 0)
+        totalAmount.attributedText = NSAttributedString.normal("Total Amount: \(formattedInstallmentAmount)", 14, .black)
+		
+		endDateInstallment.attributedText = NSAttributedString.normal("End of Installment Date: \(calendarHelper.formatFullDate(date: instlData.end_billing_date ?? Date()))", 14, .black)
+		
+		dueDate.attributedText = NSAttributedString.normal("Due in: \(dueIn) days", 14, .black)
 	}
 	
 }

@@ -10,14 +10,20 @@ import AsyncDisplayKit
 
 class InstallmentViewController: ASDKViewController<ASDisplayNode> {
 	
-	private let installmentNode: InstallmentTableNode = InstallmentTableNode()
+	private let instlNode: InstallmentTableNode?
+    private let viewModel: ProfileViewModel?
 	
-	override init() {
-		super.init(node: installmentNode)
+    init(viewModel: ProfileViewModel) {
+        self.viewModel = viewModel
+        self.instlNode = InstallmentTableNode(viewModel: viewModel)
+        
+		super.init(node: instlNode ?? ASDisplayNode())
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
+        self.instlNode = nil
+        self.viewModel = nil
+        super.init(coder: aDecoder)
 	}
 	
 	private func configureNode() {

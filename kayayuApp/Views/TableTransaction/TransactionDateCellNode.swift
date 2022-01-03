@@ -8,7 +8,7 @@
 import Foundation
 import AsyncDisplayKit
 
-class TransactionDateCellNode: ASCellNode {
+class TransactionDateCellNode: ASDisplayNode {
 	private let totalIncomeAmount: ASTextNode = ASTextNode()
 	private let totalExpenseAmount: ASTextNode = ASTextNode()
 	private let dateText: ASTextNode = ASTextNode()
@@ -18,6 +18,7 @@ class TransactionDateCellNode: ASCellNode {
 	private let expensePerDay: Float
 	
 	private let calendarHelper: CalendarHelper = CalendarHelper()
+	private let numberHelper: NumberHelper = NumberHelper()
 	
 	init(date: Date = Date() , incomePerDay: Float = 0, expensePerDay: Float = 0) {
 		self.date = date
@@ -30,10 +31,11 @@ class TransactionDateCellNode: ASCellNode {
 		configureExpenseAmount()
 		borderWidth = 1
 		borderColor = kayayuColor.softGrey.cgColor
+		
 		backgroundColor = .white
 		automaticallyManagesSubnodes = true
 		
-		style.minHeight = ASDimension(unit: .points, value: 30)
+		style.preferredSize = CGSize(width: UIScreen.main.bounds.width - 64, height: 30)
 	}
 	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
@@ -62,7 +64,12 @@ class TransactionDateCellNode: ASCellNode {
 		
 		mainSpec.style.preferredSize = CGSize(width: UIScreen.main.bounds.width - 24, height: 30)
 		
-		return mainSpec
+		let insetMain = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0,
+															   left: 8,
+															   bottom: 0,
+															   right: 8), child: mainSpec)
+		
+		return insetMain
 	}
 	
 	private func configureDatetext() {
@@ -76,10 +83,14 @@ class TransactionDateCellNode: ASCellNode {
 	}
 	
 	private func configureIncomeAmount() {
-		totalIncomeAmount.attributedText = NSAttributedString.semibold("Rp\(incomePerDay)", 14, .systemGreen)
+		let formattedAmount = numberHelper.floatToIdFormat(beforeFormatted: incomePerDay)
+        
+		totalIncomeAmount.attributedText = NSAttributedString.semibold("\(formattedAmount)", 14, .systemGreen)
 	}
 	
 	private func configureExpenseAmount() {
-		totalExpenseAmount.attributedText = NSAttributedString.semibold("Rp\(expensePerDay)", 14, .systemRed)
+		let formattedAmount = numberHelper.floatToIdFormat(beforeFormatted: expensePerDay)
+        
+        totalExpenseAmount.attributedText = NSAttributedString.semibold("\(formattedAmount)", 14, .systemRed)
 	}
 }

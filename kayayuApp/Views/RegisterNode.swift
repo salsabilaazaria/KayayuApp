@@ -10,7 +10,7 @@ import AsyncDisplayKit
 
 class RegisterNode: ASDisplayNode {
 	
-	var onOpenHomePage: (() -> Void)?
+	var onCreateTabBar: (() -> Void)?
 	var onOpenLoginPage: (() -> Void)?
 	
 	private let viewModel: AuthenticationViewModel
@@ -92,12 +92,13 @@ class RegisterNode: ASDisplayNode {
 	}
 	
 	private func configureViewModel() {
-		viewModel.onOpenHomePage = {
-			self.onOpenHomePage?()
+		viewModel.onCreateTabBar = {
+			self.onCreateTabBar?()
 		}
 		
-		viewModel.showAlert = {
+		viewModel.showAlert = { errorMsg in
 			print("SHOW ALERT")
+			self.alertText.attributedText = NSAttributedString.semibold(errorMsg, 14, .systemRed)
 			self.alertText.isHidden = false
 		}
 	}
@@ -243,7 +244,7 @@ class RegisterNode: ASDisplayNode {
 			return
 		}
 		
-		self.viewModel.addRegisterData(username: username, email: email, password: password, confirmPassword: confirmPassword)
+		self.viewModel.validateRegisterData(username: username, email: email, password: password, confirmPassword: confirmPassword)
 	
 	}
 	

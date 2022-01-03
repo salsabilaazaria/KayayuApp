@@ -14,16 +14,21 @@ final class KayayuScreen {
 	var onNavigationEvent: ((NavigationEvent) -> Void)?
 	
 	enum NavigationEvent {
-		case onCreateTabBar
+		case onCreateTabBar(viewModel: AuthenticationViewModel)
 		case onOpenHomePage
 		case onOpenLandingPage
 		case onOpenLoginPage
 		case onOpenRegisterPage
-		case onOpenStatsPage
+		case onOpenStatsPage(viewModel: StatsViewModel)
 		case onOpenAddRecordPage
-		case onOpenProfilePage
-		case onOpenSubscriptionPage
-		case onOpenInstallmentPage
+		case onOpenProfilePage(authViewModel: AuthenticationViewModel, profileViewModel: ProfileViewModel)
+		case onOpenSubscriptionPage(viewModel: ProfileViewModel)
+        case onOpenInstallmentPage(viewModel: ProfileViewModel)
+		case onOpenEditProfile(viewModel: ProfileViewModel)
+		case onBackToEditProfilePage
+		case onOpenChangeEmail(viewModel: ProfileViewModel)
+		case onOpenChangeUsername(viewModel: ProfileViewModel)
+		case onOpenChangePassword(viewModel: ProfileViewModel)
 	}
 	
 	public init(navigationController: UINavigationController, tabBarController: UITabBarController) {
@@ -32,20 +37,22 @@ final class KayayuScreen {
 	}
 	
 	func make() -> UIViewController {
-		let controller = makeStatsPageViewController()
+		let controller = makeLandingPageViewController()
 		return controller
 	}
 	
-	func makeTabBarViewController(homeViewModel: HomeViewModel) -> UITabBarController {
+	func makeTabBarViewController(homeViewModel: HomeViewModel, statsViewModel: StatsViewModel, authViewModel: AuthenticationViewModel, profileViewModel: ProfileViewModel) -> UITabBarController {
 		tabBarController.edgesForExtendedLayout = []
 
 		let home = makeHomePageViewController(viewModel: homeViewModel)
 		home.tabBarItem.image = UIImage(named: "homeUnselected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize)
 		home.tabBarItem.selectedImage = UIImage(named: "homeSelected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize)
-		let stats = makeStatsPageViewController()
+		
+		let stats = makeStatsPageViewController(viewModel: statsViewModel)
 		stats.tabBarItem.image = UIImage(named: "statsUnselected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize)
 		stats.tabBarItem.selectedImage = UIImage(named: "statsSelected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize)
-		let profile = makeProfileViewController()
+		
+		let profile = makeProfileViewController(authViewModel: authViewModel, profileViewModel: profileViewModel)
 		profile.tabBarItem.image = UIImage(named: "accUnselected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize)
 		profile.tabBarItem.selectedImage = UIImage(named: "accSelected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize)
 		
@@ -77,12 +84,12 @@ final class KayayuScreen {
 	
 	func makeLoginPageViewController(viewModel: AuthenticationViewModel) -> UIViewController {
 		let controller = LoginViewController(authenticationViewModel: viewModel)
-		controller.onOpenHomePage = { [weak self] in
+		controller.onCreateTabBar = { [weak self] in
 			guard let self = self else {
 				return
 			}
 			
-			self.onNavigationEvent?(.onCreateTabBar)
+			self.onNavigationEvent?(.onCreateTabBar(viewModel: viewModel))
 		}
 		controller.onOpenRegisterPage = { [weak self] in
 			guard let self = self else {
@@ -97,12 +104,12 @@ final class KayayuScreen {
 	
 	func makeRegisterPageViewController(viewModel: AuthenticationViewModel) -> UIViewController {
 		let controller = RegisterViewController(authenticationViewModel: viewModel)
-		controller.onOpenHomePage = { [weak self] in
+		controller.onCreateTabBar = { [weak self] in
 			guard let self = self else {
 				return
 			}
 			
-			self.onNavigationEvent?(.onCreateTabBar)
+			self.onNavigationEvent?(.onCreateTabBar(viewModel: viewModel))
 		}
 		controller.onOpenLoginPage = { [weak self] in
 				guard let self = self else {
@@ -127,43 +134,133 @@ final class KayayuScreen {
 		return controller
 	}
 	
-	func makeStatsPageViewController() -> UIViewController {
-		let controller = StatsViewController()
+	func makeAddRecordPageViewController(viewModel: HomeViewModel) -> UIViewController {
+		let controller = AddRecordViewController(viewModel: viewModel)
+		
+		controller.onOpenHomePage = { [weak self] in
+			guard let self = self else {
+				return
+			}
+			self.onNavigationEvent?(.onOpenHomePage)
+		}
+		return controller
+	}
+	
+	func makeStatsPageViewController(viewModel: StatsViewModel) -> UIViewController {
+		let controller = StatsViewController(viewModel: viewModel)
 		controller.title = "Stats"
 		return controller
 	}
 	
-	func makeProfileViewController() -> UIViewController {
-		let controller = ProfileViewController()
+	func makeProfileViewController(authViewModel: AuthenticationViewModel, profileViewModel: ProfileViewModel) -> UIViewController {
+		let controller = ProfileViewController(authViewModel: authViewModel, profileViewModel: profileViewModel)
 		controller.title = "Profile"
 		controller.onOpenSubscriptionPage = { [weak self] in
 			guard let self = self else {
 				return
 			}
-			self.onNavigationEvent?(.onOpenSubscriptionPage)
+			self.onNavigationEvent?(.onOpenSubscriptionPage(viewModel: profileViewModel))
 		}
 		
 		controller.onOpenInstallmentPage = { [weak self] in
 			guard let self = self else {
 				return
 			}
-			self.onNavigationEvent?(.onOpenInstallmentPage)
+            self.onNavigationEvent?(.onOpenInstallmentPage(viewModel: profileViewModel))
 		}
+		
+		controller.onOpenEditProfile = { [weak self] in
+			guard let self = self else {
+				return
+			}
+			
+			self.onNavigationEvent?(.onOpenEditProfile(viewModel: profileViewModel))
+			
+		}
+        
+        controller.onLogout = { [weak self] in
+            guard let self = self else {
+                return
+            }
+			self.navigationController?.popToRootViewController(animated: true)
+        }
+        
 		return controller
 	}
 	
-	func makeAddRecordPageViewController() -> UIViewController {
-		let controller = AddRecordViewController()
+    func makeSubscriptionPageViewController(viewModel: ProfileViewModel) -> UIViewController {
+		let controller = SubscriptionViewController(viewModel: viewModel)
 		return controller
 	}
 	
-	func makeSubscriptionPageViewController() -> UIViewController {
-		let controller = SubscriptionViewController()
+    func makeInstallmentPageViewController(viewModel: ProfileViewModel) -> UIViewController {
+		let controller = InstallmentViewController(viewModel: viewModel)
 		return controller
 	}
 	
-	func makeInstallmentPageViewController() -> UIViewController {
-		let controller = InstallmentViewController()
+	func makeEditProfilePageViewController(viewModel: ProfileViewModel) -> UIViewController {
+		let controller = EditProfileController(viewModel: viewModel)
+		
+		controller.onOpenChangeUsernamePage = { [weak self] in
+			guard let self = self else {
+				return
+			}
+			self.onNavigationEvent?(.onOpenChangeUsername(viewModel: viewModel))
+		}
+		
+		controller.onOpenChangeEmailPage = { [weak self] in
+			guard let self = self else {
+				return
+			}
+			self.onNavigationEvent?(.onOpenChangeEmail(viewModel: viewModel))
+		}
+		
+		controller.onOpenChangePasswordPage = { [weak self] in
+			guard let self = self else {
+				return
+			}
+			self.onNavigationEvent?(.onOpenChangePassword(viewModel: viewModel))
+		}
+		
+		return controller
+	}
+	
+	func makeChangeUsernamePageViewController(viewModel: ProfileViewModel) -> UIViewController {
+		let controller = ChangeUsernameController(viewModel: viewModel)
+		
+		controller.onBackToEditProfilePage = { [weak self] in
+			guard let self = self else {
+				return
+			}
+			self.onNavigationEvent?(.onBackToEditProfilePage)
+		}
+		
+		return controller
+	}
+	
+	func makeChangeEmailPageViewController(viewModel: ProfileViewModel) -> UIViewController {
+		let controller = ChangeEmailController(viewModel: viewModel)
+		
+		controller.onBackEditProfilePage = { [weak self] in
+			guard let self = self else {
+				return
+			}
+			self.onNavigationEvent?(.onBackToEditProfilePage)
+		}
+		
+		return controller
+	}
+	
+	func makeChangePasswordPageViewController(viewModel: ProfileViewModel) -> UIViewController {
+		let controller = ChangePasswordController(viewModel: viewModel)
+		
+		controller.onBackToEditProfilePage = { [weak self] in
+			guard let self = self else {
+				return
+			}
+			self.onNavigationEvent?(.onBackToEditProfilePage)
+		}
+		
 		return controller
 	}
 	

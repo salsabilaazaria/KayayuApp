@@ -9,6 +9,7 @@ import Foundation
 import AsyncDisplayKit
 
 class StatsDateHeader: ASDisplayNode {
+	var changeMonthStats: ((Date) -> Void)?
 	private let calendarHelper: CalendarHelper = CalendarHelper()
 	
 	private let nextMonthButton: ASButtonNode = ASButtonNode()
@@ -33,7 +34,7 @@ class StatsDateHeader: ASDisplayNode {
 		let backgroundHeader = ASDisplayNode()
 		backgroundHeader.backgroundColor = .white
 		backgroundHeader.cornerRadius = 5
-		backgroundHeader.borderWidth = kayayuSize.kayayuBorderWidth
+		backgroundHeader.borderWidth = kayayuSize.kayayuBigButtonBorderWidth
 		backgroundHeader.borderColor = UIColor.black.cgColor
 		backgroundHeader.style.preferredSize = monthYearHeaderSize
 		
@@ -59,7 +60,6 @@ class StatsDateHeader: ASDisplayNode {
 	private func configureMonthYearString() {
 		let monthYear = "\(calendarHelper.monthString(date: selectedDate)) \(calendarHelper.yearString(date: selectedDate))"
 		monthYearText.attributedText = NSAttributedString.bold(monthYear, 14, .black)
-		
 	}
 	
 	private func configureNextMonthButton() {
@@ -70,6 +70,7 @@ class StatsDateHeader: ASDisplayNode {
 	@objc func nextMonthTapped(sender: ASButtonNode) {
 		selectedDate = CalendarHelper().plusMonth(date: selectedDate)
 		configureMonthYearString()
+		self.changeMonthStats?(selectedDate)
 	}
 	
 	private func configurePrevMonthButton() {
@@ -80,5 +81,6 @@ class StatsDateHeader: ASDisplayNode {
 	@objc func prevMonthTapped(sender: ASButtonNode) {
 		selectedDate = CalendarHelper().minusMonth(date: selectedDate)
 		configureMonthYearString()
+		self.changeMonthStats?(selectedDate)
 	}
 }

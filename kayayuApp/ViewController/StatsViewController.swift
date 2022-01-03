@@ -9,13 +9,18 @@ import Foundation
 import AsyncDisplayKit
 
 class StatsViewController:ASDKViewController<ASDisplayNode> {
-	private let statsNode: StatsNode = StatsNode()
+	private let statsNode: StatsNode?
+	private let viewModel: StatsViewModel?
 	
-	override init() {
-		super.init(node: statsNode)
+	init(viewModel: StatsViewModel) {
+		self.viewModel = viewModel
+		self.statsNode = StatsNode(viewModel: viewModel)
+		super.init(node: statsNode ?? ASDisplayNode())
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
+		self.statsNode = nil
+		self.viewModel = nil
 		super.init(coder: aDecoder)
 	}
 	

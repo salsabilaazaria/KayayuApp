@@ -12,25 +12,47 @@ class ProfileViewController: ASDKViewController<ASDisplayNode> {
 	
 	var onOpenSubscriptionPage: (() -> Void)?
 	var onOpenInstallmentPage: (() -> Void)?
+	var onOpenEditProfile: (() -> Void)?
+    var onLogout: (() -> Void)?
 	
-	private let profileNode: ProfileNode = ProfileNode()
+	private let profileNode: ProfileNode?
+	let authViewModel: AuthenticationViewModel?
+	let profileViewModel: ProfileViewModel?
 	
-	override init() {
-		super.init(node: profileNode)
+	init(authViewModel: AuthenticationViewModel, profileViewModel: ProfileViewModel) {
+		self.authViewModel = authViewModel
+		self.profileViewModel = profileViewModel
+		self.profileNode = ProfileNode(authViewModel: authViewModel, profileViewModel: profileViewModel)
+		super.init(node: profileNode ?? ASDisplayNode())
 		configureNode()
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
+		self.authViewModel = nil
+		self.profileViewModel = nil
+		self.profileNode = nil
 		super.init(coder: aDecoder)
 	}
 	
 	private func configureNode() {
-		profileNode.onOpenSubscriptionPage = { [weak self] in
+		
+		profileNode?.onOpenSubscriptionPage = { [weak self] in
 			self?.onOpenSubscriptionPage?()
 		}
-		profileNode.onOpenInstallmentPage = { [weak self] in
+		
+		profileNode?.onOpenInstallmentPage = { [weak self] in
 			self?.onOpenInstallmentPage?()
 		}
+		
+		profileNode?.onLogout = { [weak self] in
+			self?.authViewModel?.logout()
+			self?.onLogout?()
+		}
+		
+		profileNode?.onOpenEditProfile = { [weak self] in
+			self?.onOpenEditProfile?()
+		}
+		
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {

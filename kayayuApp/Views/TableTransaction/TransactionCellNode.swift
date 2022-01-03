@@ -23,6 +23,8 @@ class TransactionCellNode: ASCellNode {
 	private let transactionAmount: ASTextNode = ASTextNode()
 	private let transactionData: Transactions
 	
+	private let numberHelper: NumberHelper = NumberHelper()
+	
 	init(isIncomeTransaction: Bool, data: Transactions) {
 		//init for creating cell without date
 		self.isDate = false
@@ -110,7 +112,7 @@ class TransactionCellNode: ASCellNode {
 	}
 	
 	private func configureRatio() {
-		guard let ratioString = transactionData.category else {
+		guard let ratioString = transactionData.category?.capitalized else {
 			return
 		}
 		ratio.attributedText = NSAttributedString.normal(ratioString, 14, .black)
@@ -130,10 +132,13 @@ class TransactionCellNode: ASCellNode {
 		guard let amount = transactionData.amount else {
 			return
 		}
+		
+		let formattedAmount = numberHelper.floatToIdFormat(beforeFormatted: amount)
+        
 		if isIncomeTransaction {
-			transactionAmount.attributedText = NSAttributedString.normal("Rp\(amount)", 14, .systemGreen)
+            transactionAmount.attributedText = NSAttributedString.normal("\(formattedAmount)", 14, .systemGreen)
 		} else {
-			transactionAmount.attributedText = NSAttributedString.normal("Rp\(amount)", 14, .systemRed)
+            transactionAmount.attributedText = NSAttributedString.normal("\(formattedAmount)", 14, .systemRed)
 		}
 		
 	}

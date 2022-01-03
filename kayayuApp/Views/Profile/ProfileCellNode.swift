@@ -34,16 +34,25 @@ class ProfileCellNode: ASDisplayNode {
 	}
 	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-		let itemSpec = ASStackLayoutSpec(direction: .horizontal,
-										 spacing: 10,
+		var itemSpec = ASLayoutSpec()
+		if iconImageName != "" {
+			itemSpec = ASStackLayoutSpec(direction: .horizontal,
+										 spacing: 8,
 										 justifyContent: .center,
 										 alignItems: .center,
 										 children: [icon, title, arrow])
+		} else {
+			itemSpec = ASStackLayoutSpec(direction: .horizontal,
+										 spacing: 8,
+										 justifyContent: .center,
+										 alignItems: .center,
+										 children: [title, arrow])
+		}
 		
 		itemSpec.style.preferredSize = CGSize(width: UIScreen.main.bounds.width, height: 50)
 		title.style.flexGrow = 1
 		
-		let itemInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16), child: itemSpec)
+		let itemInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16), child: itemSpec)
 		
 		let butttonOverlay = ASOverlayLayoutSpec(child: itemInset, overlay: buttonNode)
 		

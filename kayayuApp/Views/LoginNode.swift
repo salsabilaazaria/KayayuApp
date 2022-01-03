@@ -10,7 +10,7 @@ import AsyncDisplayKit
 
 class LoginNode: ASDisplayNode {
 	
-	var onOpenHomePage: (() -> Void)?
+	var onCreateTabBar: (() -> Void)?
 	var onOpenRegisterPage: (() -> Void)?
 	
 	private let viewModel: AuthenticationViewModel
@@ -83,12 +83,12 @@ class LoginNode: ASDisplayNode {
 	}
     
     private func configureViewModel() {
-        viewModel.onOpenHomePage = {
-            self.onOpenHomePage?()
+        viewModel.onCreateTabBar = {
+            self.onCreateTabBar?()
         }
 		
-		viewModel.showAlert = {
-			print("SHOW ALERT")
+		viewModel.showAlert = { errorMsg in
+			self.alertText.attributedText = NSAttributedString.semibold(errorMsg, 14, .systemRed)
 			self.alertText.isHidden = false
 		}
     }
@@ -174,13 +174,13 @@ class LoginNode: ASDisplayNode {
 		signUpButton.addTarget(self, action: #selector(signUpButtonTapped), forControlEvents: .touchUpInside)
 	}
 	
-	@objc func loginButtonTapped(sender: ASButtonNode) {
+	@objc private func loginButtonTapped(sender: ASButtonNode) {
 		guard let email = self.emailTextfield.textView.text,
 			  let password = self.passwordTextfield.text else {
 			return
 		}
 		
-		self.viewModel.validateLoginData(email: email, password: password)
+		self.viewModel.validateLoginData(email: "Angie@gmail.com", password: "Password")
 		
 	}
 	

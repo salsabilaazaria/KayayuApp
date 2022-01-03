@@ -15,15 +15,32 @@ class SubscriptionCellNode: ASCellNode {
 	private let typeSubs: ASTextNode = ASTextNode()
 	private let endDateSubs: ASTextNode = ASTextNode()
 	private let dueDate: ASTextNode = ASTextNode()
+    
+    private let subsData: RecurringTransactions
+    private let nextBillDate: Date
+    private let dueIn: Int
+//    private let detailSubsData: TransactionDetail
+    
+//    private let viewModel: ProfileViewModel
+	private let calendarHelper: CalendarHelper = CalendarHelper()
+	private let numberHelper: NumberHelper = NumberHelper()
 	
-	override init() {
-		super.init()
-		
-		configureInformation()
-		
-		backgroundColor = .white
-		automaticallyManagesSubnodes = true
-	}
+    
+    init(data: RecurringTransactions, nextBillDate: Date, dueIn: Int){
+        self.subsData = data
+        self.nextBillDate = nextBillDate
+        self.dueIn = dueIn
+//        self.detailSubsData = detailData
+        super.init()
+//        super.init(viewModel: ProfileViewModel)
+//        self.viewModel = viewModel
+        
+        configureInformation()
+        
+        backgroundColor = .white
+        automaticallyManagesSubnodes = true
+    }
+    
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
 
 		let mainSpec = ASStackLayoutSpec(direction: .vertical,
@@ -79,13 +96,17 @@ class SubscriptionCellNode: ASCellNode {
 	}
 	
 	private func configureInformation() {
-		subscriptionName.attributedText = NSAttributedString.bold("Subscription", 14, .black)
-		amountSubs.attributedText = NSAttributedString.normal("Rp", 14, .black)
-		dateSubs.attributedText = NSAttributedString.normal("Billing Date:", 14, .black)
-		typeSubs.attributedText = NSAttributedString.normal("Billed ", 14, .black)
-		endDateSubs.attributedText = NSAttributedString.normal("End of Subscription Date: ", 14, .black)
+        subscriptionName.attributedText = NSAttributedString.bold("\(subsData.description ?? " ")", 14, .black)
 		
-		dueDate.attributedText = NSAttributedString.normal("Due in", 14, .black)
-	}
-	
+		let formattedInstallmentAmount = numberHelper.floatToIdFormat(beforeFormatted: subsData.total_amount ?? 0)
+        amountSubs.attributedText = NSAttributedString.normal("\(formattedInstallmentAmount)", 14, .black)
+		
+        dateSubs.attributedText = NSAttributedString.normal("Billing Date: \(calendarHelper.formatFullDate(date: nextBillDate))", 14, .black)
+		
+        typeSubs.attributedText = NSAttributedString.normal("Billed: \(subsData.billing_type ?? " ")", 14, .black)
+        endDateSubs.attributedText = NSAttributedString.normal("End of Subscription Date: \(calendarHelper.formatFullDate(date: subsData.end_billing_date ?? Date()))", 14, .black)
+        dueDate.attributedText = NSAttributedString.normal("Due in: \(dueIn) days", 14, .black)
+
+    }
+
 }

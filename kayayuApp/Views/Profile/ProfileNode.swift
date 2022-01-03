@@ -11,9 +11,14 @@ import AsyncDisplayKit
 class ProfileNode: ASDisplayNode {
 	var onOpenSubscriptionPage: (() -> Void)?
 	var onOpenInstallmentPage: (() -> Void)?
-	
+	var onOpenEditProfile: (() -> Void)?
+    var onLogout: (() -> Void)?
+    
+//    private let viewModel: AuthenticationViewModel
+    
 	private let username: ASTextNode = ASTextNode()
 	private let email: ASTextNode = ASTextNode()
+	private var balanceSummary: SummaryHeader = SummaryHeader()
 	
 	private var subscriptionNode: ProfileCellNode = ProfileCellNode()
 	private var installmentNode: ProfileCellNode = ProfileCellNode()
@@ -22,26 +27,39 @@ class ProfileNode: ASDisplayNode {
 	
 	private let scrollNode: ASScrollNode = ASScrollNode()
 	
-	override init() {
-		
+	private let authViewModel: AuthenticationViewModel
+	private let profileViewModel: ProfileViewModel
+	
+	private let numberHelper: NumberHelper = NumberHelper()
+	
+	init(authViewModel: AuthenticationViewModel, profileViewModel: ProfileViewModel) {
+		self.authViewModel = authViewModel
+		self.profileViewModel = profileViewModel
 		super.init()
 
 		backgroundColor = .white
 		automaticallyManagesSubnodes = true
 	}
-	
+    
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
 		configureUsername()
 		configureEmail()
+		configureBalanceSummary()
 		configureScrollNode()
 		
-		let profileStack = ASStackLayoutSpec(direction: .vertical,
-											 spacing: 10,
+		let userInfoStack = ASStackLayoutSpec(direction: .vertical,
+											 spacing: 8,
 											 justifyContent: .start,
 											 alignItems: .start,
 											 children: [username, email])
 		
-		let profileInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 32, left: 16, bottom: 32, right: 16), child: profileStack)
+		let profileStack = ASStackLayoutSpec(direction: .vertical,
+											 spacing: 16,
+											 justifyContent: .start,
+											 alignItems: .start,
+											 children: [userInfoStack, balanceSummary])
+		
+		let profileInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 16, left: 16, bottom: 32, right: 16), child: profileStack)
 		
 		let mainSpec = ASStackLayoutSpec(direction: .vertical,
 											spacing: 0,
@@ -52,14 +70,25 @@ class ProfileNode: ASDisplayNode {
 		return mainSpec
 	}
 	
-	
-	
 	private func configureUsername() {
-		username.attributedText = NSAttributedString.bold("salsabilaazaria", 16, .black)
+		guard let usernameString = self.authViewModel.getUserData()?.displayName else {
+			return
+		}
+		username.attributedText = NSAttributedString.bold(usernameString, 16, .black)
 	}
 	
 	private func configureEmail() {
-		email.attributedText = NSAttributedString.semibold("salsa@gmail.com", 16, .gray)
+		guard let emailString = self.authViewModel.getUserData()?.email else {
+			return
+		}
+		email.attributedText = NSAttributedString.semibold(emailString, 16, .gray)
+	}
+	
+	private func configureBalanceSummary() {
+		guard let balanceTotal = self.profileViewModel.user.value?.balance_total else {
+			return
+		}
+		balanceSummary = SummaryHeader(summary: .balance, subtitleText: numberHelper.floatToIdFormat(beforeFormatted: balanceTotal))
 	}
 	
 	private func configureScrollNode() {
@@ -118,15 +147,20 @@ class ProfileNode: ASDisplayNode {
 	
 	private func configureEditProfileNode() {
 		editProfileNode = ProfileCellNode(icon: "editProfile.png", title: "Edit Profile")
+		editProfileNode.buttonNode.addTarget(self, action: #selector(editProfileTapped), forControlEvents: .touchUpInside)
+	}
+	
+	@objc func editProfileTapped(sender: ASButtonNode) {
+		self.onOpenEditProfile?()
 	}
 	
 	private func configureLogoutNode() {
 		logoutNode = ProfileCellNode(icon: "logout.png", title: "Logout")
-		logoutNode.buttonNode.addTarget(self, action: #selector(installmentTapped), forControlEvents: .touchUpInside)
+		logoutNode.buttonNode.addTarget(self, action: #selector(logoutTapped), forControlEvents: .touchUpInside)
 	}
 	
 	@objc func logoutTapped(sender: ASButtonNode) {
-		self.onOpenInstallmentPage?()
+        self.onLogout?()
 	}
 	
 	

@@ -8,14 +8,14 @@
 import Foundation
 import UIKit
 
-enum kayayuRatio: String, CaseIterable {
+enum kayayuRatioTitle: String, CaseIterable {
 	case all = "All"
 	case needs = "Needs"
 	case wants = "Wants"
 	case savings = "Savings"
 	
 	static var incomeValues: [String] {
-		return kayayuRatio.allCases.map { $0.rawValue }
+		return kayayuRatioTitle.allCases.map { $0.rawValue }
 	}
 	static let ratioCategory = [needs, wants, savings]
 	
@@ -23,6 +23,12 @@ enum kayayuRatio: String, CaseIterable {
 		return ratioCategory.map{$0.rawValue}
 	}
 	
+}
+
+enum kayayuRatioValue: Float {
+	case needs = 0.5
+	case wants = 0.3
+	case savings = 0.2
 }
 
 enum kayayuPaymentType: String, CaseIterable {
@@ -43,7 +49,8 @@ struct kayayuSize {
 	static let nodeSize: CGSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width - kayayuTabBarSize.height - 200)
 	
 	static let kayayuBarHeight: CGFloat = 30
-	static let kayayuBorderWidth: CGFloat = 0.2
+	static let kayayuInputTextFieldBorderWidth: CGFloat = 0.2
+	static let kayayuBigButtonBorderWidth: CGFloat = 0.2
 	static let kayayuBigButton: CGFloat = 40
 	
 	static let bigInputTextField: CGSize = CGSize(width: UIScreen.main.bounds.width - 32, height: 40)
@@ -57,6 +64,8 @@ struct kayayuSize {
 	static let dropdownRect: CGRect = CGRect(x: 3, y: 1, width: UIScreen.main.bounds.width - 32, height: 30)
 	static let halfDropdownRect: CGRect = CGRect(x: 3, y: 1, width: UIScreen.main.bounds.width/2 - 32, height: 30)
 	static let quarterDropdownRect: CGRect = CGRect(x: 3, y: 1, width: UIScreen.main.bounds.width/4 - 32, height: 30)
+	
+	static let inputTextFieldCornerRadius:CGFloat = 8.0
 }
 
 struct kayayuFont {
