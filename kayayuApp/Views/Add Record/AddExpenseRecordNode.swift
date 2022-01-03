@@ -152,7 +152,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 	@objc func saveButtonTapped() {
 		let paymentType = self.paymenTypeValue.value
 			
-		guard let category = ratio,
+		guard let category = ratio?.lowercased(),
 			  let date = self.dateInputTextField.textView.text,
 			  let desc = self.descriptionInputTextField.textView.text else {
 			return

@@ -109,7 +109,7 @@ class AddIncomeRecordNode: ASDisplayNode {
 	
 	@objc func saveButtonTapped() {
 	
-		guard let category = ratio,
+		guard let category = ratio?.lowercased(),
 			  let date = self.dateInputTextField.textView.text,
 			  let desc = self.descriptionInputTextField.textView.text,
 			  let amountString = self.amountInputTextField.textView.text,

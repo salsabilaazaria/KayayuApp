@@ -49,8 +49,14 @@ class HomeTableTransaction: ASDisplayNode {
 		transactionTableNode.style.preferredSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.55)
 
 		transactionTableHeader.changeMonthData = { [weak self] date in
-			let monthInt = self?.calendarHelper.monthInt(date: date)
-			self?.viewModel.getTransactionDataSpecMonth(diff: monthInt ?? 0)
+			guard let month = self?.calendarHelper.monthInt(date: date),
+				  let year = self?.calendarHelper.yearInt(date: date),
+				  let startDate = self?.calendarHelper.getSpecStartMonth(month: month, year: year),
+				  let endDate = self?.calendarHelper.getSpecEndMonth(month: month, year: year) else {
+				return
+			}
+
+			self?.viewModel.getTransactionDataSpecMonth(startDate: startDate, endDate: endDate)
 			
 		}
 	}

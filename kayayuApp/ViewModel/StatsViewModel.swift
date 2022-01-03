@@ -39,10 +39,15 @@ class StatsViewModel {
 	
 	init() {
 		self.getUserData()
-		self.getNeedsTransDataSpecMonth(diff: calendarHelper.monthInt(date: Date()))
-		self.getWantsTransDataSpecMonth(diff: calendarHelper.monthInt(date: Date()))
-		self.getSavingsTransDataSpecMonth(diff: calendarHelper.monthInt(date: Date()))
-		self.getAllIncomeData(diff: calendarHelper.monthInt(date: Date()))
+		
+		let currStartDate = calendarHelper.getSpecStartMonth(month: calendarHelper.monthInt(date: Date()), year: calendarHelper.yearInt(date: Date()))
+		let currEndDate = calendarHelper.getSpecEndMonth(month: calendarHelper.monthInt(date: Date()), year: calendarHelper.yearInt(date: Date()))
+		
+		self.getNeedsTransDataSpecMonth(startDate: currStartDate, endDate: currEndDate)
+		self.getWantsTransDataSpecMonth(startDate: currStartDate, endDate: currEndDate)
+		self.getSavingsTransDataSpecMonth(startDate: currStartDate, endDate: currEndDate)
+		self.getAllIncomeData(startDate: currStartDate, endDate: currEndDate)
+		
 		configureObserver()
 	}
 	
@@ -111,11 +116,11 @@ class StatsViewModel {
 	
 	
 	//INCOME
-	func getAllIncomeData (diff: Int) {
+	func getAllIncomeData(startDate: Date, endDate: Date) {
 		database.collection("transactions")
 			.whereField("user_id", isEqualTo: getUserId())
-			.whereField("transaction_date", isGreaterThan: calendarHelper.getSpecStartMonth(diff: diff))
-			.whereField("transaction_date", isLessThan: calendarHelper.getSpecEndMonth(diff: diff))
+			.whereField("transaction_date", isGreaterThan: startDate)
+			.whereField("transaction_date", isLessThan: endDate)
 			.whereField("income_flag", isEqualTo: true)
 			.order(by: "transaction_date", descending: true)
 			.addSnapshotListener { (documentSnapshot, errorMsg) in
@@ -134,7 +139,7 @@ class StatsViewModel {
 							}
 							
 							if let transDate = transData.transaction_date,
-							   diff == self.calendarHelper.monthInt(date: transDate),
+							   self.calendarHelper.monthInt(date: startDate) == self.calendarHelper.monthInt(date: transDate),
 							   let incomeFlag = transData.income_flag, incomeFlag == true,
 							   let amount = transData.amount {
 								incomeAllCategoryTotal += amount
@@ -244,17 +249,17 @@ class StatsViewModel {
 	
 	//GET DATA TRANSACTION
 	
-	func getPerCategoryTransDataSpecMont(diff: Int) {
-		self.getNeedsTransDataSpecMonth(diff: diff)
-		self.getWantsTransDataSpecMonth(diff: diff)
-		self.getSavingsTransDataSpecMonth(diff: diff)
+	func getPerCategoryTransDataSpecMonth(startDate: Date, endDate: Date) {
+		self.getNeedsTransDataSpecMonth(startDate: startDate, endDate: endDate)
+		self.getWantsTransDataSpecMonth(startDate: startDate, endDate: endDate)
+		self.getSavingsTransDataSpecMonth(startDate: startDate, endDate: endDate)
 	}
 	
-	private func getNeedsTransDataSpecMonth (diff: Int) {
+	private func getNeedsTransDataSpecMonth(startDate: Date, endDate: Date) {
 		database.collection("transactions")
 			.whereField("user_id", isEqualTo: getUserId())
-			.whereField("transaction_date", isGreaterThan: calendarHelper.getSpecStartMonth(diff: diff))
-			.whereField("transaction_date", isLessThan: calendarHelper.getSpecEndMonth(diff: diff))
+			.whereField("transaction_date", isGreaterThan: startDate)
+			.whereField("transaction_date", isLessThan: endDate)
 			.whereField("category", isEqualTo: kayayuRatioTitle.needs.rawValue.lowercased())
 			.order(by: "transaction_date", descending: true).addSnapshotListener { (documentSnapshot, errorMsg) in
 				if let errorMsg = errorMsg {
@@ -282,11 +287,11 @@ class StatsViewModel {
 			}
 	}
 	
-	private func getWantsTransDataSpecMonth (diff: Int) {
+	private func getWantsTransDataSpecMonth(startDate: Date, endDate: Date){
 		database.collection("transactions")
 			.whereField("user_id", isEqualTo: getUserId())
-			.whereField("transaction_date", isGreaterThan: calendarHelper.getSpecStartMonth(diff: diff))
-			.whereField("transaction_date", isLessThan: calendarHelper.getSpecEndMonth(diff: diff))
+			.whereField("transaction_date", isGreaterThan: startDate)
+			.whereField("transaction_date", isLessThan: endDate)
 			.whereField("category", isEqualTo: kayayuRatioTitle.wants.rawValue.lowercased())
 			.order(by: "transaction_date", descending: true).addSnapshotListener { (documentSnapshot, errorMsg) in
 				if let errorMsg = errorMsg {
@@ -314,11 +319,11 @@ class StatsViewModel {
 			}
 	}
 	
-	private func getSavingsTransDataSpecMonth (diff: Int) {
+	private func getSavingsTransDataSpecMonth(startDate: Date, endDate: Date) {
 		database.collection("transactions")
 			.whereField("user_id", isEqualTo: getUserId())
-			.whereField("transaction_date", isGreaterThan: calendarHelper.getSpecStartMonth(diff: diff))
-			.whereField("transaction_date", isLessThan: calendarHelper.getSpecEndMonth(diff: diff))
+			.whereField("transaction_date", isGreaterThan: startDate)
+			.whereField("transaction_date", isLessThan: endDate)
 			.whereField("category", isEqualTo: kayayuRatioTitle.savings.rawValue.lowercased())
 			.order(by: "transaction_date", descending: true).getDocuments() { (documentSnapshot, errorMsg) in
 				if let errorMsg = errorMsg {

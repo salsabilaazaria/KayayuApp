@@ -49,12 +49,16 @@ class StatsNode: ASDisplayNode {
 	private func configureNode() {
 		self.statsDateHeader.changeMonthStats = { [weak self] date in
 			print("selectedMonth")
-			guard let self = self else {
+		
+			guard let month = self?.calendarHelper.monthInt(date: date),
+				  let year = self?.calendarHelper.yearInt(date: date),
+				  let startDate = self?.calendarHelper.getSpecStartMonth(month: month, year: year),
+				  let endDate = self?.calendarHelper.getSpecEndMonth(month: month, year: year) else {
 				return
 			}
-			let monthInt = self.calendarHelper.monthInt(date: date)
-			self.viewModel.getAllIncomeData(diff: monthInt)
-			self.viewModel.getPerCategoryTransDataSpecMont(diff: monthInt)
+			
+			self?.viewModel.getAllIncomeData(startDate: startDate, endDate: endDate)
+			self?.viewModel.getPerCategoryTransDataSpecMonth(startDate: startDate, endDate: endDate)
 		}
 
 	}

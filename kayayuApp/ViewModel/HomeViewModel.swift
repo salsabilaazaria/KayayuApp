@@ -35,8 +35,12 @@ class HomeViewModel {
 	private let disposeBag = DisposeBag()
 	
 	init() {
+		
+		let currStartDate = calendarHelper.getSpecStartMonth(month: calendarHelper.monthInt(date: Date()), year: calendarHelper.yearInt(date: Date()))
+		let currEndDate = calendarHelper.getSpecEndMonth(month: calendarHelper.monthInt(date: Date()), year: calendarHelper.yearInt(date: Date()))
+		
 		self.getUserData()
-		self.getTransactionDataSpecMonth(diff: calendarHelper.monthInt(date: Date()))
+		self.getTransactionDataSpecMonth(startDate: currStartDate, endDate: currEndDate)
 //        self.getTransactionDataSpecMonth(diff: 11) //diff masukin month yg mo ditampilin
 		self.configureObserver()
         
@@ -79,11 +83,11 @@ class HomeViewModel {
 		})
 	}
     
-    func getTransactionDataSpecMonth (diff: Int) {
+	func getTransactionDataSpecMonth(startDate: Date, endDate: Date) {
         database.collection("transactions")
 			.whereField("user_id", isEqualTo: getUserId())
-			.whereField("transaction_date", isGreaterThan: calendarHelper.getSpecStartMonth(diff: diff))
-			.whereField("transaction_date", isLessThan: calendarHelper.getSpecEndMonth(diff: diff))
+			.whereField("transaction_date", isGreaterThan: startDate)
+			.whereField("transaction_date", isLessThan: endDate)
 			.order(by: "transaction_date", descending: true)
 			.addSnapshotListener { (documentSnapshot, errorMsg) in
 				
@@ -363,6 +367,7 @@ class HomeViewModel {
 		for transData in transactionsData {
 			if let transDate = transData.transaction_date,
 			   calendarHelper.monthString(date: date) == calendarHelper.monthString(date: transDate),
+			   calendarHelper.yearInt(date: date) == calendarHelper.yearInt(date: transDate),
 			   let incomeFlag = transData.income_flag, incomeFlag == true,
 			   let amount = transData.amount {
 				incomeTotal += amount
