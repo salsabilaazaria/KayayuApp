@@ -198,7 +198,7 @@ class ProfileViewModel {
 	
 	private func getTransactionDetailData() {
 		
-		database.collection("transactionDetails").order(by: "billing_date", descending: true).getDocuments() { (documentSnapshot, errorMsg) in
+		database.collection("transactionDetails").order(by: "billing_date", descending: true).addSnapshotListener { (documentSnapshot, errorMsg) in
 			if let errorMsg = errorMsg {
 				print("Error get Subscription Data \(errorMsg)")
 			}
@@ -254,10 +254,13 @@ class ProfileViewModel {
 			  let data = detailTrans.first(where: { $0.recurring_id == recurringId })
 		
 		else {
-			return -1
+			return 40
 		}
 		
-		let dueIn = Calendar.current.dateComponents([.day], from: calendarHelper.dateOnly(date: Date()), to: calendarHelper.dateOnly(date: data.billing_date ?? Date())).day!
+        var dueIn = Calendar.current.dateComponents([.day], from: calendarHelper.dateOnly(date: Date()), to: calendarHelper.dateOnly(date: data.billing_date ?? Date())).day!
+        if(Date() > data.billing_date!) {
+            dueIn = Calendar.current.dateComponents([.day], from: calendarHelper.dateOnly(date: data.billing_date ?? Date()), to: calendarHelper.dateOnly(date: Date())).day!
+        }
 		
 		if(dueIn <= 0){
 			print("add data \(data.transaction_detail_id) to trans table")
@@ -277,7 +280,7 @@ class ProfileViewModel {
 			guard let prevDetailTrans = self.detailTrans.value,
 				  let prevDetailTransData = prevDetailTrans.first(where: { $0.transaction_id != "a" && $0.recurring_id == recurringId }),
 				  let lastTransId = prevDetailTransData.transaction_id else {
-				return -1
+				return 50
 			}
 			
 			//get category & description
@@ -286,7 +289,7 @@ class ProfileViewModel {
 				  let category = prevData.category,
 				  let description = prevData.description
 			else {
-				return -1
+				return 60
 			}
             
 			let newTransData = Transactions(
@@ -319,18 +322,6 @@ class ProfileViewModel {
 				}
 			}
 			
-			
-			//cek if end_billing_date di table recurring sudah selesai or not
-			//            guard let recTransData = self.recurringSubsData.value,
-			//                  let recData = recTransData.first(where: { $0.recurring_id == recurringId })
-			////                  let end_billing_date = recData.end_billing_date,
-			////                  let billing_type = recData.billing_type,
-			////                  let recurring_type = recData.recurring_type
-			//                   else {
-			//                print("masuk sini cok \(recurringId)")
-			//                return -1
-			//            }
-			
 			guard let recTransData = self.recurringData.value,
 				  let recData = recTransData.first(where: { $0.recurring_id == recurringId }),
 				  let end_billing_date = recData.end_billing_date,
@@ -338,7 +329,7 @@ class ProfileViewModel {
 				  let recurring_type = recData.recurring_type
 			else {
 				print("error masuk sini")
-				return -1
+				return 70
 			}
 			
 			if(calendarHelper.dateOnly(date: Date()) < calendarHelper.dateOnly(date: end_billing_date)) {

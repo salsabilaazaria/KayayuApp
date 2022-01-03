@@ -194,7 +194,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 				  let recurringType = self.recurringTypeString else {
 				return
 			}
-			//feli, kalau mau ubah parameter add installment
+            
 			self.viewModel.addRecurringInstData(total_amount: totalAmount,
 												billing_type: recurringType,
 												start_billing_date: timeInputted,

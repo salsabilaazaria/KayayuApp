@@ -360,7 +360,7 @@ class HomeViewModel {
         }
         
         var refDetailRecInstlCurr: DocumentReference? = nil
-        refDetailRecInstlCurr = database.collection("transacionDetails").addDocument(data: ["temp":"temp"]){
+        refDetailRecInstlCurr = database.collection("transactionDetails").addDocument(data: ["temp":"temp"]){
             err in
             if let err = err {
                 print("Error adding curr detail transaction data \(err)")
@@ -369,17 +369,17 @@ class HomeViewModel {
             }
         }
         
-        if(billing_type == "Weeks"){
+        if(billing_type == "Weekly"){
             final_billing_type = "weekly"
             dateComponent.weekOfYear = 1
             dateComponentEnd.weekOfYear = tenor-1
             
-        } else if(billing_type == "Months"){
+        } else if(billing_type == "Monthly"){
             final_billing_type = "monthly"
             dateComponent.month = 1
             dateComponentEnd.month = tenor-1
             
-        } else if(billing_type == "Years"){
+        } else if(billing_type == "Yearly"){
             final_billing_type = "yearly"
             dateComponent.year = 1
             dateComponentEnd.year = tenor-1
@@ -397,7 +397,7 @@ class HomeViewModel {
         total_amount_interest = total_amount + (total_amount * interest_percentage!)
         amount_per_billing = total_amount_interest! / Float(tenor)
         
-        print("interest: \(interest_percentage), total: \(total_amount_interest), per billing: \(amount_per_billing)")
+        print("interest: \(interest_percentage), total: \(total_amount_interest), per billing: \(amount_per_billing), endbill: \(end_billing_date), finalbiltype: \(final_billing_type)")
         
         let recInstlData = RecurringTransactions(
             recurring_id: refRecInstl!.documentID,
@@ -482,6 +482,8 @@ class HomeViewModel {
                 print("Error setting next transaction data to transactionDetail firestore \(error)")
             }
         }
+        
+        self.onOpenHomePage?()
 	}
     
     

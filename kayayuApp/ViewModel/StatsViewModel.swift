@@ -325,7 +325,7 @@ class StatsViewModel {
 			.whereField("transaction_date", isGreaterThan: startDate)
 			.whereField("transaction_date", isLessThan: endDate)
 			.whereField("category", isEqualTo: kayayuRatioTitle.savings.rawValue.lowercased())
-			.order(by: "transaction_date", descending: true).getDocuments() { (documentSnapshot, errorMsg) in
+            .order(by: "transaction_date", descending: true).addSnapshotListener { (documentSnapshot, errorMsg) in
 				if let errorMsg = errorMsg {
 					print("Error Get Savings Transaction Data \(errorMsg)")
 				}
