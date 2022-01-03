@@ -162,7 +162,8 @@ class AddExpenseRecordNode: ASDisplayNode {
 		
 		switch  paymentType {
 		case .oneTime:
-			guard let amount = Float(self.amountInputTextField.textView.text) else {
+			guard let amountString = self.amountInputTextField.textView.text,
+				  let amount = Float(amountString.replacingOccurrences(of: ".", with: "")) else {
 				return
 			}
 			self.viewModel.addTransactionData(category: category,
@@ -174,7 +175,8 @@ class AddExpenseRecordNode: ASDisplayNode {
 		case .subscription:
 			guard let subsDuration = Int(self.durationInputTextField.textView.text),
 				  let recurringType = self.recurringTypeString,
-				  let amount = Float(self.amountInputTextField.textView.text) else {
+				  let amountString = self.amountInputTextField.textView.text,
+				  let amount = Float(amountString.replacingOccurrences(of: ".", with: ""))  else {
 				return
 			}
 			
@@ -185,7 +187,8 @@ class AddExpenseRecordNode: ASDisplayNode {
 												category: category,
 												description: desc)
 		case .installment:
-			guard let totalAmount = Float(self.totalAmountInputTextField.textView.text),
+			guard let totalAmountString = self.totalAmountInputTextField.textView.text,
+				  let totalAmount = Float(totalAmountString.replacingOccurrences(of: ".", with: "")),
 				  let interest = Int(self.interestInputTextField.textView.text),
 				  let tenor = Int(self.tenorInputTextField.textView.text),
 				  let recurringType = self.recurringTypeString else {
