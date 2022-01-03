@@ -260,7 +260,7 @@ class AddIncomeRecordNode: ASDisplayNode {
 		let backgroundNode: ASDisplayNode = ASDisplayNode()
 		
 		incomeDescription.attributedText = NSAttributedString.normal("Your income will be allocated for the inputted month budget", 12, .black)
-		infoIcon.image = UIImage(named: "infoIconBlack.png")
+		infoIcon.image = UIImage(named: "InfoIconBlack.png")
 		infoIcon.style.preferredSize =  CGSize(width: 20, height: 20)
 		
 		let contentSpec = ASStackLayoutSpec(direction: .horizontal, spacing: 4, justifyContent: .center, alignItems: .center, children: [infoIcon,incomeDescription])
