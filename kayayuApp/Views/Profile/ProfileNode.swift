@@ -18,6 +18,7 @@ class ProfileNode: ASDisplayNode {
     
 	private let username: ASTextNode = ASTextNode()
 	private let email: ASTextNode = ASTextNode()
+	private var balanceSummary: SummaryHeader = SummaryHeader()
 	
 	private var subscriptionNode: ProfileCellNode = ProfileCellNode()
 	private var installmentNode: ProfileCellNode = ProfileCellNode()
@@ -26,10 +27,14 @@ class ProfileNode: ASDisplayNode {
 	
 	private let scrollNode: ASScrollNode = ASScrollNode()
 	
-	private let viewModel: AuthenticationViewModel
+	private let authViewModel: AuthenticationViewModel
+	private let profileViewModel: ProfileViewModel
 	
-	init(viewModel: AuthenticationViewModel) {
-		self.viewModel = viewModel
+	private let numberHelper: NumberHelper = NumberHelper()
+	
+	init(authViewModel: AuthenticationViewModel, profileViewModel: ProfileViewModel) {
+		self.authViewModel = authViewModel
+		self.profileViewModel = profileViewModel
 		super.init()
 
 		backgroundColor = .white
@@ -39,15 +44,22 @@ class ProfileNode: ASDisplayNode {
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
 		configureUsername()
 		configureEmail()
+		configureBalanceSummary()
 		configureScrollNode()
 		
-		let profileStack = ASStackLayoutSpec(direction: .vertical,
-											 spacing: 10,
+		let userInfoStack = ASStackLayoutSpec(direction: .vertical,
+											 spacing: 8,
 											 justifyContent: .start,
 											 alignItems: .start,
 											 children: [username, email])
 		
-		let profileInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 32, left: 16, bottom: 32, right: 16), child: profileStack)
+		let profileStack = ASStackLayoutSpec(direction: .vertical,
+											 spacing: 16,
+											 justifyContent: .start,
+											 alignItems: .start,
+											 children: [userInfoStack, balanceSummary])
+		
+		let profileInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 16, left: 16, bottom: 32, right: 16), child: profileStack)
 		
 		let mainSpec = ASStackLayoutSpec(direction: .vertical,
 											spacing: 0,
@@ -59,17 +71,24 @@ class ProfileNode: ASDisplayNode {
 	}
 	
 	private func configureUsername() {
-		guard let usernameString = self.viewModel.getUserData()?.displayName else {
+		guard let usernameString = self.authViewModel.getUserData()?.displayName else {
 			return
 		}
 		username.attributedText = NSAttributedString.bold(usernameString, 16, .black)
 	}
 	
 	private func configureEmail() {
-		guard let emailString = self.viewModel.getUserData()?.email else {
+		guard let emailString = self.authViewModel.getUserData()?.email else {
 			return
 		}
 		email.attributedText = NSAttributedString.semibold(emailString, 16, .gray)
+	}
+	
+	private func configureBalanceSummary() {
+		guard let balanceTotal = self.profileViewModel.user.value?.balance_total else {
+			return
+		}
+		balanceSummary = SummaryHeader(summary: .balance, subtitleText: numberHelper.floatToIdFormat(beforeFormatted: balanceTotal))
 	}
 	
 	private func configureScrollNode() {

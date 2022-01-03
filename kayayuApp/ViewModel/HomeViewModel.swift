@@ -29,6 +29,8 @@ class HomeViewModel {
 	var incomePerMonth: BehaviorRelay<Float?> = BehaviorRelay<Float?>(value: nil)
 	var expensePerMonth: BehaviorRelay<Float?> = BehaviorRelay<Float?>(value: nil)
 	
+	var balanceTotal: BehaviorRelay<Float?> = BehaviorRelay<Float?>(value: nil)
+	
 	
 	var userBalanceTotal: Float = 0
 
@@ -41,20 +43,20 @@ class HomeViewModel {
 		
 		self.getUserData()
 		self.getTransactionDataSpecMonth(startDate: currStartDate, endDate: currEndDate)
-//        self.getTransactionDataSpecMonth(diff: 11) //diff masukin month yg mo ditampilin
 		self.configureObserver()
-        
-//        self.addTransactionData(category: "needs", income_flag: false, transaction_date: Date(), description: "makan ketoprak", recurring_flag: false, amount: 28300)
-//        self.addRecurringSubsData(total_amount: 400000, billing_type: "Months", start_billing_date: Date(), tenor: 1, category: "wants", description: "hadiah box random")
-//        self.addRecurringInstData(total_amount: 100000, billing_type: "Weeks", start_billing_date: Date(), tenor: 10, category: "wants", description: "cicilan kipas angin", interest: 1)
+		self.getBalanceTotal()
         
 	}
     
 	private func configureObserver() {
-		
 		self.transactionsData.asObservable().subscribe(onNext: { transData in
 			self.getDictionaryTransaction()
+			self.updateBalanceTotal()
 			self.reloadUI?()
+		}).disposed(by: disposeBag)
+		
+		self.balanceTotal.asObservable().subscribe(onNext: { balanceTotal in
+			self.updateBalanceTotal()
 		}).disposed(by: disposeBag)
 	}
 	
@@ -82,6 +84,58 @@ class HomeViewModel {
 				print(error)
 			}
 		})
+	}
+	
+	private func updateBalanceTotal() {
+		let balanceTotal = self.balanceTotal.value
+		let balanceTotalData = [ "balance_total": balanceTotal]
+		database.collection("users").document(self.getUserId()).updateData(balanceTotalData as [AnyHashable : Any]) { err in
+			if let err = err {
+				print("Kayayu error on updating document: \(err) ")
+				return
+			}
+			else {
+				print("Kayayu successfully update balance_total")
+			}
+		}
+	}
+
+	
+	private func getBalanceTotal() {
+		database.collection("transactions")
+			.whereField("user_id", isEqualTo: getUserId())
+			.addSnapshotListener { (documentSnapshot, errorMsg) in
+				
+				if let errorMsg = errorMsg {
+					print("Error get Transaction Data \(errorMsg)")
+				}
+				else {
+					var incomeTotal: Float = 0
+					var expenseTotal: Float = 0
+					for document in documentSnapshot!.documents {
+						
+						do {
+							guard let trans = try document.data(as: Transactions.self) else {
+								print("KAYAYU failed get transactionData")
+								return
+							}
+							
+							if trans.income_flag == true {
+								incomeTotal += trans.amount ?? 0
+							} else {
+								expenseTotal += trans.amount ?? 0
+							}
+							
+							
+						} catch {
+							print(error)
+						}
+						
+					}
+					let balanceTotal = incomeTotal - expenseTotal
+					self.balanceTotal.accept(balanceTotal)
+				}
+			}
 	}
     
 	func getTransactionDataSpecMonth(startDate: Date, endDate: Date) {

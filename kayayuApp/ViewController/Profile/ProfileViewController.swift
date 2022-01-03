@@ -16,17 +16,20 @@ class ProfileViewController: ASDKViewController<ASDisplayNode> {
     var onLogout: (() -> Void)?
 	
 	private let profileNode: ProfileNode?
-	let viewModel: AuthenticationViewModel?
+	let authViewModel: AuthenticationViewModel?
+	let profileViewModel: ProfileViewModel?
 	
-	init(viewModel: AuthenticationViewModel) {
-		self.viewModel = viewModel
-		self.profileNode = ProfileNode(viewModel: viewModel)
+	init(authViewModel: AuthenticationViewModel, profileViewModel: ProfileViewModel) {
+		self.authViewModel = authViewModel
+		self.profileViewModel = profileViewModel
+		self.profileNode = ProfileNode(authViewModel: authViewModel, profileViewModel: profileViewModel)
 		super.init(node: profileNode ?? ASDisplayNode())
 		configureNode()
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
-		self.viewModel = nil
+		self.authViewModel = nil
+		self.profileViewModel = nil
 		self.profileNode = nil
 		super.init(coder: aDecoder)
 	}
@@ -42,7 +45,7 @@ class ProfileViewController: ASDKViewController<ASDisplayNode> {
 		}
 		
 		profileNode?.onLogout = { [weak self] in
-			self?.viewModel?.logout()
+			self?.authViewModel?.logout()
 			self?.onLogout?()
 		}
 		

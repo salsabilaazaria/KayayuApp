@@ -21,7 +21,7 @@ final class KayayuScreen {
 		case onOpenRegisterPage
 		case onOpenStatsPage(viewModel: StatsViewModel)
 		case onOpenAddRecordPage
-		case onOpenProfilePage(viewModel: AuthenticationViewModel)
+		case onOpenProfilePage(authViewModel: AuthenticationViewModel, profileViewModel: ProfileViewModel)
 		case onOpenSubscriptionPage(viewModel: ProfileViewModel)
         case onOpenInstallmentPage(viewModel: ProfileViewModel)
 		case onOpenEditProfile(viewModel: ProfileViewModel)
@@ -41,7 +41,7 @@ final class KayayuScreen {
 		return controller
 	}
 	
-	func makeTabBarViewController(homeViewModel: HomeViewModel, statsViewModel: StatsViewModel, profileViewModel: AuthenticationViewModel) -> UITabBarController {
+	func makeTabBarViewController(homeViewModel: HomeViewModel, statsViewModel: StatsViewModel, authViewModel: AuthenticationViewModel, profileViewModel: ProfileViewModel) -> UITabBarController {
 		tabBarController.edgesForExtendedLayout = []
 
 		let home = makeHomePageViewController(viewModel: homeViewModel)
@@ -52,7 +52,7 @@ final class KayayuScreen {
 		stats.tabBarItem.image = UIImage(named: "statsUnselected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize)
 		stats.tabBarItem.selectedImage = UIImage(named: "statsSelected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize)
 		
-		let profile = makeProfileViewController(viewModel: profileViewModel)
+		let profile = makeProfileViewController(authViewModel: authViewModel, profileViewModel: profileViewModel)
 		profile.tabBarItem.image = UIImage(named: "accUnselected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize)
 		profile.tabBarItem.selectedImage = UIImage(named: "accSelected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize)
 		
@@ -152,9 +152,8 @@ final class KayayuScreen {
 		return controller
 	}
 	
-	func makeProfileViewController(viewModel: AuthenticationViewModel) -> UIViewController {
-		let controller = ProfileViewController(viewModel: viewModel)
-		let profileViewModel = ProfileViewModel()
+	func makeProfileViewController(authViewModel: AuthenticationViewModel, profileViewModel: ProfileViewModel) -> UIViewController {
+		let controller = ProfileViewController(authViewModel: authViewModel, profileViewModel: profileViewModel)
 		controller.title = "Profile"
 		controller.onOpenSubscriptionPage = { [weak self] in
 			guard let self = self else {

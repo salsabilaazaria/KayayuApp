@@ -48,7 +48,8 @@ public final class KayayuCoordinator {
 				DispatchQueue.main.async {
 					let homeViewModel = HomeViewModel()
 					let statsViewModel = StatsViewModel()
-					let controller = screen.makeTabBarViewController(homeViewModel: homeViewModel, statsViewModel: statsViewModel, profileViewModel: authenticationViewModel)
+					let profileViewModel = ProfileViewModel()
+					let controller = screen.makeTabBarViewController(homeViewModel: homeViewModel, statsViewModel: statsViewModel, authViewModel: authenticationViewModel, profileViewModel: profileViewModel)
 					self.navigationController.pushViewController(controller, animated: true)
 				}
 				
@@ -91,9 +92,9 @@ public final class KayayuCoordinator {
 					self.navigationController.pushViewController(controller, animated: true)
 				}
 				
-			case .onOpenProfilePage(let viewModel):
+			case .onOpenProfilePage(let authViewModel, let profileViewModel):
 				DispatchQueue.main.async {
-					let controller = screen.makeProfileViewController(viewModel: viewModel)
+					let controller = screen.makeProfileViewController(authViewModel: authViewModel, profileViewModel: profileViewModel)
 					self.navigationController.pushViewController(controller, animated: true)
 				}
 				

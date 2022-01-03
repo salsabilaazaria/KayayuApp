@@ -11,7 +11,6 @@ import AsyncDisplayKit
 class HomeNode: ASDisplayNode {
 	var onOpenAddRecordPage: (() -> Void)?
 	var onOpenStatsPage: (() -> Void)?
-	var onOpenProfilePage: (() -> Void)?
 	
 	private let homeTableTransaction: HomeTableTransaction
 	private let addRecordBtn: ASButtonNode = ASButtonNode()
