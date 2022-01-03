@@ -25,6 +25,7 @@ final class KayayuScreen {
 		case onOpenSubscriptionPage(viewModel: ProfileViewModel)
         case onOpenInstallmentPage(viewModel: ProfileViewModel)
 		case onOpenEditProfile(viewModel: ProfileViewModel)
+		case onBackToEditProfilePage
 		case onOpenChangeEmail(viewModel: ProfileViewModel)
 		case onOpenChangeUsername(viewModel: ProfileViewModel)
 		case onOpenChangePassword(viewModel: ProfileViewModel)
@@ -228,11 +229,11 @@ final class KayayuScreen {
 	func makeChangeUsernamePageViewController(viewModel: ProfileViewModel) -> UIViewController {
 		let controller = ChangeUsernameController(viewModel: viewModel)
 		
-		controller.onOpenEditProfilePage = { [weak self] in
+		controller.onBackToEditProfilePage = { [weak self] in
 			guard let self = self else {
 				return
 			}
-			self.onNavigationEvent?(.onOpenEditProfile(viewModel: viewModel))
+			self.onNavigationEvent?(.onBackToEditProfilePage)
 		}
 		
 		return controller
@@ -241,11 +242,11 @@ final class KayayuScreen {
 	func makeChangeEmailPageViewController(viewModel: ProfileViewModel) -> UIViewController {
 		let controller = ChangeEmailController(viewModel: viewModel)
 		
-		controller.onOpenEditProfilePage = { [weak self] in
+		controller.onBackEditProfilePage = { [weak self] in
 			guard let self = self else {
 				return
 			}
-			self.onNavigationEvent?(.onOpenEditProfile(viewModel: viewModel))
+			self.onNavigationEvent?(.onBackToEditProfilePage)
 		}
 		
 		return controller
@@ -254,11 +255,11 @@ final class KayayuScreen {
 	func makeChangePasswordPageViewController(viewModel: ProfileViewModel) -> UIViewController {
 		let controller = ChangePasswordController(viewModel: viewModel)
 		
-		controller.onOpenEditProfilePage = { [weak self] in
+		controller.onBackToEditProfilePage = { [weak self] in
 			guard let self = self else {
 				return
 			}
-			self.onNavigationEvent?(.onOpenEditProfile(viewModel: viewModel))
+			self.onNavigationEvent?(.onBackToEditProfilePage)
 		}
 		
 		return controller

@@ -10,7 +10,7 @@ import AsyncDisplayKit
 
 class ChangePasswordNode: ASDisplayNode {
 	
-	var onOpenEditProfilePage: (() -> Void)?
+	var onBackToEditProfilePage: (() -> Void)?
 	
 	private let viewModel: ProfileViewModel
 	
@@ -79,8 +79,8 @@ class ChangePasswordNode: ASDisplayNode {
 	}
 	
 	private func configureViewModel() {
-		viewModel.goToEditProfilePage = {
-			self.onOpenEditProfilePage?()
+		viewModel.onBackToEditProfilePage = {
+			self.onBackToEditProfilePage?()
 		}
 		
 		viewModel.showAlert = { message in

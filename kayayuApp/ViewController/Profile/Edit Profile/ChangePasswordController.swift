@@ -9,7 +9,7 @@ import Foundation
 import AsyncDisplayKit
 
 class ChangePasswordController: ASDKViewController<ASDisplayNode> {
-	var onOpenEditProfilePage: (() -> Void)?
+	var onBackToEditProfilePage: (() -> Void)?
 	
 	private let changePasswordNode: ChangePasswordNode?
 	let viewModel: ProfileViewModel?
@@ -28,8 +28,8 @@ class ChangePasswordController: ASDKViewController<ASDisplayNode> {
 	}
 	
 	private func configureNode() {
-		changePasswordNode?.onOpenEditProfilePage = { [weak self] in
-			self?.onOpenEditProfilePage?()
+		changePasswordNode?.onBackToEditProfilePage = { [weak self] in
+			self?.onBackToEditProfilePage?()
 		}
 	}
 	

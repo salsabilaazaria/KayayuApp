@@ -57,14 +57,14 @@ class EditProfileNode: ASDisplayNode {
 	
 	
 	private func configureUsername() {
-		guard let usernameString = self.viewModel.user.value?.username else {
+		guard let usernameString = self.viewModel.getAuthUser()?.displayName else {
 			return
 		}
 		username.attributedText = NSAttributedString.bold(usernameString, 16, .black)
 	}
 	
 	private func configureEmail() {
-		guard let emailString = self.viewModel.user.value?.email else {
+		guard let emailString = self.viewModel.getAuthUser()?.email else {
 			return
 		}
 		email.attributedText = NSAttributedString.semibold(emailString, 16, .gray)

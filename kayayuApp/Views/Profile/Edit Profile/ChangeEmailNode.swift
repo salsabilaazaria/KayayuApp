@@ -10,7 +10,7 @@ import AsyncDisplayKit
 
 class ChangeEmailNode: ASDisplayNode {
 	
-	var onOpenEditProfilePage: (() -> Void)?
+	var onBackEditProfilePage: (() -> Void)?
 	
 	private let viewModel: ProfileViewModel
 	
@@ -71,8 +71,8 @@ class ChangeEmailNode: ASDisplayNode {
 	}
 	
 	private func configureViewModel() {
-		viewModel.goToEditProfilePage = {
-			self.onOpenEditProfilePage?()
+		viewModel.onBackToEditProfilePage = {
+			self.onBackEditProfilePage?()
 		}
 		
 		viewModel.showAlert = { message in

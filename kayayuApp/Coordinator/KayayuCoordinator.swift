@@ -114,6 +114,11 @@ public final class KayayuCoordinator {
 					let controller = screen.makeEditProfilePageViewController(viewModel: viewModel)
 					self.navigationController.pushViewController(controller, animated: true)
 				}
+			
+			case .onBackToEditProfilePage:
+				DispatchQueue.main.async {
+					self.navigationController.popViewController(animated: true)
+				}
 				
 			case .onOpenChangeEmail(let viewModel):
 				DispatchQueue.main.async {

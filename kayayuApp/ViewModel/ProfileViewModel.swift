@@ -16,7 +16,7 @@ import RxSwift
 class ProfileViewModel {
 	var reloadUI: (() -> Void)?
 	var showAlert: ((String) -> Void)?
-	var goToEditProfilePage: (() -> Void)?
+	var onBackToEditProfilePage: (() -> Void)?
 	
 	let database = Firestore.firestore()
 	let calendarHelper = CalendarHelper()
@@ -42,13 +42,18 @@ class ProfileViewModel {
 		
 	}
 	
+	func getAuthUser() -> User? {
+		guard let user = Auth.auth().currentUser else { return nil }
+		return user
+	}
+	
 	private func configureObserver() {
 		Observable.combineLatest(recurringSubsData.asObservable(), recurringInstlData.asObservable()).subscribe(onNext: { data in
 			self.reloadUI?()
 		}).disposed(by: disposeBag)
 	}
 	
-	private func getUserId() -> String{
+	private func getUserId() -> String {
 		guard let userId = Auth.auth().currentUser?.uid else { return "" }
 		print("KAYAYU USER ID \(userId)")
 		return userId
@@ -433,7 +438,7 @@ class ProfileViewModel {
 				}
 				else {
 					
-					self.goToEditProfilePage?()
+					self.onBackToEditProfilePage?()
 					print("Kayayu successfully update username")
 				}
 			}
@@ -465,7 +470,7 @@ class ProfileViewModel {
 							return
 						}
 						else {
-							self.goToEditProfilePage?()
+							self.onBackToEditProfilePage?()
 							print("Kayayu successfully update username")
 						}
 					}
@@ -501,7 +506,7 @@ class ProfileViewModel {
 							return
 						}
 						else {
-							self.goToEditProfilePage?()
+							self.onBackToEditProfilePage?()
 							print("Kayayu successfully update username")
 						}
 					}
