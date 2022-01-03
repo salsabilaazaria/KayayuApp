@@ -53,10 +53,9 @@ public final class KayayuCoordinator {
 				}
 				
 			case .onOpenHomePage:
-				let viewModel = HomeViewModel()
 				DispatchQueue.main.async {
-					let controller = screen.makeHomePageViewController(viewModel: viewModel)
-					self.navigationController.pushViewController(controller, animated: true)
+					let controller = self.tabBarViewController
+					self.navigationController.popToViewController(controller, animated: true)
 				}
 				
 			case .onOpenLandingPage:
