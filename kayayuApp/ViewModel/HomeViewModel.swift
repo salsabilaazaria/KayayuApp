@@ -31,7 +31,7 @@ class HomeViewModel {
 	var expensePerMonth: BehaviorRelay<Float?> = BehaviorRelay<Float?>(value: nil)
 	
 	var balanceTotal: BehaviorRelay<Float?> = BehaviorRelay<Float?>(value: nil)
-	
+    var detailTrans: BehaviorRelay<[TransactionDetail]?> = BehaviorRelay<[TransactionDetail]?>(value: nil)
 	
 	var userBalanceTotal: Float = 0
 
@@ -47,6 +47,8 @@ class HomeViewModel {
 		self.configureObserver()
 		self.getBalanceTotal()
         self.getRecurringIds()
+        
+        self.getTransactionDetailData()
 	}
     
 	private func configureObserver() {
@@ -576,6 +578,36 @@ class HomeViewModel {
 	}
     
     
+    private func getTransactionDetailData() {
+        
+        database.collection("transactionDetails").order(by: "billing_date", descending: true).addSnapshotListener { (documentSnapshot, errorMsg) in
+            if let errorMsg = errorMsg {
+                print("Error get Subscription Data \(errorMsg)")
+            }
+            else {
+                
+                var documentArray: [TransactionDetail] = []
+                
+                for document in documentSnapshot!.documents {
+                    
+                    do {
+                        guard let trans = try document.data(as: TransactionDetail.self) else {
+                            print("KAYAYU failed get recurring subscription data")
+                            return
+                        }
+                        documentArray.append(trans)
+                        
+                    } catch {
+                        print("error")
+                    }
+                }
+                self.detailTrans.accept(documentArray)
+                
+            }
+        }
+    }
+    
+    
 	//DELETE
 	
 	func deleteTransactionData(transactionDelete: Transactions) {
@@ -607,6 +639,60 @@ class HomeViewModel {
         else {
             print("delete data recurring")
             
+            guard let detailTrans = self.detailTrans.value,
+                  let detailTransData = detailTrans.first(where: { $0.transaction_id == transactionDelete.transaction_id }),
+                  let recurringId = detailTransData.recurring_id else {
+                print("detailTrans data unfetched")
+                return
+            }
+            
+            print("recurring id to be deleted: \(recurringId)")
+            
+            database.collection("transactionDetails").whereField("recurring_id", isEqualTo: recurringId).addSnapshotListener { (documentSnapshot, errorMsg) in
+                if let errorMsg = errorMsg {
+                    print("Error getting detail trans data with rec id \(recurringId) with error \(errorMsg)")
+                }
+                else {
+                    for document in documentSnapshot!.documents {
+                        do {
+                            guard let detTrans = try document.data(as: TransactionDetail.self) else {
+                                print("fail to fetch detail trans data")
+                                return
+                            }
+                            print("transaction_id to delete: \(detTrans.transaction_id), detail_trans_id to delete: \(detTrans.transaction_detail_id)")
+                            
+                            if(detTrans.transaction_id != "a") {
+                                self.database.collection("transactions").document(detTrans.transaction_id!).delete() { err in
+                                    if let err = err {
+                                        print("Error removing from transactions: \(err)")
+                                    } else {
+                                        print("Document \(detTrans.transaction_id ?? "NOT FOUND") successfully removed from transactions")
+                                    }
+                                }
+                            }
+                            
+                            self.database.collection("transactionDetails").document(detTrans.transaction_detail_id).delete() { err in
+                                if let err = err {
+                                    print("Error removing from transactionDetails: \(err)")
+                                } else {
+                                    print("Document \(detTrans.transaction_detail_id) successfully removed from transactionDetails")
+                                }
+                            }
+                            
+                        } catch {
+                            print("error")
+                        }
+                    }
+                }
+            }
+            
+            database.collection("recurringTransactions").document(recurringId).delete() { err in
+                if let err = err {
+                    print("Error removing from recurringTransaction: \(err)")
+                } else {
+                    print("Document \(recurringId) successfully removed from recurringTransactions")
+                }
+            }
         }
 	}
 	
