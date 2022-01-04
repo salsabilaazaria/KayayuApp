@@ -104,11 +104,29 @@ extension TransactionTableNode: ASTableDataSource, ASTableDelegate {
 	}
 	
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        var numOfIndex: Int = 0
+        
+        if(indexPath.section == 0){
+            numOfIndex = indexPath.row
+        }
+        else {
+            for i in 0...(indexPath.section-1) {
+                numOfIndex += numberOfRows(inSection: i)
+            }
+            
+            numOfIndex += indexPath.row
+        }
+            
+        print("get rownum delete: \(indexPath), \(numOfIndex)")
+        
 		if editingStyle == .delete {
 			guard let tempTransactionsData = viewModel.transactionsData.value else {
 				return
 			}
-			viewModel.deleteTransactionData(transactionDelete: tempTransactionsData[indexPath.row])
+            print("get data delete: \(tempTransactionsData[numOfIndex])")
+            
+			viewModel.deleteTransactionData(transactionDelete: tempTransactionsData[numOfIndex])
 			//
 			//			tableView.deleteRows(at: [indexPath], with: .fade)
 		}

@@ -579,16 +579,35 @@ class HomeViewModel {
 	//DELETE
 	
 	func deleteTransactionData(transactionDelete: Transactions) {
-		guard var tempTransactionData = self.transactionsData.value,
-			  let indexDelete = tempTransactionData.firstIndex(where: { data in
-				return data.transaction_id == transactionDelete.transaction_id
-			  }) else {
-			return
-		}
+//		guard var tempTransactionData = self.transactionsData.value,
+//			  let indexDelete = tempTransactionData.firstIndex(where: { data in
+//				return data.transaction_id == transactionDelete.transaction_id
+//			  }) else {
+//			return
+//		}
 		
-		tempTransactionData.remove(at: indexDelete)
+//        print("deleted data: \(indexDelete)")
+//		tempTransactionData.remove(at: indexDelete)
 		
-		self.transactionsData.accept(tempTransactionData)
+//		self.transactionsData.accept(tempTransactionData)
+        
+        print("deleted data: \(transactionDelete)")
+        
+        if(transactionDelete.recurring_flag == false) {
+            print("delete data sekali")
+            
+            database.collection("transactions").document(transactionDelete.transaction_id).delete() { err in
+                if let err = err {
+                    print("Error removing document: \(err)")
+                } else {
+                    print("Document successfully removed")
+                }
+            }
+        }
+        else {
+            print("delete data recurring")
+            
+        }
 	}
 	
 	//EXTRAS
