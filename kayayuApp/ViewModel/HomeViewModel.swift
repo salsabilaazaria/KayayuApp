@@ -19,6 +19,7 @@ class HomeViewModel {
 	var onOpenHomePage: (() -> Void)?
 	var reloadUI: (() -> Void)?
 	
+    let profViewModel = ProfileViewModel()
 	let database = Firestore.firestore()
     private let calendarHelper = CalendarHelper()
 	
@@ -45,7 +46,7 @@ class HomeViewModel {
 		self.getTransactionDataSpecMonth(startDate: currStartDate, endDate: currEndDate)
 		self.configureObserver()
 		self.getBalanceTotal()
-        
+        self.getRecurringIds()
 	}
     
 	private func configureObserver() {
@@ -197,6 +198,40 @@ class HomeViewModel {
 		}
 		self.dictTransactionData.accept(sortedDateDictionary)
 	}
+    
+    private func getRecurringIds() {
+        database.collection("recurringTransactions")
+            .whereField("user_id", isEqualTo: getUserId())
+            .addSnapshotListener { (documentSnapshot, errorMsg) in
+                
+                if let errorMsg = errorMsg {
+                    print("Error getting Recurring Transactions data \(errorMsg)")
+                }
+                else {
+                    var documentArray: [String] = []
+                    var dueNum: Int = 0
+                    for document in documentSnapshot!.documents {
+                        
+                        do {
+                            guard let trans = try document.data(as: RecurringTransactions.self) else {
+                                print("KAYAYU failed get recurringTransactions")
+                                return
+                            }
+                            documentArray.append(trans.recurring_id)
+                            
+                            print("rec id: \(trans.recurring_id)")
+                            
+                            dueNum = self.profViewModel.getDueIn(recurringId: trans.recurring_id)
+                            print("due in: \(dueNum)")
+                            
+                        } catch {
+                            print(error)
+                        }
+                    }
+                }
+            }
+    }
+    
 	
 	//ADD DATA
     
