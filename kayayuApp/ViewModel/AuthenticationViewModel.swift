@@ -100,7 +100,6 @@ class AuthenticationViewModel {
 								 email: email,
 								 password: password,
 								 balance_total: 0,
-								 balance_month: 0,
 								 balance_needs: 0,
 								 balance_wants: 0,
 								 balance_savings: 0)

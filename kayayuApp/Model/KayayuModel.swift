@@ -13,7 +13,6 @@ struct Users: Codable {
     var email: String?
     var password: String?
     var balance_total: Float?
-    var balance_month: Float?
     var balance_needs: Float?
     var balance_wants: Float?
     var balance_savings: Float?

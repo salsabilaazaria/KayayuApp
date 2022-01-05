@@ -27,12 +27,16 @@ class HomeViewModel {
 	var transactionsData: BehaviorRelay<[Transactions]?> = BehaviorRelay<[Transactions]?>(value: nil)
 	var dictTransactionData: BehaviorRelay<[TransactionDateDictionary]?> = BehaviorRelay<[TransactionDateDictionary]?>(value: nil)
 	
+	var detailTrans: BehaviorRelay<[TransactionDetail]?> = BehaviorRelay<[TransactionDetail]?>(value: nil)
+	
 	var incomePerMonth: BehaviorRelay<Float?> = BehaviorRelay<Float?>(value: nil)
 	var expensePerMonth: BehaviorRelay<Float?> = BehaviorRelay<Float?>(value: nil)
 	
 	var balanceTotal: BehaviorRelay<Float?> = BehaviorRelay<Float?>(value: nil)
-    var detailTrans: BehaviorRelay<[TransactionDetail]?> = BehaviorRelay<[TransactionDetail]?>(value: nil)
-	
+	var needsTotal: Float = 0
+	var wantsTotal: Float = 0
+	var savingsTotal: Float = 0
+  
 	var userBalanceTotal: Float = 0
 
 	private let disposeBag = DisposeBag()
@@ -91,7 +95,10 @@ class HomeViewModel {
 	
 	private func updateBalanceTotal() {
 		let balanceTotal = self.balanceTotal.value
-		let balanceTotalData = [ "balance_total": balanceTotal]
+		let balanceTotalData = [ "balance_total": balanceTotal,
+								 "balance_needs": needsTotal,
+								 "balance_wants": wantsTotal,
+								 "balance_savings": savingsTotal]
 		database.collection("users").document(self.getUserId()).updateData(balanceTotalData as [AnyHashable : Any]) { err in
 			if let err = err {
 				print("Kayayu error on updating document: \(err) ")
@@ -115,6 +122,15 @@ class HomeViewModel {
 				else {
 					var incomeTotal: Float = 0
 					var expenseTotal: Float = 0
+					
+					var needsIncome: Float = 0
+					var needsExpense: Float = 0
+					
+					var wantsIncome: Float = 0
+					var wantsExpense: Float = 0
+					
+					var savingsIncome: Float = 0
+					var savingsExpense: Float = 0
 					for document in documentSnapshot!.documents {
 						
 						do {
@@ -123,10 +139,48 @@ class HomeViewModel {
 								return
 							}
 							
+							guard let amount = trans.amount else {
+								return
+							}
 							if trans.income_flag == true {
-								incomeTotal += trans.amount ?? 0
+								incomeTotal += amount
+								if trans.category == kayayuRatioTitle.all.rawValue.lowercased() {
+									
+									let needsAmount = amount * kayayuRatioValue.needs.rawValue
+									let wantsAmount = amount * kayayuRatioValue.wants.rawValue
+									let savingsAmount = amount * kayayuRatioValue.savings.rawValue
+									
+									needsIncome += needsAmount
+									wantsIncome += wantsAmount
+									savingsIncome += savingsAmount
+									
+								} else if trans.category == kayayuRatioTitle.needs.rawValue.lowercased() {
+									needsIncome += amount
+								} else if trans.category == kayayuRatioTitle.wants.rawValue.lowercased() {
+									wantsIncome += amount
+								} else if trans.category == kayayuRatioTitle.savings.rawValue.lowercased() {
+									savingsIncome += amount
+								}
 							} else {
-								expenseTotal += trans.amount ?? 0
+								expenseTotal += amount
+								
+								if trans.category == kayayuRatioTitle.all.rawValue.lowercased() {
+									
+									let needsAmount = amount * kayayuRatioValue.needs.rawValue
+									let wantsAmount = amount * kayayuRatioValue.wants.rawValue
+									let savingsAmount = amount * kayayuRatioValue.savings.rawValue
+									
+									needsExpense += needsAmount
+									wantsExpense += wantsAmount
+									savingsExpense += savingsAmount
+									
+								} else if trans.category == kayayuRatioTitle.needs.rawValue.lowercased() {
+									needsExpense += amount
+								} else if trans.category == kayayuRatioTitle.wants.rawValue.lowercased() {
+									wantsExpense += amount
+								} else if trans.category == kayayuRatioTitle.savings.rawValue.lowercased() {
+									savingsExpense += amount
+								}
 							}
 							
 							
@@ -136,6 +190,9 @@ class HomeViewModel {
 						
 					}
 					let balanceTotal = incomeTotal - expenseTotal
+					self.needsTotal = needsIncome - needsExpense
+					self.wantsTotal = wantsIncome - wantsExpense
+					self.savingsTotal = savingsIncome - savingsExpense
 					self.balanceTotal.accept(balanceTotal)
 				}
 			}

@@ -73,6 +73,7 @@
 		AF6728DC277645CA00EFD5DE /* EditProfileNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6728DB277645CA00EFD5DE /* EditProfileNode.swift */; };
 		AF6728E127764BE200EFD5DE /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6728E027764BE200EFD5DE /* EditProfileController.swift */; };
 		AF7591DA274E43DE003B8708 /* StatsDateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7591D9274E43DE003B8708 /* StatsDateHeader.swift */; };
+		AF767C5E2785D7F6001AEEAD /* WalletSummaryCollectionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF767C5D2785D7F6001AEEAD /* WalletSummaryCollectionNode.swift */; };
 		AFA9CDD5274F759A00E520A3 /* AddIncomeRecordNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA9CDD4274F759A00E520A3 /* AddIncomeRecordNode.swift */; };
 		AFA9CDE2274F766300E520A3 /* AddRecordeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA9CDE1274F766300E520A3 /* AddRecordeNode.swift */; };
 		AFA9CDEB274F776C00E520A3 /* AddExpenseRecordNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA9CDEA274F776C00E520A3 /* AddExpenseRecordNode.swift */; };
@@ -169,6 +170,7 @@
 		AF6728DB277645CA00EFD5DE /* EditProfileNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileNode.swift; sourceTree = "<group>"; };
 		AF6728E027764BE200EFD5DE /* EditProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileController.swift; sourceTree = "<group>"; };
 		AF7591D9274E43DE003B8708 /* StatsDateHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsDateHeader.swift; sourceTree = "<group>"; };
+		AF767C5D2785D7F6001AEEAD /* WalletSummaryCollectionNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSummaryCollectionNode.swift; sourceTree = "<group>"; };
 		AFA9CDD4274F759A00E520A3 /* AddIncomeRecordNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIncomeRecordNode.swift; sourceTree = "<group>"; };
 		AFA9CDE1274F766300E520A3 /* AddRecordeNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordeNode.swift; sourceTree = "<group>"; };
 		AFA9CDEA274F776C00E520A3 /* AddExpenseRecordNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseRecordNode.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 				0ADCBA86275E5F1100F15F5E /* Subscription */,
 				0A337AB8275E503900B04508 /* ProfileNode.swift */,
 				0A337AC2275E540500B04508 /* ProfileCellNode.swift */,
+				AF767C5D2785D7F6001AEEAD /* WalletSummaryCollectionNode.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -795,6 +798,7 @@
 				0ABC631B273929860041087F /* SceneDelegate.swift in Sources */,
 				0ADCBAA3275E7DB900F15F5E /* InstallmentCellNode.swift in Sources */,
 				AFA9CDEB274F776C00E520A3 /* AddExpenseRecordNode.swift in Sources */,
+				AF767C5E2785D7F6001AEEAD /* WalletSummaryCollectionNode.swift in Sources */,
 				0ADCBA95275E793A00F15F5E /* SubscriptionViewController.swift in Sources */,
 				0A20A9C427411024005E8BB6 /* TabBar.swift in Sources */,
 				0A337AC3275E540500B04508 /* ProfileCellNode.swift in Sources */,

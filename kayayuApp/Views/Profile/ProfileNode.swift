@@ -19,6 +19,7 @@ class ProfileNode: ASDisplayNode {
 	private let username: ASTextNode = ASTextNode()
 	private let email: ASTextNode = ASTextNode()
 	private var balanceSummary: SummaryHeader = SummaryHeader()
+	private var walletSummary: WalletSummaryCollectionNode
 	
 	private var subscriptionNode: ProfileCellNode = ProfileCellNode()
 	private var installmentNode: ProfileCellNode = ProfileCellNode()
@@ -35,6 +36,7 @@ class ProfileNode: ASDisplayNode {
 	init(authViewModel: AuthenticationViewModel, profileViewModel: ProfileViewModel) {
 		self.authViewModel = authViewModel
 		self.profileViewModel = profileViewModel
+		self.walletSummary = WalletSummaryCollectionNode(viewModel: profileViewModel)
 		super.init()
 
 		backgroundColor = .white
@@ -57,7 +59,7 @@ class ProfileNode: ASDisplayNode {
 											 spacing: 16,
 											 justifyContent: .start,
 											 alignItems: .start,
-											 children: [userInfoStack, balanceSummary])
+											 children: [userInfoStack, walletSummary])
 		
 		let profileInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 16, left: 16, bottom: 32, right: 16), child: profileStack)
 		
