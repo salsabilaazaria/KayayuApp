@@ -27,8 +27,13 @@ class PopUpViewController:ASDKViewController<ASDisplayNode> {
 	}
 
 	override func viewDidLoad() {
-	
+		let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapView(_:)))
+		popUp.view.addGestureRecognizer(tapGestureRecognizer)
 
+	}
+	
+	@objc func didTapView(_ sender: UITapGestureRecognizer) {
+		self.dismiss(animated: true, completion: nil)
 	}
 
 }
