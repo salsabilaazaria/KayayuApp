@@ -25,8 +25,8 @@ class ProfileViewModel {
 	var recurringData: BehaviorRelay<[RecurringTransactions]?> = BehaviorRelay<[RecurringTransactions]?>(value: nil)
 	var recurringSubsData: BehaviorRelay<[RecurringTransactions]?> = BehaviorRelay<[RecurringTransactions]?>(value: nil)
 	var recurringInstlData: BehaviorRelay<[RecurringTransactions]?> = BehaviorRelay<[RecurringTransactions]?>(value: nil)
-	var detailTrans: BehaviorRelay<[TransactionDetail]?> = BehaviorRelay<[TransactionDetail]?>(value: nil)
-	var detailTransLatest: BehaviorRelay<[TransactionDetail]?> = BehaviorRelay<[TransactionDetail]?>(value: nil)
+	var detailTrans: BehaviorRelay<[TransactionDetails]?> = BehaviorRelay<[TransactionDetails]?>(value: nil)
+	var detailTransLatest: BehaviorRelay<[TransactionDetails]?> = BehaviorRelay<[TransactionDetails]?>(value: nil)
 	var transactionsData: BehaviorRelay<[Transactions]?> = BehaviorRelay<[Transactions]?>(value: nil)
 	
 	private let disposeBag = DisposeBag()
@@ -204,12 +204,12 @@ class ProfileViewModel {
 			}
 			else {
 				
-				var documentArray: [TransactionDetail] = []
+				var documentArray: [TransactionDetails] = []
 				
 				for document in documentSnapshot!.documents {
 					
 					do {
-						guard let trans = try document.data(as: TransactionDetail.self) else {
+						guard let trans = try document.data(as: TransactionDetails.self) else {
 							print("KAYAYU failed get recurring subscription data")
 							return
 						}
@@ -370,7 +370,7 @@ class ProfileViewModel {
 					}
 				}
 				
-				let nextDetailTransData = TransactionDetail(
+				let nextDetailTransData = TransactionDetails(
 					transaction_detail_id: refDetailTrans!.documentID,
 					transaction_id: "a",
 					user_id: self.getUserId(),

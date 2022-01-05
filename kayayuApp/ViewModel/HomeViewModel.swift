@@ -27,7 +27,7 @@ class HomeViewModel {
 	var transactionsData: BehaviorRelay<[Transactions]?> = BehaviorRelay<[Transactions]?>(value: nil)
 	var dictTransactionData: BehaviorRelay<[TransactionDateDictionary]?> = BehaviorRelay<[TransactionDateDictionary]?>(value: nil)
 	
-	var detailTrans: BehaviorRelay<[TransactionDetail]?> = BehaviorRelay<[TransactionDetail]?>(value: nil)
+	var detailTrans: BehaviorRelay<[TransactionDetails]?> = BehaviorRelay<[TransactionDetails]?>(value: nil)
 	
 	var incomePerMonth: BehaviorRelay<Float?> = BehaviorRelay<Float?>(value: nil)
 	var expensePerMonth: BehaviorRelay<Float?> = BehaviorRelay<Float?>(value: nil)
@@ -412,7 +412,7 @@ class HomeViewModel {
             amount: total_amount
         )
         
-        let detailRecSubsCurrData = TransactionDetail(
+        let detailRecSubsCurrData = TransactionDetails(
             transaction_detail_id: refDetailRecSubsCurr!.documentID,
             transaction_id: refTransRecSubs!.documentID,
             user_id: self.getUserId(),
@@ -453,7 +453,7 @@ class HomeViewModel {
                 }
             }
             
-            let detailRecSubsNextData = TransactionDetail(
+            let detailRecSubsNextData = TransactionDetails(
                 transaction_detail_id: refDetailRecSubsNext!.documentID,
                 transaction_id: "a",
                 user_id: self.getUserId(),
@@ -571,7 +571,7 @@ class HomeViewModel {
             amount: amount_per_billing
         )
         
-        let detailRecInstlCurrData = TransactionDetail(
+        let detailRecInstlCurrData = TransactionDetails(
             transaction_detail_id: refDetailRecInstlCurr!.documentID,
             transaction_id: refTransRecInstl!.documentID,
             user_id: self.getUserId(),
@@ -612,7 +612,7 @@ class HomeViewModel {
                 }
             }
             
-            let detailRecInstlNextData = TransactionDetail(
+            let detailRecInstlNextData = TransactionDetails(
                 transaction_detail_id: refDetailRecInstlNext!.documentID,
                 transaction_id: "a",
                 user_id: self.getUserId(),
@@ -643,12 +643,12 @@ class HomeViewModel {
             }
             else {
                 
-                var documentArray: [TransactionDetail] = []
+                var documentArray: [TransactionDetails] = []
                 
                 for document in documentSnapshot!.documents {
                     
                     do {
-                        guard let trans = try document.data(as: TransactionDetail.self) else {
+                        guard let trans = try document.data(as: TransactionDetails.self) else {
                             print("KAYAYU failed get recurring subscription data")
                             return
                         }
@@ -701,7 +701,7 @@ class HomeViewModel {
                 else {
                     for document in documentSnapshot!.documents {
                         do {
-                            guard let detTrans = try document.data(as: TransactionDetail.self) else {
+                            guard let detTrans = try document.data(as: TransactionDetails.self) else {
                                 print("fail to fetch detail trans data")
                                 return
                             }

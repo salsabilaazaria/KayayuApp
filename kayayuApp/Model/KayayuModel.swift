@@ -47,7 +47,7 @@ struct RecurringTransactions: Codable {
     var interest: Float?
 }
 
-struct TransactionDetail: Codable {
+struct TransactionDetails: Codable {
     var transaction_detail_id:String = UUID().uuidString
     var transaction_id:String?
     var user_id:String?

@@ -600,6 +600,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 		durationInputTextField.borderWidth = kayayuSize.kayayuInputTextFieldBorderWidth
 		durationInputTextField.borderColor = kayayuColor.borderInputTextField.cgColor
 		durationInputTextField.layer.cornerRadius = kayayuSize.inputTextFieldCornerRadius
+		durationInputTextField.textContainerInset = textContainerInset
 		
 		let recurring = createRecurringTypeSpec()
 		
