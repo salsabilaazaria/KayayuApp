@@ -9,9 +9,11 @@ import Foundation
 import AsyncDisplayKit
 
 class HomeViewController:ASDKViewController<ASDisplayNode> {
+	var onOpenAddRecordPage: (() -> Void)?
+	var onDeleteData: ((Transactions) -> Void)?
+	
 	private let homeNode: HomeNode?
     private let viewModel: HomeViewModel?
-	var onOpenAddRecordPage: (() -> Void)?
 	
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
@@ -31,6 +33,22 @@ class HomeViewController:ASDKViewController<ASDisplayNode> {
 	private func configureHomeNode() {
 		homeNode?.onOpenAddRecordPage = { [weak self] in
 			self?.onOpenAddRecordPage?()
+		}
+		homeNode?.onDeleteData = { [weak self] transData in
+			
+			let alert = UIAlertController(title: "Delete Data", message: "Are you sure want to delete '\(transData.description ?? "this data")'?", preferredStyle: UIAlertController.Style.alert)
+			
+			alert.addAction(UIAlertAction(title: "No", style: UIAlertAction.Style.default, handler: {_ in
+				self?.dismiss(animated: true, completion: nil)
+			}))
+			
+			alert.addAction(UIAlertAction(title: "Yes", style: UIAlertAction.Style.destructive, handler: {_ in
+				self?.viewModel?.deleteTransactionData(transactionDelete: transData)
+			
+			}))
+			
+			self?.present(alert, animated: true, completion: nil)
+			
 		}
 	}
 	

@@ -10,6 +10,7 @@ import AsyncDisplayKit
 
 class HomeTableTransaction: ASDisplayNode {
 	var changeMonthData: ((Date) -> Void)?
+	var onDeleteData: ((Transactions) -> Void)?
 	private let transactionTableHeader: TransactionTableHeaderNode
 	private let transactionTableNode: TransactionTableNode
 	private let viewModel: HomeViewModel
@@ -58,6 +59,10 @@ class HomeTableTransaction: ASDisplayNode {
 
 			self?.viewModel.getTransactionDataSpecMonth(startDate: startDate, endDate: endDate)
 			
+		}
+		
+		transactionTableNode.onDeleteData = { [weak self] transData in
+			self?.onDeleteData?(transData)
 		}
 	}
 	

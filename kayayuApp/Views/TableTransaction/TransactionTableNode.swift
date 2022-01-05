@@ -11,6 +11,7 @@ import RxCocoa
 import RxSwift
 
 class TransactionTableNode: ASTableNode {
+	var onDeleteData: ((Transactions) -> Void)?
 	private let viewModel: HomeViewModel
 	private let calendarHelper: CalendarHelper = CalendarHelper()
 	
@@ -121,14 +122,15 @@ extension TransactionTableNode: ASTableDataSource, ASTableDelegate {
         print("get rownum delete: \(indexPath), \(numOfIndex)")
         
 		if editingStyle == .delete {
+		
+			
 			guard let tempTransactionsData = viewModel.transactionsData.value else {
 				return
 			}
-            print("get data delete: \(tempTransactionsData[numOfIndex])")
-            
-			viewModel.deleteTransactionData(transactionDelete: tempTransactionsData[numOfIndex])
-			//
-			//			tableView.deleteRows(at: [indexPath], with: .fade)
+			print("get data delete: \(tempTransactionsData[numOfIndex])")
+			self.onDeleteData?(tempTransactionsData[numOfIndex])
+//			viewModel.deleteTransactionData(transactionDelete: tempTransactionsData[numOfIndex])
+
 		}
 	}
 	

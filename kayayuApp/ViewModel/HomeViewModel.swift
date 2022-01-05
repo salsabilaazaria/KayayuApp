@@ -668,17 +668,6 @@ class HomeViewModel {
 	//DELETE
 	
 	func deleteTransactionData(transactionDelete: Transactions) {
-//		guard var tempTransactionData = self.transactionsData.value,
-//			  let indexDelete = tempTransactionData.firstIndex(where: { data in
-//				return data.transaction_id == transactionDelete.transaction_id
-//			  }) else {
-//			return
-//		}
-		
-//        print("deleted data: \(indexDelete)")
-//		tempTransactionData.remove(at: indexDelete)
-		
-//		self.transactionsData.accept(tempTransactionData)
         
         print("deleted data: \(transactionDelete)")
         
