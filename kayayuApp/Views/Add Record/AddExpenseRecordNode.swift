@@ -137,7 +137,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 		
 		mainSpec.style.preferredSize = CGSize(width: UIScreen.main.bounds.width, height:  UIScreen.main.bounds.height)
 		
-		let insetMainSpec = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 16, left: 16, bottom: 32, right: 16), child: mainSpec)
+		let insetMainSpec = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 16, left: 16, bottom: 48, right: 16), child: mainSpec)
 		
 		return insetMainSpec
 	}

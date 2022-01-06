@@ -524,8 +524,14 @@ class HomeViewModel {
             
         } else if(billing_type == "Monthly"){
             final_billing_type = "monthly"
-            dateComponent.month = 1
-            dateComponentEnd.month = tenor-1
+			
+			if calendarHelper.dayOfDate(date: start_billing_date) > 28 {
+				dateComponent.day = 30
+				dateComponentEnd.day = (tenor-1)*30
+			} else {
+				dateComponent.month = 1
+				dateComponentEnd.month = tenor-1
+			}
             
         } else if(billing_type == "Yearly"){
             final_billing_type = "yearly"
