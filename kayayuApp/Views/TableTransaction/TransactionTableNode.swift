@@ -69,7 +69,7 @@ extension TransactionTableNode: ASTableDataSource, ASTableDelegate {
 		let incomePerDay = viewModel.calculateIncomePerDay(date: date)
 		let expensePerDay = viewModel.calculateExpensePerDay(date: date)
 		
-		let rect = CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 30)
+		let rect = CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40)
 		let view = UIView(frame: rect)
 		
 		let cell = TransactionDateCellNode(date: date, incomePerDay: incomePerDay, expensePerDay: expensePerDay)
