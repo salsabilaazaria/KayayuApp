@@ -13,7 +13,6 @@ struct Users: Codable {
     var email: String?
     var password: String?
     var balance_total: Float?
-    var balance_month: Float?
     var balance_needs: Float?
     var balance_wants: Float?
     var balance_savings: Float?
@@ -48,7 +47,7 @@ struct RecurringTransactions: Codable {
     var interest: Float?
 }
 
-struct TransactionDetail: Codable {
+struct TransactionDetails: Codable {
     var transaction_detail_id:String = UUID().uuidString
     var transaction_id:String?
     var user_id:String?

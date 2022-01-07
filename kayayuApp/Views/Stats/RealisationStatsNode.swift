@@ -108,7 +108,7 @@ class RealisationStatsNode: ASDisplayNode {
 	}
 	
 	private func configureRatioTitle() {
-		ratioTitle.attributedText = NSAttributedString.bold("Summary", 14, kayayuColor.yellow)
+		ratioTitle.attributedText = NSAttributedString.bold("Summary", 16, kayayuColor.yellow)
 	}
 	
 	private func configureNeedsSummary() {

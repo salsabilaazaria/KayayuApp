@@ -73,6 +73,7 @@
 		AF6728DC277645CA00EFD5DE /* EditProfileNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6728DB277645CA00EFD5DE /* EditProfileNode.swift */; };
 		AF6728E127764BE200EFD5DE /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6728E027764BE200EFD5DE /* EditProfileController.swift */; };
 		AF7591DA274E43DE003B8708 /* StatsDateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7591D9274E43DE003B8708 /* StatsDateHeader.swift */; };
+		AF767C5E2785D7F6001AEEAD /* WalletSummaryCollectionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF767C5D2785D7F6001AEEAD /* WalletSummaryCollectionNode.swift */; };
 		AFA9CDD5274F759A00E520A3 /* AddIncomeRecordNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA9CDD4274F759A00E520A3 /* AddIncomeRecordNode.swift */; };
 		AFA9CDE2274F766300E520A3 /* AddRecordeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA9CDE1274F766300E520A3 /* AddRecordeNode.swift */; };
 		AFA9CDEB274F776C00E520A3 /* AddExpenseRecordNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA9CDEA274F776C00E520A3 /* AddExpenseRecordNode.swift */; };
@@ -83,6 +84,9 @@
 		AFC65DAA274792AD0050769D /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC65DA9274792AD0050769D /* LandingViewController.swift */; };
 		AFC65DB52747ABBA0050769D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC65DB42747ABBA0050769D /* LoginViewController.swift */; };
 		AFC65DBA2747ABCA0050769D /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC65DB92747ABCA0050769D /* RegisterViewController.swift */; };
+		AFF76AC6277E179200FBA576 /* PopUpContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF76AC5277E179200FBA576 /* PopUpContent.swift */; };
+		AFF76ACE277E1D4100FBA576 /* PopUpBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF76ACD277E1D4100FBA576 /* PopUpBackground.swift */; };
+		AFF76AD5277E1E3100FBA576 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF76AD4277E1E3100FBA576 /* PopUpViewController.swift */; };
 		FD2C4EBA276388ED00A8C50F /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2C4EB9276388ED00A8C50F /* ProfileViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -169,6 +173,7 @@
 		AF6728DB277645CA00EFD5DE /* EditProfileNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileNode.swift; sourceTree = "<group>"; };
 		AF6728E027764BE200EFD5DE /* EditProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileController.swift; sourceTree = "<group>"; };
 		AF7591D9274E43DE003B8708 /* StatsDateHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsDateHeader.swift; sourceTree = "<group>"; };
+		AF767C5D2785D7F6001AEEAD /* WalletSummaryCollectionNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSummaryCollectionNode.swift; sourceTree = "<group>"; };
 		AFA9CDD4274F759A00E520A3 /* AddIncomeRecordNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIncomeRecordNode.swift; sourceTree = "<group>"; };
 		AFA9CDE1274F766300E520A3 /* AddRecordeNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordeNode.swift; sourceTree = "<group>"; };
 		AFA9CDEA274F776C00E520A3 /* AddExpenseRecordNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseRecordNode.swift; sourceTree = "<group>"; };
@@ -179,6 +184,9 @@
 		AFC65DA9274792AD0050769D /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LandingViewController.swift; path = kayayuApp/LandingViewController.swift; sourceTree = SOURCE_ROOT; };
 		AFC65DB42747ABBA0050769D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = kayayuApp/LoginViewController.swift; sourceTree = SOURCE_ROOT; };
 		AFC65DB92747ABCA0050769D /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RegisterViewController.swift; path = kayayuApp/RegisterViewController.swift; sourceTree = SOURCE_ROOT; };
+		AFF76AC5277E179200FBA576 /* PopUpContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpContent.swift; sourceTree = "<group>"; };
+		AFF76ACD277E1D4100FBA576 /* PopUpBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpBackground.swift; sourceTree = "<group>"; };
+		AFF76AD4277E1E3100FBA576 /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		C38129C91BEF170882976105 /* Pods-kayayuApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuApp.release.xcconfig"; path = "Target Support Files/Pods-kayayuApp/Pods-kayayuApp.release.xcconfig"; sourceTree = "<group>"; };
 		CD62154645A87E11302368DD /* Pods-kayayuApp-kayayuAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuApp-kayayuAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-kayayuApp-kayayuAppUITests/Pods-kayayuApp-kayayuAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		E5EF96CDCC12CC6B377D880A /* Pods-kayayuApp-kayayuAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kayayuApp-kayayuAppUITests.release.xcconfig"; path = "Target Support Files/Pods-kayayuApp-kayayuAppUITests/Pods-kayayuApp-kayayuAppUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -229,6 +237,7 @@
 				0ADCBA86275E5F1100F15F5E /* Subscription */,
 				0A337AB8275E503900B04508 /* ProfileNode.swift */,
 				0A337AC2275E540500B04508 /* ProfileCellNode.swift */,
+				AF767C5D2785D7F6001AEEAD /* WalletSummaryCollectionNode.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -247,6 +256,7 @@
 		0AAA2672273A65750063D876 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				AFF76AD2277E1E0700FBA576 /* Pop Up */,
 				0AAA2673273A65900063D876 /* BigButton.swift */,
 				0AAA2689273AB0700063D876 /* SummaryHeader.swift */,
 				0A20A9C327411024005E8BB6 /* TabBar.swift */,
@@ -364,6 +374,7 @@
 				0A8D950C274D2B2400BB55FC /* StatsViewController.swift */,
 				AF6728D72776455800EFD5DE /* Home */,
 				AF6728D52776453100EFD5DE /* Profile */,
+				AFF76AD3277E1E1700FBA576 /* Component */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -475,6 +486,23 @@
 				AFC65DA4274771650050769D /* KayayuScreen.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		AFF76AD2277E1E0700FBA576 /* Pop Up */ = {
+			isa = PBXGroup;
+			children = (
+				AFF76AC5277E179200FBA576 /* PopUpContent.swift */,
+				AFF76ACD277E1D4100FBA576 /* PopUpBackground.swift */,
+			);
+			path = "Pop Up";
+			sourceTree = "<group>";
+		};
+		AFF76AD3277E1E1700FBA576 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				AFF76AD4277E1E3100FBA576 /* PopUpViewController.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 		E949D484373EE7F83AF88521 /* Pods */ = {
@@ -767,6 +795,7 @@
 				0A8D9517274D333500BB55FC /* PlanStatsNode.swift in Sources */,
 				0A8D950D274D2B2400BB55FC /* StatsViewController.swift in Sources */,
 				AF2C1867274607AC00482D6E /* CalendarHelper.swift in Sources */,
+				AFF76AD5277E1E3100FBA576 /* PopUpViewController.swift in Sources */,
 				0ADCBA90275E5F3100F15F5E /* SubscriptionCellNode.swift in Sources */,
 				AF7591DA274E43DE003B8708 /* StatsDateHeader.swift in Sources */,
 				AF2C18752746165600482D6E /* TransactionTableHeaderNode.swift in Sources */,
@@ -794,7 +823,9 @@
 				AF6728C22776420500EFD5DE /* ChangePasswordNode.swift in Sources */,
 				0ABC631B273929860041087F /* SceneDelegate.swift in Sources */,
 				0ADCBAA3275E7DB900F15F5E /* InstallmentCellNode.swift in Sources */,
+				AFF76AC6277E179200FBA576 /* PopUpContent.swift in Sources */,
 				AFA9CDEB274F776C00E520A3 /* AddExpenseRecordNode.swift in Sources */,
+				AF767C5E2785D7F6001AEEAD /* WalletSummaryCollectionNode.swift in Sources */,
 				0ADCBA95275E793A00F15F5E /* SubscriptionViewController.swift in Sources */,
 				0A20A9C427411024005E8BB6 /* TabBar.swift in Sources */,
 				0A337AC3275E540500B04508 /* ProfileCellNode.swift in Sources */,
@@ -803,6 +834,7 @@
 				AFC65DBA2747ABCA0050769D /* RegisterViewController.swift in Sources */,
 				AFA9CDE2274F766300E520A3 /* AddRecordeNode.swift in Sources */,
 				AFA9CDF0274F78A800E520A3 /* AddRecordViewController.swift in Sources */,
+				AFF76ACE277E1D4100FBA576 /* PopUpBackground.swift in Sources */,
 				0A337ABE275E517700B04508 /* ProfileViewController.swift in Sources */,
 				0AAA268A273AB0700063D876 /* SummaryHeader.swift in Sources */,
 				AFC65DAA274792AD0050769D /* LandingViewController.swift in Sources */,

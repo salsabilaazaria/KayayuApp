@@ -19,6 +19,7 @@ class HomeViewModel {
 	var onOpenHomePage: (() -> Void)?
 	var reloadUI: (() -> Void)?
 	
+    let profViewModel = ProfileViewModel()
 	let database = Firestore.firestore()
     private let calendarHelper = CalendarHelper()
 	
@@ -26,12 +27,16 @@ class HomeViewModel {
 	var transactionsData: BehaviorRelay<[Transactions]?> = BehaviorRelay<[Transactions]?>(value: nil)
 	var dictTransactionData: BehaviorRelay<[TransactionDateDictionary]?> = BehaviorRelay<[TransactionDateDictionary]?>(value: nil)
 	
+	var detailTrans: BehaviorRelay<[TransactionDetails]?> = BehaviorRelay<[TransactionDetails]?>(value: nil)
+	
 	var incomePerMonth: BehaviorRelay<Float?> = BehaviorRelay<Float?>(value: nil)
 	var expensePerMonth: BehaviorRelay<Float?> = BehaviorRelay<Float?>(value: nil)
 	
 	var balanceTotal: BehaviorRelay<Float?> = BehaviorRelay<Float?>(value: nil)
-	
-	
+	var needsTotal: Float = 0
+	var wantsTotal: Float = 0
+	var savingsTotal: Float = 0
+  
 	var userBalanceTotal: Float = 0
 
 	private let disposeBag = DisposeBag()
@@ -45,7 +50,9 @@ class HomeViewModel {
 		self.getTransactionDataSpecMonth(startDate: currStartDate, endDate: currEndDate)
 		self.configureObserver()
 		self.getBalanceTotal()
+        self.getRecurringIds()
         
+        self.getTransactionDetailData()
 	}
     
 	private func configureObserver() {
@@ -88,7 +95,10 @@ class HomeViewModel {
 	
 	private func updateBalanceTotal() {
 		let balanceTotal = self.balanceTotal.value
-		let balanceTotalData = [ "balance_total": balanceTotal]
+		let balanceTotalData = [ "balance_total": balanceTotal,
+								 "balance_needs": needsTotal,
+								 "balance_wants": wantsTotal,
+								 "balance_savings": savingsTotal]
 		database.collection("users").document(self.getUserId()).updateData(balanceTotalData as [AnyHashable : Any]) { err in
 			if let err = err {
 				print("Kayayu error on updating document: \(err) ")
@@ -112,6 +122,15 @@ class HomeViewModel {
 				else {
 					var incomeTotal: Float = 0
 					var expenseTotal: Float = 0
+					
+					var needsIncome: Float = 0
+					var needsExpense: Float = 0
+					
+					var wantsIncome: Float = 0
+					var wantsExpense: Float = 0
+					
+					var savingsIncome: Float = 0
+					var savingsExpense: Float = 0
 					for document in documentSnapshot!.documents {
 						
 						do {
@@ -120,10 +139,48 @@ class HomeViewModel {
 								return
 							}
 							
+							guard let amount = trans.amount else {
+								return
+							}
 							if trans.income_flag == true {
-								incomeTotal += trans.amount ?? 0
+								incomeTotal += amount
+								if trans.category == kayayuRatioTitle.all.rawValue.lowercased() {
+									
+									let needsAmount = amount * kayayuRatioValue.needs.rawValue
+									let wantsAmount = amount * kayayuRatioValue.wants.rawValue
+									let savingsAmount = amount * kayayuRatioValue.savings.rawValue
+									
+									needsIncome += needsAmount
+									wantsIncome += wantsAmount
+									savingsIncome += savingsAmount
+									
+								} else if trans.category == kayayuRatioTitle.needs.rawValue.lowercased() {
+									needsIncome += amount
+								} else if trans.category == kayayuRatioTitle.wants.rawValue.lowercased() {
+									wantsIncome += amount
+								} else if trans.category == kayayuRatioTitle.savings.rawValue.lowercased() {
+									savingsIncome += amount
+								}
 							} else {
-								expenseTotal += trans.amount ?? 0
+								expenseTotal += amount
+								
+								if trans.category == kayayuRatioTitle.all.rawValue.lowercased() {
+									
+									let needsAmount = amount * kayayuRatioValue.needs.rawValue
+									let wantsAmount = amount * kayayuRatioValue.wants.rawValue
+									let savingsAmount = amount * kayayuRatioValue.savings.rawValue
+									
+									needsExpense += needsAmount
+									wantsExpense += wantsAmount
+									savingsExpense += savingsAmount
+									
+								} else if trans.category == kayayuRatioTitle.needs.rawValue.lowercased() {
+									needsExpense += amount
+								} else if trans.category == kayayuRatioTitle.wants.rawValue.lowercased() {
+									wantsExpense += amount
+								} else if trans.category == kayayuRatioTitle.savings.rawValue.lowercased() {
+									savingsExpense += amount
+								}
 							}
 							
 							
@@ -133,6 +190,9 @@ class HomeViewModel {
 						
 					}
 					let balanceTotal = incomeTotal - expenseTotal
+					self.needsTotal = needsIncome - needsExpense
+					self.wantsTotal = wantsIncome - wantsExpense
+					self.savingsTotal = savingsIncome - savingsExpense
 					self.balanceTotal.accept(balanceTotal)
 				}
 			}
@@ -197,6 +257,40 @@ class HomeViewModel {
 		}
 		self.dictTransactionData.accept(sortedDateDictionary)
 	}
+    
+    private func getRecurringIds() {
+        database.collection("recurringTransactions")
+            .whereField("user_id", isEqualTo: getUserId())
+            .addSnapshotListener { (documentSnapshot, errorMsg) in
+                
+                if let errorMsg = errorMsg {
+                    print("Error getting Recurring Transactions data \(errorMsg)")
+                }
+                else {
+                    var documentArray: [String] = []
+                    var dueNum: Int = 0
+                    for document in documentSnapshot!.documents {
+                        
+                        do {
+                            guard let trans = try document.data(as: RecurringTransactions.self) else {
+                                print("KAYAYU failed get recurringTransactions")
+                                return
+                            }
+                            documentArray.append(trans.recurring_id)
+                            
+                            print("rec id: \(trans.recurring_id)")
+                            
+                            dueNum = self.profViewModel.getDueIn(recurringId: trans.recurring_id)
+                            print("due in: \(dueNum)")
+                            
+                        } catch {
+                            print(error)
+                        }
+                    }
+                }
+            }
+    }
+    
 	
 	//ADD DATA
     
@@ -318,7 +412,7 @@ class HomeViewModel {
             amount: total_amount
         )
         
-        let detailRecSubsCurrData = TransactionDetail(
+        let detailRecSubsCurrData = TransactionDetails(
             transaction_detail_id: refDetailRecSubsCurr!.documentID,
             transaction_id: refTransRecSubs!.documentID,
             user_id: self.getUserId(),
@@ -359,7 +453,7 @@ class HomeViewModel {
                 }
             }
             
-            let detailRecSubsNextData = TransactionDetail(
+            let detailRecSubsNextData = TransactionDetails(
                 transaction_detail_id: refDetailRecSubsNext!.documentID,
                 transaction_id: "a",
                 user_id: self.getUserId(),
@@ -430,8 +524,14 @@ class HomeViewModel {
             
         } else if(billing_type == "Monthly"){
             final_billing_type = "monthly"
-            dateComponent.month = 1
-            dateComponentEnd.month = tenor-1
+			
+			if calendarHelper.dayOfDate(date: start_billing_date) > 28 {
+				dateComponent.day = 30
+				dateComponentEnd.day = (tenor-1)*30
+			} else {
+				dateComponent.month = 1
+				dateComponentEnd.month = tenor-1
+			}
             
         } else if(billing_type == "Yearly"){
             final_billing_type = "yearly"
@@ -477,7 +577,7 @@ class HomeViewModel {
             amount: amount_per_billing
         )
         
-        let detailRecInstlCurrData = TransactionDetail(
+        let detailRecInstlCurrData = TransactionDetails(
             transaction_detail_id: refDetailRecInstlCurr!.documentID,
             transaction_id: refTransRecInstl!.documentID,
             user_id: self.getUserId(),
@@ -518,7 +618,7 @@ class HomeViewModel {
                 }
             }
             
-            let detailRecInstlNextData = TransactionDetail(
+            let detailRecInstlNextData = TransactionDetails(
                 transaction_detail_id: refDetailRecInstlNext!.documentID,
                 transaction_id: "a",
                 user_id: self.getUserId(),
@@ -541,19 +641,111 @@ class HomeViewModel {
 	}
     
     
+    private func getTransactionDetailData() {
+        
+        database.collection("transactionDetails").order(by: "billing_date", descending: true).addSnapshotListener { (documentSnapshot, errorMsg) in
+            if let errorMsg = errorMsg {
+                print("Error get Subscription Data \(errorMsg)")
+            }
+            else {
+                
+                var documentArray: [TransactionDetails] = []
+                
+                for document in documentSnapshot!.documents {
+                    
+                    do {
+                        guard let trans = try document.data(as: TransactionDetails.self) else {
+                            print("KAYAYU failed get recurring subscription data")
+                            return
+                        }
+                        documentArray.append(trans)
+                        
+                    } catch {
+                        print("error")
+                    }
+                }
+                self.detailTrans.accept(documentArray)
+                
+            }
+        }
+    }
+    
+    
 	//DELETE
 	
 	func deleteTransactionData(transactionDelete: Transactions) {
-		guard var tempTransactionData = self.transactionsData.value,
-			  let indexDelete = tempTransactionData.firstIndex(where: { data in
-				return data.transaction_id == transactionDelete.transaction_id
-			  }) else {
-			return
-		}
-		
-		tempTransactionData.remove(at: indexDelete)
-		
-		self.transactionsData.accept(tempTransactionData)
+        
+        print("deleted data: \(transactionDelete)")
+        
+        if(transactionDelete.recurring_flag == false) {
+            print("delete data sekali")
+            
+            database.collection("transactions").document(transactionDelete.transaction_id).delete() { err in
+                if let err = err {
+                    print("Error removing document: \(err)")
+                } else {
+                    print("Document successfully removed")
+                }
+            }
+        }
+        else {
+            print("delete data recurring")
+            
+            guard let detailTrans = self.detailTrans.value,
+                  let detailTransData = detailTrans.first(where: { $0.transaction_id == transactionDelete.transaction_id }),
+                  let recurringId = detailTransData.recurring_id else {
+                print("detailTrans data unfetched")
+                return
+            }
+            
+            print("recurring id to be deleted: \(recurringId)")
+            
+            database.collection("transactionDetails").whereField("recurring_id", isEqualTo: recurringId).addSnapshotListener { (documentSnapshot, errorMsg) in
+                if let errorMsg = errorMsg {
+                    print("Error getting detail trans data with rec id \(recurringId) with error \(errorMsg)")
+                }
+                else {
+                    for document in documentSnapshot!.documents {
+                        do {
+                            guard let detTrans = try document.data(as: TransactionDetails.self) else {
+                                print("fail to fetch detail trans data")
+                                return
+                            }
+                            print("transaction_id to delete: \(detTrans.transaction_id), detail_trans_id to delete: \(detTrans.transaction_detail_id)")
+                            
+                            if(detTrans.transaction_id != "a") {
+                                self.database.collection("transactions").document(detTrans.transaction_id!).delete() { err in
+                                    if let err = err {
+                                        print("Error removing from transactions: \(err)")
+                                    } else {
+                                        print("Document \(detTrans.transaction_id ?? "NOT FOUND") successfully removed from transactions")
+                                    }
+                                }
+                            }
+                            
+                            self.database.collection("transactionDetails").document(detTrans.transaction_detail_id).delete() { err in
+                                if let err = err {
+                                    print("Error removing from transactionDetails: \(err)")
+                                } else {
+                                    print("Document \(detTrans.transaction_detail_id) successfully removed from transactionDetails")
+                                }
+                            }
+                            
+                        } catch {
+                            print("error")
+                        }
+                    }
+                }
+            }
+            
+            database.collection("recurringTransactions").document(recurringId).delete() { err in
+                if let err = err {
+                    print("Error removing from recurringTransaction: \(err)")
+                } else {
+                    print("Document \(recurringId) successfully removed from recurringTransactions")
+                }
+            }
+        }
 	}
 	
 	//EXTRAS
@@ -573,6 +765,7 @@ class HomeViewModel {
 			   let amount = transData.amount {
 				incomeTotal += amount
 			}
+			
 		}
 		self.incomePerMonth.accept(incomeTotal)
 		return incomeTotal
@@ -622,6 +815,7 @@ class HomeViewModel {
 			   let amount = transData.amount {
 				expenseTotal += amount
 			}
+			
 		}
 		self.expensePerMonth.accept(expenseTotal)
 		

@@ -11,6 +11,7 @@ import AsyncDisplayKit
 class HomeNode: ASDisplayNode {
 	var onOpenAddRecordPage: (() -> Void)?
 	var onOpenStatsPage: (() -> Void)?
+	var onDeleteData: ((Transactions) -> Void)?
 	
 	private let homeTableTransaction: HomeTableTransaction
 	private let addRecordBtn: ASButtonNode = ASButtonNode()
@@ -22,9 +23,16 @@ class HomeNode: ASDisplayNode {
 		super.init()
      
 		configureAddRecordBtn()
+		configureNode()
 		backgroundColor = .white
 		automaticallyManagesSubnodes = true
 		
+	}
+	
+	private func configureNode() {
+		homeTableTransaction.onDeleteData = { [weak self] transData in
+			self?.onDeleteData?(transData)
+		}
 	}
 	
 	private func configureAddRecordBtn() {

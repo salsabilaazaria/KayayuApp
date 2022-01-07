@@ -10,6 +10,7 @@ import iOSDropDown
 
 class AddIncomeRecordNode: ASDisplayNode {
 	var onOpenHomePage: (() -> Void)?
+	var onErrorData: (() -> Void)?
 	
 	private let dateTitle: ASTextNode = ASTextNode()
 	private let descTitle: ASTextNode = ASTextNode()
@@ -115,6 +116,7 @@ class AddIncomeRecordNode: ASDisplayNode {
 			  let desc = self.descriptionInputTextField.textView.text,
 			  let amountString = self.amountInputTextField.textView.text,
 			  let amount = Float(amountString.replacingOccurrences(of: ".", with: "")) else {
+			self.onErrorData?()
 			return
 		}
 

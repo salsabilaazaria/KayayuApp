@@ -51,7 +51,6 @@ class SummaryHeader: ASCellNode {
 											alignItems: .start,
 											children: elementArray)
 		
-		
 		let elementSpecCenter = ASCenterLayoutSpec(centeringOptions: .Y,
 												  sizingOptions: .minimumXY,
 												  child: elementSpec)

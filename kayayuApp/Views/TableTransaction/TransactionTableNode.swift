@@ -11,6 +11,7 @@ import RxCocoa
 import RxSwift
 
 class TransactionTableNode: ASTableNode {
+	var onDeleteData: ((Transactions) -> Void)?
 	private let viewModel: HomeViewModel
 	private let calendarHelper: CalendarHelper = CalendarHelper()
 	
@@ -68,7 +69,7 @@ extension TransactionTableNode: ASTableDataSource, ASTableDelegate {
 		let incomePerDay = viewModel.calculateIncomePerDay(date: date)
 		let expensePerDay = viewModel.calculateExpensePerDay(date: date)
 		
-		let rect = CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 30)
+		let rect = CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40)
 		let view = UIView(frame: rect)
 		
 		let cell = TransactionDateCellNode(date: date, incomePerDay: incomePerDay, expensePerDay: expensePerDay)
@@ -104,13 +105,32 @@ extension TransactionTableNode: ASTableDataSource, ASTableDelegate {
 	}
 	
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        var numOfIndex: Int = 0
+        
+        if(indexPath.section == 0){
+            numOfIndex = indexPath.row
+        }
+        else {
+            for i in 0...(indexPath.section-1) {
+                numOfIndex += numberOfRows(inSection: i)
+            }
+            
+            numOfIndex += indexPath.row
+        }
+            
+        print("get rownum delete: \(indexPath), \(numOfIndex)")
+        
 		if editingStyle == .delete {
+		
+			
 			guard let tempTransactionsData = viewModel.transactionsData.value else {
 				return
 			}
-			viewModel.deleteTransactionData(transactionDelete: tempTransactionsData[indexPath.row])
-			//
-			//			tableView.deleteRows(at: [indexPath], with: .fade)
+			print("get data delete: \(tempTransactionsData[numOfIndex])")
+			self.onDeleteData?(tempTransactionsData[numOfIndex])
+//			viewModel.deleteTransactionData(transactionDelete: tempTransactionsData[numOfIndex])
+
 		}
 	}
 	

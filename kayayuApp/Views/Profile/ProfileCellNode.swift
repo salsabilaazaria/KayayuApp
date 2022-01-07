@@ -18,6 +18,8 @@ class ProfileCellNode: ASDisplayNode {
 	private let iconImageName: String
 	private let titleString: String
 	
+	private let cornerRadiusFloat: CGFloat = 8
+	
 	init(icon: String = "", title: String = "") {
 		self.iconImageName = icon
 		self.titleString = title
@@ -28,12 +30,17 @@ class ProfileCellNode: ASDisplayNode {
 		configureTitle()
 		configureArrow()
 		configureButton()
+		cornerRadius = cornerRadiusFloat
+		backgroundColor = .clear
 		
-		backgroundColor = .white
 		automaticallyManagesSubnodes = true
 	}
 	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
+		let backgroundNode = ASDisplayNode()
+		backgroundNode.backgroundColor = .white
+		backgroundNode.cornerRadius = cornerRadiusFloat
+
 		var itemSpec = ASLayoutSpec()
 		if iconImageName != "" {
 			itemSpec = ASStackLayoutSpec(direction: .horizontal,
@@ -55,8 +62,11 @@ class ProfileCellNode: ASDisplayNode {
 		let itemInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16), child: itemSpec)
 		
 		let butttonOverlay = ASOverlayLayoutSpec(child: itemInset, overlay: buttonNode)
+		let backgroundSpec = ASBackgroundLayoutSpec(child: butttonOverlay, background: backgroundNode)
 		
-		return butttonOverlay
+		let mainInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16), child: backgroundSpec)
+		
+		return mainInset
 	}
 
 	private func configureIcon() {
@@ -78,6 +88,7 @@ class ProfileCellNode: ASDisplayNode {
 		buttonNode.backgroundColor = .clear
 		buttonNode.borderWidth = 1
 		buttonNode.borderColor = kayayuColor.softGrey.cgColor
+		buttonNode.cornerRadius = cornerRadiusFloat
 	}
 	
 }

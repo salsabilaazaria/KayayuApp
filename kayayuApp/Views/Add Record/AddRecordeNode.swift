@@ -10,6 +10,7 @@ import AsyncDisplayKit
 
 class AddRecordeNode: ASDisplayNode {
 	var onOpenHomePage: (() -> Void)?
+	var onErrorData: (() -> Void)?
 	
 	private let incomeButton: ASButtonNode = ASButtonNode()
 	private let expenseButton: ASButtonNode = ASButtonNode()
@@ -78,8 +79,16 @@ class AddRecordeNode: ASDisplayNode {
 			self?.onOpenHomePage?()
 		}
 		
+		incomeNode.onErrorData = { [weak self] in
+			self?.onErrorData?()
+		}
+		
 		expenseNode.onOpenHomePage = { [weak self] in
 			self?.onOpenHomePage?()
+		}
+		
+		expenseNode.onErrorData = { [weak self] in
+			self?.onErrorData?()
 		}
 	}
 

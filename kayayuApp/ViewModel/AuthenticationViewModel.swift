@@ -42,10 +42,15 @@ class AuthenticationViewModel {
 				return
 			}
 			
-			self.onCreateTabBar?()
 			print("KAYAYU Login Success")
 			
-			
+		})
+		
+		
+		Firebase.Auth.auth().addStateDidChangeListener({ auth, user in
+			if (user != nil) {
+				self.onCreateTabBar?()
+			}
 		})
 		
 	}
@@ -100,7 +105,6 @@ class AuthenticationViewModel {
 								 email: email,
 								 password: password,
 								 balance_total: 0,
-								 balance_month: 0,
 								 balance_needs: 0,
 								 balance_wants: 0,
 								 balance_savings: 0)

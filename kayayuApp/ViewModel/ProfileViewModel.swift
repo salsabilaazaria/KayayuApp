@@ -25,8 +25,8 @@ class ProfileViewModel {
 	var recurringData: BehaviorRelay<[RecurringTransactions]?> = BehaviorRelay<[RecurringTransactions]?>(value: nil)
 	var recurringSubsData: BehaviorRelay<[RecurringTransactions]?> = BehaviorRelay<[RecurringTransactions]?>(value: nil)
 	var recurringInstlData: BehaviorRelay<[RecurringTransactions]?> = BehaviorRelay<[RecurringTransactions]?>(value: nil)
-	var detailTrans: BehaviorRelay<[TransactionDetail]?> = BehaviorRelay<[TransactionDetail]?>(value: nil)
-	var detailTransLatest: BehaviorRelay<[TransactionDetail]?> = BehaviorRelay<[TransactionDetail]?>(value: nil)
+	var detailTrans: BehaviorRelay<[TransactionDetails]?> = BehaviorRelay<[TransactionDetails]?>(value: nil)
+	var detailTransLatest: BehaviorRelay<[TransactionDetails]?> = BehaviorRelay<[TransactionDetails]?>(value: nil)
 	var transactionsData: BehaviorRelay<[Transactions]?> = BehaviorRelay<[Transactions]?>(value: nil)
 	
 	private let disposeBag = DisposeBag()
@@ -204,12 +204,12 @@ class ProfileViewModel {
 			}
 			else {
 				
-				var documentArray: [TransactionDetail] = []
+				var documentArray: [TransactionDetails] = []
 				
 				for document in documentSnapshot!.documents {
 					
 					do {
-						guard let trans = try document.data(as: TransactionDetail.self) else {
+						guard let trans = try document.data(as: TransactionDetails.self) else {
 							print("KAYAYU failed get recurring subscription data")
 							return
 						}
@@ -326,7 +326,9 @@ class ProfileViewModel {
 				  let recData = recTransData.first(where: { $0.recurring_id == recurringId }),
 				  let end_billing_date = recData.end_billing_date,
 				  let billing_type = recData.billing_type,
-				  let recurring_type = recData.recurring_type
+				  let recurring_type = recData.recurring_type,
+				  let number_of_recurring = data.number_of_recurring,
+				  let start_billing_date = recData.start_billing_date
 			else {
 				print("error masuk sini")
 				return 70
@@ -341,12 +343,12 @@ class ProfileViewModel {
 					dateComponent.weekOfYear = 1
 					
 				} else if(billing_type == "monthly"){
-					dateComponent.month = 1
+					dateComponent.month = number_of_recurring
 					
 				} else if(billing_type == "yearly"){
-					dateComponent.year = 1
+					dateComponent.year = number_of_recurring
 				}
-				next_billing_date = Calendar.current.date(byAdding: dateComponent, to: data.billing_date!)
+				next_billing_date = Calendar.current.date(byAdding: dateComponent, to: start_billing_date)
 				
 				var final_amount_paid: Float?
 				var final_amount_havent_paid: Float?
@@ -370,13 +372,13 @@ class ProfileViewModel {
 					}
 				}
 				
-				let nextDetailTransData = TransactionDetail(
+				let nextDetailTransData = TransactionDetails(
 					transaction_detail_id: refDetailTrans!.documentID,
 					transaction_id: "a",
 					user_id: self.getUserId(),
 					recurring_id: recurringId,
 					billing_date: next_billing_date,
-					number_of_recurring: data.number_of_recurring! + 1,
+					number_of_recurring: number_of_recurring + 1,
 					amount: data.amount,
 					amount_paid: final_amount_paid,
 					amount_havent_paid: final_amount_havent_paid
