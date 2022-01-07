@@ -45,7 +45,7 @@ final class KayayuScreen {
 		tabBarController.edgesForExtendedLayout = []
 
 		let home = makeHomePageViewController(viewModel: homeViewModel)
-		home.tabBarItem.image = UIImage(named: "homeUnselected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize)
+		home.tabBarItem.image = UIImage(named: "homeSelected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize)
 		home.tabBarItem.selectedImage = UIImage(named: "homeSelected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize)
 		
 		let stats = makeStatsPageViewController(viewModel: statsViewModel)
@@ -57,6 +57,7 @@ final class KayayuScreen {
 		profile.tabBarItem.selectedImage = UIImage(named: "accSelected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize)
 		
 		tabBarController.tabBar.tintColor = kayayuColor.yellow
+		tabBarController.selectedIndex = 0
 		tabBarController.setViewControllers([home,stats,profile], animated: true)
 		tabBarController.navigationItem.hidesBackButton = true
 		tabBarController.navigationItem.backButtonDisplayMode = .minimal

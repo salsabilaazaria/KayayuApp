@@ -57,6 +57,7 @@ class HomeViewController:ASDKViewController<ASDisplayNode> {
 		super.viewWillAppear(animated)
 		self.navigationController?.navigationBar.prefersLargeTitles = true
 		self.tabBarController?.navigationItem.title = "Hello!"
+		self.tabBarController?.selectedIndex = 0
 	}
 
 	override func viewDidLoad() {
@@ -65,8 +66,8 @@ class HomeViewController:ASDKViewController<ASDisplayNode> {
 		
 		self.navigationController?.navigationBar.backgroundColor = .white
 		self.navigationController?.navigationItem.largeTitleDisplayMode = .always
-		
-		let customTabBarItem:UITabBarItem = UITabBarItem(title: "Home", image: UIImage(named: "homeUnselected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize), selectedImage: UIImage(named: "homeSelected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize))
+		self.tabBarController?.selectedIndex = 0
+		let customTabBarItem:UITabBarItem = UITabBarItem(title: "Home", image: UIImage(named: "homeSelected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize), selectedImage: UIImage(named: "homeSelected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize))
 		self.tabBarItem = customTabBarItem
 	}
 	
