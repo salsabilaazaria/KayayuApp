@@ -20,6 +20,7 @@ class TransactionCellNode: ASCellNode {
 	private var dateCellNode: TransactionDateCellNode = TransactionDateCellNode()
 	private let ratio: ASTextNode = ASTextNode()
 	private let notes: ASTextNode = ASTextNode()
+	private let recurringDesc: ASTextNode = ASTextNode()
 	private let transactionAmount: ASTextNode = ASTextNode()
 	private let transactionData: Transactions
 	
@@ -71,11 +72,28 @@ class TransactionCellNode: ASCellNode {
 		transactionSpec.style.flexGrow = 1
 		notes.style.flexGrow = 1
 		
+		
+		var detailTransElement: [ASLayoutElement] = [ratio]
+		
+		if let isRecurring = transactionData.recurring_flag, isRecurring {
+			recurringDesc.attributedText = NSAttributedString.normal("Recurring", 12, .darkGray)
+			
+			let transactionSpec = ASStackLayoutSpec(direction: .vertical,
+													spacing: 4,
+													justifyContent: .start,
+													alignItems: .stretch,
+													children: [recurringDesc, notes])
+			detailTransElement.append(transactionSpec)
+		} else {
+			detailTransElement.append(notes)
+		}
+		detailTransElement.append(transactionSpec)
+		
 		let detailTransaction = ASStackLayoutSpec(direction: .horizontal,
 												  spacing: 16,
 												  justifyContent: .center,
 												  alignItems: .start,
-												  children: [ratio, notes, transactionSpec])
+												  children: detailTransElement)
 		
 		detailTransaction.alignItems = .center
 		
