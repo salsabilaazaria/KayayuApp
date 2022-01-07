@@ -8,12 +8,18 @@
 import Foundation
 import AsyncDisplayKit
 
+enum popUpType: String {
+	case invalidData = "invalidData"
+}
+
 class PopUpContent: ASDisplayNode {
 	private let title: ASTextNode = ASTextNode()
 	private let subtitle: ASTextNode = ASTextNode()
 	private var bigButton: BigButton = BigButton()
+	private let type: popUpType
 	
-	override init() {
+	init(type: popUpType) {
+		self.type = type
 		super.init()
 		cornerRadius = 8.0
 		clipsToBounds = true
@@ -24,11 +30,17 @@ class PopUpContent: ASDisplayNode {
 	}
 	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
+		let centerSubtitle = ASStackLayoutSpec(direction: .vertical,
+											   spacing: 0,
+											   justifyContent: .center,
+											   alignItems: .center,
+											   children: [subtitle])
+		
 		let textSpec = ASStackLayoutSpec(direction: .vertical,
 											spacing: 8,
 											justifyContent: .center,
 											alignItems: .center,
-											children: [title,subtitle])
+											children: [title,centerSubtitle])
 		
 		let contentSpec = ASStackLayoutSpec(direction: .vertical,
 											spacing: 16,
@@ -46,8 +58,14 @@ class PopUpContent: ASDisplayNode {
 	}
 	
 	private func configureContent() {
-		title.attributedText = NSAttributedString.semibold("title", 14, .black)
-		subtitle.attributedText = NSAttributedString.normal("qwedwfadckewfnksdnckenkfqwefqe", 14, .black)
-		bigButton = BigButton(buttonText: "Understand", buttonColor: kayayuColor.yellow, borderColor: kayayuColor.yellow)
+		switch type {
+		case .invalidData:
+			title.attributedText = NSAttributedString.semibold("Add Data Failed", 16, .black)
+			subtitle.attributedText = NSAttributedString.normal("There is invalid data. Please try again.", 14, .black)
+			bigButton = BigButton(buttonText: "OK", buttonColor: kayayuColor.yellow, borderColor: kayayuColor.yellow)
+		default:
+			break;
+		}
+		
 	}
 }

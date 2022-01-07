@@ -9,16 +9,17 @@ import Foundation
 import AsyncDisplayKit
 
 class PopUpViewController:ASDKViewController<ASDisplayNode> {
-	private let popUp: PopUpBackground = PopUpBackground()
+	private let popUp: PopUpBackground?
 	
-	override init() {
+	init(type: popUpType) {
+		self.popUp = PopUpBackground(type: type)
 		super.init(node: popUp ?? ASDisplayNode())
 		modalPresentationStyle = .overFullScreen
 		modalTransitionStyle = .crossDissolve
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
-
+		self.popUp = nil
 		super.init(coder: aDecoder)
 	}
 	
@@ -28,7 +29,7 @@ class PopUpViewController:ASDKViewController<ASDisplayNode> {
 
 	override func viewDidLoad() {
 		let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapView(_:)))
-		popUp.view.addGestureRecognizer(tapGestureRecognizer)
+		popUp?.view.addGestureRecognizer(tapGestureRecognizer)
 
 	}
 	

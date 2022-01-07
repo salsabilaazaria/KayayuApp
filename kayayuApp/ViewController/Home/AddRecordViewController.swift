@@ -32,6 +32,11 @@ class AddRecordViewController:ASDKViewController<ASDisplayNode> {
 			self?.onOpenHomePage?()
 			
 		}
+		
+		addRecordNode?.onErrorData = { [weak self] in
+			let controller = PopUpViewController(type: .invalidData)
+			self?.present(controller, animated: true, completion: nil)
+		}
 	}
 	
 	override func viewDidLoad() {

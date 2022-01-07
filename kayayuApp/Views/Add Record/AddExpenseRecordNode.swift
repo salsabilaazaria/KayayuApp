@@ -13,6 +13,8 @@ import RxSwift
 
 class AddExpenseRecordNode: ASDisplayNode {
 	var onOpenHomePage: (() -> Void)?
+	var onErrorData: (() -> Void)?
+	
 	private let dateTitle: ASTextNode = ASTextNode()
 	private let descTitle: ASTextNode = ASTextNode()
 	private let amountTitle: ASTextNode = ASTextNode()
@@ -159,6 +161,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 		guard let category = ratio?.lowercased(),
 			  let date = self.dateInputTextField.textView.text,
 			  let desc = self.descriptionInputTextField.textView.text else {
+			self.onErrorData?()
 			return
 		}
 		
@@ -168,6 +171,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 		case .oneTime:
 			guard let amountString = self.amountInputTextField.textView.text,
 				  let amount = Float(amountString.replacingOccurrences(of: ".", with: "")) else {
+				self.onErrorData?()
 				return
 			}
 			self.viewModel.addTransactionData(category: category,
@@ -180,7 +184,8 @@ class AddExpenseRecordNode: ASDisplayNode {
 			guard let subsDuration = Int(self.durationInputTextField.textView.text),
 				  let recurringType = self.recurringTypeString,
 				  let amountString = self.amountInputTextField.textView.text,
-				  let amount = Float(amountString.replacingOccurrences(of: ".", with: ""))  else {
+				  let amount = Float(amountString.replacingOccurrences(of: ".", with: "")) else {
+				self.onErrorData?()
 				return
 			}
 			
@@ -197,6 +202,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 				  let interest = Float(interestString.replacingOccurrences(of: ",", with: ".")),
 				  let tenor = Int(self.tenorInputTextField.textView.text),
 				  let recurringType = self.recurringTypeString else {
+				self.onErrorData?()
 				return
 			}
             

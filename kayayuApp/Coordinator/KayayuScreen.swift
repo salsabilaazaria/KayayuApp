@@ -37,7 +37,7 @@ final class KayayuScreen {
 	}
 	
 	func make() -> UIViewController {
-		let controller = PopUpViewController()
+		let controller = makeLandingPageViewController()
 		return controller
 	}
 	

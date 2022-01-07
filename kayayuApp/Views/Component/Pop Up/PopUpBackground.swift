@@ -10,9 +10,10 @@ import AsyncDisplayKit
 
 class PopUpBackground: ASDisplayNode {
 	
-	private let content = PopUpContent()
+	private let content: PopUpContent
 	
-	override init() {
+	init(type: popUpType) {
+		self.content = PopUpContent(type: type)
 		super.init()
 		backgroundColor = .init(white: 0, alpha: 0.5)
 		automaticallyManagesSubnodes = true
