@@ -116,7 +116,7 @@ class PlanStatsNode: ASDisplayNode {
 	}
 	
 	private func configureRatioTitle() {
-		ratioTitle.attributedText = NSAttributedString.bold("This Month Goal", 14, kayayuColor.yellow)
+		ratioTitle.attributedText = NSAttributedString.bold("This Month Goal", 16, kayayuColor.yellow)
 	}
 	
 	private func configureNeedsSummary() {
