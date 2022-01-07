@@ -46,7 +46,9 @@ class LandingViewController:ASDKViewController<ASDisplayNode> {
 	
 	// MARK: - Private methods -
 	
-
+	override func viewWillAppear(_ animated: Bool) {
+		self.navigationController?.navigationBar.isHidden = true
+	}
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		edgesForExtendedLayout = []

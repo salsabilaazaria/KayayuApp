@@ -13,6 +13,7 @@ import FirebaseFirestoreSwift
 
 class AuthenticationViewModel {
 	var onCreateTabBar: (() -> Void)?
+	var enableButton: (() -> Void)?
 	var showAlert: ((String) -> Void)?
 	var email: String = ""
 	let database = Firestore.firestore()
@@ -24,33 +25,29 @@ class AuthenticationViewModel {
 		return userData
 	}
 	
-	func validateLoginData(email: String, password: String) {
+	func validateLoginData(emailInputted: String, passwordInputted: String) {
 		//put logic to data validation, if data correct return true
-		print("Auth Validate Login Data Username '\(email)' Password '\(password)'")
-		guard !email.isEmpty,
-			  !password.isEmpty else {
+		print("Auth Validate Login Data Username '\(emailInputted)' Password '\(passwordInputted)'")
+		guard !emailInputted.isEmpty,
+			  !passwordInputted.isEmpty else {
+			self.showAlert?("Invalid data, please try again.")
+			self.enableButton?()
 			return
 		}
 		
-		FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password, completion: { [weak self] result, error in
+		FirebaseAuth.Auth.auth().signIn(withEmail: emailInputted, password: passwordInputted, completion: { [weak self] result, error in
 			guard let self = self else {
 				return
 			}
 			guard error == nil else {
+				self.enableButton?()
 				self.showAlert?(error?.localizedDescription ?? "Login failed, please try again later")
 				print("KAYAYU Login Failed")
 				return
 			}
-			
 			print("KAYAYU Login Success")
+			self.onCreateTabBar?()
 			
-		})
-		
-		
-		Firebase.Auth.auth().addStateDidChangeListener({ auth, user in
-			if (user != nil) {
-				self.onCreateTabBar?()
-			}
 		})
 		
 	}

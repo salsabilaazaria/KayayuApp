@@ -91,6 +91,10 @@ class LoginNode: ASDisplayNode {
 			self.alertText.attributedText = NSAttributedString.semibold(errorMsg, 14, .systemRed)
 			self.alertText.isHidden = false
 		}
+		
+		viewModel.enableButton = {
+			self.loginButton.isEnabled = true
+		}
     }
 	
 	private func configureToolBar() {
@@ -177,10 +181,13 @@ class LoginNode: ASDisplayNode {
 	@objc private func loginButtonTapped(sender: ASButtonNode) {
 		guard let email = self.emailTextfield.textView.text,
 			  let password = self.passwordTextfield.text else {
+			viewModel.showAlert?("Invalid data, please try again.")
+			viewModel.enableButton?()
 			return
 		}
 		
-		self.viewModel.validateLoginData(email: email, password: password)
+		loginButton.isEnabled = false
+		self.viewModel.validateLoginData(emailInputted: email, passwordInputted: password)
 		
 	}
 	

@@ -61,7 +61,7 @@ class PopUpContent: ASDisplayNode {
 		switch type {
 		case .invalidData:
 			title.attributedText = NSAttributedString.semibold("Add Data Failed", 16, .black)
-			subtitle.attributedText = NSAttributedString.normal("There is invalid data. Please try again.", 14, .black)
+			subtitle.attributedText = NSAttributedString.normal("Invalid data, please try again.", 14, .black)
 			bigButton = BigButton(buttonText: "OK", buttonColor: kayayuColor.yellow, borderColor: kayayuColor.yellow)
 		default:
 			break;
