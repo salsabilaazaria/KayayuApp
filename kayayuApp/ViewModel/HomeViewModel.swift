@@ -765,6 +765,7 @@ class HomeViewModel {
 			   let amount = transData.amount {
 				incomeTotal += amount
 			}
+			
 		}
 		self.incomePerMonth.accept(incomeTotal)
 		return incomeTotal
@@ -814,6 +815,7 @@ class HomeViewModel {
 			   let amount = transData.amount {
 				expenseTotal += amount
 			}
+			
 		}
 		self.expensePerMonth.accept(expenseTotal)
 		
