@@ -56,6 +56,7 @@ class HomeViewController:ASDKViewController<ASDisplayNode> {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		self.navigationController?.navigationBar.prefersLargeTitles = true
+		self.navigationController?.navigationBar.tintColor = kayayuColor.yellow
 		self.tabBarController?.navigationItem.title = "Hello!"
 		self.tabBarController?.selectedIndex = 0
 	}
@@ -63,7 +64,7 @@ class HomeViewController:ASDKViewController<ASDisplayNode> {
 	override func viewDidLoad() {
 		edgesForExtendedLayout = []
 		super.viewDidLoad()
-		
+		self.navigationController?.navigationBar.tintColor = kayayuColor.yellow
 		self.navigationController?.navigationBar.backgroundColor = .white
 		self.navigationController?.navigationItem.largeTitleDisplayMode = .always
 		self.tabBarController?.selectedIndex = 0
