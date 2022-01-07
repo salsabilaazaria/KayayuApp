@@ -62,6 +62,7 @@ class AuthenticationViewModel {
 			  password == confirmPassword else {
 			print("KAYAYU Register Data is not valid")
 			self.showAlert?("There is invalid data, please try again.")
+			self.enableButton?()
 			return
 		}
 		
@@ -81,16 +82,16 @@ class AuthenticationViewModel {
 			let changeRequest = result?.user.createProfileChangeRequest()
 			changeRequest?.displayName = username
 			changeRequest?.commitChanges { error in
-				print("Change request failed \(error?.localizedDescription)")
+				print("Change username in firebase authentication failed \(error?.localizedDescription ?? "unknown")")
 				self.showAlert?(error?.localizedDescription ?? "Register failed, please try again later.")
+				self.enableButton?()
 				return
 			}
 			
-			print("Change Request \(changeRequest)")
-			
 			guard error == nil else {
-				print("KAYAYU Failed to register \(error)")
+				print("KAYAYU Failed to register \(error?.localizedDescription ?? "unknown")")
 				self.showAlert?(error?.localizedDescription ?? "Register failed, please try again later.")
+				self.enableButton?()
 				return
 			}
 			

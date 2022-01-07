@@ -101,6 +101,10 @@ class RegisterNode: ASDisplayNode {
 			self.alertText.attributedText = NSAttributedString.semibold(errorMsg, 14, .systemRed)
 			self.alertText.isHidden = false
 		}
+		
+		viewModel.enableButton = {
+			self.signUpButton.isEnabled = true
+		}
 	}
 	
 	private func configureAlertText() {
@@ -219,7 +223,7 @@ class RegisterNode: ASDisplayNode {
 	
 	private func configureSignUpButton() {
 		signUpButton = BigButton(buttonText: "REGISTER", buttonColor: kayayuColor.yellow, borderColor: kayayuColor.yellow)
-		//NEED TO CONFIRM: setelah sign up mau ke home apa ke login?
+
 		signUpButton.addTarget(self, action: #selector(signUpButtonTapped), forControlEvents: .touchUpInside)
 	}
 	
@@ -241,9 +245,11 @@ class RegisterNode: ASDisplayNode {
 			  let email = self.emailTextfield.textView.text,
 			  let password = self.passwordTextfield.text,
 			  let confirmPassword = self.confirmPassTextfield.text else {
+			self.viewModel.showAlert?("Invalid data, please try again.")
+			self.viewModel.enableButton?()
 			return
 		}
-		
+		signUpButton.isEnabled = false
 		self.viewModel.validateRegisterData(username: username, email: email, password: password, confirmPassword: confirmPassword)
 	
 	}
