@@ -27,6 +27,7 @@ class ProfileNode: ASDisplayNode {
 	private var logoutNode: ProfileCellNode = ProfileCellNode()
 	
 	private let scrollNode: ASScrollNode = ASScrollNode()
+	private let backgroundNode: ASDisplayNode = ASDisplayNode()
 	
 	private let authViewModel: AuthenticationViewModel
 	private let profileViewModel: ProfileViewModel
@@ -38,7 +39,8 @@ class ProfileNode: ASDisplayNode {
 		self.profileViewModel = profileViewModel
 		self.walletSummary = WalletSummaryCollectionNode(viewModel: profileViewModel)
 		super.init()
-
+		backgroundNode.backgroundColor = kayayuColor.lightYellow
+		backgroundNode.style.preferredSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.6)
 		backgroundColor = .white
 		automaticallyManagesSubnodes = true
 	}
@@ -48,6 +50,12 @@ class ProfileNode: ASDisplayNode {
 		configureEmail()
 		configureBalanceSummary()
 		configureScrollNode()
+		
+		let backgroundSpec = ASStackLayoutSpec(direction: .vertical,
+											   spacing: 0,
+											   justifyContent: .end,
+											   alignItems: .end,
+											   children: [backgroundNode])
 		
 		let userInfoStack = ASStackLayoutSpec(direction: .vertical,
 											 spacing: 8,
@@ -61,7 +69,7 @@ class ProfileNode: ASDisplayNode {
 											 alignItems: .start,
 											 children: [userInfoStack, walletSummary])
 		
-		let profileInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 16, left: 16, bottom: 32, right: 16), child: profileStack)
+		let profileInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16), child: profileStack)
 		
 		let mainSpec = ASStackLayoutSpec(direction: .vertical,
 											spacing: 0,
@@ -69,7 +77,9 @@ class ProfileNode: ASDisplayNode {
 											alignItems: .start,
 											children: [profileInset, scrollNode])
 		
-		return mainSpec
+		let back = ASOverlayLayoutSpec(child: backgroundSpec, overlay: mainSpec)
+		
+		return back
 	}
 	
 	private func configureUsername() {

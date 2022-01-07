@@ -30,7 +30,7 @@ class WalletSummaryCollectionNode: ASDisplayNode {
 		
 		super.init()
 		
-		backgroundColor = .white
+		backgroundColor = .clear
 		automaticallyManagesSubnodes = true
 		configureSummaryCollectioNode()
 		
