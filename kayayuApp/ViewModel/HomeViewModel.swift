@@ -326,8 +326,7 @@ class HomeViewModel {
     }
 
     func addRecurringSubsData(total_amount: Float, billing_type: String, start_billing_date: Date, tenor: Int, category: String, description: String) {
-        
-        var final_billing_type: String?
+
         var next_billing_date: Date?
         var end_billing_date: Date?
         
@@ -364,18 +363,15 @@ class HomeViewModel {
             }
         }
         
-        if(billing_type == "Weeks"){
-            final_billing_type = "weekly"
+        if(billing_type == "Weekly"){
             dateComponent.weekOfYear = 1
             dateComponentEnd.weekOfYear = tenor-1
             
-        } else if(billing_type == "Months"){
-            final_billing_type = "monthly"
+        } else if(billing_type == "Monthly"){
             dateComponent.month = 1
             dateComponentEnd.month = tenor-1
             
-        } else if(billing_type == "Years"){
-            final_billing_type = "yearly"
+        } else if(billing_type == "Yearly"){
             dateComponent.year = 1
             dateComponentEnd.year = tenor-1
         }
@@ -394,7 +390,7 @@ class HomeViewModel {
             description: description,
             recurring_type: "subscription",
             total_amount: total_amount,
-            billing_type: final_billing_type,
+			billing_type: billing_type.lowercased(),
             start_billing_date: start_billing_date,
             end_billing_date: end_billing_date,
             tenor: tenor,
@@ -477,7 +473,6 @@ class HomeViewModel {
 	
     func addRecurringInstData(total_amount: Float, billing_type: String, start_billing_date: Date, tenor: Int, category: String, description: String, interest: Float) {
         
-        var final_billing_type: String?
         var next_billing_date: Date?
         var end_billing_date: Date?
         var total_amount_interest: Float?
@@ -517,32 +512,22 @@ class HomeViewModel {
             }
         }
         
-        if(billing_type == "Weekly"){
-            final_billing_type = "weekly"
-            dateComponent.weekOfYear = 1
-            dateComponentEnd.weekOfYear = tenor-1
-            
-        } else if(billing_type == "Monthly"){
-            final_billing_type = "monthly"
+		if(billing_type == "Weekly"){
+			dateComponent.weekOfYear = 1
+			dateComponentEnd.weekOfYear = tenor-1
 			
-			if calendarHelper.dayOfDate(date: start_billing_date) > 28 {
-				dateComponent.day = 30
-				dateComponentEnd.day = (tenor-1)*30
-			} else {
-				dateComponent.month = 1
-				dateComponentEnd.month = tenor-1
-			}
-            
-        } else if(billing_type == "Yearly"){
-            final_billing_type = "yearly"
-            dateComponent.year = 1
-            dateComponentEnd.year = tenor-1
-        }
+		} else if(billing_type == "Monthly"){
+			dateComponent.month = 1
+			dateComponentEnd.month = tenor-1
+			
+		} else if(billing_type == "Yearly"){
+			dateComponent.year = 1
+			dateComponentEnd.year = tenor-1
+		}
         
         if(tenor == 1){
             end_billing_date = start_billing_date
-        }
-        else {
+        } else {
             next_billing_date = Calendar.current.date(byAdding: dateComponent, to: start_billing_date)
             end_billing_date = Calendar.current.date(byAdding: dateComponentEnd, to: start_billing_date)
         }
@@ -551,7 +536,7 @@ class HomeViewModel {
         total_amount_interest = total_amount + (total_amount * interest_percentage!)
         amount_per_billing = total_amount_interest! / Float(tenor)
         
-        print("interest: \(interest_percentage), total: \(total_amount_interest), per billing: \(amount_per_billing), endbill: \(end_billing_date), finalbiltype: \(final_billing_type)")
+		print("interest: \(interest_percentage), total: \(total_amount_interest), per billing: \(amount_per_billing), endbill: \(end_billing_date), finalbiltype: \(billing_type.lowercased())")
         
         let recInstlData = RecurringTransactions(
             recurring_id: refRecInstl!.documentID,
@@ -559,7 +544,7 @@ class HomeViewModel {
             description: description,
             recurring_type: "installment",
             total_amount: total_amount_interest,
-            billing_type: final_billing_type,
+			billing_type: billing_type.lowercased(),
             start_billing_date: start_billing_date,
             end_billing_date: end_billing_date,
             tenor: tenor,

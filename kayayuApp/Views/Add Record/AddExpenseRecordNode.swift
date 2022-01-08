@@ -91,27 +91,27 @@ class AddExpenseRecordNode: ASDisplayNode {
 		
 		var elementArray: [ASLayoutElement] = [date, paymentType, desc, category]
 		
+		let tenorRecurringTypeSpec = ASStackLayoutSpec(direction: .horizontal,
+												   spacing: horizontalSpace,
+												   justifyContent: .start,
+												   alignItems: .center,
+												   children: [tenorSpec, recurringType])
+		tenorSpec.style.flexGrow = 1
+	
 		switch paymenTypeValue.value {
 			case .oneTime:
 				elementArray.append(amount)
 			case .subscription:
-				elementArray.append(createDurationSpec())
+				elementArray.append(tenorRecurringTypeSpec)
 				elementArray.append(amount)
 			case .installment:
+				elementArray.append(tenorRecurringTypeSpec)
+				
 				let amountInterestSpec = ASStackLayoutSpec(direction: .horizontal,
 														   spacing: horizontalSpace,
 														   justifyContent: .start,
 														   alignItems: .start,
 														   children: [totalAmount, interest])
-		
-				let tenorRecurringTypeSpec = ASStackLayoutSpec(direction: .horizontal,
-														   spacing: horizontalSpace,
-														   justifyContent: .start,
-														   alignItems: .center,
-														   children: [tenorSpec, recurringType])
-
-				tenorSpec.style.flexGrow = 1
-				elementArray.append(tenorRecurringTypeSpec)
 				elementArray.append(amountInterestSpec)
 			default:
 				break;
@@ -181,7 +181,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 											  recurring_flag: false,
 											  amount: amount)
 		case .subscription:
-			guard let subsDuration = Int(self.durationInputTextField.textView.text),
+			guard let subsDuration = Int(self.tenorInputTextField.textView.text),
 				  let recurringType = self.recurringTypeString,
 				  let amountString = self.amountInputTextField.textView.text,
 				  let amount = Float(amountString.replacingOccurrences(of: ".", with: "")) else {
@@ -525,7 +525,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 	}
 	
 	private func configureTenor() {
-		tenorTitle.attributedText = NSAttributedString.bold("Tenor", 16, .black)
+		tenorTitle.attributedText = NSAttributedString.bold("Duration", 16, .black)
 		tenorTitle.style.preferredLayoutSize.width = ASDimension(unit: .points, value: kayayuSize.halfInputTextFieldSize.width)
 		
 		tenorInputTextField.keyboardType = .numberPad
@@ -552,41 +552,23 @@ class AddExpenseRecordNode: ASDisplayNode {
 		
 		var reccurringElement: [ASLayoutElement] = []
 		
-		switch paymenTypeValue.value {
-			case .installment:
-				recurringTypeNode.style.preferredSize = kayayuSize.halfDropdownSize
-				reccurringElement.append(recurringTypeTitle)
-				reccurringElement.append(recurringTypeWrap)
-			case .subscription:
-				recurringTypeNode.style.preferredSize = kayayuSize.halfDropdownSize
-				reccurringElement.append(recurringTypeWrap)
-			default:
-				break
-		}
-		
+		recurringTypeNode.style.preferredSize = kayayuSize.halfDropdownSize
+
 		let recurringTypeSpec = ASStackLayoutSpec(direction: .vertical,
 										  spacing: spacingTitle,
 										  justifyContent: .start,
 										  alignItems: .start,
-										  children: reccurringElement)
+										  children: [recurringTypeTitle, recurringTypeWrap])
 		
 		return recurringTypeSpec
 	}
 	
 	private func configureRecurringType() {
-		recurringTypeTitle.attributedText = NSAttributedString.bold("Type", 16, .black)
+		recurringTypeTitle.attributedText = NSAttributedString.bold("Billing Type", 16, .black)
 		
-		switch paymenTypeValue.value {
-			case .installment:
-				recurringType = DropDown(frame: kayayuSize.halfDropdownRect)
-				recurringType.optionArray = ["Weekly","Monthly", "Yearly"]
-			case .subscription:
-				recurringType = DropDown(frame: kayayuSize.halfDropdownRect)
-				recurringType.optionArray = ["Weeks","Months", "Years"]
-			case .oneTime:
-				break
-		}
-		
+		let recurringTypeArray = ["Weekly","Monthly", "Yearly"]
+		recurringType = DropDown(frame: kayayuSize.halfDropdownRect)
+		recurringType.optionArray = recurringTypeArray
 		
 		recurringType.selectedRowColor = kayayuColor.softGrey
 		recurringType.checkMarkEnabled = false
