@@ -503,7 +503,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 		
 		interestInputTextField.keyboardType = .numberPad
 		interestInputTextField.maximumLinesToDisplay = 1
-		interestInputTextField.style.preferredSize = CGSize(width: UIScreen.main.bounds.width/2 - 80 - interestTitle.calculatedSize.width, height: 30)
+		interestInputTextField.style.preferredSize = CGSize(width: UIScreen.main.bounds.width/2 - 54, height: 30)
 		interestInputTextField.textView.inputAccessoryView = toolBar
 		interestInputTextField.textView.font = kayayuFont.inputTextFieldFont
 		interestInputTextField.borderColor = kayayuColor.borderInputTextField.cgColor

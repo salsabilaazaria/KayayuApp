@@ -58,11 +58,11 @@ struct kayayuSize {
 	static let halfInputTextFieldSize: CGSize = CGSize(width: UIScreen.main.bounds.width/2 - 32, height: 20)
 	
 	static let dropdownSize: CGSize = CGSize(width: UIScreen.main.bounds.width - 32, height: 30)
-	static let halfDropdownSize: CGSize = CGSize(width: UIScreen.main.bounds.width/2 - 32, height: 30)
+	static let halfDropdownSize: CGSize = CGSize(width: UIScreen.main.bounds.width/2 - 16, height: 30)
 	static let quarterDropdownSize: CGSize = CGSize(width: UIScreen.main.bounds.width/4 - 32, height: 30)
 	
 	static let dropdownRect: CGRect = CGRect(x: 3, y: 1, width: UIScreen.main.bounds.width - 32, height: 30)
-	static let halfDropdownRect: CGRect = CGRect(x: 3, y: 1, width: UIScreen.main.bounds.width/2 - 32, height: 30)
+	static let halfDropdownRect: CGRect = CGRect(x: 3, y: 1, width: UIScreen.main.bounds.width/2 - 16, height: 30)
 	static let quarterDropdownRect: CGRect = CGRect(x: 3, y: 1, width: UIScreen.main.bounds.width/4 - 32, height: 30)
 	
 	static let inputTextFieldCornerRadius:CGFloat = 8.0
