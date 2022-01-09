@@ -34,10 +34,9 @@ class AddExpenseRecordNode: ASDisplayNode {
 	private var ratioCategory: DropDown = DropDown()
 	private let paymentTypeTitle: ASTextNode = ASTextNode()
 	private var paymentType: DropDown = DropDown()
-	private let tenorTitle: ASTextNode = ASTextNode()
-	private var tenorInputTextField: ASEditableTextNode = ASEditableTextNode()
-	private let recurringTypeTitle: ASTextNode = ASTextNode()
-	private var recurringType: DropDown = DropDown()
+	private var durationInputTextfield: ASEditableTextNode = ASEditableTextNode()
+	private let billingTypeTitle: ASTextNode = ASTextNode()
+	private var billingType: DropDown = DropDown()
 	
 	private let dateDescription: ASTextNode = ASTextNode()
 	private let paymenTypeHelperIcon: ASButtonNode = ASButtonNode()
@@ -45,6 +44,8 @@ class AddExpenseRecordNode: ASDisplayNode {
 	private var saveButton: BigButton = BigButton()
 	
 	private let toolBar: UIToolbar = UIToolbar()
+	
+	private let scrollNode: ASScrollNode = ASScrollNode()
 	
 	private let spacingTitle: CGFloat = 8
 	private let horizontalSpace: CGFloat = 12
@@ -80,35 +81,55 @@ class AddExpenseRecordNode: ASDisplayNode {
 		
 	}
 	
+	
+	private func configureViewModel() {
+		viewModel.onOpenHomePage = { [weak self] in
+			self?.onOpenHomePage?()
+		}
+	}
+	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
+		configureScrollNode()
+		return ASInsetLayoutSpec(insets: UIEdgeInsets.zero, child: scrollNode)
+	}
+	
+	private func configureScrollNode() {
+		scrollNode.automaticallyManagesSubnodes = true
+		scrollNode.automaticallyManagesContentSize = true
+		scrollNode.scrollableDirections = [.up, .down]
+		scrollNode.style.flexGrow = 1.0
+		scrollNode.style.flexShrink = 1.0
+		scrollNode.view.bounces = true
+		scrollNode.view.showsVerticalScrollIndicator = true
+		scrollNode.view.isScrollEnabled = true
+		scrollNode.layoutSpecBlock = { [weak self] _, constrainedSize in
+			return (self?.createInputSpec(constrainedSize) ?? ASLayoutSpec())
+		}
+	}
+	
+	private func createInputSpec(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
 		let paymentType = createPaymentTypeSpec()
 		let date = createDateInputSpec()
 		let desc = createDescInputSpec()
 		let category = createRatioCategorySpec()
 		let amount = createAmountInputSpec()
 		let totalAmount = createTotalAmountInputSpec()
-		let recurringType = createRecurringTypeSpec()
+		let recurringType = createBillingTypeSpec()
 		let interest = createInterestInputSpec()
-		let tenorSpec = createTenorTypeSpec()
+		let tenorSpec = createDurationTypeSpec()
 		
 		var elementArray: [ASLayoutElement] = [date, paymentType, desc, category]
-		
-		let tenorRecurringTypeSpec = ASStackLayoutSpec(direction: .horizontal,
-												   spacing: horizontalSpace,
-												   justifyContent: .start,
-												   alignItems: .center,
-												   children: [tenorSpec, recurringType])
-		tenorSpec.style.flexGrow = 1
-	
+
 		switch paymenTypeValue.value {
 			case .oneTime:
 				elementArray.append(amount)
 			case .subscription:
-				elementArray.append(tenorRecurringTypeSpec)
+				elementArray.append(recurringType)
+				elementArray.append(tenorSpec)
 				elementArray.append(amount)
 			case .installment:
-				elementArray.append(tenorRecurringTypeSpec)
-				
+				elementArray.append(recurringType)
+				elementArray.append(tenorSpec)
 				let amountInterestSpec = ASStackLayoutSpec(direction: .horizontal,
 														   spacing: horizontalSpace,
 														   justifyContent: .start,
@@ -128,28 +149,20 @@ class AddExpenseRecordNode: ASDisplayNode {
 		inputSpec.style.flexGrow = 1
 		
 		let saveButtonSpec = ASStackLayoutSpec(direction: .vertical,
-											   spacing: spacingTitle*2,
+											   spacing: spacingTitle,
 											   justifyContent: .end,
 											   alignItems: .end,
 											   children: [saveButton])
 		
 		let mainSpec = ASStackLayoutSpec(direction: .vertical,
-										 spacing: 10,
+										 spacing: 32,
 										 justifyContent: .start,
 										 alignItems: .start,
 										 children: [inputSpec, saveButtonSpec])
 		
-		mainSpec.style.preferredSize = CGSize(width: UIScreen.main.bounds.width, height:  UIScreen.main.bounds.height)
-		
-		let insetMainSpec = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 16, left: 16, bottom: 48, right: 16), child: mainSpec)
+		let insetMainSpec = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 16, left: 16, bottom: 0, right: 16), child: mainSpec)
 		
 		return insetMainSpec
-	}
-	
-	private func configureViewModel() {
-		viewModel.onOpenHomePage = { [weak self] in
-			self?.onOpenHomePage?()
-		}
 	}
 	
 	private func configureSaveButton() {
@@ -183,7 +196,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 											  recurring_flag: false,
 											  amount: amount)
 		case .subscription:
-			guard let subsDuration = Int(self.tenorInputTextField.textView.text),
+			guard let subsDuration = Int(self.durationInputTextfield.textView.text),
 				  let recurringType = self.recurringTypeString,
 				  let amountString = self.amountInputTextField.textView.text,
 				  let amount = Float(amountString.replacingOccurrences(of: ".", with: "")) else {
@@ -202,7 +215,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 				  let totalAmount = Float(totalAmountString.replacingOccurrences(of: ".", with: "")),
 				  let interestString = self.interestInputTextField.textView.text,
 				  let interest = Float(interestString.replacingOccurrences(of: ",", with: ".")),
-				  let tenor = Int(self.tenorInputTextField.textView.text),
+				  let tenor = Int(self.durationInputTextfield.textView.text),
 				  let recurringType = self.recurringTypeString else {
 				self.onErrorData?()
 				return
@@ -225,6 +238,9 @@ class AddExpenseRecordNode: ASDisplayNode {
 	private func configureObserver() {
 		paymenTypeValue.asObservable().distinctUntilChanged().subscribe(onNext: { value in
 			self.setNeedsLayout()
+			self.layoutIfNeeded()
+			self.scrollNode.setNeedsLayout()
+			self.scrollNode.layoutIfNeeded()
 		}).disposed(by: disposeBag)
 	}
 	
@@ -282,8 +298,6 @@ class AddExpenseRecordNode: ASDisplayNode {
 		
 			self.paymenTypeValue.accept(kayayuPaymentType(rawValue: selectedText) ?? .oneTime)
 		}
-		
-		let icon = UIImage(named: "questionIconGrey.png")
 	
 		paymenTypeHelperIcon.setImage( UIImage(named: "questionIconBlack.png"), for: .normal)
 		paymenTypeHelperIcon.style.preferredSize = CGSize(width: 20, height: 20)
@@ -532,67 +546,65 @@ class AddExpenseRecordNode: ASDisplayNode {
 	}
 	
 	
-	private func createTenorTypeSpec() -> ASLayoutSpec{
-		let tenorTypeSpec = ASStackLayoutSpec(direction: .vertical,
+	private func createDurationTypeSpec() -> ASLayoutSpec{
+		let durationTypeSpec = ASStackLayoutSpec(direction: .vertical,
 										  spacing: spacingTitle,
 										  justifyContent: .start,
 										  alignItems: .start,
-										  children: [tenorTitle, tenorInputTextField])
+										  children: [durationTitle, durationInputTextfield])
 		
 		
-		return tenorTypeSpec
+		return durationTypeSpec
 	}
 	
 	private func configureTenor() {
-		tenorTitle.attributedText = NSAttributedString.bold("Duration", 16, .black)
-		tenorTitle.style.preferredLayoutSize.width = ASDimension(unit: .points, value: kayayuSize.halfInputTextFieldSize.width)
+		durationTitle.attributedText = NSAttributedString.bold("Duration", 16, .black)
+		durationTitle.style.preferredLayoutSize.width = ASDimension(unit: .points, value: kayayuSize.halfInputTextFieldSize.width)
 		
-		tenorInputTextField.keyboardType = .numberPad
-		tenorInputTextField.maximumLinesToDisplay = 1
-		tenorInputTextField.style.preferredSize = CGSize(width: UIScreen.main.bounds.width/2 - 32, height: 30)
-		tenorInputTextField.textView.inputAccessoryView = toolBar
-		tenorInputTextField.textView.font = kayayuFont.inputTextFieldFont
-		tenorInputTextField.borderColor = kayayuColor.borderInputTextField.cgColor
-		tenorInputTextField.layer.cornerRadius = kayayuSize.inputTextFieldCornerRadius
-		tenorInputTextField.borderWidth = kayayuSize.kayayuInputTextFieldBorderWidth
-		tenorInputTextField.textContainerInset = textContainerInset
+		durationInputTextfield.keyboardType = .numberPad
+		durationInputTextfield.maximumLinesToDisplay = 1
+		durationInputTextfield.style.preferredSize = CGSize(width: UIScreen.main.bounds.width/2 - 32, height: 30)
+		durationInputTextfield.textView.inputAccessoryView = toolBar
+		durationInputTextfield.textView.font = kayayuFont.inputTextFieldFont
+		durationInputTextfield.borderColor = kayayuColor.borderInputTextField.cgColor
+		durationInputTextfield.layer.cornerRadius = kayayuSize.inputTextFieldCornerRadius
+		durationInputTextfield.borderWidth = kayayuSize.kayayuInputTextFieldBorderWidth
+		durationInputTextfield.textContainerInset = textContainerInset
 	}
 	
-	private func createRecurringTypeSpec() -> ASLayoutSpec{
-		configureRecurringType()
-		let recurringTypeNode = ASDisplayNode()
+	private func createBillingTypeSpec() -> ASLayoutSpec{
+		configureBillingType()
+		let billingTypeNode = ASDisplayNode()
 	
-		recurringTypeNode.view.addSubview(recurringType)
-		recurringTypeNode.borderWidth = kayayuSize.kayayuInputTextFieldBorderWidth
-		recurringTypeNode.borderColor = kayayuColor.borderInputTextField.cgColor
-		recurringTypeNode.layer.cornerRadius = kayayuSize.inputTextFieldCornerRadius
+		billingTypeNode.view.addSubview(billingType)
+		billingTypeNode.borderWidth = kayayuSize.kayayuInputTextFieldBorderWidth
+		billingTypeNode.borderColor = kayayuColor.borderInputTextField.cgColor
+		billingTypeNode.layer.cornerRadius = kayayuSize.inputTextFieldCornerRadius
 		
-		let recurringTypeWrap = ASWrapperLayoutSpec(layoutElements: [recurringTypeNode])
+		let billingTypeWrap = ASWrapperLayoutSpec(layoutElements: [billingTypeNode])
 		
-		var reccurringElement: [ASLayoutElement] = []
-		
-		recurringTypeNode.style.preferredSize = kayayuSize.halfDropdownSize
+		billingTypeNode.style.preferredSize = kayayuSize.dropdownSize
 
-		let recurringTypeSpec = ASStackLayoutSpec(direction: .vertical,
+		let billingTypeSpec = ASStackLayoutSpec(direction: .vertical,
 										  spacing: spacingTitle,
 										  justifyContent: .start,
 										  alignItems: .start,
-										  children: [recurringTypeTitle, recurringTypeWrap])
+										  children: [billingTypeTitle, billingTypeWrap])
 		
-		return recurringTypeSpec
+		return billingTypeSpec
 	}
 	
-	private func configureRecurringType() {
-		recurringTypeTitle.attributedText = NSAttributedString.bold("Billing Type", 16, .black)
+	private func configureBillingType() {
+		billingTypeTitle.attributedText = NSAttributedString.bold("Billing Type", 16, .black)
 		
 		let recurringTypeArray = ["Weekly","Monthly", "Yearly"]
-		recurringType = DropDown(frame: kayayuSize.halfDropdownRect)
-		recurringType.optionArray = recurringTypeArray
+		billingType = DropDown(frame: kayayuSize.dropdownRect)
+		billingType.optionArray = recurringTypeArray
 		
-		recurringType.selectedRowColor = kayayuColor.softGrey
-		recurringType.checkMarkEnabled = false
-		recurringType.font = UIFont.systemFont(ofSize: 14)
-		recurringType.didSelect{(selectedText, index, id) in
+		billingType.selectedRowColor = kayayuColor.softGrey
+		billingType.checkMarkEnabled = false
+		billingType.font = UIFont.systemFont(ofSize: 14)
+		billingType.didSelect{(selectedText, index, id) in
 			self.recurringTypeString = selectedText
 		}
 	}
@@ -610,7 +622,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 		durationInputTextField.layer.cornerRadius = kayayuSize.inputTextFieldCornerRadius
 		durationInputTextField.textContainerInset = textContainerInset
 		
-		let recurring = createRecurringTypeSpec()
+		let recurring = createBillingTypeSpec()
 		
 		let inputSpec = ASStackLayoutSpec(direction: .horizontal,
 											 spacing: 0,

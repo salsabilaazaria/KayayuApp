@@ -37,7 +37,8 @@ final class KayayuScreen {
 	}
 	
 	func make() -> UIViewController {
-		let controller = makeLandingPageViewController()
+		let home = HomeViewModel()
+		let controller = makeHomePageViewController(viewModel: home)
 		return controller
 	}
 	

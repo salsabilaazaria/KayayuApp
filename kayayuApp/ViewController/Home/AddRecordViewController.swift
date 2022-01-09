@@ -52,6 +52,7 @@ class AddRecordViewController:ASDKViewController<ASDisplayNode> {
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
+		self.navigationController?.navigationItem.largeTitleDisplayMode = .always
 		self.navigationController?.navigationBar.backItem?.backButtonDisplayMode = .minimal
 	}
 	
