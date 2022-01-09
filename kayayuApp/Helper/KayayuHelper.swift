@@ -43,6 +43,28 @@ enum kayayuPaymentType: String, CaseIterable {
 	
 }
 
+enum kayayuBillingType: String, CaseIterable {
+	case weekly = "Weekly"
+	case monthly = "Monthly"
+	case yearly = "Yearly"
+	
+	static var kayayuBillingTypeValues: [String] {
+		return kayayuBillingType.allCases.map { $0.rawValue }
+	}
+	
+}
+
+enum kayayuDurationType: String, CaseIterable {
+	case weeks = "Weeks"
+	case months = "Months"
+	case years = "Years"
+	
+	static var kayayuDurationTypeValues: [String] {
+		return kayayuDurationType.allCases.map { $0.rawValue }
+	}
+	
+}
+
 struct kayayuSize {
 	static let kayayuTabbarImageSize: CGSize = CGSize(width: 20, height: 20)
 	static let kayayuTabBarSize: CGSize = CGSize(width: UIScreen.main.bounds.width, height: 80)

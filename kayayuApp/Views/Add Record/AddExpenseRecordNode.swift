@@ -55,7 +55,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 	private let calendarHelper = CalendarHelper()
 	private var paymenTypeValue: BehaviorRelay<kayayuPaymentType> = BehaviorRelay<kayayuPaymentType>(value: .oneTime)
 	private var ratio: String?
-	private var recurringTypeString: String?
+	private var billingTypeString: BehaviorRelay<String?> = BehaviorRelay<String?>(value: nil)
 	
 	private let numberHelper: NumberHelper = NumberHelper()
 	private let disposeBag = DisposeBag()
@@ -79,6 +79,24 @@ class AddExpenseRecordNode: ASDisplayNode {
 		backgroundColor = .white
 		automaticallyManagesSubnodes = true
 		
+	}
+	
+	private func reloadUI() {
+		self.setNeedsLayout()
+		self.layoutIfNeeded()
+		self.scrollNode.setNeedsLayout()
+		self.scrollNode.layoutIfNeeded()
+	}
+	
+	private func configureObserver() {
+		paymenTypeValue.asObservable().distinctUntilChanged().subscribe(onNext: { value in
+			self.billingTypeString.accept(nil)
+			self.reloadUI()
+		}).disposed(by: disposeBag)
+		
+		billingTypeString.asObservable().distinctUntilChanged().subscribe(onNext: { value in
+			self.reloadUI()
+		}).disposed(by: disposeBag)
 	}
 	
 	
@@ -197,7 +215,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 											  amount: amount)
 		case .subscription:
 			guard let subsDuration = Int(self.durationInputTextfield.textView.text),
-				  let recurringType = self.recurringTypeString,
+				  let recurringType = self.billingTypeString.value,
 				  let amountString = self.amountInputTextField.textView.text,
 				  let amount = Float(amountString.replacingOccurrences(of: ".", with: "")) else {
 				self.onErrorData?()
@@ -216,7 +234,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 				  let interestString = self.interestInputTextField.textView.text,
 				  let interest = Float(interestString.replacingOccurrences(of: ",", with: ".")),
 				  let tenor = Int(self.durationInputTextfield.textView.text),
-				  let recurringType = self.recurringTypeString else {
+				  let recurringType = self.billingTypeString.value else {
 				self.onErrorData?()
 				return
 			}
@@ -233,15 +251,6 @@ class AddExpenseRecordNode: ASDisplayNode {
 			
 		}
 
-	}
-	
-	private func configureObserver() {
-		paymenTypeValue.asObservable().distinctUntilChanged().subscribe(onNext: { value in
-			self.setNeedsLayout()
-			self.layoutIfNeeded()
-			self.scrollNode.setNeedsLayout()
-			self.scrollNode.layoutIfNeeded()
-		}).disposed(by: disposeBag)
 	}
 	
 	private func configureToolBar() {
@@ -547,11 +556,36 @@ class AddExpenseRecordNode: ASDisplayNode {
 	
 	
 	private func createDurationTypeSpec() -> ASLayoutSpec{
+		let durationDesc: ASTextNode = ASTextNode()
+		
+		let paymentType = self.paymenTypeValue.value
+		
+		if let recurringType = self.billingTypeString.value {
+			switch paymentType {
+			case .subscription, .installment:
+				if recurringType == kayayuBillingType.weekly.rawValue {
+					durationDesc.attributedText = NSAttributedString.normal(kayayuDurationType.weeks.rawValue, 14, .black)
+				} else 	if recurringType == kayayuBillingType.monthly.rawValue {
+					durationDesc.attributedText = NSAttributedString.normal(kayayuDurationType.months.rawValue, 14, .black)
+				} else {
+					durationDesc.attributedText = NSAttributedString.normal(kayayuDurationType.years.rawValue, 14, .black)
+				}
+			default:
+				break
+			}
+		}
+		
+		let durationInputSpec = ASStackLayoutSpec(direction: .horizontal,
+												   spacing: spacingTitle,
+											 justifyContent: .center,
+											 alignItems: .center,
+											 children: [durationInputTextfield, durationDesc])
+		   
 		let durationTypeSpec = ASStackLayoutSpec(direction: .vertical,
 										  spacing: spacingTitle,
 										  justifyContent: .start,
 										  alignItems: .start,
-										  children: [durationTitle, durationInputTextfield])
+										  children: [durationTitle, durationInputSpec])
 		
 		
 		return durationTypeSpec
@@ -597,15 +631,15 @@ class AddExpenseRecordNode: ASDisplayNode {
 	private func configureBillingType() {
 		billingTypeTitle.attributedText = NSAttributedString.bold("Billing Type", 16, .black)
 		
-		let recurringTypeArray = ["Weekly","Monthly", "Yearly"]
+		let billingTypeArray = kayayuBillingType.kayayuBillingTypeValues
 		billingType = DropDown(frame: kayayuSize.dropdownRect)
-		billingType.optionArray = recurringTypeArray
+		billingType.optionArray = billingTypeArray
 		
 		billingType.selectedRowColor = kayayuColor.softGrey
 		billingType.checkMarkEnabled = false
 		billingType.font = UIFont.systemFont(ofSize: 14)
 		billingType.didSelect{(selectedText, index, id) in
-			self.recurringTypeString = selectedText
+			self.billingTypeString.accept(selectedText)
 		}
 	}
 	
