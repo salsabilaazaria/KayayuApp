@@ -24,6 +24,8 @@ class AddIncomeRecordNode: ASDisplayNode {
 	private var ratioCategory: DropDown = DropDown()
 	private let ratioDescription: ASTextNode = ASTextNode()
 	
+	private let scrollNode: ASScrollNode = ASScrollNode()
+	
 	private var saveButton: BigButton = BigButton()
 	private let toolBar: UIToolbar = UIToolbar()
 	private let datePicker = UIDatePicker()
@@ -47,9 +49,43 @@ class AddIncomeRecordNode: ASDisplayNode {
 		configureViewModel()
 		configureDateInputTextField()
 	}
+	
+	private func configureViewModel() {
+		viewModel.onOpenHomePage = { [weak self] in
+			self?.onOpenHomePage?()
+		}
+	}
+	
+	private func reloadUI() {
+		self.setNeedsLayout()
+		self.layoutIfNeeded()
+		self.scrollNode.setNeedsLayout()
+		self.scrollNode.layoutIfNeeded()
+	}
 
 	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
+		configureScrollNode()
+		return ASInsetLayoutSpec(insets: UIEdgeInsets.zero, child: scrollNode)
+	}
+	
+	private func configureScrollNode() {
+		scrollNode.automaticallyManagesSubnodes = true
+		scrollNode.automaticallyManagesContentSize = true
+		scrollNode.scrollableDirections = [.up, .down]
+		scrollNode.style.flexGrow = 1.0
+		scrollNode.style.flexShrink = 1.0
+		scrollNode.view.bounces = true
+		scrollNode.view.showsVerticalScrollIndicator = true
+		scrollNode.view.isScrollEnabled = true
+		scrollNode.layoutSpecBlock = { [weak self] _, constrainedSize in
+			return(self?.createInputSpec(constrainedSize) ?? ASLayoutSpec())
+			
+		}
+	}
+	
+	
+	private func createInputSpec(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
 		let date = createDateInputSpec()
 		let desc = createDescInputSpec()
 		let amount = createAmountInputSpec()
@@ -76,21 +112,16 @@ class AddIncomeRecordNode: ASDisplayNode {
 											   children: [saveButton])
 		
 		let mainSpec = ASStackLayoutSpec(direction: .vertical,
-										 spacing: 10,
+										 spacing: 32,
 										 justifyContent: .start,
 										 alignItems: .start,
 										 children: [inputSpec, saveButtonSpec])
-		mainSpec.style.preferredSize = CGSize(width: UIScreen.main.bounds.width, height:  UIScreen.main.bounds.height)
 		
-		let insetMainSpec = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 16, left: 16, bottom: 48, right: 16), child: mainSpec)
+		let insetMainSpec = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 16, left: 16, bottom: 0, right: 16), child: mainSpec)
+		
 		return insetMainSpec
 	}
 	
-	private func configureViewModel() {
-		viewModel.onOpenHomePage = { [weak self] in
-			self?.onOpenHomePage?()
-		}
-	}
 	
 	private func configureToolBar() {
 		toolBar.sizeToFit()
@@ -268,11 +299,6 @@ class AddIncomeRecordNode: ASDisplayNode {
 		amountInputTextField.textContainerInset = textContainerInset
 		
 		amountInputTextField.textView.text = "0"
-	}
-	
-	private func reloadUI() {
-		self.setNeedsLayout()
-		self.layoutIfNeeded()
 	}
 	
 }
