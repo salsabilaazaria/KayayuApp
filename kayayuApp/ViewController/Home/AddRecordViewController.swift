@@ -37,6 +37,11 @@ class AddRecordViewController:ASDKViewController<ASDisplayNode> {
 			let controller = PopUpViewController(type: .invalidData)
 			self?.present(controller, animated: true, completion: nil)
 		}
+		
+		addRecordNode?.showPaymentTypeHelper = { [weak self] in
+			let controller = PopUpViewController(type: .paymentHelper)
+			self?.present(controller, animated: true, completion: nil)
+		}
 	}
 	
 	override func viewDidLoad() {

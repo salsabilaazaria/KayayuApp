@@ -10,6 +10,7 @@ import AsyncDisplayKit
 
 enum popUpType: String {
 	case invalidData = "invalidData"
+	case paymentHelper = "paymentHelper"
 }
 
 class PopUpContent: ASDisplayNode {
@@ -62,6 +63,11 @@ class PopUpContent: ASDisplayNode {
 		case .invalidData:
 			title.attributedText = NSAttributedString.semibold("Add Data Failed", 16, .black)
 			subtitle.attributedText = NSAttributedString.normal("Invalid data, please try again.", 14, .black)
+			bigButton = BigButton(buttonText: "OK", buttonColor: kayayuColor.yellow, borderColor: kayayuColor.yellow)
+			
+		case .paymentHelper:
+			title.attributedText = NSAttributedString.semibold("Payment Type", 16, .black)
+			subtitle.attributedText = NSAttributedString.normal("When Subscription and Installment payment are due, transaction will be added automatically ", 14, .black)
 			bigButton = BigButton(buttonText: "OK", buttonColor: kayayuColor.yellow, borderColor: kayayuColor.yellow)
 		default:
 			break;

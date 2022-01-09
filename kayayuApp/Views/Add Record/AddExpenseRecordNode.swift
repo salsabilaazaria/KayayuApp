@@ -14,6 +14,7 @@ import RxSwift
 class AddExpenseRecordNode: ASDisplayNode {
 	var onOpenHomePage: (() -> Void)?
 	var onErrorData: (() -> Void)?
+	var showPaymentTypeHelper: (() -> Void)?
 	
 	private let dateTitle: ASTextNode = ASTextNode()
 	private let descTitle: ASTextNode = ASTextNode()
@@ -39,6 +40,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 	private var recurringType: DropDown = DropDown()
 	
 	private let dateDescription: ASTextNode = ASTextNode()
+	private let paymenTypeHelperIcon: ASButtonNode = ASButtonNode()
 	
 	private var saveButton: BigButton = BigButton()
 	
@@ -247,13 +249,19 @@ class AddExpenseRecordNode: ASDisplayNode {
 		paymentTypeNode.borderColor = kayayuColor.borderInputTextField.cgColor
 		paymentTypeNode.layer.cornerRadius = kayayuSize.inputTextFieldCornerRadius
 		
+		let paymentTitleSpec = ASStackLayoutSpec(direction: .horizontal,
+										  spacing: spacingTitle/2,
+										  justifyContent: .start,
+										  alignItems: .center,
+										  children: [paymentTypeTitle, paymenTypeHelperIcon])
+		
 		let paymentTypeWrap = ASWrapperLayoutSpec(layoutElements: [paymentTypeNode])
 		
 		let paymentTypeSpec = ASStackLayoutSpec(direction: .vertical,
 										  spacing: spacingTitle,
 										  justifyContent: .start,
 										  alignItems: .start,
-										  children: [paymentTypeTitle, paymentTypeWrap])
+										  children: [paymentTitleSpec, paymentTypeWrap])
 		
 		return paymentTypeSpec
 	}
@@ -274,6 +282,17 @@ class AddExpenseRecordNode: ASDisplayNode {
 		
 			self.paymenTypeValue.accept(kayayuPaymentType(rawValue: selectedText) ?? .oneTime)
 		}
+		
+		let icon = UIImage(named: "questionIconGrey.png")
+	
+		paymenTypeHelperIcon.setImage( UIImage(named: "questionIconBlack.png"), for: .normal)
+		paymenTypeHelperIcon.style.preferredSize = CGSize(width: 20, height: 20)
+		paymenTypeHelperIcon.imageNode.contentMode = .scaleAspectFit
+		paymenTypeHelperIcon.addTarget(self, action: #selector(paymentTypeHelperTapped), forControlEvents: .touchUpInside)
+	}
+	
+	@objc func paymentTypeHelperTapped() {
+		self.showPaymentTypeHelper?()
 	}
 	
 	private func createRatioCategorySpec() -> ASLayoutSpec{
