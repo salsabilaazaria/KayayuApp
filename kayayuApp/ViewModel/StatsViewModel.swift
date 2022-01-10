@@ -89,7 +89,8 @@ class StatsViewModel {
 	//PROGRESS BAR RATIO
 	func calculateNeedsProgressBarRatio() -> Float {
 		guard let needsBalance = self.needsTotalIncome.value,
-			  let needsTotalTrans = self.needsTotalExpense.value else {
+			  let needsTotalTrans = self.needsTotalExpense.value,
+			  needsBalance > 0, needsTotalTrans > 0 else {
 			return 0
 		}
 		
@@ -98,7 +99,8 @@ class StatsViewModel {
 	
 	func calculateWantsProgressBarRatio() -> Float {
 		guard let wantsBalance = self.wantsTotalIncome.value,
-			  let wantsTotalTrans = self.wantsTotalExpense.value else {
+			  let wantsTotalTrans = self.wantsTotalExpense.value,
+			  wantsBalance > 0, wantsTotalTrans > 0 else {
 			return 0
 		}
 		
@@ -107,7 +109,8 @@ class StatsViewModel {
 	
 	func calculateSavingsProgressBarRatio() -> Float {
 		guard let savingsBalance = self.savingsTotalIncome.value,
-			  let savingsTotalTrans = self.savingsTotalExpense.value else {
+			  let savingsTotalTrans = self.savingsTotalExpense.value,
+			  savingsBalance > 0, savingsTotalTrans > 0 else {
 			return 0
 		}
 		

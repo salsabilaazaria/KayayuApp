@@ -12,8 +12,7 @@ import Charts
 class RealisationStatsNode: ASDisplayNode {
 	var changeMonthStats: ((Date) -> Void)?
 	
-	private let realisationPieChart: PieChartView = PieChartView()
-	private let realisationPieChartNode: ASDisplayNode = ASDisplayNode()
+	private var realisationPieChartNode: ASDisplayNode = ASDisplayNode()
 	
 	private let ratioTitle: ASTextNode = ASTextNode()
 	private var needsSummary: ASLayoutSpec = ASLayoutSpec()
@@ -44,14 +43,32 @@ class RealisationStatsNode: ASDisplayNode {
 	}
 	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-		configurePlanPieChart()
-		configurePlanPieChartNode()
 		
-		let pieChartStack = ASStackLayoutSpec(direction: .vertical,
-											  spacing: 10,
-											  justifyContent: .center,
-											  alignItems: .center,
-											  children: [realisationPieChartNode])
+		var layoutElement: [ASLayoutElement] = []
+		if let needsAmount = viewModel.needsTotalExpense.value,
+			  let wantsAmount = viewModel.wantsTotalExpense.value,
+			  let savingsIncome = viewModel.savingsTotalIncome.value,
+			  let savingsExpense = viewModel.savingsTotalExpense.value, needsAmount > 0, wantsAmount > 0, (savingsIncome - savingsExpense) > 0  {
+			configureRealisationPieChart()
+			let pieChartStack = ASStackLayoutSpec(direction: .vertical,
+												  spacing: 10,
+												  justifyContent: .center,
+												  alignItems: .center,
+												  children: [realisationPieChartNode])
+			layoutElement.append(pieChartStack)
+			
+		} else {
+			let noDataText = ASTextNode()
+			noDataText.attributedText = NSAttributedString.normal("You haven't input any data for this month", 14, .black)
+			
+			let noDataSpec = ASStackLayoutSpec(direction: .horizontal,
+												  spacing: 10,
+												  justifyContent: .center,
+												  alignItems: .center,
+												  children: [noDataText])
+			noDataSpec.style.preferredSize = CGSize(width: 200, height: 200)
+			layoutElement.append(noDataSpec)
+		}
 		
 		let summaryTitle = ASStackLayoutSpec(direction: .vertical,
 											 spacing: 10,
@@ -62,17 +79,53 @@ class RealisationStatsNode: ASDisplayNode {
 		let summaryTitleSpec = ASAbsoluteLayoutSpec(children: [summaryTitle])
 		let summaryTitleInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0), child: summaryTitleSpec)
 		
+		layoutElement.append(summaryTitleInset)
+		layoutElement.append(scrollNode)
+		
 		let mainStack = ASStackLayoutSpec(direction: .vertical,
 										  spacing: 10,
 										  justifyContent: .start,
 										  alignItems: .center,
-										  children: [pieChartStack, summaryTitleInset, scrollNode])
+										  children: layoutElement)
 		
 		
 		return mainStack
 		
 	}
 	
+	private func configureRealisationPieChart() {
+		let realisationPieChart: PieChartView = PieChartView()
+		realisationPieChart.chartDescription?.enabled = false
+		realisationPieChart.drawHoleEnabled = false
+		realisationPieChart.rotationAngle = 0
+		realisationPieChart.rotationEnabled = false
+		
+		realisationPieChart.legend.enabled = false
+		
+		guard let needsAmount = viewModel.needsTotalExpense.value,
+			  let wantsAmount = viewModel.wantsTotalExpense.value,
+			  let savingsIncome = viewModel.savingsTotalIncome.value,
+			  let savingsExpense = viewModel.savingsTotalExpense.value else {
+			return
+		}
+		
+		print("STATS DATA \(needsAmount) \(wantsAmount) \(Double(savingsIncome))")
+		let savingsAmount = savingsIncome - savingsExpense
+		let entries: [PieChartDataEntry] = [PieChartDataEntry(value: Double(needsAmount), label: "\(kayayuRatioTitle.needs.rawValue)"),
+											PieChartDataEntry(value: Double(wantsAmount), label: "\(kayayuRatioTitle.wants.rawValue)"),
+											PieChartDataEntry(value: Double(savingsAmount), label: "\(kayayuRatioTitle.savings.rawValue)")]
+
+		
+		let dataSet = PieChartDataSet(entries: entries, label: "label")
+		
+		dataSet.colors = kayayuColor.pieCharArrColor
+		realisationPieChart.data = PieChartData(dataSet: dataSet)
+		
+		realisationPieChart.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+		realisationPieChartNode.view.addSubview(realisationPieChart)
+		realisationPieChartNode.style.preferredSize = CGSize(width: 200, height: 200)
+		
+	}
 	
 	private func configureScrollNode() {
 		scrollNode.automaticallyManagesSubnodes = true
@@ -101,94 +154,6 @@ class RealisationStatsNode: ASDisplayNode {
 		return mainStack
 	}
 	
-
-	
-	private func configurePlanPieChartNode() {
-		realisationPieChart.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
-		realisationPieChartNode.view.addSubview(realisationPieChart)
-		realisationPieChartNode.style.preferredSize = CGSize(width: 200, height: 200)
-	}
-	
-	private func configurePlanPieChart() {
-		realisationPieChart.chartDescription?.enabled = false
-		realisationPieChart.drawHoleEnabled = false
-		realisationPieChart.rotationAngle = 0
-		realisationPieChart.rotationEnabled = false
-		
-		realisationPieChart.legend.enabled = false
-		
-		guard let needsAmount = viewModel.needsTotalExpense.value,
-			  let wantsAmount = viewModel.wantsTotalExpense.value,
-			  let savingsIncome = viewModel.savingsTotalIncome.value,
-			  let savingsExpense = viewModel.savingsTotalExpense.value else {
-			return
-		}
-		
-		let savingsAmount = savingsIncome - savingsExpense
-		let entries: [PieChartDataEntry] = [PieChartDataEntry(value: Double(needsAmount), label: "\(kayayuRatioTitle.needs.rawValue)"),
-											PieChartDataEntry(value: Double(wantsAmount), label: "\(kayayuRatioTitle.wants.rawValue)"),
-											PieChartDataEntry(value: Double(savingsAmount), label: "\(kayayuRatioTitle.savings.rawValue)")]
-
-		
-		let dataSet = PieChartDataSet(entries: entries, label: "label")
-		
-		dataSet.colors = kayayuColor.pieCharArrColor
-		realisationPieChart.data = PieChartData(dataSet: dataSet)
-		
-	}
-	
-	private func configureRatioTitle() {
-		ratioTitle.attributedText = NSAttributedString.bold("Summary", 16, kayayuColor.yellow)
-	}
-	
-	private func configureNeedsSummary() {
-		let needsRatio = viewModel.calculateNeedsProgressBarRatio()
-		guard let needsTransaction = viewModel.needsTotalExpense.value,
-			  let needsBalance = viewModel.needsTotalIncome.value else {
-			return
-		}
-		let needsRemaining = needsBalance - needsTransaction
-		let needsText = "\(self.numberHelper.floatToIdFormat(beforeFormatted: needsRemaining)) Remaining"
-		
-		needsSummary =  createRatioSummarySpec(category: kayayuRatioTitle.needs.rawValue, text: needsText, ratio: needsRatio, progressColor: kayayuColor.needsLight, baseColor: kayayuColor.needsDark)
-
-	}
-	
-	private func configureWantsSummary() {
-		
-		guard let wantsTransaction = viewModel.wantsTotalExpense.value,
-			  let wantsBalance = viewModel.wantsTotalIncome.value else {
-			return
-		}
-		
-		let wantsRatio = wantsTransaction/wantsBalance
-		let remainingWants = wantsBalance - wantsTransaction
-		let wantsText = "\(numberHelper.floatToIdFormat(beforeFormatted: remainingWants)) Remaining"
-
-		wantsSummary =  createRatioSummarySpec(category: kayayuRatioTitle.wants.rawValue, text: wantsText, ratio: wantsRatio, progressColor: kayayuColor.wantsLight, baseColor: kayayuColor.wantsDark)
-	}
-	
-	private func configureSavingsSummary() {
-	
-		guard let savingsTransaction = viewModel.savingsTotalExpense.value,
-			  let savingsBalance = viewModel.savingsTotalIncome.value else {
-			return
-		}
-		
-		let savingsRatio = 1 - savingsTransaction/savingsBalance
-		
-		var savingsText: String
-		if savingsTransaction == 0 {
-			savingsText = "\(numberHelper.floatToIdFormat(beforeFormatted: savingsBalance)) Saved"
-		} else {
-			savingsText = "\(numberHelper.floatToIdFormat(beforeFormatted: savingsTransaction)) Used"
-		}
-		
-		savingsSummary = createRatioSummarySpec(category: kayayuRatioTitle.savings.rawValue, text: savingsText, ratio: savingsRatio, progressColor: kayayuColor.savingsLight, baseColor: kayayuColor.savingsDark)
-	
-	
-	}
-	
 	private func createAllRatioSummarySpec() -> ASLayoutSpec {
 		configureNeedsSummary()
 		configureWantsSummary()
@@ -207,9 +172,71 @@ class RealisationStatsNode: ASDisplayNode {
 	
 	}
 	
+	private func configureRatioTitle() {
+		ratioTitle.attributedText = NSAttributedString.bold("Summary", 16, kayayuColor.yellow)
+	}
+	
+	private func configureNeedsSummary() {
+	
+		guard let needsTransaction = viewModel.needsTotalExpense.value,
+			  let needsBalance = viewModel.needsTotalIncome.value else {
+			return
+		}
+		
+		let needsRatio = viewModel.calculateNeedsProgressBarRatio()
+		
+		let needsRemaining = needsBalance - needsTransaction
+		let needsText = "\(self.numberHelper.floatToIdFormat(beforeFormatted: needsRemaining)) Remaining"
+		if needsRatio > 1 {
+			needsSummary =  createRatioSummarySpec(category: kayayuRatioTitle.needs.rawValue, text: needsText, ratio: needsRatio, progressColor: .systemRed, baseColor: kayayuColor.needsDark)
+		} else {
+			needsSummary =  createRatioSummarySpec(category: kayayuRatioTitle.needs.rawValue, text: needsText, ratio: needsRatio, progressColor: kayayuColor.needsLight, baseColor: kayayuColor.needsDark)
+		}
+
+	}
+	
+	private func configureWantsSummary() {
+		
+		guard let wantsTransaction = viewModel.wantsTotalExpense.value,
+			  let wantsBalance = viewModel.wantsTotalIncome.value else {
+			return
+		}
+		
+		let wantsRatio = viewModel.calculateWantsProgressBarRatio()
+		let remainingWants = wantsBalance - wantsTransaction
+		
+		let wantsText = "\(numberHelper.floatToIdFormat(beforeFormatted: remainingWants)) Remaining"
+		if wantsRatio > 1 {
+			wantsSummary =  createRatioSummarySpec(category: kayayuRatioTitle.wants.rawValue, text: wantsText, ratio: wantsRatio, progressColor: .systemRed, baseColor: kayayuColor.wantsDark)
+		} else {
+			wantsSummary =  createRatioSummarySpec(category: kayayuRatioTitle.wants.rawValue, text: wantsText, ratio: wantsRatio, progressColor: kayayuColor.wantsLight, baseColor: kayayuColor.wantsDark)
+		}
+
+	}
+	
+	private func configureSavingsSummary() {
+	
+		guard let savingsTransaction = viewModel.savingsTotalExpense.value,
+			  let savingsBalance = viewModel.savingsTotalIncome.value else {
+			return
+		}
+		let savingsRatio = viewModel.calculateSavingsProgressBarRatio()
+		
+		var savingsText: String
+		if savingsTransaction == 0 {
+			savingsText = "\(numberHelper.floatToIdFormat(beforeFormatted: savingsBalance)) Saved"
+		} else {
+			savingsText = "\(numberHelper.floatToIdFormat(beforeFormatted: savingsTransaction)) Used"
+		}
+		
+		savingsSummary = createRatioSummarySpec(category: kayayuRatioTitle.savings.rawValue, text: savingsText, ratio: savingsRatio, progressColor: kayayuColor.savingsLight, baseColor: kayayuColor.savingsDark)
+	
+	
+	}
+	
 	private func createRatioSummarySpec(category: String, text: String, ratio: Float, progressColor: UIColor, baseColor: UIColor) -> ASLayoutSpec {
 		let progressBarText = ASTextNode()
-		progressBarText.attributedText = NSAttributedString.normal(text, 9, .black)
+		progressBarText.attributedText = NSAttributedString.semibold(text, 9, .black)
 		
 		let progressBarNode = configureProgressBar(ratio: ratio, progressColor: progressColor, baseColor: baseColor)
 		let text = ASCenterLayoutSpec(centeringOptions: .X, sizingOptions: .minimumXY, child: progressBarText)
@@ -233,7 +260,7 @@ class RealisationStatsNode: ASDisplayNode {
 		
 		
 		let elementSpecCenter = ASCenterLayoutSpec(centeringOptions: .Y,
-												  sizingOptions: .minimumXY,
+												  sizingOptions: [],
 												  child: elementSpec)
 		
 		let horizontalSpec = ASStackLayoutSpec(direction: .horizontal,
@@ -274,7 +301,7 @@ class RealisationStatsNode: ASDisplayNode {
 		progressBar.progressTintColor = progressColor
 		progressBar.trackTintColor = baseColor
 		progressBar.progress = ratio
-		progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 3)
+		progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 4)
 		
 		progressBarNode.view.addSubview(progressBar)
 		progressBarNode.style.preferredSize = CGSize(width: progressBarWidth, height: progressBarHeight)

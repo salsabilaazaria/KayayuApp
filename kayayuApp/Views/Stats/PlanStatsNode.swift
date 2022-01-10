@@ -46,23 +46,46 @@ class PlanStatsNode: ASDisplayNode {
 	
 	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-		configurePlanPieChartNode()
-		configurePlanPieChart()
-
-		let pieChartStack = ASStackLayoutSpec(direction: .vertical,
-											  spacing: 10,
-												 justifyContent: .center,
-												 alignItems: .center,
-												 children: [planPieChartNode])
+		var layoutElement: [ASLayoutElement] = []
+		
+		if let needsAmount = viewModel.needsTotalExpense.value,
+			  let wantsAmount = viewModel.wantsTotalExpense.value,
+			  let savingsIncome = viewModel.savingsTotalIncome.value,
+			  let savingsExpense = viewModel.savingsTotalExpense.value,
+			  needsAmount > 0, wantsAmount > 0, (savingsIncome - savingsExpense) > 0  {
+			configurePlanPieChart()
+			let pieChartStack = ASStackLayoutSpec(direction: .vertical,
+												  spacing: 10,
+												  justifyContent: .center,
+												  alignItems: .center,
+												  children: [planPieChartNode])
+			layoutElement.append(pieChartStack)
+			
+		} else {
+			let noDataText = ASTextNode()
+			noDataText.attributedText = NSAttributedString.normal("You haven't input any data for this month", 14, .black)
+			
+			let noDataSpec = ASStackLayoutSpec(direction: .horizontal,
+												  spacing: 10,
+												  justifyContent: .center,
+												  alignItems: .center,
+												  children: [noDataText])
+			noDataSpec.style.preferredSize = CGSize(width: 200, height: 200)
+			layoutElement.append(noDataSpec)
+		}
+		
 		
 		let summaryTitleSpec = ASAbsoluteLayoutSpec(children: [planSummaryTitle])
 		let summaryTitleInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0), child: summaryTitleSpec)
+		
+		layoutElement.append(summaryTitleInset)
+		layoutElement.append(scrollNode)
 		
 		let mainStack = ASStackLayoutSpec(direction: .vertical,
 										  spacing: 10,
 										  justifyContent: .start,
 										  alignItems: .center,
-										  children: [pieChartStack, summaryTitleInset, scrollNode])
+										  children: layoutElement)
 		
 	
 		return mainStack
@@ -96,12 +119,6 @@ class PlanStatsNode: ASDisplayNode {
 		return mainStack
 	}
 	
-	private func configurePlanPieChartNode() {
-		planPieChart.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
-		planPieChartNode.view.addSubview(planPieChart)
-		planPieChartNode.style.preferredSize = CGSize(width: 200, height: 200)
-	}
-	
 	private func configurePlanPieChart() {
 		planPieChart.chartDescription?.enabled = false
 		planPieChart.drawHoleEnabled = false
@@ -123,6 +140,10 @@ class PlanStatsNode: ASDisplayNode {
 		let dataSet = PieChartDataSet(entries: entries, label: "")
 		dataSet.colors = kayayuColor.pieCharArrColor
 		planPieChart.data = PieChartData(dataSet: dataSet)
+		
+		planPieChart.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+		planPieChartNode.view.addSubview(planPieChart)
+		planPieChartNode.style.preferredSize = CGSize(width: 200, height: 200)
 
 	}
 	
