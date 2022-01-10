@@ -57,7 +57,7 @@ class TransactionTableHeaderNode: ASCellNode {
 										 alignItems: .start,
 										 children: [headerSpec, summarySpec])
 		
-		let mainInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 32,
+		let mainInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 8,
 															   left: 16,
 															   bottom: 0,
 															   right: 16),

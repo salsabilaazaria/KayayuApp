@@ -49,7 +49,7 @@ class HomeNode: ASDisplayNode {
 	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
 		
-		let homeStack = ASStackLayoutSpec(direction: .vertical, spacing: 32, justifyContent: .spaceAround, alignItems: .stretch, children: [homeTableTransaction])
+		let homeStack = ASWrapperLayoutSpec(layoutElement: homeTableTransaction)
 	
 		let addRecordBtnSpec = ASStackLayoutSpec(direction: .vertical,
 									   spacing: 20,

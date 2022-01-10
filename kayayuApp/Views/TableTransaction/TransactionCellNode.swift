@@ -37,14 +37,12 @@ class TransactionCellNode: ASCellNode {
 	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
 		let transactionSpec = ASStackLayoutSpec(direction: .horizontal,
-												spacing: 8,
+												spacing: 0,
 												justifyContent: .end,
 												alignItems: .end,
 												children: [transactionAmount])
 		
-		transactionSpec.style.flexGrow = 1
-		notes.style.flexGrow = 1
-		
+		transactionSpec.style.flexGrow = 1.0
 		
 		var detailTransElement: [ASLayoutElement] = [ratio]
 		
@@ -54,7 +52,7 @@ class TransactionCellNode: ASCellNode {
 			let transactionSpec = ASStackLayoutSpec(direction: .vertical,
 													spacing: 4,
 													justifyContent: .start,
-													alignItems: .stretch,
+													alignItems: .start,
 													children: [recurringDesc, notes])
 			detailTransElement.append(transactionSpec)
 		} else {
@@ -63,20 +61,17 @@ class TransactionCellNode: ASCellNode {
 		detailTransElement.append(transactionSpec)
 		
 		let detailTransaction = ASStackLayoutSpec(direction: .horizontal,
-												  spacing: 16,
-												  justifyContent: .center,
+												  spacing: 8,
+												  justifyContent: .spaceAround,
 												  alignItems: .start,
 												  children: detailTransElement)
 		
 		detailTransaction.alignItems = .center
 		
-		detailTransaction.style.preferredSize = CGSize(width: UIScreen.main.bounds.width - 24, height: 60)
+		detailTransaction.style.preferredSize = CGSize(width: UIScreen.main.bounds.width - 16, height: 60)
 		
-		let mainStack = ASStackLayoutSpec(direction: .vertical,
-										  spacing: 0,
-										  justifyContent: .center,
-										  alignItems: .center,
-										  children: [detailTransaction])
+		let mainStack = ASCenterLayoutSpec(centeringOptions: .XY, sizingOptions: [], child: detailTransaction)
+
 		let mainInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0,
 															   left: 8,
 															   bottom: 0,

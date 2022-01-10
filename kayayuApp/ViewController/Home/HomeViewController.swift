@@ -67,6 +67,7 @@ class HomeViewController:ASDKViewController<ASDisplayNode> {
 		self.navigationController?.navigationBar.tintColor = kayayuColor.yellow
 		self.navigationController?.navigationBar.backgroundColor = .white
 		self.navigationController?.navigationItem.largeTitleDisplayMode = .always
+		self.navigationController?.navigationBar.isTranslucent = false
 		self.tabBarController?.selectedIndex = 0
 		let customTabBarItem:UITabBarItem = UITabBarItem(title: "Home", image: UIImage(named: "homeSelected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize), selectedImage: UIImage(named: "homeSelected.png")?.scalePreservingAspectRatio(targetSize: kayayuSize.kayayuTabbarImageSize))
 		self.tabBarItem = customTabBarItem
