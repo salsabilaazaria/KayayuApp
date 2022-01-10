@@ -15,10 +15,12 @@ class PlanStatsNode: ASDisplayNode {
 	private let planPieChart: PieChartView = PieChartView()
 	private let planPieChartNode: ASDisplayNode = ASDisplayNode()
 	
-	private let ratioTitle: ASTextNode = ASTextNode()
+	private let planSummaryTitle: ASTextNode = ASTextNode()
 	private var needsSummary: SummaryHeader = SummaryHeader()
 	private var wantsSummary: SummaryHeader = SummaryHeader()
 	private var savingsSummary: SummaryHeader = SummaryHeader()
+	
+	private let scrollNode: ASScrollNode = ASScrollNode()
 	
 	private let numberHelper: NumberHelper = NumberHelper()
 	
@@ -31,10 +33,13 @@ class PlanStatsNode: ASDisplayNode {
 		backgroundColor = .white
 		
 		configureRatioTitle()
+		configureScrollNode()
 
 	}
 	
 	 func reloadUI(){
+		self.scrollNode.setNeedsLayout()
+		self.scrollNode.layoutIfNeeded()
 		self.setNeedsLayout()
 		self.layoutIfNeeded()
 	}
@@ -43,7 +48,6 @@ class PlanStatsNode: ASDisplayNode {
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
 		configurePlanPieChartNode()
 		configurePlanPieChart()
-		let summaryStack = createRatioSummarySpec()
 
 		let pieChartStack = ASStackLayoutSpec(direction: .vertical,
 											  spacing: 10,
@@ -51,15 +55,45 @@ class PlanStatsNode: ASDisplayNode {
 												 alignItems: .center,
 												 children: [planPieChartNode])
 		
+		let summaryTitleSpec = ASAbsoluteLayoutSpec(children: [planSummaryTitle])
+		let summaryTitleInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0), child: summaryTitleSpec)
 		
 		let mainStack = ASStackLayoutSpec(direction: .vertical,
 										  spacing: 10,
-												justifyContent: .start,
-												alignItems: .center,
-												children: [pieChartStack, summaryStack])
+										  justifyContent: .start,
+										  alignItems: .center,
+										  children: [pieChartStack, summaryTitleInset, scrollNode])
 		
+	
 		return mainStack
 		
+	}
+	
+	private func configureScrollNode() {
+		scrollNode.automaticallyManagesSubnodes = true
+		scrollNode.automaticallyManagesContentSize = true
+		scrollNode.scrollableDirections = [.up, .down]
+		scrollNode.style.flexGrow = 1.0
+		scrollNode.style.flexShrink = 1.0
+		scrollNode.view.bounces = true
+		scrollNode.view.showsVerticalScrollIndicator = true
+		scrollNode.view.isScrollEnabled = true
+		scrollNode.view.contentInset.bottom = 42
+		scrollNode.layoutSpecBlock = { [weak self] _, constrainedSize in
+			return(self?.createScrollNode(constrainedSize) ?? ASLayoutSpec())
+			
+		}
+	}
+	
+	private func createScrollNode(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
+		let ratioSummary = createRatioSummarySpec()
+		let mainStack = ASStackLayoutSpec(direction: .vertical,
+										  spacing: 0,
+										  justifyContent: .start,
+										  alignItems: .stretch,
+										  children: [ratioSummary])
+		
+		return mainStack
 	}
 	
 	private func configurePlanPieChartNode() {
@@ -90,8 +124,6 @@ class PlanStatsNode: ASDisplayNode {
 		dataSet.colors = kayayuColor.pieCharArrColor
 		planPieChart.data = PieChartData(dataSet: dataSet)
 
-
-		
 	}
 	
 	
@@ -103,20 +135,20 @@ class PlanStatsNode: ASDisplayNode {
 		
 		let summaryStack = ASStackLayoutSpec(direction: .vertical,
 											 spacing: 10,
-											 justifyContent: .center,
-											 alignItems: .center,
+											 justifyContent: .start,
+											 alignItems: .start,
 											 children: [needsSummary, wantsSummary, savingsSummary])
 		
-		let summaryTitleStack = ASStackLayoutSpec(direction: .vertical,
-												  spacing: 10,
-												  justifyContent: .start,
-												  alignItems: .start,
-												  children: [ratioTitle, summaryStack])
-		return summaryTitleStack
+		summaryStack.style.flexGrow = 1.0
+		summaryStack.style.flexShrink = 1.0
+		
+		let ratioSummaryInsetSpec = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16), child: summaryStack)
+		
+		return ratioSummaryInsetSpec
 	}
 	
 	private func configureRatioTitle() {
-		ratioTitle.attributedText = NSAttributedString.bold("This Month Goal", 16, kayayuColor.yellow)
+		planSummaryTitle.attributedText = NSAttributedString.bold("This Month Goal", 16, kayayuColor.yellow)
 	}
 	
 	private func configureNeedsSummary() {

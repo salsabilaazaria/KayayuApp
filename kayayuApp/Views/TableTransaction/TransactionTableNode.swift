@@ -24,7 +24,7 @@ class TransactionTableNode: ASTableNode {
 		self.dataSource = self
 		configureObserver()
 		backgroundColor = .white
-		contentInset.bottom = 100
+		contentInset.bottom = 200
 	}
 	
 	private func configureObserver() {

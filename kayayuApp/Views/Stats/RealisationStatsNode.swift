@@ -20,7 +20,7 @@ class RealisationStatsNode: ASDisplayNode {
 	private var wantsSummary: ASLayoutSpec = ASLayoutSpec()
 	private var savingsSummary: ASLayoutSpec = ASLayoutSpec()
 	
-//	private var scrollNode: ASScrollNode = ASScrollNode()
+	private var scrollNode: ASScrollNode = ASScrollNode()
 	
 	private let numberHelper: NumberHelper = NumberHelper()
 	private let viewModel: StatsViewModel
@@ -32,20 +32,20 @@ class RealisationStatsNode: ASDisplayNode {
 		backgroundColor = .white
 	
 		configureRatioTitle()
+		configureScrollNode()
 		
 	}
 	
 	 func reloadUI(){
 		self.setNeedsLayout()
 		self.layoutIfNeeded()
+		self.scrollNode.setNeedsLayout()
+		self.scrollNode.layoutIfNeeded()
 	}
 	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
 		configurePlanPieChart()
 		configurePlanPieChartNode()
-		configureNeedsSummary()
-		configureWantsSummary()
-		configureSavingsSummary()
 		
 		let pieChartStack = ASStackLayoutSpec(direction: .vertical,
 											  spacing: 10,
@@ -66,12 +66,42 @@ class RealisationStatsNode: ASDisplayNode {
 										  spacing: 10,
 										  justifyContent: .start,
 										  alignItems: .center,
-										  children: [pieChartStack, summaryTitleInset, createAllRatioSummarySpec()])
+										  children: [pieChartStack, summaryTitleInset, scrollNode])
 		
 		
 		return mainStack
 		
 	}
+	
+	
+	private func configureScrollNode() {
+		scrollNode.automaticallyManagesSubnodes = true
+		scrollNode.automaticallyManagesContentSize = true
+		scrollNode.scrollableDirections = [.up, .down]
+		scrollNode.style.flexGrow = 1.0
+		scrollNode.style.flexShrink = 1.0
+		scrollNode.view.bounces = true
+		scrollNode.view.showsVerticalScrollIndicator = true
+		scrollNode.view.isScrollEnabled = true
+		scrollNode.view.contentInset.bottom = 42
+		scrollNode.layoutSpecBlock = { [weak self] _, constrainedSize in
+			return(self?.createScrollNode(constrainedSize) ?? ASLayoutSpec())
+			
+		}
+	}
+	
+	private func createScrollNode(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
+		let ratioSummary = createAllRatioSummarySpec()
+		let mainStack = ASStackLayoutSpec(direction: .vertical,
+										  spacing: 0,
+										  justifyContent: .center,
+										  alignItems: .stretch,
+										  children: [ratioSummary])
+		
+		return mainStack
+	}
+	
+
 	
 	private func configurePlanPieChartNode() {
 		realisationPieChart.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
@@ -160,6 +190,9 @@ class RealisationStatsNode: ASDisplayNode {
 	}
 	
 	private func createAllRatioSummarySpec() -> ASLayoutSpec {
+		configureNeedsSummary()
+		configureWantsSummary()
+		configureSavingsSummary()
 		let summaryRatioSpec = ASStackLayoutSpec(direction: .vertical,
 												  spacing: 10,
 												  justifyContent: .start,

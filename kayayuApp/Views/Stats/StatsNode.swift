@@ -28,7 +28,7 @@ class StatsNode: ASDisplayNode {
 		self.realisationNode = RealisationStatsNode(viewModel: viewModel)
 		super.init()
 		
-		let nodeSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - TabBar().style.preferredSize.height - 200)
+		let nodeSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - kayayuSize.kayayuBarHeight - 150)
 		planNode.style.preferredSize = nodeSize
 		realisationNode.style.preferredSize = nodeSize
 		statsDateHeader.style.preferredSize = CGSize(width: UIScreen.main.bounds.width, height: kayayuSize.kayayuBarHeight)
@@ -48,7 +48,7 @@ class StatsNode: ASDisplayNode {
 	
 	private func configureNode() {
 		self.statsDateHeader.changeMonthStats = { [weak self] date in
-			print("selectedMonth")
+			print("selectedMonth \(date)")
 		
 			guard let month = self?.calendarHelper.monthInt(date: date),
 				  let year = self?.calendarHelper.yearInt(date: date),
@@ -91,8 +91,6 @@ class StatsNode: ASDisplayNode {
 										  alignItems: .start,
 										  children: statsElementArray)
 		
-
-
 		return mainStack
 	}
 	
