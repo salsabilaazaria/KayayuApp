@@ -37,6 +37,7 @@ class HomeNode: ASDisplayNode {
 	
 	private func configureAddRecordBtn() {
 		addRecordBtn.setImage(UIImage(named: "addRecordBtn.png"), for: .normal)
+		addRecordBtn.imageNode.contentMode = .scaleAspectFit
 		addRecordBtn.style.preferredSize = CGSize(width: 80, height: 80)
 		addRecordBtn.addTarget(self, action: #selector(goToAddRecord), forControlEvents: .touchUpInside)
 	}
