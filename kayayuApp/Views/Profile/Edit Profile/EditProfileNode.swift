@@ -13,9 +13,6 @@ class EditProfileNode: ASDisplayNode {
 	var onOpenChangeUsernamePage: (() -> Void)?
 	var onOpenChangePasswordPage: (() -> Void)?
 	
-	private let username: ASTextNode = ASTextNode()
-	private let email: ASTextNode = ASTextNode()
-	
 	private var changeUsername: ProfileCellNode = ProfileCellNode()
 	private var changeEmail: ProfileCellNode = ProfileCellNode()
 	private var changePassword: ProfileCellNode = ProfileCellNode()
@@ -28,46 +25,14 @@ class EditProfileNode: ASDisplayNode {
 		self.viewModel = viewModel
 		super.init()
 
-		backgroundColor = .white
+		backgroundColor = kayayuColor.lightYellow
 		automaticallyManagesSubnodes = true
 	}
 	
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-		configureUsername()
-		configureEmail()
 		configureScrollNode()
 		
-		let profileStack = ASStackLayoutSpec(direction: .vertical,
-											 spacing: 10,
-											 justifyContent: .start,
-											 alignItems: .start,
-											 children: [username, email])
-		
-		let profileInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 32, left: 16, bottom: 32, right: 16), child: profileStack)
-		
-		let mainSpec = ASStackLayoutSpec(direction: .vertical,
-											spacing: 0,
-											justifyContent: .start,
-											alignItems: .start,
-											children: [profileInset, scrollNode])
-		
-		return mainSpec
-	}
-	
-	
-	
-	private func configureUsername() {
-		guard let usernameString = self.viewModel.getAuthUser()?.displayName else {
-			return
-		}
-		username.attributedText = NSAttributedString.bold(usernameString, 16, .black)
-	}
-	
-	private func configureEmail() {
-		guard let emailString = self.viewModel.getAuthUser()?.email else {
-			return
-		}
-		email.attributedText = NSAttributedString.semibold(emailString, 16, .gray)
+		return ASWrapperLayoutSpec(layoutElement: scrollNode)
 	}
 	
 	private func configureScrollNode() {
@@ -90,20 +55,16 @@ class EditProfileNode: ASDisplayNode {
 		configureChangePasswordNode()
 		
 		let listSpec = ASStackLayoutSpec(direction: .vertical,
-										  spacing: 0,
+										  spacing: 8,
 										  justifyContent: .start,
 										  alignItems: .stretch,
 										  children: [changeUsername,
 													 changeEmail,
 													 changePassword])
 		
-		let mainSpec = ASStackLayoutSpec(direction: .vertical,
-										  spacing: 30,
-										  justifyContent: .start,
-										  alignItems: .stretch,
-										  children: [listSpec])
+		let insetList = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0), child: listSpec)
 
-		return mainSpec
+		return insetList
 	}
 	
 	private func configureChangeUsernameNode() {

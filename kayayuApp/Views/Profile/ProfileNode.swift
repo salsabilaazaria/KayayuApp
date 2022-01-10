@@ -134,8 +134,10 @@ class ProfileNode: ASDisplayNode {
 										  justifyContent: .start,
 										  alignItems: .stretch,
 										  children: [listSpec, editProfileNode, logoutNode])
+		
+		let mainSpecInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 0, bottom: 16, right: 0), child: mainSpec)
 
-		return mainSpec
+		return mainSpecInset
 	}
 	
 	private func configureSubscriptionNode() {
