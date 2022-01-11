@@ -41,15 +41,14 @@ extension InstallmentTableNode: ASTableDataSource, ASTableDelegate {
 	}
 	
 	func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
-        guard let allInstlData = viewModel.recurringInstlData.value else {
+        guard let allInstlData = viewModel.recurringInstlData.value,
+			  let instlData = allInstlData[indexPath.row].recurringTransaction,
+			  let dueIn = allInstlData[indexPath.row].dueIn  else {
             return ASCellNode()
         }
         
-        let instlData = allInstlData[indexPath.row]
-        
         let nextBillDate = self.viewModel.getNextBillDate(recurringId: instlData.recurring_id)
         let remainingAmount = self.viewModel.getRemainingAmount(recurringId: instlData.recurring_id)
-        let dueIn = self.viewModel.getDueIn(recurringId: instlData.recurring_id)
         
         let cellNode = InstallmentCellNode(data: instlData, nextBillDate: nextBillDate, remainingAmount: remainingAmount, dueIn: dueIn)
 		return cellNode

@@ -23,21 +23,20 @@ class ProfileViewModel {
 	
 	var user: BehaviorRelay<Users?> = BehaviorRelay<Users?>(value: nil)
 	var recurringData: BehaviorRelay<[RecurringTransactions]?> = BehaviorRelay<[RecurringTransactions]?>(value: nil)
-	var recurringSubsData: BehaviorRelay<[RecurringTransactions]?> = BehaviorRelay<[RecurringTransactions]?>(value: nil)
-	var recurringInstlData: BehaviorRelay<[RecurringTransactions]?> = BehaviorRelay<[RecurringTransactions]?>(value: nil)
 	var detailTrans: BehaviorRelay<[TransactionDetails]?> = BehaviorRelay<[TransactionDetails]?>(value: nil)
-	var detailTransLatest: BehaviorRelay<[TransactionDetails]?> = BehaviorRelay<[TransactionDetails]?>(value: nil)
+	var recurringSubsData: BehaviorRelay<[RecurringTransactionWithDueIn]?> = BehaviorRelay<[RecurringTransactionWithDueIn]?>(value: nil)
+	var recurringInstlData: BehaviorRelay<[RecurringTransactionWithDueIn]?> = BehaviorRelay<[RecurringTransactionWithDueIn]?>(value: nil)
 	var transactionsData: BehaviorRelay<[Transactions]?> = BehaviorRelay<[Transactions]?>(value: nil)
+	var recurringTransWithDueIn: BehaviorRelay<[RecurringTransactionWithDueIn]?> = BehaviorRelay<[RecurringTransactionWithDueIn]?>(value: nil)
 	
 	private let disposeBag = DisposeBag()
 	
 	init() {
 		getUserData()
 		getRecurringData()
-		getRecurringSubsData()
-		getRecurringInstlData()
 		getTransactionDetailData()
 		getTransactionData()
+		getRecurringDataWithDueIn()
 		configureObserver()
 		
 	}
@@ -83,6 +82,72 @@ class ProfileViewModel {
 		})
 	}
 	
+	private func getRecurringDataWithDueIn() {
+		database.collection("recurringTransactions")
+			.whereField("user_id", isEqualTo: getUserId())
+			.addSnapshotListener { (documentSnapshot, errorMsg) in
+				
+				if let errorMsg = errorMsg {
+					print("Error getting Recurring Transactions data \(errorMsg)")
+				}
+				else {
+					var documentArray: [RecurringTransactionWithDueIn] = []
+					var dueNum: Int = 0
+					for document in documentSnapshot!.documents {
+						
+						do {
+							guard let trans = try document.data(as: RecurringTransactions.self) else {
+								print("KAYAYU failed get recurringTransactions")
+								return
+							}
+							
+							dueNum = self.getDueIn(recurringId: trans.recurring_id)
+							print("rec id: \(trans.recurring_id) due in: \(dueNum)")
+							
+							let recurringTransData = RecurringTransactionWithDueIn(dueIn: dueNum, recurringTransaction: trans)
+							documentArray.append(recurringTransData)
+						
+							
+						} catch {
+							print(error)
+						}
+					}
+					self.recurringTransWithDueIn.accept(documentArray)
+					self.getSortedData()
+					print("RECURRING TRANS WITH DUE IN \(self.recurringTransWithDueIn.value)")
+				}
+			}
+	}
+	
+	private func getSortedData() {
+		
+		var subsArray: [RecurringTransactionWithDueIn] = []
+		var installmentArray: [RecurringTransactionWithDueIn] = []
+		guard let recurringData = self.recurringTransWithDueIn.value else {
+			return
+		}
+		for data in recurringData {
+			if data.recurringTransaction?.recurring_type == "subscription" {
+				subsArray.append(data)
+			} else if data.recurringTransaction?.recurring_type == "installment" {
+				installmentArray.append(data)
+			}
+		}
+		
+		subsArray.sort { guard let first = $0.dueIn,
+							   let second = $1.dueIn else { return false }
+			return first < second }
+		
+		installmentArray.sort { guard let first = $0.dueIn,
+							   let second = $1.dueIn else { return false }
+			return first < second }
+		
+		self.recurringSubsData.accept(subsArray)
+		self.recurringInstlData.accept(installmentArray)
+		
+	
+	}
+	
 	func getTransactionData () {
 		database.collection("transactions")
 			.whereField("user_id", isEqualTo: getUserId()).order(by: "transaction_date", descending: true)
@@ -92,10 +157,8 @@ class ProfileViewModel {
 					print("Error get Transaction Data \(errorMsg)")
 				}
 				else {
-					var count = 0
 					var documentArray: [Transactions] = []
 					for document in documentSnapshot!.documents {
-						count += 1
 						
 						do {
 							guard let trans = try document.data(as: Transactions.self) else {
@@ -114,7 +177,7 @@ class ProfileViewModel {
 			}
 	}
 	
-	private func getRecurringData () {
+	private func getRecurringData() {
 		database.collection("recurringTransactions")
 			.whereField("user_id", isEqualTo: getUserId()).order(by: "end_billing_date", descending: true)
 			.whereField("end_billing_date", isGreaterThan: self.calendarHelper.getEndDay())
@@ -142,64 +205,7 @@ class ProfileViewModel {
 				}
 			}
 	}
-	
-	private func getRecurringSubsData () {
-		database.collection("recurringTransactions")
-			.whereField("user_id", isEqualTo: getUserId()).whereField("recurring_type", isEqualTo: "subscription")
-			.order(by: "end_billing_date", descending: false)
-			.whereField("end_billing_date", isGreaterThan: self.calendarHelper.getEndDay())
-			.addSnapshotListener { (documentSnapshot, errorMsg) in
-				if let errorMsg = errorMsg {
-					print("Error get Subscription Data \(errorMsg)")
-				}
-				else {
-					var documentArray: [RecurringTransactions] = []
-					for document in documentSnapshot!.documents {
-						do {
-							guard let trans = try document.data(as: RecurringTransactions.self) else {
-								print("KAYAYU failed get recurring subscription data")
-								return
-								
-							}
-							documentArray.append(trans)
-							
-						} catch {
-							print("error")
-						}
-					}
-					self.recurringSubsData.accept(documentArray)
-				}
-			}
-	}
-	
-	private func getRecurringInstlData () {
-		database.collection("recurringTransactions").whereField("user_id", isEqualTo: getUserId())
-			.whereField("recurring_type", isEqualTo: "installment")
-			.order(by: "end_billing_date", descending: false)
-			.whereField("end_billing_date", isGreaterThan: self.calendarHelper.getEndDay())
-			.addSnapshotListener { (documentSnapshot, errorMsg) in
-				if let errorMsg = errorMsg {
-					print("Error get Installment Data \(errorMsg)")
-				}
-				else {
-					var documentArray: [RecurringTransactions] = []
-					for document in documentSnapshot!.documents {
-						do {
-							guard let trans = try document.data(as: RecurringTransactions.self) else {
-								print("KAYAYU failed get recurring installment data")
-								return
-							}
-							documentArray.append(trans)
-							
-						} catch {
-							print("error")
-						}
-					}
-					self.recurringInstlData.accept(documentArray)
-				}
-			}
-	}
-	
+
 	private func getTransactionDetailData() {
 		
 		database.collection("transactionDetails").order(by: "billing_date", descending: true).addSnapshotListener { (documentSnapshot, errorMsg) in
