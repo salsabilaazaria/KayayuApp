@@ -51,6 +51,10 @@ class ProfileViewModel {
 		Observable.combineLatest(recurringSubsData.asObservable(), recurringInstlData.asObservable()).subscribe(onNext: { data in
 			self.reloadUI?()
 		}).disposed(by: disposeBag)
+		
+		self.user.asObservable().subscribe(onNext: { user in
+			self.reloadUI?()
+		}).disposed(by: disposeBag)
 	}
 	
 	private func getUserId() -> String {

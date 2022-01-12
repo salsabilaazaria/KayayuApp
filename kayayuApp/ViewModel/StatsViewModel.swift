@@ -59,6 +59,20 @@ class StatsViewModel {
 									self.reloadUI?()
 								}.disposed(by: disposeBag)
 		
+		Observable.combineLatest(
+								 wantsTotalIncome.asObservable(),
+								 wantsTotalExpense.asObservable()).subscribe {
+									(wantsIncom, wantsExpense) in
+									self.reloadUI?()
+								}.disposed(by: disposeBag)
+		
+		Observable.combineLatest(
+								 needsTotalIncome.asObservable(),
+								 needsTotalExpense.asObservable()).subscribe {
+									(needsIncome, needsExpense) in
+									self.reloadUI?()
+								}.disposed(by: disposeBag)
+		
 	}
 	
 	private func getUserId() -> String{

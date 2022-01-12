@@ -58,6 +58,7 @@ class HomeViewModel {
 	private func configureObserver() {
 		self.transactionsData.asObservable().subscribe(onNext: { transData in
 			self.getDictionaryTransaction()
+			self.getBalanceTotal()
 			self.updateBalanceTotal()
 			self.reloadUI?()
 		}).disposed(by: disposeBag)

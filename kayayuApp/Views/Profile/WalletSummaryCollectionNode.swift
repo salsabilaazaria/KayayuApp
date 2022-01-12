@@ -8,6 +8,8 @@
 
 import Foundation
 import AsyncDisplayKit
+import RxCocoa
+import RxSwift
 
 class WalletSummaryCollectionNode: ASDisplayNode {
 	
@@ -29,7 +31,7 @@ class WalletSummaryCollectionNode: ASDisplayNode {
 		self.summaryCollectionNode = ASCollectionNode(collectionViewLayout: flowLayout)
 		
 		super.init()
-		
+		configureViewModel()
 		backgroundColor = .clear
 		automaticallyManagesSubnodes = true
 		configureSummaryCollectioNode()
@@ -41,6 +43,14 @@ class WalletSummaryCollectionNode: ASDisplayNode {
 		summaryCollectionNode.dataSource = self
 		summaryCollectionNode.backgroundColor = .clear
 		summaryCollectionNode.showsHorizontalScrollIndicator = false
+	}
+	
+	private func configureViewModel() {
+		viewModel.reloadUI = { 
+			print("summaryCollectionNode reload ui")
+			self.summaryCollectionNode.reloadData()
+			self.summaryCollectionNode.relayoutItems()
+		}
 	}
 	
 	

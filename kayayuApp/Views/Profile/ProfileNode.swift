@@ -14,8 +14,6 @@ class ProfileNode: ASDisplayNode {
 	var onOpenEditProfile: (() -> Void)?
     var onLogout: (() -> Void)?
     
-//    private let viewModel: AuthenticationViewModel
-    
 	private let username: ASTextNode = ASTextNode()
 	private let email: ASTextNode = ASTextNode()
 	private var balanceSummary: SummaryHeader = SummaryHeader()
