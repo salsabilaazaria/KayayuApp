@@ -79,6 +79,8 @@
 		AFA9CDEB274F776C00E520A3 /* AddExpenseRecordNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA9CDEA274F776C00E520A3 /* AddExpenseRecordNode.swift */; };
 		AFA9CDF0274F78A800E520A3 /* AddRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA9CDEF274F78A800E520A3 /* AddRecordViewController.swift */; };
 		AFBA5F59274DF8F6002455A7 /* KayayuHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBA5F58274DF8F6002455A7 /* KayayuHelper.swift */; };
+		AFC0DB22278EBC8900193B59 /* TheoryExplanationNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC0DB21278EBC8900193B59 /* TheoryExplanationNode.swift */; };
+		AFC0DB27278EC3EB00193B59 /* TheoryExplanationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC0DB26278EC3EB00193B59 /* TheoryExplanationController.swift */; };
 		AFC65DA027476F000050769D /* KayayuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC65D9F27476F000050769D /* KayayuCoordinator.swift */; };
 		AFC65DA5274771650050769D /* KayayuScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC65DA4274771650050769D /* KayayuScreen.swift */; };
 		AFC65DAA274792AD0050769D /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC65DA9274792AD0050769D /* LandingViewController.swift */; };
@@ -179,6 +181,8 @@
 		AFA9CDEA274F776C00E520A3 /* AddExpenseRecordNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseRecordNode.swift; sourceTree = "<group>"; };
 		AFA9CDEF274F78A800E520A3 /* AddRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordViewController.swift; sourceTree = "<group>"; };
 		AFBA5F58274DF8F6002455A7 /* KayayuHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KayayuHelper.swift; sourceTree = "<group>"; };
+		AFC0DB21278EBC8900193B59 /* TheoryExplanationNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheoryExplanationNode.swift; sourceTree = "<group>"; };
+		AFC0DB26278EC3EB00193B59 /* TheoryExplanationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheoryExplanationController.swift; sourceTree = "<group>"; };
 		AFC65D9F27476F000050769D /* KayayuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KayayuCoordinator.swift; sourceTree = "<group>"; };
 		AFC65DA4274771650050769D /* KayayuScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KayayuScreen.swift; sourceTree = "<group>"; };
 		AFC65DA9274792AD0050769D /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LandingViewController.swift; path = kayayuApp/LandingViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -238,6 +242,7 @@
 				0A337AB8275E503900B04508 /* ProfileNode.swift */,
 				0A337AC2275E540500B04508 /* ProfileCellNode.swift */,
 				AF767C5D2785D7F6001AEEAD /* WalletSummaryCollectionNode.swift */,
+				AFC0DB21278EBC8900193B59 /* TheoryExplanationNode.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -445,6 +450,7 @@
 				0ADCBA94275E793A00F15F5E /* SubscriptionViewController.swift */,
 				0ADCBAA7275E7F4A00F15F5E /* InstallmentViewController.swift */,
 				AF6728D62776454200EFD5DE /* Edit Profile */,
+				AFC0DB26278EC3EB00193B59 /* TheoryExplanationController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -796,6 +802,7 @@
 				0A8D950D274D2B2400BB55FC /* StatsViewController.swift in Sources */,
 				AF2C1867274607AC00482D6E /* CalendarHelper.swift in Sources */,
 				AFF76AD5277E1E3100FBA576 /* PopUpViewController.swift in Sources */,
+				AFC0DB27278EC3EB00193B59 /* TheoryExplanationController.swift in Sources */,
 				0ADCBA90275E5F3100F15F5E /* SubscriptionCellNode.swift in Sources */,
 				AF7591DA274E43DE003B8708 /* StatsDateHeader.swift in Sources */,
 				AF2C18752746165600482D6E /* TransactionTableHeaderNode.swift in Sources */,
@@ -834,6 +841,7 @@
 				AFC65DBA2747ABCA0050769D /* RegisterViewController.swift in Sources */,
 				AFA9CDE2274F766300E520A3 /* AddRecordeNode.swift in Sources */,
 				AFA9CDF0274F78A800E520A3 /* AddRecordViewController.swift in Sources */,
+				AFC0DB22278EBC8900193B59 /* TheoryExplanationNode.swift in Sources */,
 				AFF76ACE277E1D4100FBA576 /* PopUpBackground.swift in Sources */,
 				0A337ABE275E517700B04508 /* ProfileViewController.swift in Sources */,
 				0AAA268A273AB0700063D876 /* SummaryHeader.swift in Sources */,

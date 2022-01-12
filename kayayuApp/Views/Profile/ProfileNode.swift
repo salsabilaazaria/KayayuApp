@@ -12,6 +12,7 @@ class ProfileNode: ASDisplayNode {
 	var onOpenSubscriptionPage: (() -> Void)?
 	var onOpenInstallmentPage: (() -> Void)?
 	var onOpenEditProfile: (() -> Void)?
+	var onOpenHelp: (() -> Void)?
     var onLogout: (() -> Void)?
     
 	private let username: ASTextNode = ASTextNode()
@@ -22,6 +23,7 @@ class ProfileNode: ASDisplayNode {
 	private var subscriptionNode: ProfileCellNode = ProfileCellNode()
 	private var installmentNode: ProfileCellNode = ProfileCellNode()
 	private var editProfileNode: ProfileCellNode = ProfileCellNode()
+	private var helpNode: ProfileCellNode = ProfileCellNode()
 	private var logoutNode: ProfileCellNode = ProfileCellNode()
 	
 	private let scrollNode: ASScrollNode = ASScrollNode()
@@ -119,19 +121,20 @@ class ProfileNode: ASDisplayNode {
 		configureSubscriptionNode()
 		configureInstallmentNode()
 		configureEditProfileNode()
+		configureHelpNode()
 		configureLogoutNode()
 		
-		let listSpec = ASStackLayoutSpec(direction: .vertical,
+		let showDataListSpec = ASStackLayoutSpec(direction: .vertical,
 										  spacing: 0,
 										  justifyContent: .start,
 										  alignItems: .stretch,
 										  children: [subscriptionNode, installmentNode])
 		
 		let mainSpec = ASStackLayoutSpec(direction: .vertical,
-										  spacing: 30,
+										  spacing: 24,
 										  justifyContent: .start,
 										  alignItems: .stretch,
-										  children: [listSpec, editProfileNode, logoutNode])
+										  children: [showDataListSpec, editProfileNode, helpNode, logoutNode])
 		
 		let mainSpecInset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 0, bottom: 16, right: 0), child: mainSpec)
 
@@ -164,6 +167,15 @@ class ProfileNode: ASDisplayNode {
 	
 	@objc func editProfileTapped(sender: ASButtonNode) {
 		self.onOpenEditProfile?()
+	}
+	
+	private func configureHelpNode() {
+		helpNode = ProfileCellNode(icon: "helpIcon.png", title: "Help")
+		helpNode.buttonNode.addTarget(self, action: #selector(helpTapped), forControlEvents: .touchUpInside)
+	}
+	
+	@objc func helpTapped(sender: ASButtonNode) {
+		self.onOpenHelp?()
 	}
 	
 	private func configureLogoutNode() {

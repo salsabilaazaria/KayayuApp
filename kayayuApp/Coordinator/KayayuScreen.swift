@@ -25,6 +25,7 @@ final class KayayuScreen {
 		case onOpenSubscriptionPage(viewModel: ProfileViewModel)
         case onOpenInstallmentPage(viewModel: ProfileViewModel)
 		case onOpenEditProfile(viewModel: ProfileViewModel)
+		case onOpenHelp
 		case onBackToEditProfilePage
 		case onOpenChangeEmail(viewModel: ProfileViewModel)
 		case onOpenChangeUsername(viewModel: ProfileViewModel)
@@ -178,6 +179,15 @@ final class KayayuScreen {
 			self.onNavigationEvent?(.onOpenEditProfile(viewModel: profileViewModel))
 			
 		}
+		
+		controller.onOpenHelp = { [weak self] in
+			guard let self = self else {
+				return
+			}
+			
+			self.onNavigationEvent?(.onOpenHelp)
+			
+		}
         
         controller.onLogout = { [weak self] in
             guard let self = self else {
@@ -196,6 +206,11 @@ final class KayayuScreen {
 	
     func makeInstallmentPageViewController(viewModel: ProfileViewModel) -> UIViewController {
 		let controller = InstallmentViewController(viewModel: viewModel)
+		return controller
+	}
+	
+	func makeTheoryExplanationViewController() -> UIViewController {
+		let controller = TheoryExplanationController()
 		return controller
 	}
 	

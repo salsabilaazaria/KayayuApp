@@ -13,6 +13,7 @@ class ProfileViewController: ASDKViewController<ASDisplayNode> {
 	var onOpenSubscriptionPage: (() -> Void)?
 	var onOpenInstallmentPage: (() -> Void)?
 	var onOpenEditProfile: (() -> Void)?
+	var onOpenHelp: (() -> Void)?
     var onLogout: (() -> Void)?
 	
 	private let profileNode: ProfileNode?
@@ -51,6 +52,10 @@ class ProfileViewController: ASDKViewController<ASDisplayNode> {
 		
 		profileNode?.onOpenEditProfile = { [weak self] in
 			self?.onOpenEditProfile?()
+		}
+		
+		profileNode?.onOpenHelp = { [weak self] in
+			self?.onOpenHelp?()
 		}
 		
 	}
