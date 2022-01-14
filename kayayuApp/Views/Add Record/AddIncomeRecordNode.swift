@@ -117,7 +117,7 @@ class AddIncomeRecordNode: ASDisplayNode {
 										 alignItems: .start,
 										 children: [inputSpec, saveButtonSpec])
 		
-		let insetMainSpec = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 16, left: 16, bottom: 0, right: 16), child: mainSpec)
+		let insetMainSpec = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16), child: mainSpec)
 		
 		return insetMainSpec
 	}
