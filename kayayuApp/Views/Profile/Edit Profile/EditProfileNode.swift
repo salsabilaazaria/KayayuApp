@@ -25,7 +25,7 @@ class EditProfileNode: ASDisplayNode {
 		self.viewModel = viewModel
 		super.init()
 
-		backgroundColor = kayayuColor.lightYellow
+		backgroundColor = .white
 		automaticallyManagesSubnodes = true
 	}
 	

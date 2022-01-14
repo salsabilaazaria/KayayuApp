@@ -86,7 +86,7 @@ class ProfileCellNode: ASDisplayNode {
 	private func configureButton() {
 		buttonNode.style.preferredSize = CGSize(width: UIScreen.main.bounds.width, height: 40)
 		buttonNode.backgroundColor = .clear
-		buttonNode.borderWidth = 1
+		buttonNode.borderWidth = 2
 		buttonNode.borderColor = kayayuColor.softGrey.cgColor
 		buttonNode.cornerRadius = cornerRadiusFloat
 	}
