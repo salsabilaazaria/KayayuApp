@@ -308,8 +308,8 @@ class AddExpenseRecordNode: ASDisplayNode {
 			self.paymenTypeValue.accept(kayayuPaymentType(rawValue: selectedText) ?? .oneTime)
 		}
 	
-		paymenTypeHelperIcon.setImage( UIImage(named: "questionIconBlack.png"), for: .normal)
-		paymenTypeHelperIcon.style.preferredSize = CGSize(width: 20, height: 20)
+		paymenTypeHelperIcon.setImage( UIImage(named: "InfoIconBlack.png"), for: .normal)
+		paymenTypeHelperIcon.style.preferredSize = CGSize(width: 15, height: 15)
 		paymenTypeHelperIcon.imageNode.contentMode = .scaleAspectFit
 		paymenTypeHelperIcon.addTarget(self, action: #selector(paymentTypeHelperTapped), forControlEvents: .touchUpInside)
 	}
