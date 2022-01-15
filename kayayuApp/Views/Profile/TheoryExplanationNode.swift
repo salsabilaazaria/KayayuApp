@@ -38,7 +38,7 @@ class TheoryExplanationNode: ASDisplayNode {
 		
 		let needsDescription = createRatioDesc(iconName: "needsIcon.png", titleString: "\(kayayuRatioTitle.needs.rawValue) (50%)", descString: "Needs are things you must pay no matter what: housing, food, transportation, insurance and etc.")
 		let wantsDescription = createRatioDesc(iconName: "wantsIcon.png", titleString: "\(kayayuRatioTitle.wants.rawValue) (30%)", descString: "Wants are things that is nice to have: exclusive clothes, restaurant meals, streaming subscriptions, and etc.")
-		let savingsDescription = createRatioDesc(iconName: "savingsIcon.png", titleString: "\(kayayuRatioTitle.savings.rawValue) (20%)", descString: "Savings is a everything left after you take care of Needs and Wants is set aside for the future. ")
+		let savingsDescription = createRatioDesc(iconName: "savingsIcon.png", titleString: "\(kayayuRatioTitle.savings.rawValue) (20%)", descString: "Savings is everything left after you take care of Needs and Wants, set aside for the future. ")
 		
 		let ratioSpec =  ASStackLayoutSpec(direction: .vertical,
 										   spacing: 8,
