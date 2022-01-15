@@ -13,6 +13,7 @@ class ProfileViewController: ASDKViewController<ASDisplayNode> {
 	var onOpenSubscriptionPage: (() -> Void)?
 	var onOpenInstallmentPage: (() -> Void)?
 	var onOpenEditProfile: (() -> Void)?
+	var onOpenHelp: (() -> Void)?
     var onLogout: (() -> Void)?
 	
 	private let profileNode: ProfileNode?
@@ -45,12 +46,30 @@ class ProfileViewController: ASDKViewController<ASDisplayNode> {
 		}
 		
 		profileNode?.onLogout = { [weak self] in
-			self?.authViewModel?.logout()
-			self?.onLogout?()
+			
+			let alert = UIAlertController(title: "Logout", message: "Are you sure you want to logout?", preferredStyle: UIAlertController.Style.alert)
+			
+			alert.addAction(UIAlertAction(title: "No", style: UIAlertAction.Style.default, handler: {_ in
+				self?.dismiss(animated: true, completion: nil)
+			}))
+			
+			alert.addAction(UIAlertAction(title: "Yes", style: UIAlertAction.Style.destructive, handler: {_ in
+				
+				self?.authViewModel?.logout()
+				self?.onLogout?()
+			
+			}))
+			
+			self?.present(alert, animated: true, completion: nil)
+			
 		}
 		
 		profileNode?.onOpenEditProfile = { [weak self] in
 			self?.onOpenEditProfile?()
+		}
+		
+		profileNode?.onOpenHelp = { [weak self] in
+			self?.onOpenHelp?()
 		}
 		
 	}

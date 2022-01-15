@@ -110,6 +110,12 @@ public final class KayayuCoordinator {
 					self.navigationController.pushViewController(controller, animated: true)
 				}
 				
+			case .onOpenHelp:
+				DispatchQueue.main.async {
+					let controller = screen.makeTheoryExplanationViewController()
+					self.navigationController.pushViewController(controller, animated: true)
+				}
+				
 			case .onOpenEditProfile(let viewModel):
 				DispatchQueue.main.async {
 					let controller = screen.makeEditProfilePageViewController(viewModel: viewModel)

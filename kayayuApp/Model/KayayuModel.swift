@@ -34,6 +34,11 @@ struct TransactionDateDictionary {
 	var transaction: [Transactions]?
 }
 
+struct RecurringTransactionWithDueIn{
+	var dueIn: Int?
+	var recurringTransaction: RecurringTransactions?
+}
+
 struct RecurringTransactions: Codable {
     var recurring_id:String = UUID().uuidString
     var user_id:String?

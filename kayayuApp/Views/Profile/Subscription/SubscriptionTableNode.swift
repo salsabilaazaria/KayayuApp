@@ -42,16 +42,14 @@ extension SubscriptionTableNode: ASTableDataSource, ASTableDelegate {
 	}
 	
 	func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
-		guard let allSubsData = viewModel.recurringSubsData.value else {
+		guard let allSubsData = viewModel.recurringSubsData.value,
+			  let subsData = allSubsData[indexPath.row].recurringTransaction,
+			  let dueIn = allSubsData[indexPath.row].dueIn else {
 			return ASCellNode()
 		}
-        
-
-		let subsData = allSubsData[indexPath.row]
 
         let nextBillDate = self.viewModel.getNextBillDate(recurringId: subsData.recurring_id)
-        let dueIn = self.viewModel.getDueIn(recurringId: subsData.recurring_id)
-        
+    
         let cellNode = SubscriptionCellNode(data: subsData, nextBillDate: nextBillDate, dueIn: dueIn)
 		return cellNode
 	}
