@@ -149,7 +149,7 @@ class ChangeEmailNode: ASDisplayNode {
 	}
 	
 	private func configureSaveButton() {
-		saveButton = BigButton(buttonText: "LOGIN", buttonColor: kayayuColor.yellow, borderColor: kayayuColor.yellow)
+		saveButton = BigButton(buttonText: "SAVE", buttonColor: kayayuColor.yellow, borderColor: kayayuColor.yellow)
 		saveButton.addTarget(self, action: #selector(saveButtonTapped), forControlEvents: .touchUpInside)
 	}
 
