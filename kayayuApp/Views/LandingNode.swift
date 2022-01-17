@@ -69,7 +69,7 @@ class LandingNode: ASDisplayNode {
 	}
 	
 	private func configureRegisterButton(){
-		registerButton = BigButton(buttonText: "SIGN UP", buttonColor: .white, borderColor: kayayuColor.yellow)
+		registerButton = BigButton(buttonText: "REGISTER", buttonColor: .white, borderColor: kayayuColor.yellow)
 		registerButton.addTarget(self, action: #selector(registerClicked), forControlEvents: .touchUpInside)
 		
 	}
