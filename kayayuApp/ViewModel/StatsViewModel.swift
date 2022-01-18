@@ -124,11 +124,11 @@ class StatsViewModel {
 	func calculateSavingsProgressBarRatio() -> Float {
 		guard let savingsBalance = self.savingsTotalIncome.value,
 			  let savingsTotalTrans = self.savingsTotalExpense.value,
-			  savingsBalance > 0, savingsTotalTrans > 0 else {
+			  savingsBalance >= 0, savingsTotalTrans >= 0 else {
 			return 0
 		}
 		
-		return savingsTotalTrans/savingsBalance
+		return (1 - savingsTotalTrans/savingsBalance)
 	}
 	
 	
