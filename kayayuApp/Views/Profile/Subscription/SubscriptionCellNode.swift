@@ -103,7 +103,7 @@ class SubscriptionCellNode: ASCellNode {
 		
         dateSubs.attributedText = NSAttributedString.normal("Billing Date: \(calendarHelper.formatFullDate(date: nextBillDate))", 14, .black)
 		
-        typeSubs.attributedText = NSAttributedString.normal("Billed: \(subsData.billing_type ?? " ")", 14, .black)
+		typeSubs.attributedText = NSAttributedString.normal("Billed: \(subsData.billing_type?.capitalized ?? " ")", 14, .black)
         endDateSubs.attributedText = NSAttributedString.normal("End of Subscription Date: \(calendarHelper.formatFullDate(date: subsData.end_billing_date ?? Date()))", 14, .black)
         dueDate.attributedText = NSAttributedString.normal("Due in: \(dueIn) days", 14, .black)
 

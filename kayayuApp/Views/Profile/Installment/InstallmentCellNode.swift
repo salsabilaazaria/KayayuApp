@@ -100,7 +100,7 @@ class InstallmentCellNode: ASCellNode {
 		
         billingDateInstallment.attributedText = NSAttributedString.normal("Billing Date: \(calendarHelper.formatFullDate(date: nextBillDate))", 14, .black)
 		
-        typeInstallment.attributedText = NSAttributedString.normal("Billed: \(instlData.billing_type ?? " ")", 14, .black)
+		typeInstallment.attributedText = NSAttributedString.normal("Billed: \(instlData.billing_type?.capitalized ?? " ")", 14, .black)
 		
         let formattedRemaingingAmount = numberHelper.floatToIdFormat(beforeFormatted: remainingAmountValue)
         remainingAmount.attributedText = NSAttributedString.normal("Remaining Amount: \(formattedRemaingingAmount)", 14, .black)
