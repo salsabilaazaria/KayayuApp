@@ -83,9 +83,9 @@ class TransactionTableHeaderNode: ASCellNode {
 											children: [prevButton, nextButton])
 		
 		buttonStack.style.preferredSize = CGSize(width: 80, height: 30)
-
+		
 		dateText.style.flexGrow = 1
-
+		
 		let headerStack = ASStackLayoutSpec(direction: .horizontal,
 											spacing: 5,
 											justifyContent: .center,
@@ -142,16 +142,16 @@ class TransactionTableHeaderNode: ASCellNode {
 		let totalSpec = configureTotalText()
 		
 		let incomeExpenseSpec = ASStackLayoutSpec(direction: .vertical,
-											spacing: 8,
-											justifyContent: .start,
-											alignItems: .stretch,
-											children: [incomeSpec,expenseSpec])
+												  spacing: 8,
+												  justifyContent: .start,
+												  alignItems: .stretch,
+												  children: [incomeSpec,expenseSpec])
 		
 		let summaryInfoSpec = ASStackLayoutSpec(direction: .vertical,
-											spacing: 12,
-											justifyContent: .start,
-											alignItems: .stretch,
-											children: [incomeExpenseSpec,totalSpec])
+												spacing: 12,
+												justifyContent: .start,
+												alignItems: .stretch,
+												children: [incomeExpenseSpec,totalSpec])
 		
 		summaryInfoSpec.style.flexGrow = 1
 		let summarySpec = ASStackLayoutSpec(direction: .horizontal,
@@ -200,10 +200,10 @@ class TransactionTableHeaderNode: ASCellNode {
 		expenseAmountSpec.style.flexGrow = 1
 		
 		let expenseSpec = ASStackLayoutSpec(direction: .horizontal,
-										   spacing: 5,
-										   justifyContent: .center,
-										   alignItems: .center,
-										   children: [expenseTitle, expenseAmountSpec])
+											spacing: 5,
+											justifyContent: .center,
+											alignItems: .center,
+											children: [expenseTitle, expenseAmountSpec])
 		
 		return expenseSpec
 		
@@ -220,10 +220,10 @@ class TransactionTableHeaderNode: ASCellNode {
 		totalAmountSpec.style.flexGrow = 1
 		
 		let totalSpec = ASStackLayoutSpec(direction: .horizontal,
-										   spacing: 5,
-										   justifyContent: .center,
-										   alignItems: .center,
-										   children: [totalTitle, totalAmountSpec])
+										  spacing: 5,
+										  justifyContent: .center,
+										  alignItems: .center,
+										  children: [totalTitle, totalAmountSpec])
 		
 		return totalSpec
 	}

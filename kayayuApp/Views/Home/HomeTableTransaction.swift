@@ -17,7 +17,7 @@ class HomeTableTransaction: ASDisplayNode {
 	
 	private let calendarHelper: CalendarHelper = CalendarHelper()
 	
-    init(viewModel: HomeViewModel) {
+	init(viewModel: HomeViewModel) {
 		self.viewModel = viewModel
 		self.transactionTableNode = TransactionTableNode(viewModel: viewModel)
 		self.transactionTableHeader = TransactionTableHeaderNode(viewModel: viewModel)
@@ -56,7 +56,7 @@ class HomeTableTransaction: ASDisplayNode {
 				  let endDate = self?.calendarHelper.getSpecEndMonth(month: month, year: year) else {
 				return
 			}
-
+			self?.viewModel.selectedDate.accept(date)
 			self?.viewModel.getTransactionDataSpecMonth(startDate: startDate, endDate: endDate)
 			
 		}

@@ -45,10 +45,7 @@ class RealisationStatsNode: ASDisplayNode {
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
 		
 		var layoutElement: [ASLayoutElement] = []
-		if let needsAmount = viewModel.needsTotalExpense.value,
-			  let wantsAmount = viewModel.wantsTotalExpense.value,
-			  let savingsIncome = viewModel.savingsTotalIncome.value,
-			  let savingsExpense = viewModel.savingsTotalExpense.value, needsAmount > 0, wantsAmount > 0, (savingsIncome - savingsExpense) > 0  {
+		if (viewModel.needsTotalExpense.value ?? -1 > 0)  || (viewModel.savingsTotalExpense.value ?? -1 > 0) || (viewModel.wantsTotalExpense.value ?? -1 > 0 )  {
 			configureRealisationPieChart()
 			let pieChartStack = ASStackLayoutSpec(direction: .vertical,
 												  spacing: 10,

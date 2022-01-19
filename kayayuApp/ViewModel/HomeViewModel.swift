@@ -27,6 +27,8 @@ class HomeViewModel {
 	var transactionsData: BehaviorRelay<[Transactions]?> = BehaviorRelay<[Transactions]?>(value: nil)
 	var dictTransactionData: BehaviorRelay<[TransactionDateDictionary]?> = BehaviorRelay<[TransactionDateDictionary]?>(value: nil)
 	
+	var selectedDate: BehaviorRelay<Date> = BehaviorRelay<Date>(value: Date())
+	
 	var detailTrans: BehaviorRelay<[TransactionDetails]?> = BehaviorRelay<[TransactionDetails]?>(value: nil)
 	
 	var incomePerMonth: BehaviorRelay<Float?> = BehaviorRelay<Float?>(value: nil)
@@ -57,6 +59,7 @@ class HomeViewModel {
     
 	private func configureObserver() {
 		self.transactionsData.asObservable().subscribe(onNext: { transData in
+			print("transaction data berubag")
 			self.getDictionaryTransaction()
 			self.getBalanceTotal()
 			self.updateBalanceTotal()
@@ -232,7 +235,9 @@ class HomeViewModel {
     }
 	
 	private func getDictionaryTransaction() {
-		guard let transDatas = transactionsData.value else {
+		guard let transDatas = transactionsData.value,
+			  let transDataDate = transDatas.first?.transaction_date,
+			  calendarHelper.monthInt(date: transDataDate) == calendarHelper.monthInt(date: selectedDate.value) else {
 			return
 		}
 		let groupedDictionary = Dictionary(grouping: transDatas) { (transData) -> DateComponents in

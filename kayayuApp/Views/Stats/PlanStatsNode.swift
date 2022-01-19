@@ -48,7 +48,7 @@ class PlanStatsNode: ASDisplayNode {
 	override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
 		var layoutElement: [ASLayoutElement] = []
 		
-		if (viewModel.needsTotalExpense.value ?? -1 > 0)  || (viewModel.savingsTotalIncome.value ?? -1 > 0) || (viewModel.wantsTotalIncome.value ?? -1 > 0 ) {
+		if (viewModel.needsTotalIncome.value ?? -1 > 0)  || (viewModel.savingsTotalIncome.value ?? -1 > 0) || (viewModel.wantsTotalIncome.value ?? -1 > 0 ) {
 			
 			configurePlanPieChart()
 			
