@@ -119,17 +119,13 @@ extension TransactionTableNode: ASTableDataSource, ASTableDelegate {
             numOfIndex += indexPath.row
         }
             
-        print("get rownum delete: \(indexPath), \(numOfIndex)")
         
 		if editingStyle == .delete {
-		
-			
-			guard let tempTransactionsData = viewModel.transactionsData.value else {
+			guard let tempTransactionsData = viewModel.transactionsDataPerMonth.value else {
 				return
 			}
 			print("get data delete: \(tempTransactionsData[numOfIndex])")
 			self.onDeleteData?(tempTransactionsData[numOfIndex])
-//			viewModel.deleteTransactionData(transactionDelete: tempTransactionsData[numOfIndex])
 
 		}
 	}
