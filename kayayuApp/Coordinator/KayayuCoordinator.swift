@@ -85,9 +85,8 @@ public final class KayayuCoordinator {
 					self.navigationController.pushViewController(controller, animated: true)
 				}
 				
-			case .onOpenAddRecordPage:
+			case .onOpenAddRecordPage(let viewModel):
 				DispatchQueue.main.async {
-					let viewModel = HomeViewModel()
 					let controller = screen.makeAddRecordPageViewController(viewModel: viewModel)
 					self.navigationController.pushViewController(controller, animated: true)
 				}

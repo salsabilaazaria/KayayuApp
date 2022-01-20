@@ -100,13 +100,18 @@ class ProfileViewModel {
 								print("KAYAYU failed get recurringTransactions")
 								return
 							}
+					
+							guard let detailTrans = self.detailTrans.value,
+								  let data = detailTrans.first(where: { $0.recurring_id == trans.recurring_id }) else {
+								return
+							}
 							
-							dueNum = self.getDueIn(recurringId: trans.recurring_id)
+							var dueNum = Calendar.current.dateComponents([.day], from: self.calendarHelper.dateOnly(date: Date()), to: self.calendarHelper.dateOnly(date: data.billing_date ?? Date())).day!
 							print("rec id: \(trans.recurring_id) due in: \(dueNum)")
 							
 							let recurringTransData = RecurringTransactionWithDueIn(dueIn: dueNum, recurringTransaction: trans)
 							documentArray.append(recurringTransData)
-						
+							
 							
 						} catch {
 							print(error)
@@ -242,8 +247,7 @@ class ProfileViewModel {
 			  let nextBillDate = data.billing_date else {
 			return Date()
 		}
-		
-		//        print("next subs due: \(nextBillDate)")
+
 		return nextBillDate
 	}
 	
@@ -267,10 +271,7 @@ class ProfileViewModel {
 			return 40
 		}
 		
-        var dueIn = Calendar.current.dateComponents([.day], from: calendarHelper.dateOnly(date: Date()), to: calendarHelper.dateOnly(date: data.billing_date ?? Date())).day!
-        if(Date() > data.billing_date!) {
-            dueIn = Calendar.current.dateComponents([.day], from: calendarHelper.dateOnly(date: data.billing_date ?? Date()), to: calendarHelper.dateOnly(date: Date())).day!
-        }
+        let dueIn = Calendar.current.dateComponents([.day], from: calendarHelper.dateOnly(date: Date()), to: calendarHelper.dateOnly(date: data.billing_date ?? Date())).day!
 		
 		if(dueIn <= 0){
 			print("add data \(data.transaction_detail_id) to trans table")

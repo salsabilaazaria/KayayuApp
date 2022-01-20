@@ -20,7 +20,7 @@ final class KayayuScreen {
 		case onOpenLoginPage
 		case onOpenRegisterPage
 		case onOpenStatsPage(viewModel: StatsViewModel)
-		case onOpenAddRecordPage
+		case onOpenAddRecordPage(viewModel: HomeViewModel)
 		case onOpenProfilePage(authViewModel: AuthenticationViewModel, profileViewModel: ProfileViewModel)
 		case onOpenSubscriptionPage(viewModel: ProfileViewModel)
         case onOpenInstallmentPage(viewModel: ProfileViewModel)
@@ -131,7 +131,7 @@ final class KayayuScreen {
 			guard let self = self else {
 				return
 			}
-			self.onNavigationEvent?(.onOpenAddRecordPage)
+			self.onNavigationEvent?(.onOpenAddRecordPage(viewModel: viewModel))
 		}
 		return controller
 	}
