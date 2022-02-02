@@ -638,6 +638,7 @@ class AddExpenseRecordNode: ASDisplayNode {
 		billingType.selectedRowColor = kayayuColor.softGrey
 		billingType.checkMarkEnabled = false
 		billingType.font = UIFont.systemFont(ofSize: 14)
+		paymentType.attributedText = NSAttributedString.init(string: billingTypeString.value ?? "")
 		billingType.didSelect{(selectedText, index, id) in
 			self.billingTypeString.accept(selectedText)
 		}
