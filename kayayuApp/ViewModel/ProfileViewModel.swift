@@ -101,17 +101,15 @@ class ProfileViewModel {
 								return
 							}
 					
-							guard let detailTrans = self.detailTrans.value,
-								  let data = detailTrans.first(where: { $0.recurring_id == trans.recurring_id }) else {
-								return
+							if let detailTrans = self.detailTrans.value,
+							   let data = detailTrans.first(where: { $0.recurring_id == trans.recurring_id }) {
+								dueNum = Calendar.current.dateComponents([.day], from: self.calendarHelper.dateOnly(date: Date()), to: self.calendarHelper.dateOnly(date: data.billing_date ?? Date())).day!
+								print("rec id: \(trans.recurring_id) due in: \(dueNum)")
+								
+								let recurringTransData = RecurringTransactionWithDueIn(dueIn: dueNum, recurringTransaction: trans)
+								documentArray.append(recurringTransData)
+								
 							}
-							
-							var dueNum = Calendar.current.dateComponents([.day], from: self.calendarHelper.dateOnly(date: Date()), to: self.calendarHelper.dateOnly(date: data.billing_date ?? Date())).day!
-							print("rec id: \(trans.recurring_id) due in: \(dueNum)")
-							
-							let recurringTransData = RecurringTransactionWithDueIn(dueIn: dueNum, recurringTransaction: trans)
-							documentArray.append(recurringTransData)
-							
 							
 						} catch {
 							print(error)
