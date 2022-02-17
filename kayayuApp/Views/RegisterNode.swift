@@ -143,6 +143,7 @@ class RegisterNode: ASDisplayNode {
 		usernameTextfield.style.preferredSize = inputTextFieldSize
 		usernameTextfield.textContainerInset = UIEdgeInsets(top: 10, left: 8, bottom: 10, right: 8)
 		usernameTextfield.textView.textContainer.maximumNumberOfLines = 1
+		usernameTextfield.textView.delegate = self
 	}
 	
 	private func createEmailTextField() -> ASLayoutSpec {
@@ -164,6 +165,7 @@ class RegisterNode: ASDisplayNode {
 		
 		emailTextfield.textView.inputAccessoryView = toolBar
 		emailTextfield.textView.textContainer.maximumNumberOfLines = 1
+		emailTextfield.textView.delegate = self
 	}
 	
 	
@@ -191,6 +193,7 @@ class RegisterNode: ASDisplayNode {
 		passwordTextfield.inputAccessoryView = toolBar
 		passwordTextfield.isSecureTextEntry = true
 		passwordTextfield.font = UIFont.systemFont(ofSize: 12)
+		passwordTextfield.delegate = self
 		
 	}
 	
@@ -218,6 +221,7 @@ class RegisterNode: ASDisplayNode {
 		confirmPassTextfield.inputAccessoryView = toolBar
 		confirmPassTextfield.isSecureTextEntry = true
 		confirmPassTextfield.font = UIFont.systemFont(ofSize: 12)
+		confirmPassTextfield.delegate = self
 		
 	}
 	
@@ -256,7 +260,7 @@ class RegisterNode: ASDisplayNode {
 	
 }
 
-extension RegisterNode: UITextViewDelegate {
+extension RegisterNode: UITextViewDelegate, UITextFieldDelegate {
 	
 	func validate(string: String) -> Bool {
 		return string.rangeOfCharacter(from: CharacterSet.whitespaces) == nil
@@ -267,6 +271,12 @@ extension RegisterNode: UITextViewDelegate {
 		 let newString = currentString.replacingCharacters(in: range, with: text)
 		 return validate(string: newString)
 	 }
+	
+	func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+		let currentString: NSString = (textField.text ?? "") as NSString
+		let newString = currentString.replacingCharacters(in: range, with: string)
+		return validate(string: newString)
+	}
 	
 	func textViewDidBeginEditing(_ textView: UITextView) {
 		textView.textContainerInset =  UIEdgeInsets(top: 10, left: 8, bottom: 10, right: 8)
