@@ -135,6 +135,7 @@ class LoginNode: ASDisplayNode {
 		
 		emailTextfield.textView.inputAccessoryView = toolBar
         emailTextfield.textView.textContainer.maximumNumberOfLines = 1
+		emailTextfield.delegate = self
 	}
 	
 	private func createPasswordTextField() -> ASLayoutSpec {
@@ -161,6 +162,7 @@ class LoginNode: ASDisplayNode {
 		passwordTextfield.inputAccessoryView = toolBar
 		passwordTextfield.isSecureTextEntry = true
 		passwordTextfield.font = UIFont.systemFont(ofSize: 12)
+		passwordTextfield.delegate = self
 		
 	}
 	
@@ -195,6 +197,26 @@ class LoginNode: ASDisplayNode {
 		self.onOpenRegisterPage?()
 	}
 
+	
+}
+
+extension LoginNode: UITextViewDelegate, UITextFieldDelegate {
+	
+	func validate(string: String) -> Bool {
+		return string.rangeOfCharacter(from: CharacterSet.whitespaces) == nil
+	}
+	
+	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+		 let currentString: NSString = (textView.text ?? "") as NSString
+		 let newString = currentString.replacingCharacters(in: range, with: text)
+		 return validate(string: newString)
+	 }
+	
+	func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+		let currentString: NSString = (textField.text ?? "") as NSString
+		let newString = currentString.replacingCharacters(in: range, with: string)
+		return validate(string: newString)
+	}
 	
 }
 

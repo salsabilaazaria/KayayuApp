@@ -78,15 +78,13 @@ class LandingNode: ASDisplayNode {
 	@objc func loginClicked(sender:UIButton)
 	{
 		self.onOpenLoginPage?()
-		print("LOGIN CLICKED")
+		print("Kayayu Login Button Clicked")
 	}
 	
 	@objc func registerClicked(sender:UIButton)
 	{
 		self.onOpenRegisterPage?()
-		print("SIGN UP CLICKED")
+		print("Kayayu Register Button Clicked")
 	}
-	
-	
 	
 }

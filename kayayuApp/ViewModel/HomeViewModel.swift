@@ -70,20 +70,20 @@ class HomeViewModel {
 	
 	private func getUserId() -> String{
 		guard let userId = Auth.auth().currentUser?.uid else { return "" }
-		print("KAYAYU USER ID \(userId)")
+		print("Kayayu user id \(userId)")
 		return userId
 	}
 	
 	func getUserData() {
 		database.collection("users").document(getUserId()).addSnapshotListener({ documentSnapshot, error in
 			guard let document = documentSnapshot else {
-				print("KAYAYU get data failed")
+				print("Kayayu get user data failed")
 				return
 			}
 			
 			do {
 				guard let userData = try document.data(as: Users.self) else {
-					print("KAYAYU failed get userData")
+					print("Kayayu failed get userData")
 					return
 				}
 				self.user.accept(userData)
@@ -118,7 +118,7 @@ class HomeViewModel {
 			.addSnapshotListener { (documentSnapshot, errorMsg) in
 				
 				if let errorMsg = errorMsg {
-					print("Error get Transaction Data \(errorMsg)")
+					print("Kayayu Error get Transaction Data \(errorMsg)")
 				}
 				else {
 					var incomeTotal: Float = 0
@@ -136,7 +136,7 @@ class HomeViewModel {
 						
 						do {
 							guard let trans = try document.data(as: Transactions.self) else {
-								print("KAYAYU failed get transactionData")
+								print("Kayayu failed get transactionData")
 								return
 							}
 							
@@ -207,7 +207,7 @@ class HomeViewModel {
 			.order(by: "transaction_date", descending: true)
 			.addSnapshotListener { (documentSnapshot, errorMsg) in
 				if let errorMsg = errorMsg {
-					print("Error get Transaction Data \(errorMsg)")
+					print("Kayayu Error get Transaction Data \(errorMsg)")
 				}
 				else {
 					var documentArray: [Transactions] = []
@@ -215,7 +215,7 @@ class HomeViewModel {
 						
 						do {
 							guard let trans = try document.data(as: Transactions.self) else {
-								print("KAYAYU failed get transactionData")
+								print("Kayayu failed get transactionData")
 								return
 							}
 							documentArray.append(trans)
@@ -247,7 +247,7 @@ class HomeViewModel {
 		let arrayOfDictionary = groupedDictionary.map { (date, trans) in
 			return TransactionDateDictionary(date: date, transaction: trans)
 		}
-		print("DATA DICTIONARY \(arrayOfDictionary)")
+		print("Kayayu Data Dictionary Success \(arrayOfDictionary)")
 		
 		let sortedDateDictionary = arrayOfDictionary.sorted {
 			guard let firstDate = calendarHelper.calendar.date(from: $0.date!),
@@ -267,7 +267,7 @@ class HomeViewModel {
 			.addSnapshotListener { (documentSnapshot, errorMsg) in
 				
 				if let errorMsg = errorMsg {
-					print("Error getting Recurring Transactions data \(errorMsg)")
+					print("Kayayu Error getting Recurring Transactions data \(errorMsg)")
 				}
 				else {
 					var documentArray: [String] = []
@@ -276,18 +276,16 @@ class HomeViewModel {
 						
 						do {
 							guard let trans = try document.data(as: RecurringTransactions.self) else {
-								print("KAYAYU failed get recurringTransactions")
+								print("Kayayu failed get recurringTransactions")
 								return
 							}
 							documentArray.append(trans.recurring_id)
 							
-							print("rec id: \(trans.recurring_id)")
-							
 							dueNum = self.profViewModel.getDueIn(recurringId: trans.recurring_id)
-							print("due in: \(dueNum)")
+							print("Kayayu recurring transaction with reccurring_id: \(trans.recurring_id) and due in: \(dueNum)")
 							
 						} catch {
-							print(error)
+							print("Kayayu Error get recurring trans data \(error)")
 						}
 					}
 				}
@@ -303,9 +301,9 @@ class HomeViewModel {
 		ref = database.collection("transactions").addDocument(data: ["temp": "temp"]){
 			err in
 			if let err = err {
-				print("Error adding transaction data \(err)")
+				print("Kayayu Error adding transaction data \(err)")
 			} else {
-				print("Document added with ID: \(ref!.documentID)")
+				print("Kayayu added transactiondatawith ID: \(ref!.documentID)")
 			}
 		}
 		
@@ -324,7 +322,7 @@ class HomeViewModel {
 			try database.collection("transactions").document(ref!.documentID).setData(from: data)
 			self.onOpenHomePage?()
 		} catch {
-			print("Error setting data to transactions firestore \(error)")
+			print("Kayayu Error setting data to transactions firestore \(error)")
 		}
 	}
 	
@@ -376,9 +374,9 @@ class HomeViewModel {
 		refRecSubs = database.collection("recurringTransactions").addDocument(data: ["temp": "temp"]){
 			err in
 			if let err = err {
-				print("Error adding recurring transaction data \(err)")
+				print("KayayuError adding recurring transaction data \(err)")
 			} else {
-				print("Document added with ID to recurringTransactions: \(refRecSubs!.documentID)")
+				print("Kayayu Document added with ID to recurringTransactions: \(refRecSubs!.documentID)")
 			}
 		}
 		
@@ -386,9 +384,9 @@ class HomeViewModel {
 		refTransRecSubs = database.collection("transactions").addDocument(data: ["temp": "temp"]){
 			err in
 			if let err = err {
-				print("Error adding transaction data \(err)")
+				print("Kayayu Error adding transaction data \(err)")
 			} else {
-				print("Document added with ID to transactions: \(refTransRecSubs!.documentID)")
+				print("Kayayu Document added with ID to transactions: \(refTransRecSubs!.documentID)")
 			}
 		}
 		
@@ -396,9 +394,9 @@ class HomeViewModel {
 		refDetailRecSubsCurr = database.collection("transactionDetails").addDocument(data: ["temp": "temp"]){
 			err in
 			if let err = err {
-				print("Error adding curr detail transaction data \(err)")
+				print("Kayayu Error adding curr detail transaction data \(err)")
 			} else {
-				print("Document added with ID to transactionDetails: \(refDetailRecSubsCurr!.documentID)")
+				print("Kayayu Document added with ID to transactionDetails: \(refDetailRecSubsCurr!.documentID)")
 			}
 		}
 		
@@ -443,19 +441,19 @@ class HomeViewModel {
 		do {
 			try database.collection("recurringTransactions").document(refRecSubs!.documentID).setData(from: recSubsData)
 		} catch {
-			print("Error setting recurring data to recurringTransactions firestore \(error)")
+			print("Kayayu Error setting recurring data to recurringTransactions firestore \(error)")
 		}
 		
 		do {
 			try database.collection("transactions").document(refTransRecSubs!.documentID).setData(from: transRecSubsData)
 		} catch {
-			print("Error setting transaction data to transactions firestore \(error)")
+			print("Kayayu Error setting transaction data to transactions firestore \(error)")
 		}
 		
 		do {
 			try database.collection("transactionDetails").document(refDetailRecSubsCurr!.documentID).setData(from: detailRecSubsCurrData)
 		} catch {
-			print("Error setting curr transaction data to transactionDetail firestore \(error)")
+			print("Kayayu Error setting curr transaction data to transactionDetail firestore \(error)")
 		}
 		
 		if(tenor > 1) {
@@ -471,9 +469,9 @@ class HomeViewModel {
 						refTransRecSubs = database.collection("transactions").addDocument(data: ["temp": "temp"]){
 							err in
 							if let err = err {
-								print("Error adding transaction data \(err)")
+								print("Kayayu Error adding transaction data \(err)")
 							} else {
-								print("Document added with ID to transactions: \(refTransRecSubs!.documentID)")
+								print("Kayayu Document added with ID to transactions: \(refTransRecSubs!.documentID)")
 							}
 						}
 						
@@ -491,16 +489,16 @@ class HomeViewModel {
 						do {
 							try database.collection("transactions").document(refTransRecSubs!.documentID).setData(from: transRecSubsData)
 						} catch {
-							print("Error setting transaction data to transactions firestore \(error)")
+							print("Kayayu Error setting transaction data to transactions firestore \(error)")
 						}
 						
 						var refDetailRecSubsNext: DocumentReference? = nil
 						refDetailRecSubsNext = database.collection("transactionDetails").addDocument(data: ["temp": "temp"]){
 							err in
 							if let err = err {
-								print("Error adding next detail transaction data \(err)")
+								print("Kayayu Error adding next detail transaction data \(err)")
 							} else {
-								print("Document added with ID to transactionDetails: \(refDetailRecSubsNext!.documentID)")
+								print("Kayayu Document added with ID to transactionDetails: \(refDetailRecSubsNext!.documentID)")
 							}
 						}
 						
@@ -517,12 +515,11 @@ class HomeViewModel {
 						)
 						
 						do {
-							print("SALSA add transaction details \(next_billing_date)  \(detailRecSubsNextData.transaction_id) \(detailRecSubsNextData.amount)")
 							try
 								database.collection("transactionDetails").document(refDetailRecSubsNext!.documentID).setData(from: detailRecSubsNextData)
-							print("SALSA SUCCES ADD DATA")
+							print("Kayayu success add transactipn detail data with next_billing_date \(next_billing_date) trans_id \(detailRecSubsNextData.transaction_id) and amount \(detailRecSubsNextData.amount)")
 						} catch {
-							print("SALSA Error setting next transaction data to transactionDetail firestore \(error)")
+							print("Kayayu Error setting next transaction data to transactionDetail firestore \(error)")
 						}
 						
 						next_billing_date = self.getNextBillingDate(start_billing_date: next_billing_date, billing_type: billing_type, tenor: tenor)
@@ -535,9 +532,9 @@ class HomeViewModel {
 				refDetailRecSubsNext = database.collection("transactionDetails").addDocument(data: ["temp": "temp"]){
 					err in
 					if let err = err {
-						print("Error adding next detail transaction data \(err)")
+						print("Kayayu Error adding next detail transaction data \(err)")
 					} else {
-						print("Document added with ID to transactionDetails: \(refDetailRecSubsNext!.documentID)")
+						print("Kayayu Document added with ID to transactionDetails: \(refDetailRecSubsNext!.documentID)")
 					}
 				}
 				
@@ -557,7 +554,7 @@ class HomeViewModel {
 					try
 						database.collection("transactionDetails").document(refDetailRecSubsNext!.documentID).setData(from: detailRecSubsNextData)
 				} catch {
-					print(" Error setting next transaction data to transactionDetail firestore \(error)")
+					print("Kayayu Error setting next transaction data to transactionDetail firestore \(error)")
 				}
 				
 				next_billing_date = self.getNextBillingDate(start_billing_date: next_billing_date, billing_type: billing_type, tenor: tenor)
@@ -580,9 +577,9 @@ class HomeViewModel {
 		refRecInstl = database.collection("recurringTransactions").addDocument(data: ["temp":"temp"]){
 			err in
 			if let err = err {
-				print("Error adding recurring installment transaction data \(err)")
+				print("Kayayu Error adding recurring installment transaction data \(err)")
 			} else {
-				print("Document added with ID to recurringTransactions: \(refRecInstl!.documentID)")
+				print("Kayayu Document Installment added with ID to recurringTransactions: \(refRecInstl!.documentID)")
 			}
 		}
 		
@@ -590,9 +587,9 @@ class HomeViewModel {
 		refTransRecInstl = database.collection("transactions").addDocument(data: ["temp":"temp"]){
 			err in
 			if let err = err {
-				print("Error adding transaction data \(err)")
+				print("Kayayu Error adding transaction data \(err)")
 			} else {
-				print("Document added with ID to transactions: \(refTransRecInstl!.documentID)")
+				print("Kayayu Document Installment added with ID to transactions: \(refTransRecInstl!.documentID)")
 			}
 		}
 		

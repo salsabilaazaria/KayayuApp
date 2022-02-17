@@ -27,7 +27,7 @@ class AuthenticationViewModel {
 	
 	func validateLoginData(emailInputted: String, passwordInputted: String) {
 		//put logic to data validation, if data correct return true
-		print("Auth Validate Login Data Username '\(emailInputted)' Password '\(passwordInputted)'")
+		print("Kayayu Auth Validate Login Data Username '\(emailInputted)' Password '\(passwordInputted)'")
 		guard !emailInputted.isEmpty,
 			  !passwordInputted.isEmpty else {
 			self.showAlert?("Invalid data, please try again.")
@@ -42,10 +42,10 @@ class AuthenticationViewModel {
 			guard error == nil else {
 				self.enableButton?()
 				self.showAlert?(error?.localizedDescription ?? "Login failed, please try again later")
-				print("KAYAYU Login Failed")
+				print("Kayayu Login Failed")
 				return
 			}
-			print("KAYAYU Login Success")
+			print("Kayayu Login Success")
 			self.onCreateTabBar?()
 			
 		})
@@ -53,14 +53,14 @@ class AuthenticationViewModel {
 	}
 	
 	func validateRegisterData(username: String, email: String, password: String, confirmPassword: String) {
-		print("Auth Validate Register Data \(username), \(email), \(password), \(confirmPassword)")
+		print("Kayayu Auth Validate Register Data \(username), \(email), \(password), \(confirmPassword)")
 		guard !username.isEmpty,
 			  !email.isEmpty,
 			  email.contains("@"),
 			  !password.isEmpty,
 			  !confirmPassword.isEmpty,
 			  password == confirmPassword else {
-			print("KAYAYU Register Data is not valid")
+			print("Kayayu Register Data is not valid")
 			self.showAlert?("There is invalid data, please try again.")
 			self.enableButton?()
 			return
@@ -71,7 +71,7 @@ class AuthenticationViewModel {
 	
 	private func addRegisterData(username: String, email: String, password: String, confirmPassword: String) {
 		
-		print("Auth Processing Add Register Data \(username), \(email), \(password), \(confirmPassword)")
+		print("Kayayu Auth Processing Add Register Data \(username), \(email), \(password), \(confirmPassword)")
 		
 		FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password, completion: { [weak self] result, error in
 			
@@ -82,14 +82,14 @@ class AuthenticationViewModel {
 			let changeRequest = result?.user.createProfileChangeRequest()
 			changeRequest?.displayName = username
 			changeRequest?.commitChanges { error in
-				print("Change username in firebase authentication failed \(error?.localizedDescription ?? "unknown")")
+				print("Kayayu Change username in firebase authentication failed \(error?.localizedDescription ?? "unknown")")
 				self.showAlert?(error?.localizedDescription ?? "Register failed, please try again later.")
 				self.enableButton?()
 				return
 			}
 			
 			guard error == nil else {
-				print("KAYAYU Failed to register \(error?.localizedDescription ?? "unknown")")
+				print("Kayayu Failed to register \(error?.localizedDescription ?? "unknown")")
 				self.showAlert?(error?.localizedDescription ?? "Register failed, please try again later.")
 				self.enableButton?()
 				return
@@ -112,7 +112,7 @@ class AuthenticationViewModel {
 						self.database.collection("users").document(result.user.uid).setData(from: data)
 					self.onCreateTabBar?()
 				} catch {
-					print("Error setting data to data firestore \(error)")
+					print("Kayayu Error setting data to data firestore \(error)")
 				}
 				
 			}
@@ -127,7 +127,7 @@ class AuthenticationViewModel {
 		}
 		catch { print("already logged out") }
 		
-		print("KAYAYU Logout Success")
+		print("Kayayu Logout Success")
 	}
 	
 }
