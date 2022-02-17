@@ -100,15 +100,15 @@ class ProfileViewModel {
 								print("KAYAYU failed get recurringTransactions")
 								return
 							}
-					
+							
 							if let detailTrans = self.detailTrans.value,
 							   let data = detailTrans.first(where: { $0.recurring_id == trans.recurring_id }) {
+								
 								dueNum = Calendar.current.dateComponents([.day], from: self.calendarHelper.dateOnly(date: Date()), to: self.calendarHelper.dateOnly(date: data.billing_date ?? Date())).day!
 								print("rec id: \(trans.recurring_id) due in: \(dueNum)")
 								
 								let recurringTransData = RecurringTransactionWithDueIn(dueIn: dueNum, recurringTransaction: trans)
 								documentArray.append(recurringTransData)
-								
 							}
 							
 						} catch {
@@ -142,13 +142,13 @@ class ProfileViewModel {
 			return first < second }
 		
 		installmentArray.sort { guard let first = $0.dueIn,
-							   let second = $1.dueIn else { return false }
+									  let second = $1.dueIn else { return false }
 			return first < second }
 		
 		self.recurringSubsData.accept(subsArray)
 		self.recurringInstlData.accept(installmentArray)
 		
-	
+		
 	}
 	
 	func getTransactionData () {
@@ -208,7 +208,7 @@ class ProfileViewModel {
 				}
 			}
 	}
-
+	
 	private func getTransactionDetailData() {
 		
 		database.collection("transactionDetails").order(by: "billing_date", descending: true).addSnapshotListener { (documentSnapshot, errorMsg) in
@@ -245,7 +245,7 @@ class ProfileViewModel {
 			  let nextBillDate = data.billing_date else {
 			return Date()
 		}
-
+		
 		return nextBillDate
 	}
 	
@@ -269,7 +269,7 @@ class ProfileViewModel {
 			return 40
 		}
 		
-        let dueIn = Calendar.current.dateComponents([.day], from: calendarHelper.dateOnly(date: Date()), to: calendarHelper.dateOnly(date: data.billing_date ?? Date())).day!
+		let dueIn = Calendar.current.dateComponents([.day], from: calendarHelper.dateOnly(date: Date()), to: calendarHelper.dateOnly(date: data.billing_date ?? Date())).day!
 		
 		if(dueIn <= 0){
 			print("add data \(data.transaction_detail_id) to trans table")
@@ -300,7 +300,7 @@ class ProfileViewModel {
 			else {
 				return 60
 			}
-            
+			
 			let newTransData = Transactions(
 				transaction_id: refTrans!.documentID,
 				user_id: self.getUserId(),
@@ -312,8 +312,8 @@ class ProfileViewModel {
 				amount: data.amount
 			)
 			
-            print("document data: \(newTransData)")
-            
+			print("document data: \(newTransData)")
+			
 			do {
 				try database.collection("transactions").document(refTrans!.documentID).setData(from: newTransData)
 			} catch {
@@ -406,8 +406,9 @@ class ProfileViewModel {
 	
 	
 	//EDIT PROFILE
-	
+	private let invalidData = "There is invalid data, please try again."
 	private let wrongPasswordMsg = "Password is incorrect, please try again."
+	private let systemError = "Oops, Something is wrong. Please try again later."
 	
 	private func validatePassword(validatePassword: String) -> Bool {
 		print("ValidatePassword \(self.user.value?.password) \(validatePassword)")
@@ -418,19 +419,29 @@ class ProfileViewModel {
 		let passIsValid = self.validatePassword(validatePassword: password)
 		let oldUsername = self.user.value?.username
 		
-		if passIsValid == true, oldUsername != newUsername {
+		guard oldUsername != newUsername else {
+			self.showAlert?(invalidData)
+			return
+		}
+		
+		guard passIsValid == true else {
+			self.showAlert?(wrongPasswordMsg)
+			return
+		}
+		
+		if passIsValid == true, oldUsername != newUsername, Auth.auth().currentUser != nil {
 			
 			let changeRequest = Firebase.Auth.auth().currentUser?.createProfileChangeRequest()
 			changeRequest?.displayName = newUsername
 			changeRequest?.commitChanges { error in
-			  print("Change username request failed \(error)")
+				print("Change username request failed \(error)")
 				self.showAlert?(error?.localizedDescription ?? "Failed to update your username, please try again later.")
 				return
 			}
 			
 			
 			let newUsernameData = [ "username": "\(newUsername)" ]
-
+			
 			database.collection("users").document(getUserId()).updateData(newUsernameData) { err in
 				if let err = err {
 					self.showAlert?(err.localizedDescription)
@@ -444,7 +455,7 @@ class ProfileViewModel {
 				}
 			}
 		} else {
-			self.showAlert?(wrongPasswordMsg)
+			self.showAlert?(systemError)
 			return
 		}
 		
@@ -454,7 +465,17 @@ class ProfileViewModel {
 		let passIsValid = self.validatePassword(validatePassword: password)
 		let oldEmail = self.user.value?.email
 		
-		if passIsValid == true, newEmail != oldEmail {
+		guard newEmail != oldEmail else {
+			self.showAlert?(invalidData)
+			return
+		}
+		
+		guard passIsValid == true else {
+			self.showAlert?(wrongPasswordMsg)
+			return
+		}
+		
+		if passIsValid == true, newEmail != oldEmail, Auth.auth().currentUser != nil  {
 			
 			//Ganti di authentication
 			FirebaseAuth.Auth.auth().currentUser?.updateEmail(to: newEmail, completion: { errorMsg in
@@ -478,21 +499,35 @@ class ProfileViewModel {
 					
 					return
 				}
+				self.showAlert?(errorMsg.localizedDescription)
 				print("Kayayu Firebase failed to change email in authentication with errorMsg \(errorMsg)")
 			})
 			
 		} else {
-			self.showAlert?(wrongPasswordMsg)
+			self.showAlert?(systemError)
 			return
 		}
 	}
 	
 	func updateNewPassword(oldPassword: String, newPassword: String, newConfirmationPassword: String) {
 		let passIsValid = self.validatePassword(validatePassword: oldPassword)
+		
+		guard newPassword == newConfirmationPassword, oldPassword != newPassword else {
+			self.showAlert?(invalidData)
+			return
+		}
+		
+		guard passIsValid == true else {
+			self.showAlert?(wrongPasswordMsg)
+			return
+		}
+		
+		
 		if passIsValid == true,
 		   newPassword == newConfirmationPassword,
-		   oldPassword != newPassword {
-	
+		   oldPassword != newPassword,
+		   Auth.auth().currentUser != nil {
+			
 			//Ganti di authentication
 			FirebaseAuth.Auth.auth().currentUser?.updatePassword(to: newPassword, completion: { errorMsg in
 				guard let errorMsg = errorMsg else {
@@ -514,11 +549,12 @@ class ProfileViewModel {
 					
 					return
 				}
+				self.showAlert?(errorMsg.localizedDescription)
 				print("Kayayu Firebase failed to change email in authentication with errorMsg \(errorMsg)")
 			})
 			
 		} else {
-			self.showAlert?(wrongPasswordMsg)
+			self.showAlert?(systemError)
 			return
 		}
 	}

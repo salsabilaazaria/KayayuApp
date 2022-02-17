@@ -119,6 +119,7 @@ class ChangeUsernameNode: ASDisplayNode {
 		
 		usernameTextfield.textView.inputAccessoryView = toolBar
 		usernameTextfield.textView.textContainer.maximumNumberOfLines = 1
+		usernameTextfield.textView.delegate = self
 	}
 	
 	private func createPasswordTextField() -> ASLayoutSpec {
@@ -165,5 +166,20 @@ class ChangeUsernameNode: ASDisplayNode {
 
 	
 }
+
+extension ChangeUsernameNode: UITextViewDelegate {
+	
+	func validate(string: String) -> Bool {
+		return string.rangeOfCharacter(from: CharacterSet.whitespaces) == nil
+	}
+	
+	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+		 let currentString: NSString = (textView.text ?? "") as NSString
+		 let newString = currentString.replacingCharacters(in: range, with: text)
+		 return validate(string: newString)
+	 }
+	
+}
+
 
 
