@@ -258,6 +258,16 @@ class RegisterNode: ASDisplayNode {
 
 extension RegisterNode: UITextViewDelegate {
 	
+	func validate(string: String) -> Bool {
+		return string.rangeOfCharacter(from: CharacterSet.whitespaces) == nil
+	}
+	
+	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+		 let currentString: NSString = (textView.text ?? "") as NSString
+		 let newString = currentString.replacingCharacters(in: range, with: text)
+		 return validate(string: newString)
+	 }
+	
 	func textViewDidBeginEditing(_ textView: UITextView) {
 		textView.textContainerInset =  UIEdgeInsets(top: 10, left: 8, bottom: 10, right: 8)
 		
